@@ -1,0 +1,3 @@
+.wp-crm-widget{border-bottom: 1px solid #eee;font-size: 13px;padding: 8px 12px 10px;}
+.wp-crm-widget:last-child {border-bottom: none;padding-bottom: 8px;}
+.wpcrm-extension{float: left;margin: 0 15px 15px 0;background: #fff;border: 1px solid #ccc;width: 300px;padding: 14px;height: 315px;position: relative;}

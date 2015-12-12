@@ -3,7 +3,7 @@
    Plugin Name: WP-CRM System
    Plugin URI: https://www.wp-crm.com
    Description: A complete CRM for WordPress
-   Version: 1.0
+   Version: 1.0.1
    Author: Scott DeLuzio
    Author URI: https://www.wp-crm.com
    Text Domain: wp-crm-system
@@ -24,6 +24,16 @@ add_action('plugins_loaded', 'wp_crm_plugin_init');
 function wp_crm_plugin_init() {
 	load_plugin_textdomain( 'wp-crm-system', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 }
+/* Add a metabox on dashboard for WP-CRM System Notices */
+add_action('wp_dashboard_setup', 'wp_crm_dashboard_widget');
+function wp_crm_dashboard_widget() {
+	global $wp_meta_boxes;
+	wp_add_dashboard_widget('wp_crm_notifications', 'WP-CRM System', 'wp_crm_dashboard_notifications');
+}
+function wp_crm_dashboard_notifications() {
+	include('wp-crm-system-dashboard.php');
+}
+	
 /* Settings Page */
 
 // Hook for adding admin menu
@@ -749,7 +759,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'title'         => 'Additional Organization Information',
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'textarea',
+                'type'          =>   'wysiwyg',
                 'scope'         =>   array( 'wpcrm-organization' ),
                 'capability'    => 'manage_options'
             ),
@@ -786,7 +796,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'title'         => 'Description',
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'textarea',
+                'type'          =>   'wysiwyg',
                 'scope'         =>   array( 'wpcrm-opportunity' ),
                 'capability'    => 'manage_options'
             ),
@@ -832,7 +842,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'title'         => 'Project Description',
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'textarea',
+                'type'          =>   'wysiwyg',
                 'scope'         =>   array( 'wpcrm-project' ),
                 'capability'    => 'manage_options'
             ),
@@ -1179,6 +1189,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									<div id="gmap_canvas"><?php _e('Loading map...','wp-crm-system'); ?></div>
 									<div id='map-label'><?php _e('Map shows approximate location.','wp-crm-system'); ?></div>
 									<!-- JavaScript to show google map included here to retrieve local variables -->
+									<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 									<script type="text/javascript">
 										function init_map() {
 											var myOptions = {
@@ -1266,9 +1277,9 @@ function add_datepicker_script() {
 	wp_enqueue_script('jquery-ui-datepicker');
 	wp_register_style('jquery-ui-datepicker', plugins_url('/css/jquery-ui.min.css', __FILE__));
 	wp_enqueue_style('jquery-ui-datepicker');
-	wp_register_script('gmap-js', plugins_url('/js/gmap.js', __FILE__));
-	wp_enqueue_script('gmap-js');
 	wp_register_style('gmap-style', plugins_url('/css/gmap.css', __FILE__));
 	wp_enqueue_style('gmap-style');
+	wp_register_style('wpcrm-style', plugins_url('/css/wp-crm.css', __FILE__));
+	wp_enqueue_style('wpcrm-style');
 }
 add_action( 'admin_enqueue_scripts', 'add_datepicker_script' );

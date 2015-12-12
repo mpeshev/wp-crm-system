@@ -2,18 +2,6 @@
 <?php 
 $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'overview';
 ?>
-<style>
-.wpcrm-extension{ 
-	float: left;
-    margin: 0 15px 15px 0;
-    background: #fff;
-    border: 1px solid #ccc;
-    width: 300px;
-    padding: 14px;
-    height: 315px;
-    position: relative;
-}
-</style>
 <h2 class="nav-tab-wrapper">
 	<a class="nav-tab <?php echo $active_tab == 'overview' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=overview"><?php _e('Overview', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'contact-forms' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=contact-forms"><?php _e('Contact Forms', 'wp-crm-system') ?></a>
@@ -127,6 +115,17 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'img'			=>	'/slack-notifications-300x145.png',
 				'desc'			=>	'Send notifications from WP-CRM to a Slack channel.',
 				'class'			=>	'WPCRM_SLACK_NOTIFICATIONS',
+			),
+			array(
+				'title'			=>	'Email Notifications',
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'url'			=>	'https://www.wp-crm.com/downloads/email-notifications/',
+				'img'			=>	'/email-notifications-300x145.png',
+				'desc'			=>	'Send notifications from WP-CRM to the assigned user\'s email address.',
+				'class'			=>	'WPCRM_EMAIL_NOTIFICATIONS',
 			),
 		);		
 		function wpcrm_extensions_overview() {  ?>
