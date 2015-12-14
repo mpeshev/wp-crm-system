@@ -31,7 +31,7 @@ if ($active_tab == 'contact') {
 }
 function wpcrm_reports_overview() { 
 	global $wpdb;
-	include ('/includes/wp-crm-system-vars.php'); ?>
+	include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php'); ?>
 	<div class="wrap">
 		<div>
 			<h2><?php _e('WP CRM System Reports', 'wp-crm-system'); ?></h2>
@@ -109,17 +109,17 @@ function wpcrm_reports_overview() {
 	</div>
 <?php }
 function wpcrm_project_reports() {
-	include ('includes/reports/project-reports.php');
+	include(plugin_dir_path( __FILE__ ) . 'includes/reports/project-reports.php');
 }
 function wpcrm_opportunity_reports() {
-	include ('includes/reports/opportunity-reports.php');
+	include(plugin_dir_path( __FILE__ ) . 'includes/reports/opportunity-reports.php');
 }
 function wpcrm_task_reports() {
-	include ('includes/reports/task-reports.php');
+	include(plugin_dir_path( __FILE__ ) . 'includes/reports/task-reports.php');
 }
 function wpcrm_organization_reports() { 
-	include ('includes/reports/organization-reports.php');
+	include(plugin_dir_path( __FILE__ ) . 'includes/reports/organization-reports.php');
 }
 function wpcrm_contact_reports() {
-	include ('includes/reports/contact-reports.php');
+	include(plugin_dir_path( __FILE__ ) . 'includes/reports/contact-reports.php');
 }
