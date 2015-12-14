@@ -29,6 +29,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.0.2 =
+* Fixed error message on certain reports and dashboard notice.
 = 1.0.1 =
 * Fixed minor issue with Google maps in records with addresses.
 * Added dashboard notifications for any projects, tasks, or opportunities the current logged in user is assigned to.
@@ -37,7 +39,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.0.1 =
-* Fixed minor issue with Google maps in records with addresses.
-* Added dashboard notifications for any projects, tasks, or opportunities the current logged in user is assigned to.
-* Fixed a minor CSS issue.
+= 1.0.2 =
+* Fixed error message on certain reports and dashboard notice.
