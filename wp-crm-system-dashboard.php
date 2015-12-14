@@ -21,9 +21,9 @@ function wp_crm_user_projects() {
 				'meta_query'	=> array(
 					'relation'		=>	'AND',
 					array(
-						'key'				=>	$meta_key1,
-						'value'				=>	$meta_key1_value,
-						'compare'			=>	'=',
+						'key'		=>	$meta_key1,
+						'value'		=>	$meta_key1_value,
+						'compare'	=>	'=',
 					),
 					array(
 						'key'		=>	$meta_key2,
@@ -76,9 +76,9 @@ function wp_crm_user_tasks() {
 				'meta_query'	=> array(
 					'relation'		=>	'AND',
 					array(
-						'key'				=>	$meta_key1,
-						'value'				=>	$meta_key1_value,
-						'compare'			=>	'=',
+						'key'		=>	$meta_key1,
+						'value'		=>	$meta_key1_value,
+						'compare'	=>	'=',
 					),
 					array(
 						'key'		=>	$meta_key2,
@@ -131,9 +131,9 @@ function wp_crm_user_opportunities() {
 				'meta_query'	=> array(
 					'relation'		=>	'AND',
 					array(
-						'key'				=>	$meta_key1,
-						'value'				=>	$meta_key1_value,
-						'compare'			=>	'=',
+						'key'		=>	$meta_key1,
+						'value'		=>	$meta_key1_value,
+						'compare'	=>	'=',
 					),
 					array(
 						'key'		=>	$meta_key2,
