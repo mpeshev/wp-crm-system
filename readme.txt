@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack
 Requires at least: 3.3.0
 Tested up to: 4.4
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ WP-CRM is a fully featured CRM that allows you to use the WordPress interface yo
 Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM allows you to have an unlimited number of records and lets you give everyone in your organization access to the data they need to drive business.
 
 == Installation ==
-1. Download archive and unzip in wp-content/plugins or install via Plugins – Add New.
+1. Download archive and unzip in wp-content/plugins or install via Plugins - Add New.
 2. Activate the plugin through the Plugins menu in WordPress.
 
 == Frequently Asked Questions ==
@@ -29,6 +29,10 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.0.4 =
+* Modified how users are provided access to WP-CRM System. Only Administrator level users (with manage_options capability) can access WP-CRM System settings. Administrators can allow users in other roles access to add, edit, or delete records, as well as view reports.
+* Hide dashboard widget if current user is not in a role with access to WP-CRM System information.
+* Added translatable text in missing areas.
 = 1.0.3 =
 * Fixed error message on reports.
 = 1.0.2 =
@@ -41,5 +45,7 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.0.3 =
-* Fixed error message on reports.
+= 1.0.4 =
+* Modified how users are provided access to WP-CRM System. Only Administrator level users (with manage_options capability) can access WP-CRM System settings. Administrators can allow users in other roles access to add, edit, or delete records, as well as view reports.
+* Hide dashboard widget if current user is not in a role with access to WP-CRM System information.
+* Added translatable text in missing areas.
