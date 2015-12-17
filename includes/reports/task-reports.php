@@ -9,46 +9,46 @@
 			$task_report = '';
 			$tasks = '';
 			$report_title = __('Tasks by User', 'wp-crm-system');
-			$roles = explode(",", get_option('wpcrm_system_select_user_role'));
-				foreach ($roles as $role) {
-					$args = array('posts_per_page'=>-1,'role' => $role);
-					$users = get_users($args);
-					if( empty($users) )
-					  break;
-					foreach( $users as $user ){
-						$meta_key1_value = $user->data->user_login;
-						$meta_key1_display = $user->data->display_name;
-						global $post;
-						
-						$args = array(
-							'post_type'		=>	'wpcrm-task',
-							'meta_query'	=> array(
-								array(
-									'key'		=>	$meta_key1,
-									'value'		=>	$meta_key1_value,
-									'compare'	=>	'=',
-								),
-							),
-						);
-						$posts = get_posts($args);					
-						if ($posts) {
-							foreach($posts as $post) {
-								$tasks .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-							}
-						} else {
-							$tasks = '';
-						}
-						if ($tasks == '') {
-							$task_report .= '';
-						} else {
-							$task_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $tasks . '</td></tr>';
-						}
-						$tasks = '';//reset tasks for next user
+			$users = get_users();
+			$wp_crm_users = array();
+			foreach( $users as $user ){
+				if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
+					$wp_crm_users[] = $user;
+				}
+			}
+			foreach( $wp_crm_users as $user) {
+				$meta_key1_value = $user->data->user_login;
+				$meta_key1_display = $user->data->display_name;
+				global $post;
+				
+				$args = array(
+					'post_type'		=>	'wpcrm-task',
+					'meta_query'	=> array(
+						array(
+							'key'		=>	$meta_key1,
+							'value'		=>	$meta_key1_value,
+							'compare'	=>	'=',
+						),
+					),
+				);
+				$posts = get_posts($args);					
+				if ($posts) {
+					foreach($posts as $post) {
+						$tasks .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
 					}
+				} else {
+					$tasks = '';
 				}
-				if ($task_report == '') {
-					$task_report = '<tr><td>' . __('No tasks are linked to users. Please add or edit a task and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
+				if ($tasks == '') {
+					$task_report .= '';
+				} else {
+					$task_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $tasks . '</td></tr>';
 				}
+				$tasks = '';//reset tasks for next user
+			}
+		if ($task_report == '') {
+			$task_report = '<tr><td>' . __('No tasks are linked to users. Please add or edit a task and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
+		}
 			break;
 		case 'organization_tasks':
 			$meta_key1 = $prefix . 'task-attach-to-organization';

@@ -9,46 +9,46 @@
 			$opportunity_report = '';
 			$opportunities = '';
 			$report_title = __('Opportunities by User', 'wp-crm-system');
-			$roles = explode(",", get_option('wpcrm_system_select_user_role'));
-				foreach ($roles as $role) {
-					$args = array('posts_per_page'=>-1,'role' => $role);
-					$users = get_users($args);
-					if( empty($users) )
-					  break;
-					foreach( $users as $user ){
-						$meta_key1_value = $user->data->user_login;
-						$meta_key1_display = $user->data->display_name;
-						global $post;
-						
-						$args = array(
-							'post_type'		=>	'wpcrm-opportunity',
-							'meta_query'	=> array(
-								array(
-									'key'		=>	$meta_key1,
-									'value'		=>	$meta_key1_value,
-									'compare'	=>	'=',
-								),
-							),
-						);
-						$posts = get_posts($args);					
-						if ($posts) {
-							foreach($posts as $post) {
-								$opportunities .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-							}
-						} else {
-							$opportunities = '';
-						}
-						if ($opportunities == '') {
-							$opportunity_report .= '';
-						} else {
-							$opportunity_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $opportunities . '</td></tr>';
-						}
-						$opportunities = '';//reset opportunities for next user
+			$users = get_users();
+			$wp_crm_users = array();
+			foreach( $users as $user ){
+				if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
+					$wp_crm_users[] = $user;
+				}
+			}
+			foreach( $wp_crm_users as $user) {
+				$meta_key1_value = $user->data->user_login;
+				$meta_key1_display = $user->data->display_name;
+				global $post;
+				
+				$args = array(
+					'post_type'		=>	'wpcrm-opportunity',
+					'meta_query'	=> array(
+						array(
+							'key'		=>	$meta_key1,
+							'value'		=>	$meta_key1_value,
+							'compare'	=>	'=',
+						),
+					),
+				);
+				$posts = get_posts($args);					
+				if ($posts) {
+					foreach($posts as $post) {
+						$opportunities .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
 					}
+				} else {
+					$opportunities = '';
 				}
-				if ($opportunity_report == '') {
-					$opportunity_report = '<tr><td>' . __('No opportunities are linked to users. Please add or edit a opportunity and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
+				if ($opportunities == '') {
+					$opportunity_report .= '';
+				} else {
+					$opportunity_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $opportunities . '</td></tr>';
 				}
+				$opportunities = '';//reset opportunities for next user
+			}
+			if ($opportunity_report == '') {
+				$opportunity_report = '<tr><td>' . __('No opportunities are linked to users. Please add or edit a opportunity and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
+			}
 			break;
 		case 'organization_opportunities':
 			$meta_key1 = $prefix . 'opportunity-attach-to-organization';
@@ -137,6 +137,7 @@
 			$meta_key1_values = array('won'=>__('Won','wp-crm-system'),'lost'=>__('Lost','wp-crm-system'),'suspended'=>__('Suspended','wp-crm-system'),'abandoned'=>__('Abandoned','wp-crm-system'),'not-set'=>__('Not Set','wp-crm-system'));
 			$meta_key2 = $prefix . 'opportunity-closedate';
 			global $post;
+			$opportunity_report .= '<tr><td><strong>' . WPCRM_STATUS . '</strong></td><td><strong>' . __('Opportunity','wp-crm-system') . ' - ' . WPCRM_FORECASTED_CLOSE .'</strong></td></tr>';
 			foreach($meta_key1_values as $key=>$value) {
 				$args = array(
 					'post_type'		=>	'wpcrm-opportunity',
@@ -152,7 +153,7 @@
 				if ($posts) {
 					$opportunity_report .= '<tr><td><strong>' . $value . '</strong></td><td>';
 					foreach($posts as $post) {
-						$opportunity_report .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a> - Forecasted Close Date ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$meta_key2,true)) . '<br />';
+						$opportunity_report .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a> - '. date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$meta_key2,true)) . '<br />';
 					}
 					$opportunity_report .= '</td></tr>';
 				} else {

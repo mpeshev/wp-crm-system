@@ -9,46 +9,46 @@
 			$project_report = '';
 			$projects = '';
 			$report_title = __('Projects by User', 'wp-crm-system');
-			$roles = explode(",", get_option('wpcrm_system_select_user_role'));
-				foreach ($roles as $role) {
-					$args = array('posts_per_page'=>-1,'role' => $role);
-					$users = get_users($args);
-					if( empty($users) )
-					  break;
-					foreach( $users as $user ){
-						$meta_key1_value = $user->data->user_login;
-						$meta_key1_display = $user->data->display_name;
-						global $post;
-						
-						$args = array(
-							'post_type'		=>	'wpcrm-project',
-							'meta_query'	=> array(
-								array(
-									'key'		=>	$meta_key1,
-									'value'		=>	$meta_key1_value,
-									'compare'	=>	'=',
-								),
-							),
-						);
-						$posts = get_posts($args);					
-						if ($posts) {
-							foreach($posts as $post) {
-								$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-							}
-						} else {
-							$projects = '';
-						}
-						if ($projects == '') {
-							$project_report .= '';
-						} else {
-							$project_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $projects . '</td></tr>';
-						}
-						$projects = '';//reset projects for next user
+			$users = get_users();
+			$wp_crm_users = array();
+			foreach( $users as $user ){
+				if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
+					$wp_crm_users[] = $user;
+				}
+			}
+			foreach( $wp_crm_users as $user) {
+				$meta_key1_value = $user->data->user_login;
+				$meta_key1_display = $user->data->display_name;
+				global $post;
+				
+				$args = array(
+					'post_type'		=>	'wpcrm-project',
+					'meta_query'	=> array(
+						array(
+							'key'		=>	$meta_key1,
+							'value'		=>	$meta_key1_value,
+							'compare'	=>	'=',
+						),
+					),
+				);
+				$posts = get_posts($args);					
+				if ($posts) {
+					foreach($posts as $post) {
+						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
 					}
+				} else {
+					$projects = '';
 				}
-				if ($project_report == '') {
-					$project_report = '<tr><td>' . __('No projects are linked to users. Please add or edit a project and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
+				if ($projects == '') {
+					$project_report .= '';
+				} else {
+					$project_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $projects . '</td></tr>';
 				}
+				$projects = '';//reset projects for next user
+			}
+			if ($project_report == '') {
+				$project_report = '<tr><td>' . __('No projects are linked to users. Please add or edit a project and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
+			}
 			break;
 		case 'organization_projects':
 			$meta_key1 = $prefix . 'project-attach-to-organization';
