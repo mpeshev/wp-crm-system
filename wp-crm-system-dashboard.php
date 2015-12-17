@@ -187,4 +187,4 @@ function wp_crm_user_opportunities() {
 </div>
 <div class="wp-crm-widget">
 <a href="<?php echo admin_url('admin.php?page=wpcrm-reports'); ?>"><?php _e('View Reports','wp-crm-system'); ?></a> | <a href="<?php echo admin_url('admin.php?page=wpcrm-extensions'); ?>"><?php _e('Browse Extensions','wp-crm-system'); ?></a>
-</div> 
+</div>

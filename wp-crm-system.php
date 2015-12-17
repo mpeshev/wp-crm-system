@@ -14,10 +14,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-if (!defined('WPCRM_BASE_STORE_URL')){
-	define( 'WPCRM_BASE_STORE_URL', 'http://wp-crm.com' );
-}
-define( 'WPCRM_BASE_PLUGIN_PATH', dirname( __FILE__ ) );
+include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
 
 /* Load Text Domain */
 add_action('plugins_loaded', 'wp_crm_plugin_init');
@@ -27,8 +24,10 @@ function wp_crm_plugin_init() {
 /* Add a metabox on dashboard for WP-CRM System Notices */
 add_action('wp_dashboard_setup', 'wp_crm_dashboard_widget');
 function wp_crm_dashboard_widget() {
-	global $wp_meta_boxes;
-	wp_add_dashboard_widget('wp_crm_notifications', 'WP-CRM System', 'wp_crm_dashboard_notifications');
+	if(current_user_can(WPCRM_USER_ACCESS)) {
+		global $wp_meta_boxes;
+		wp_add_dashboard_widget('wp_crm_notifications', 'WP-CRM System', 'wp_crm_dashboard_notifications');
+	}
 }
 function wp_crm_dashboard_notifications() {
 	include('wp-crm-system-dashboard.php');
@@ -41,11 +40,10 @@ add_action('admin_menu', 'wpcrm_admin_page');
 // action function for above hook
 function wpcrm_admin_page() {
     // Add a new menu:
-    add_menu_page(__('WP CRM', 'wp-crm-system'), __('WP CRM', 'wp-crm-system'),'manage_options','wpcrm','wpcrm_settings_page', 'dashicons-id');
-	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), 'manage_options', 'wpcrm-reports', 'wpcrm_reports_page' );
+    add_menu_page(__('WP CRM', 'wp-crm-system'), __('WP CRM', 'wp-crm-system'),WPCRM_USER_ACCESS,'wpcrm','wpcrm_settings_page', 'dashicons-id');
+	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-reports', 'wpcrm_reports_page' );
 	add_submenu_page( 'wpcrm', __('Settings', 'wp-crm-system'), __('Settings', 'wp-crm-system'), 'manage_options', 'wpcrm-settings', 'wpcrm_settings_page' );
-	add_submenu_page( 'wpcrm', __('Extensions', 'wp-crm-system'), __('Extensions', 'wp-crm-system'), 'manage_options', 'wpcrm-extensions', 'wpcrm_extensions_page' );
-	
+	add_submenu_page( 'wpcrm', __('Extensions', 'wp-crm-system'), __('Extensions', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-extensions', 'wpcrm_extensions_page' );
 }
 //Display the page content for the plugin settings and reports
 function wpcrm_reports_page() {
@@ -62,7 +60,7 @@ register_activation_hook(__FILE__, 'activate_wpcrm_system_settings');
 register_uninstall_hook(__FILE__, 'deactivate_wpcrm_system_settings');
 add_action('admin_init', 'register_wpcrm_system_settings');
 function activate_wpcrm_system_settings() {
-	add_option('wpcrm_system_select_user_role', 'Administrator');
+	add_option('wpcrm_system_select_user_role', 'manage_options');
 	add_option('wpcrm_system_default_currency', 'USD');
 	add_option('wpcrm_system_report_currency_decimals', 0);
 	add_option('wpcrm_system_report_currency_decimal_point', '.');
@@ -103,8 +101,62 @@ add_action( 'init', 'wpcrm_opportunity_taxonomy');
 add_action( 'init', 'wpcrm_projects_init' );
 add_action( 'init', 'wpcrm_project_taxonomy');
 
+/**
+ * Adjust capabilities as necessary
+ */
+add_action('admin_init','wpcrm_add_role_caps',999);
+function wpcrm_add_role_caps() {
+	$post_types = array('wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project');
+    
+	foreach($post_types as $post_type) {
+		// Add the roles you'd like to administer contacts
+		$roles = array('subscriber','contributor','author','editor','administrator');
+
+		// Loop through each role and assign capabilities
+		foreach($roles as $the_role) { 
+			$role = get_role($the_role);
+		// Need to check if the role has get_option('myplugin_select_user_role'); capability then add_cap if it does.
+			if($role->has_cap(get_option('wpcrm_system_select_user_role'))) {
+				$role->add_cap( 'edit_'.$post_type);
+				$role->add_cap( 'read_'.$post_type);
+				$role->add_cap( 'delete_'.$post_type);
+				$role->add_cap( 'edit_'.$post_type.'s');
+				$role->add_cap( 'edit_others_'.$post_type.'s');
+				$role->add_cap( 'publish_'.$post_type.'s');
+				$role->add_cap( 'read_private_'.$post_type.'s');
+				$role->add_cap( 'read_'.$post_type);
+				$role->add_cap( 'delete_'.$post_type.'s');
+				$role->add_cap( 'delete_private_'.$post_type.'s');
+				$role->add_cap( 'delete_published_'.$post_type.'s');
+				$role->add_cap( 'delete_others_'.$post_type.'s');
+				$role->add_cap( 'edit_private_'.$post_type.'s');
+				$role->add_cap( 'edit_published_'.$post_type.'s');
+				$role->add_cap( 'create_'.$post_type.'s');
+			} else {
+			// Remove the capabilities if the role isn't supposed to edit the CPT. Allows for admin to change to a higher role if too much access was previously given.
+				$role->remove_cap( 'edit_'.$post_type);
+				$role->remove_cap( 'read_'.$post_type);
+				$role->remove_cap( 'delete_'.$post_type);
+				$role->remove_cap( 'edit_'.$post_type.'s');
+				$role->remove_cap( 'edit_others_'.$post_type.'s');
+				$role->remove_cap( 'publish_'.$post_type.'s');
+				$role->remove_cap( 'read_private_'.$post_type.'s');
+				$role->remove_cap( 'read_'.$post_type);
+				$role->remove_cap( 'delete_'.$post_type.'s');
+				$role->remove_cap( 'delete_private_'.$post_type.'s');
+				$role->remove_cap( 'delete_published_'.$post_type.'s');
+				$role->remove_cap( 'delete_others_'.$post_type.'s');
+				$role->remove_cap( 'edit_private_'.$post_type.'s');
+				$role->remove_cap( 'edit_published_'.$post_type.'s');
+				$role->remove_cap( 'create_'.$post_type.'s');
+			}
+		}
+	}
+}
+
 /* Contacts post type. */
 function wpcrm_contacts_init() {
+	$post_type = 'wpcrm-contact';
 	$labels = array(
 		'name'               => __( 'Contacts', 'wp-crm-system' ),
 		'singular_name'      => __( 'Contact', 'wp-crm-system' ),
@@ -121,36 +173,51 @@ function wpcrm_contacts_init() {
 		'not_found'          => __( 'No contacts found.', 'wp-crm-system' ),
 		'not_found_in_trash' => __( 'No contacts found in Trash.', 'wp-crm-system' )
 	);
-
 	$args = array(
-		'labels'             => $labels,
-        'description'        => __( 'Contacts', 'wp-crm-system' ),
-		'public'             => false,
-		'exclude_from_search'=> true,
-		'publicly_queryable' => false,
-		'show_ui'            => true,
-		'show_in_menu'       => 'wpcrm',
-		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'wpcrm-contact' ),
-		'capability_type'    => 'post',
-		'has_archive'        => false,
-		'hierarchical'       => false,
-		'menu_position'      => null,
-		'taxonomies'		 => array('contact-type'),
-		'supports'           => array( 'title', 'thumbnail', 'custom-fields' )
+			'labels'             => $labels,
+			'description'        => __( 'Contacts', 'wp-crm-system' ),
+			'public'             => false,
+			'exclude_from_search'=> true,
+			'publicly_queryable' => false,
+			'show_ui'            => true,
+			'show_in_menu'       => 'wpcrm',
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => $post_type ),
+			'capabilities' => array(
+				'edit_post' => 'edit_'.$post_type,
+				'read_post' => 'read_'.$post_type,
+				'delete_post' => 'delete_'.$post_type,
+				'edit_posts' => 'edit_'.$post_type.'s',
+				'edit_others_posts' => 'edit_others_'.$post_type.'s',
+				'publish_posts' => 'publish_'.$post_type.'s',
+				'read_private_posts' => 'read_private_'.$post_type.'s',
+				'read' => 'read_'.$post_type,
+				'delete_posts' => 'delete_'.$post_type.'s',
+				'delete_private_posts' => 'delete_private_'.$post_type.'s',
+				'delete_published_posts' => 'delete_published_'.$post_type.'s',
+				'delete_others_posts' => 'delete_others_'.$post_type.'s',
+				'edit_private_posts' => 'edit_private_'.$post_type.'s',
+				'edit_published_posts' => 'edit_published_'.$post_type.'s',
+				'create_posts' => 'create_'.$post_type.'s',
+			),
+			'has_archive'        => false,
+			'hierarchical'       => false,
+			'menu_position'      => null,
+			'taxonomies'		 => array('contact-type'),
+			'supports'           => array( 'title', 'thumbnail', 'custom-fields' )
 	);
 
-	register_post_type( 'wpcrm-contact', $args );
+	register_post_type( $post_type, $args );
 }
 function wpcrm_contact_taxonomy() {
 	$labels = array(
 		'name'              => __( 'Contact Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Contact Type', 'wp-crm-system' ),
-		'edit_item'         => __( 'Edit Contact Type' ),
-		'update_item'       => __( 'Update Contact Type' ),
-		'add_new_item'      => __( 'Add New Contact Type' ),
-		'new_item_name'     => __( 'New Contact Type' ),
-		'menu_name'         => __( 'Contact Types' ),
+		'edit_item'         => __( 'Edit Contact Type', 'wp-crm-system' ),
+		'update_item'       => __( 'Update Contact Type', 'wp-crm-system' ),
+		'add_new_item'      => __( 'Add New Contact Type', 'wp-crm-system' ),
+		'new_item_name'     => __( 'New Contact Type', 'wp-crm-system' ),
+		'menu_name'         => __( 'Contact Types', 'wp-crm-system' ),
 	);
 	$args = array(
 		'hierarchical'          => true,
@@ -165,6 +232,7 @@ function wpcrm_contact_taxonomy() {
 }
 /* Tasks post type. */
 function wpcrm_tasks_init() {
+	$post_type = 'wpcrm-task';
 	$labels = array(
 		'name'               => __( 'Tasks', 'wp-crm-system' ),
 		'singular_name'      => __( 'Task', 'wp-crm-system' ),
@@ -191,8 +259,24 @@ function wpcrm_tasks_init() {
 		'show_ui'            => true,
 		'show_in_menu'       => 'wpcrm',
 		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'wpcrm-task' ),
-		'capability_type'    => 'post',
+		'rewrite'            => array( 'slug' => $post_type ),
+		'capabilities' => array(
+			'edit_post' => 'edit_'.$post_type,
+			'read_post' => 'read_'.$post_type,
+			'delete_post' => 'delete_'.$post_type,
+			'edit_posts' => 'edit_'.$post_type.'s',
+			'edit_others_posts' => 'edit_others_'.$post_type.'s',
+			'publish_posts' => 'publish_'.$post_type.'s',
+			'read_private_posts' => 'read_private_'.$post_type.'s',
+			'read' => 'read_'.$post_type,
+			'delete_posts' => 'delete_'.$post_type.'s',
+			'delete_private_posts' => 'delete_private_'.$post_type.'s',
+			'delete_published_posts' => 'delete_published_'.$post_type.'s',
+			'delete_others_posts' => 'delete_others_'.$post_type.'s',
+			'edit_private_posts' => 'edit_private_'.$post_type.'s',
+			'edit_published_posts' => 'edit_published_'.$post_type.'s',
+			'create_posts' => 'create_'.$post_type.'s',
+		),
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => null,
@@ -200,23 +284,22 @@ function wpcrm_tasks_init() {
 		'supports'           => array( 'title', 'thumbnail', 'custom-fields' )
 	);
 
-	register_post_type( 'wpcrm-task', $args );
+	register_post_type( $post_type, $args );
 }
 function wpcrm_task_taxonomy() {
 	$labels = array(
 		'name'              => __( 'Task Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Task Type', 'wp-crm-system' ),
-		'edit_item'         => __( 'Edit Task Type' ),
-		'update_item'       => __( 'Update Task Type' ),
-		'add_new_item'      => __( 'Add New Task Type' ),
-		'new_item_name'     => __( 'New Task Type' ),
-		'menu_name'         => __( 'Task Types' ),
+		'edit_item'         => __( 'Edit Task Type', 'wp-crm-system' ),
+		'update_item'       => __( 'Update Task Type', 'wp-crm-system' ),
+		'add_new_item'      => __( 'Add New Task Type', 'wp-crm-system' ),
+		'new_item_name'     => __( 'New Task Type', 'wp-crm-system' ),
+		'menu_name'         => __( 'Task Types', 'wp-crm-system' ),
 	);
 	$args = array(
 		'hierarchical'          => true,
 		'labels'                => $labels,
 		'show_ui'               => true,
-		'show_in_menu'			=> 'edit.php?post_type=wpcrm',
 		'show_admin_column'     => true,
 		'update_count_callback' => '_update_post_term_count',
 		'query_var'             => true,
@@ -226,6 +309,7 @@ function wpcrm_task_taxonomy() {
 }
 /* Organizations post type. */
 function wpcrm_organizations_init() {
+	$post_type = 'wpcrm-organization';
 	$labels = array(
 		'name'               => __( 'Organizations', 'wp-crm-system' ),
 		'singular_name'      => __( 'Organization', 'wp-crm-system' ),
@@ -252,8 +336,24 @@ function wpcrm_organizations_init() {
 		'show_ui'            => true,
 		'show_in_menu'       => 'wpcrm',
 		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'wpcrm-organization' ),
-		'capability_type'    => 'post',
+		'rewrite'            => array( 'slug' => $post_type ),
+		'capabilities' => array(
+			'edit_post' => 'edit_'.$post_type,
+			'read_post' => 'read_'.$post_type,
+			'delete_post' => 'delete_'.$post_type,
+			'edit_posts' => 'edit_'.$post_type.'s',
+			'edit_others_posts' => 'edit_others_'.$post_type.'s',
+			'publish_posts' => 'publish_'.$post_type.'s',
+			'read_private_posts' => 'read_private_'.$post_type.'s',
+			'read' => 'read_'.$post_type,
+			'delete_posts' => 'delete_'.$post_type.'s',
+			'delete_private_posts' => 'delete_private_'.$post_type.'s',
+			'delete_published_posts' => 'delete_published_'.$post_type.'s',
+			'delete_others_posts' => 'delete_others_'.$post_type.'s',
+			'edit_private_posts' => 'edit_private_'.$post_type.'s',
+			'edit_published_posts' => 'edit_published_'.$post_type.'s',
+			'create_posts' => 'create_'.$post_type.'s',
+		),
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => null,
@@ -261,17 +361,17 @@ function wpcrm_organizations_init() {
 		'supports'           => array( 'title', 'thumbnail', 'custom-fields' )
 	);
 
-	register_post_type( 'wpcrm-organization', $args );
+	register_post_type( $post_type, $args );
 }
 function wpcrm_organization_taxonomy() {
 	$labels = array(
 		'name'              => __( 'Organization Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Organization Type', 'wp-crm-system' ),
-		'edit_item'         => __( 'Edit Organization Type' ),
-		'update_item'       => __( 'Update Organization Type' ),
-		'add_new_item'      => __( 'Add New Organization Type' ),
-		'new_item_name'     => __( 'New Organization Type' ),
-		'menu_name'         => __( 'Organization Types' ),
+		'edit_item'         => __( 'Edit Organization Type', 'wp-crm-system' ),
+		'update_item'       => __( 'Update Organization Type', 'wp-crm-system' ),
+		'add_new_item'      => __( 'Add New Organization Type', 'wp-crm-system' ),
+		'new_item_name'     => __( 'New Organization Type', 'wp-crm-system' ),
+		'menu_name'         => __( 'Organization Types', 'wp-crm-system' ),
 	);
 	$args = array(
 		'hierarchical'          => true,
@@ -286,6 +386,7 @@ function wpcrm_organization_taxonomy() {
 }
 /* Opportunities post type. */
 function wpcrm_opportunities_init() {
+	$post_type = 'wpcrm-opportunity';
 	$labels = array(
 		'name'               => __( 'Opportunities', 'wp-crm-system' ),
 		'singular_name'      => __( 'Opportunity', 'wp-crm-system' ),
@@ -312,8 +413,24 @@ function wpcrm_opportunities_init() {
 		'show_ui'            => true,
 		'show_in_menu'       => 'wpcrm',
 		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'wpcrm-opportunity' ),
-		'capability_type'    => 'post',
+		'rewrite'            => array( 'slug' => $post_type ),
+		'capabilities' => array(
+			'edit_post' => 'edit_'.$post_type,
+			'read_post' => 'read_'.$post_type,
+			'delete_post' => 'delete_'.$post_type,
+			'edit_posts' => 'edit_'.$post_type.'s',
+			'edit_others_posts' => 'edit_others_'.$post_type.'s',
+			'publish_posts' => 'publish_'.$post_type.'s',
+			'read_private_posts' => 'read_private_'.$post_type.'s',
+			'read' => 'read_'.$post_type,
+			'delete_posts' => 'delete_'.$post_type.'s',
+			'delete_private_posts' => 'delete_private_'.$post_type.'s',
+			'delete_published_posts' => 'delete_published_'.$post_type.'s',
+			'delete_others_posts' => 'delete_others_'.$post_type.'s',
+			'edit_private_posts' => 'edit_private_'.$post_type.'s',
+			'edit_published_posts' => 'edit_published_'.$post_type.'s',
+			'create_posts' => 'create_'.$post_type.'s',
+		),
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => null,
@@ -321,17 +438,17 @@ function wpcrm_opportunities_init() {
 		'supports'           => array( 'title', 'thumbnail', 'custom-fields' )
 	);
 
-	register_post_type( 'wpcrm-opportunity', $args );
+	register_post_type( $post_type, $args );
 }
 function wpcrm_opportunity_taxonomy() {
 	$labels = array(
 		'name'              => __( 'Opportunity Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Opportunity Type', 'wp-crm-system' ),
-		'edit_item'         => __( 'Edit Opportunity Type' ),
-		'update_item'       => __( 'Update Opportunity Type' ),
-		'add_new_item'      => __( 'Add New Opportunity Type' ),
-		'new_item_name'     => __( 'New Opportunity Type' ),
-		'menu_name'         => __( 'Opportunity Types' ),
+		'edit_item'         => __( 'Edit Opportunity Type', 'wp-crm-system' ),
+		'update_item'       => __( 'Update Opportunity Type', 'wp-crm-system' ),
+		'add_new_item'      => __( 'Add New Opportunity Type', 'wp-crm-system' ),
+		'new_item_name'     => __( 'New Opportunity Type', 'wp-crm-system' ),
+		'menu_name'         => __( 'Opportunity Types', 'wp-crm-system' ),
 	);
 	$args = array(
 		'hierarchical'          => true,
@@ -346,6 +463,7 @@ function wpcrm_opportunity_taxonomy() {
 }
 /* Projects post type. */
 function wpcrm_projects_init() {
+	$post_type = 'wpcrm-project';
 	$labels = array(
 		'name'               => __( 'Projects', 'wp-crm-system' ),
 		'singular_name'      => __( 'Project', 'wp-crm-system' ),
@@ -372,8 +490,24 @@ function wpcrm_projects_init() {
 		'show_ui'            => true,
 		'show_in_menu'       => 'wpcrm',
 		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'wpcrm-project' ),
-		'capability_type'    => 'post',
+		'rewrite'            => array( 'slug' => $post_type ),
+		'capabilities' => array(
+			'edit_post' => 'edit_'.$post_type,
+			'read_post' => 'read_'.$post_type,
+			'delete_post' => 'delete_'.$post_type,
+			'edit_posts' => 'edit_'.$post_type.'s',
+			'edit_others_posts' => 'edit_others_'.$post_type.'s',
+			'publish_posts' => 'publish_'.$post_type.'s',
+			'read_private_posts' => 'read_private_'.$post_type.'s',
+			'read' => 'read_'.$post_type,
+			'delete_posts' => 'delete_'.$post_type.'s',
+			'delete_private_posts' => 'delete_private_'.$post_type.'s',
+			'delete_published_posts' => 'delete_published_'.$post_type.'s',
+			'delete_others_posts' => 'delete_others_'.$post_type.'s',
+			'edit_private_posts' => 'edit_private_'.$post_type.'s',
+			'edit_published_posts' => 'edit_published_'.$post_type.'s',
+			'create_posts' => 'create_'.$post_type.'s',
+		),
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => null,
@@ -381,17 +515,17 @@ function wpcrm_projects_init() {
 		'supports'           => array( 'title', 'thumbnail', 'custom-fields' )
 	);
 
-	register_post_type( 'wpcrm-project', $args );
+	register_post_type( $post_type, $args );
 }
 function wpcrm_project_taxonomy() {
 	$labels = array(
 		'name'              => __( 'Project Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Project Type', 'wp-crm-system' ),
-		'edit_item'         => __( 'Edit Project Type' ),
-		'update_item'       => __( 'Update Project Type' ),
-		'add_new_item'      => __( 'Add New Project Type' ),
-		'new_item_name'     => __( 'New Project Type' ),
-		'menu_name'         => __( 'Project Types' ),
+		'edit_item'         => __( 'Edit Project Type', 'wp-crm-system' ),
+		'update_item'       => __( 'Update Project Type', 'wp-crm-system' ),
+		'add_new_item'      => __( 'Add New Project Type', 'wp-crm-system' ),
+		'new_item_name'     => __( 'New Project Type', 'wp-crm-system' ),
+		'menu_name'         => __( 'Project Types', 'wp-crm-system' ),
 	);
 	$args = array(
 		'hierarchical'          => true,
@@ -405,7 +539,6 @@ function wpcrm_project_taxonomy() {
 	register_taxonomy( 'project-type', 'wpcrm-project', $args );
 }
 if ( !class_exists('wpCRMSystemCustomFields') ) {
- 
     class wpCRMSystemCustomFields {
         /**
         * @var  string  $prefix  The prefix for storing custom fields in the postmeta table
@@ -422,492 +555,492 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 			// Contact Fields
             array(
                 'name'          => 'contact-name-prefix',
-                'title'         => 'Name Prefix',
+                'title'         => WPCRM_NAME_PREFIX,
                 'description'   => '',
                 'type'          => 'selectnameprefix',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-first-name',
-                'title'         => 'First Name',
+                'title'         => WPCRM_FIRST_NAME,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
             array(
                 'name'          => 'contact-last-name',
-                'title'         => 'Last Name',
+                'title'         => WPCRM_LAST_NAME,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
 				'name'          => 'contact-attach-to-organization',
-                'title'         => 'Organization',
+                'title'         => WPCRM_ORGANIZATION,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectorganization',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectorganization',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-role',
-                'title'         => 'Role',
+                'title'         => WPCRM_ROLE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-email',
-                'title'         => 'Email',
+                'title'         => WPCRM_EMAIL,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'email',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-phone',
-                'title'         => 'Phone',
+                'title'         => WPCRM_PHONE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-mobile-phone',
-                'title'         => 'Mobile Phone',
+                'title'         => WPCRM_MOBILE_PHONE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-fax',
-                'title'         => 'Fax',
+                'title'         => WPCRM_FAX,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-website',
-                'title'         => 'Website',
+                'title'         => WPCRM_WEBSITE,
                 'description'   => '',
-				'placeholder'	=>	'http://',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+				'placeholder'	=> 'http://',
+                'type'          => 'url',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-address1',
-                'title'         => 'Address 1',
+                'title'         => WPCRM_ADDRESS_1,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-address2',
-                'title'         => 'Address 2',
+                'title'         => WPCRM_ADDRESS_2,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-city',
-                'title'         => 'City',
+                'title'         => WPCRM_CITY,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-state',
-                'title'         => 'State/Province',
+                'title'         => WPCRM_STATE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-postal',
-                'title'         => 'Postal Code',
+                'title'         => WPCRM_POSTAL,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-country',
-                'title'         => 'Country',
+                'title'         => WPCRM_COUNTRY,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-gmap',
-                'title'         => 'Contact Location',
+                'title'         => WPCRM_LOCATION,
                 'description'   => '',
 				'placeholder'   => '',
                 'type'          => 'gmap',
                 'scope'         => array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'contact-additional',
-                'title'         => 'Additional Information',
+                'title'         => WPCRM_ADDITIONAL,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'wysiwyg',
-                'scope'         =>   array( 'wpcrm-contact' ),
-                'capability'    => 'manage_options'
+                'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			//Task Fields
 			array(
                 'name'          => 'task-assignment',
-                'title'         => 'Assigned To',
+                'title'         => WPCRM_ASSIGNED,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectuser',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectuser',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
 				'name'          => 'task-attach-to-organization',
-                'title'         => 'Attach to organization',
+                'title'         => WPCRM_ATTACH_ORG,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectorganization',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectorganization',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
 				'name'          => 'task-attach-to-contact',
-                'title'         => 'Attach to contact',
+                'title'         => WPCRM_ATTACH_CONTACT,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectcontact',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectcontact',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'task-due-date',
-                'title'         => 'Due Date',
+                'title'         => WPCRM_DUE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'datepicker',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'datepicker',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'task-start-date',
-                'title'         => 'Start Date',
+                'title'         => WPCRM_START,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'datepicker',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'datepicker',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'task-progress',
-                'title'         => 'Progress',
+                'title'         => WPCRM_PROGRESS,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectprogress',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectprogress',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'task-priority',
-                'title'         => 'Priority',
+                'title'         => WPCRM_PRIORITY,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectpriority',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectpriority',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'task-status',
-                'title'         => 'Status',
+                'title'         => WPCRM_STATUS,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectstatus',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectstatus',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'task-description',
-                'title'         => 'Description',
+                'title'         => WPCRM_DESCRIPTION,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'wysiwyg',
-                'scope'         =>   array( 'wpcrm-task' ),
-                'capability'    => 'manage_options'
+                'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			//Organization Fields
 			array(
                 'name'          => 'organization-phone',
-                'title'         => 'Phone',
+                'title'         => WPCRM_PHONE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-email',
-                'title'         => 'Email',
+                'title'         => WPCRM_EMAIL,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'email',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-website',
-                'title'         => 'Website',
+                'title'         => WPCRM_WEBSITE,
                 'description'   => '',
 				'placeholder'   => 'http://',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'url',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-address1',
-                'title'         => 'Address 1',
+                'title'         => WPCRM_ADDRESS_1,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-address2',
-                'title'         => 'Address 2',
+                'title'         => WPCRM_ADDRESS_2,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-city',
-                'title'         => 'City',
+                'title'         => WPCRM_CITY,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-state',
-                'title'         => 'State/Province',
+                'title'         => WPCRM_STATE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-postal',
-                'title'         => 'Postal Code',
+                'title'         => WPCRM_POSTAL,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-country',
-                'title'         => 'Country',
+                'title'         => WPCRM_COUNTRY,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'default',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'default',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-gmap',
-                'title'         => 'Organization Location',
+                'title'         => WPCRM_LOCATION,
                 'description'   => '',
 				'placeholder'   => '',
                 'type'          => 'gmap',
                 'scope'         => array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'organization-information',
-                'title'         => 'Additional Organization Information',
+                'title'         => WPCRM_ADDITIONAL,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'wysiwyg',
-                'scope'         =>   array( 'wpcrm-organization' ),
-                'capability'    => 'manage_options'
+                'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			//Opportunity Fields
 			array(
                 'name'          => 'opportunity-assigned',
-                'title'         => 'Responsible Party',
+                'title'         => WPCRM_ASSIGNED,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectuser',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectuser',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
 				'name'          => 'opportunity-attach-to-organization',
-                'title'         => 'Attach to organization',
+                'title'         => WPCRM_ATTACH_ORG,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectorganization',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectorganization',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
 				'name'          => 'opportunity-attach-to-contact',
-                'title'         => 'Attach to contact',
+                'title'         => WPCRM_ATTACH_CONTACT,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectcontact',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectcontact',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'opportunity-description',
-                'title'         => 'Description',
+                'title'         => WPCRM_DESCRIPTION,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'wysiwyg',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'opportunity-probability',
-                'title'         => 'Probability of Winning',
+                'title'         => WPCRM_PROBABILITY,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectprogress',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectprogress',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'opportunity-closedate',
-                'title'         => 'Forecasted Close Date',
+                'title'         => WPCRM_FORECASTED_CLOSE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'datepicker',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'datepicker',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'opportunity-value',
-                'title'         => 'Opportunity Value',
+                'title'         => WPCRM_VALUE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'currency',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'currency',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'opportunity-wonlost',
-                'title'         => 'Opportunity Won/Lost',
+                'title'         => WPCRM_WON_LOST,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectwonlost',
-                'scope'         =>   array( 'wpcrm-opportunity' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectwonlost',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			//Project Fields
 			array(
                 'name'          => 'project-description',
-                'title'         => 'Project Description',
+                'title'         => WPCRM_DESCRIPTION,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'wysiwyg',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'project-closedate',
-                'title'         => 'Project Close Date',
+                'title'         => WPCRM_CLOSE_DATE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'datepicker',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'datepicker',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'project-progress',
-                'title'         => 'Progress',
+                'title'         => WPCRM_PROGRESS,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectprogress',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectprogress',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'project-status',
-                'title'         => 'Project Status',
+                'title'         => WPCRM_STATUS,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectstatus',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectstatus',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'project-value',
-                'title'         => 'Project Value',
+                'title'         => WPCRM_VALUE,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'currency',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'currency',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
                 'name'          => 'project-assigned',
-                'title'         => 'Responsible Party',
+                'title'         => WPCRM_ASSIGNED,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectuser',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectuser',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
 				'name'          => 'project-attach-to-organization',
-                'title'         => 'Attach to organization',
+                'title'         => WPCRM_ATTACH_ORG,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectorganization',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectorganization',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
 				'name'          => 'project-attach-to-contact',
-                'title'         => 'Attach to contact',
+                'title'         => WPCRM_ATTACH_CONTACT,
                 'description'   => '',
 				'placeholder'   => '',
-                'type'          =>   'selectcontact',
-                'scope'         =>   array( 'wpcrm-project' ),
-                'capability'    => 'manage_options'
+                'type'          => 'selectcontact',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
             ),
         );
         /**
@@ -947,7 +1080,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
             ?>
             <div class="form-wrap">
                 <?php
-                wp_nonce_field( 'my-custom-fields', 'my-custom-fields_wpnonce', false, true );
+                wp_nonce_field( 'wpcrm-fields', 'wpcrm-fields_wpnonce', false, true );
                 foreach ( $this->customFields as $customField ) {
                     // Check scope
                     $scope = $customField[ 'scope' ];
@@ -977,8 +1110,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								case 'selectpriority':
 								case 'selectstatus':
 								case 'selectnameprefix':
-								case 'selectuser':
-								case 'selectemail': {
+								case 'selectuser': {
 									// Select
 									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . $customField[ 'title' ] . '</strong></label>&nbsp;&nbsp;';
 									//Select User
@@ -986,18 +1118,17 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 										echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
 										if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
 										echo '<option value="" ' . $selected . '>Not Assigned</option>';
-										
-										$roles = explode(",", get_option('wpcrm_system_select_user_role'));
-										foreach ($roles as $role) {
-											$args = array('role' => $role);
-											$users = get_users($args);
-											if( empty($users) )
-											  break;
+											$users = get_users();
+											$wp_crm_users = array();
 											foreach( $users as $user ){
+												if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
+													$wp_crm_users[] = $user;
+												}
+											}
+											foreach( $wp_crm_users as $user) {
 												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $user->data->user_login) { $selected = 'selected'; } else { $selected = ''; }
 												echo '<option value="'.$user->data->user_login.'" ' . $selected . '>'.$user->data->display_name.'</option>';
 											}
-										}
 										echo'</select>';
 									} elseif ( $customField[ 'type' ] == "selectorganization" ) {
 										//Select Organization
@@ -1052,14 +1183,10 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 										//Select prefix
 										if ( $customField[ 'type' ] == "selectnameprefix" ) {
 											$args = array(''=>__('Select an Option','wp-crm-system'),'mr'=>_x('Mr.','Title for male without a higher professional title.','wp-crm-system'),'mrs'=>_x('Mrs.','Married woman or woman who has been married with no higher professional title.','wp-crm-system'),'miss'=>_x('Miss','An unmarried woman. Also Ms.','wp-crm-system'),'dr'=>_x('Dr.','Doctor','wp-crm-system'),'master'=>_x('Master','Title used for young men.','wp-crm-system'),'rev'=>_x('Rev.','Title of a priest or religous clergy - Reverend ','wp-crm-system'),'fr'=>_x('Fr.','Title of a priest or religous clergy - Father','wp-crm-system'),'atty'=>_x('Atty.','Attorney, or lawyer','wp-crm-system'),'prof'=>_x('Prof.','Professor, as in a teacher at a university.','wp-crm-system'),'hon'=>_x('Hon.','Honorable - often used for elected officials or judges.','wp-crm-system'),'pres'=>_x('Pres.','Term given to the head of an organization or country. As in President of a University or President of the United States','wp-crm-system'),'gov'=>_x('Gov.','Governor, as in the Governor of the State of New York.','wp-crm-system'),'ofc'=>_x('Ofc.','Officer as in a police officer.','wp-crm-system'),'supt'=>_x('Supt.','Superintendent','wp-crm-system'),'rep'=>_x('Rep.','Representative - as in an elected official to the House of Representatives','wp-crm-system'),'sen'=>_x('Sen.','An elected official - Senator.','wp-crm-system'),'amb'=>_x('Amb.','Ambassador - a diplomatic official.','wp-crm-system'));
-										}
-										//Select Email 
-										if ( $customField[ 'type' ] == "selectemail" ) {
-											$args = array('work'=>_x('Work','An email associated with an employer','wp-crm-system'),'home'=>_x('Home','An email associated with a family, or personal','wp-crm-system'),'personal'=>_x('Personal','A personal email address, not associated with an employer','wp-crm-system'),'other'=>_x('Other','Not fitting any of the above','wp-crm-system'));
 										} ?>
 										<select name="<?php echo $this->prefix . $customField[ 'name' ]; ?>">
 										<?php foreach ($args as $key => $value) { ?>
-											<option value="<?php echo $key; ?>" <?php if (htmlspecialchars( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) == $key) { echo 'selected'; } ?> ><?php echo $value; if ( $customField[ 'type' ] == "selectprogress" ) { echo '%'; }?></option>
+											<option value="<?php echo $key; ?>" <?php if (esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) == $key) { echo 'selected'; } ?> ><?php echo $value; if ( $customField[ 'type' ] == "selectprogress" ) { echo '%'; }?></option>
 										<?php } ?>
 										</select>
 										<?php
@@ -1069,7 +1196,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								case 'currency': {
 									if ( $customField[ 'type' ] == "currency" ) { 
 									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . $customField[ 'title' ] . '</strong></label>&nbsp;&nbsp;';?>
-										<input style="width:25%;" type="text" name="<?php echo $this->prefix . $customField[ 'name' ]; ?>" id="<?php echo $this->prefix . $customField[ 'name' ]; ?>" value="<?php echo htmlspecialchars( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ); ?>" placeholder="<?php echo $customField['placeholder']; ?>" />
+										<input style="width:25%;" type="text" name="<?php echo $this->prefix . $customField[ 'name' ]; ?>" id="<?php echo $this->prefix . $customField[ 'name' ]; ?>" value="<?php echo esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ); ?>" placeholder="<?php echo $customField['placeholder']; ?>" />
 										<?php echo strtoupper(get_option('wpcrm_system_default_currency')); ?>
 										<br />
 										<em><?php _e('Only numbers allowed. No thousands separator (commas, spaces, or periods), currency symbols, etc. allowed.', 'wp-crm-system');?></em><?php
@@ -1081,7 +1208,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                                     
 										echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
 									if ($customField[ 'type' ] == 'textarea') {
-										echo '<textarea name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" columns="30" rows="3">' . htmlspecialchars( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '</textarea>';
+										echo '<textarea name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" columns="30" rows="3">' . esc_textarea( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '</textarea>';
 									}
                                     // WYSIWYG
                                     if ( $customField[ 'type' ] == "wysiwyg" ) { 
@@ -1103,7 +1230,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                                 }
 								case 'datepicker': {
 									if (!null == (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ]))) { 
-										$date = date(get_option('wpcrm_system_php_date_format'),htmlspecialchars( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) ); 
+										$date = date(get_option('wpcrm_system_php_date_format'),esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) ); 
 									} else { 
 										$date = '';
 									}
@@ -1218,10 +1345,22 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									}
 									break;
 								}
+								case 'email': {
+									// Plain text field
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    break;
+                                }
+								case 'url': {
+									// Plain text field
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_url( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    break;
+                                }
                                 default: {
                                     // Plain text field
                                     echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . htmlspecialchars( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
                                     break;
                                 }
                             }
@@ -1238,7 +1377,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         * Save the new Custom Fields values
         */
         function saveCustomFields( $post_id, $post ) {
-            if ( !isset( $_POST[ 'my-custom-fields_wpnonce' ] ) || !wp_verify_nonce( $_POST[ 'my-custom-fields_wpnonce' ], 'my-custom-fields' ) )
+            if ( !isset( $_POST[ 'wpcrm-fields_wpnonce' ] ) || !wp_verify_nonce( $_POST[ 'wpcrm-fields_wpnonce' ], 'wpcrm-fields' ) )
                 return;
             if ( !current_user_can( 'edit_post', $post_id ) )
                 return;
@@ -1247,14 +1386,91 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
             foreach ( $this->customFields as $customField ) {
                 if ( current_user_can( $customField['capability'], $post_id ) ) {
                     if ( isset( $_POST[ $this->prefix . $customField['name'] ] ) && trim( $_POST[ $this->prefix . $customField['name'] ] ) ) {
+						//Get field's value
                         $value = $_POST[ $this->prefix . $customField['name'] ];
-						if ( $customField['type'] == 'gmap' ) $value = '';
-						if ( $customField['type'] == 'datepicker' ) $value = strtotime($value);
-                        // Save currency only with numbers. No decimals, commas, currency symbols or other characters.
-						if ( $customField['type'] == 'currency' ) $value = preg_replace("/[^0-9]/", "", $value);
-                        // Auto-paragraphs for any WYSIWYG
-						if ( $customField['type'] == 'wysiwyg' ) $value = wpautop( $value );
-                        update_post_meta( $post_id, $this->prefix . $customField[ 'name' ], $value );
+						$safevalue = '';
+						/** Validate and sanitize input **/
+							if ( $customField['type'] == 'selectcontact' ) {
+								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-contact'));
+								if ($allowed) {
+									if (in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
+								}
+							}
+							if ( $customField['type'] == 'selectorganization' ) {
+								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
+								if ($allowed) {
+									if (in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
+								}
+							}
+							if ( $customField['type'] == 'selectprogress' ) {
+								$allowed = array('zero',5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100);
+								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = 'zero';}
+							}
+							if ( $customField['type'] == 'selectwonlost' ) {
+								$allowed = array('not-set','won','lost','suspended','abandoned');
+								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = 'not-set';}
+							}
+							if ( $customField['type'] == 'selectpriority' ) {
+								$allowed = array('','low','medium','high');
+								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
+							}
+							if ( $customField['type'] == 'selectstatus' ) {
+								$allowed = array('not-started','in-progress','complete','on-hold');
+								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = 'not-started';}
+							}
+							if ( $customField['type'] == 'selectnameprefix' ) {
+								$allowed = array('','mr','mrs','miss','dr','master','rev','fr','atty','prof','hon','pres','gov','ofc','supt','rep','sen','amb');
+								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
+							}
+							if ( $customField['type'] == 'selectuser' ) {
+								$users = get_users();
+								$wp_crm_users = array();
+								foreach( $users as $user ){
+									if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
+										$wp_crm_users[] = $user->data->user_login;
+									}
+								}
+								if(in_array($value,$wp_crm_users)){$safevalue = $value;}else{$safevalue = '';}
+							}
+							if ( $customField['type'] == 'gmap' ) {
+								// Google maps needs no input to be saved.
+								$safevalue = '';
+							}
+							if ( $customField['type'] == 'datepicker' ) {
+								// Datepicker fields should be strtotime()
+								$safevalue = strtotime($value);
+							}
+							if ( $customField['type'] == 'currency' ) {
+								// Save currency only with numbers.
+								$safevalue = preg_replace("/[^0-9]/", "", $value);
+							}
+							if ( $customField['type'] == 'wysiwyg' ) {
+								// Auto-paragraphs for any WYSIWYG. Sanitize content for allowed HTML
+								$safevalue = wp_kses_post( wpautop( $value ) );
+							}
+							if ( $customField['type'] == 'textarea' ) {
+								//Sanitize content for allowed textarea content.
+								$safevalue = esc_textarea( $value );
+							}
+							if ( $customField['type'] == 'url' ) {
+								//Sanitize URLs
+								$safevalue = esc_url_raw( $value );
+							}
+							if ( $customField['type'] == 'email' ) {
+								// Sanitize email field and make sure value is actually an email
+								$email = sanitize_email( $value );
+								if ( is_email($email)) {$safevalue = $email;} else {$safevalue = '';}
+							}
+							if ( $customField['type'] == 'checkbox' ) {
+								//Option will either be yes or blank
+								$allowed = array('','yes');
+								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
+							}
+							if ( $customField['type'] == 'default' ) {
+								// Sanitize text field
+								$safevalue = sanitize_text_field( $value );
+							}
+                        update_post_meta( $post_id, $this->prefix . $customField[ 'name' ], $safevalue );
                     } else {
                         delete_post_meta( $post_id, $this->prefix . $customField[ 'name' ] );
                     }

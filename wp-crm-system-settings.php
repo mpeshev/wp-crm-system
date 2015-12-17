@@ -76,30 +76,25 @@ function wpcrm_general_settings_content() { ?>
 						</tr>
 						<tr>
 							<td>
-								<strong><?php _e('Select user roles that tasks, projects, and opportunities can be assigned to.', 'wp-crm-system'); ?></strong>	
+								<strong><?php _e('Select the user role that should have access to WP-CRM System.', 'wp-crm-system'); ?></strong><br />
+								<?php _e('Roles are listed in order of seniority (Administrator is highest, Subscriber is lowest). All roles higher than, and including the role you select will have access to WP-CRM System.', 'wp-crm-system'); ?><br />
+								<em><?php _e('Example: Selecting Author will allow access to Author, Editor, and Administrator roles.', 'wp-crm-system'); ?></em>
 							</td>
 							<td>
-								<?php global $wp_roles;
-								$roles = $wp_roles->get_names(); 
-								  foreach ($roles as $role){
-									if (in_array($role,explode(",",get_option('wpcrm_system_select_user_role')))) { $checked = 'checked'; } else { $checked = ''; } ?>
-									<input class="checkbox" type="checkbox" name="select_user_role" id="select<?php echo $role; ?>" value="<?php echo $role; ?>" <?php echo $checked; ?> /> <?php echo $role; ?><br />
-									<script>
-									jQuery(document).ready(function () {
-										jQuery('#select<?php echo $role; ?>').click(function () {
-											var cur_val = jQuery('#wpcrm_system_select_user_role').val();
-											if (jQuery('#select<?php echo $role; ?>').is(':checked')) {
-												if(cur_val != '') {comma = ',';} else { comma = '';}
-												jQuery('#wpcrm_system_select_user_role').val(cur_val + comma + '<?php echo $role; ?>');
-											}
-											else{
-												jQuery('#wpcrm_system_select_user_role').val(cur_val.replace('<?php echo $role; ?>','').replace(/(^,)|(,$)/g, "").replace(',,',','));
-											}
-										})
-									});
-									</script>
+								<?php
+								$roles = array(
+									'manage_options'	=>	__('Administrator', 'wp-crm-system'),
+									'edit_pages'		=>	__('Editor', 'wp-crm-system'),
+									'publish_posts'		=>	__('Author', 'wp-crm-system'),
+									'edit_posts'		=>	__('Contributor', 'wp-crm-system'),
+									'read'				=>	__('Subscriber', 'wp-crm-system'),
+								);?>
+								<select name="wpcrm_system_select_user_role"> <?php
+								  foreach ($roles as $role=>$name){
+									if (get_option('wpcrm_system_select_user_role') == $role) { $selected = 'selected'; } else { $selected = ''; } ?>
+									<option value="<?php echo $role; ?>" <?php echo $selected; ?>><?php echo $name; ?></option>
 								  <?php } ?>
-								  <input type="hidden" id="wpcrm_system_select_user_role" name="wpcrm_system_select_user_role" value="<?php echo get_option('wpcrm_system_select_user_role'); ?>" />
+								</select>
 							</td>
 						</tr>
 						<tr>

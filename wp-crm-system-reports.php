@@ -122,4 +122,4 @@ function wpcrm_organization_reports() {
 }
 function wpcrm_contact_reports() {
 	include(plugin_dir_path( __FILE__ ) . 'includes/reports/contact-reports.php');
-} 
+}
