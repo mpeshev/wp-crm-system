@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+} 
 	global $wpdb;
 	include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php');
 	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : ''; 

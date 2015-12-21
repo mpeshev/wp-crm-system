@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 	global $wpdb;
 	include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php');
 	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : ''; 
@@ -93,7 +96,7 @@
 			$meta_key1 = $prefix . 'opportunity-attach-to-contact';
 			$opportunity_report = '';
 			$opportunities = '';
-			$report_title = __('Projects by Contact', 'wp-crm-system');;
+			$report_title = __('Projects by Contact', 'wp-crm-system');
 			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-contact');
 			$loop = new WP_Query( $args );
 			while ( $loop->have_posts() ) : $loop->the_post();
