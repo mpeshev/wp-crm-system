@@ -15,7 +15,7 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'general';
 <h2 class="nav-tab-wrapper">
 	<a class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=general"><?php _e('General', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'categories' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=categories"><?php _e('Categories', 'wp-crm-system') ?></a>
-	<?php if (defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_IMPORT_PROJECTS')) { ?>
+	<?php if (defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_IMPORT_CAMPAIGNS')) { ?>
 	<a class="nav-tab <?php echo $active_tab == 'import' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=import"><?php _e('Import', 'wp-crm-system') ?></a>
 	<?php } 
 	if (defined('WPCRM_NINJA_FORMS_CONNECT')) { ?>
@@ -175,7 +175,7 @@ function wpcrm_categories_settings_content() {
 function wpcrm_import_settings_content() {
 	include(plugin_dir_path( __FILE__ ) . 'includes/return_bytes.php');
 	$plugin_base = 'wp-crm-system-';
-	$import_types = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects');
+	$import_types = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects',$plugin_base.'import-campaigns');
 	foreach($import_types as $import_type) {
 		if(is_plugin_active($import_type.'/'.$import_type.'.php')) {
 			include(WP_PLUGIN_DIR .'/'.$import_type.'/import.php');
@@ -209,7 +209,7 @@ function wpcrm_email_settings_content() {
 function wpcrm_license_keys() {
 	// Provides a way to activate license keys only if an add-on plugin is installed.
 	$plugin_base = 'wp-crm-system-';
-	$plugins = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects',$plugin_base.'contact-user',$plugin_base.'gravity-form-connect',$plugin_base.'ninja-form-connect',$plugin_base.'slack-notifications',$plugin_base.'email-notifications'); ?>
+	$plugins = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects',$plugin_base.'import-campaigns',$plugin_base.'contact-user',$plugin_base.'gravity-form-connect',$plugin_base.'ninja-form-connect',$plugin_base.'slack-notifications',$plugin_base.'email-notifications'); ?>
 	<div class="wrap">
 		<h2><?php _e('Premium Plugin Licenses','wp-crm-system'); ?></h2>
 		<form method="post" action="options.php">

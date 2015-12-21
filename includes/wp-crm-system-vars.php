@@ -92,7 +92,7 @@ if (!defined('WPCRM_NAME_PREFIX')){
 	define( 'WPCRM_NAME_PREFIX', __('Name Prefix', 'wp-crm-system') );
 }
 if (!defined('WPCRM_OPPORTUNITIES')){
-	define( 'WPCRM_OPPORTUNITIES', __('Number of Opportunities', 'wp-crm-system') );
+	define( 'WPCRM_OPPORTUNITIES', __('Number of Opportunities Created', 'wp-crm-system') );
 }
 if (!defined('WPCRM_ORGANIZATION')){
 	define( 'WPCRM_ORGANIZATION', __('Organization', 'wp-crm-system') );
@@ -118,6 +118,9 @@ if (!defined('WPCRM_REACH')){
 if (!defined('WPCRM_RESPONSES')){
 	define( 'WPCRM_RESPONSES', __('Total Responses', 'wp-crm-system') );
 }
+if (!defined('WPCRM_ROI')){
+	define( 'WPCRM_ROI', __('Return on Investment', 'wp-crm-system') );
+}
 if (!defined('WPCRM_ROLE')){
 	define( 'WPCRM_ROLE', __('Role', 'wp-crm-system') );
 }
@@ -132,6 +135,12 @@ if (!defined('WPCRM_STATUS')){
 }
 if (!defined('WPCRM_VALUE')){
 	define( 'WPCRM_VALUE', __('Value', 'wp-crm-system') );
+}
+if (!defined('WPCRM_VALUE_OPPS')){
+	define( 'WPCRM_VALUE_OPPS', __('Value of Opportunities Created', 'wp-crm-system') );
+}
+if (!defined('WPCRM_VALUE_WON_OPPS')){
+	define( 'WPCRM_VALUE_WON_OPPS', __('Value of Opportunities Won', 'wp-crm-system') );
 }
 if (!defined('WPCRM_WEBSITE')){
 	define( 'WPCRM_WEBSITE', __('Website', 'wp-crm-system') );

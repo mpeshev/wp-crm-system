@@ -95,6 +95,17 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'class'			=>	'WPCRM_IMPORT_PROJECTS',
 			),
 			array(
+				'title'			=>	'Import Campaigns',
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'yes',
+				'notifications'	=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/import-campaigns/',
+				'img'			=>	'/import-campaigns-300x145.png',
+				'desc'			=>	'Import your campaigns from another CRM with an easy to use CSV importer.',
+				'class'			=>	'WPCRM_IMPORT_CAMPAIGNS',
+			),
+			array(
 				'title'			=>	'Import Tasks',
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',

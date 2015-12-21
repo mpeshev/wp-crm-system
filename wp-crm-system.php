@@ -100,13 +100,15 @@ add_action( 'init', 'wpcrm_opportunities_init' );
 add_action( 'init', 'wpcrm_opportunity_taxonomy');
 add_action( 'init', 'wpcrm_projects_init' );
 add_action( 'init', 'wpcrm_project_taxonomy');
+add_action( 'init', 'wpcrm_campaign_init' );
+add_action( 'init', 'wpcrm_campaign_taxonomy');
 
 /**
  * Adjust capabilities as necessary
  */
 add_action('admin_init','wpcrm_add_role_caps',999);
 function wpcrm_add_role_caps() {
-	$post_types = array('wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project');
+	$post_types = array('wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign');
     
 	foreach($post_types as $post_type) {
 		// Add the roles you'd like to administer contacts
@@ -115,7 +117,7 @@ function wpcrm_add_role_caps() {
 		// Loop through each role and assign capabilities
 		foreach($roles as $the_role) { 
 			$role = get_role($the_role);
-		// Need to check if the role has get_option('myplugin_select_user_role'); capability then add_cap if it does.
+		// Need to check if the role has get_option('wpcrm_system_select_user_role'); capability then add_cap if it does.
 			if($role->has_cap(get_option('wpcrm_system_select_user_role'))) {
 				$role->add_cap( 'edit_'.$post_type);
 				$role->add_cap( 'read_'.$post_type);
@@ -538,6 +540,83 @@ function wpcrm_project_taxonomy() {
 	);
 	register_taxonomy( 'project-type', 'wpcrm-project', $args );
 }
+/* Projects post type. */
+function wpcrm_campaign_init() {
+	$post_type = 'wpcrm-campaign';
+	$labels = array(
+		'name'               => __( 'Campaigns', 'wp-crm-system' ),
+		'singular_name'      => __( 'Campaign', 'wp-crm-system' ),
+		'menu_name'          => __( 'Campaigns', 'wp-crm-system' ),
+		'name_admin_bar'     => __( 'Campaign', 'wp-crm-system' ),
+		'add_new'            => __( 'Add New', 'wp-crm-system' ),
+		'add_new_item'       => __( 'Add New Campaign', 'wp-crm-system' ),
+		'new_item'           => __( 'New Campaign', 'wp-crm-system' ),
+		'edit_item'          => __( 'Edit Campaign', 'wp-crm-system' ),
+		'view_item'          => __( 'View Campaign', 'wp-crm-system' ),
+		'all_items'          => __( 'Campaigns', 'wp-crm-system' ),
+		'search_items'       => __( 'Search Campaigns', 'wp-crm-system' ),
+		'parent_item_colon'  => __( 'Parent Campaign:', 'wp-crm-system' ),
+		'not_found'          => __( 'No campaigns found.', 'wp-crm-system' ),
+		'not_found_in_trash' => __( 'No campaigns found in Trash.', 'wp-crm-system' )
+	);
+
+	$args = array(
+		'labels'             => $labels,
+        'description'        => __( 'Campaigns', 'wp-crm-system' ),
+		'public'             => false,
+		'exclude_from_search'=> true,
+		'publicly_queryable' => false,
+		'show_ui'            => true,
+		'show_in_menu'       => 'wpcrm',
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => $post_type ),
+		'capabilities' => array(
+			'edit_post' => 'edit_'.$post_type,
+			'read_post' => 'read_'.$post_type,
+			'delete_post' => 'delete_'.$post_type,
+			'edit_posts' => 'edit_'.$post_type.'s',
+			'edit_others_posts' => 'edit_others_'.$post_type.'s',
+			'publish_posts' => 'publish_'.$post_type.'s',
+			'read_private_posts' => 'read_private_'.$post_type.'s',
+			'read' => 'read_'.$post_type,
+			'delete_posts' => 'delete_'.$post_type.'s',
+			'delete_private_posts' => 'delete_private_'.$post_type.'s',
+			'delete_published_posts' => 'delete_published_'.$post_type.'s',
+			'delete_others_posts' => 'delete_others_'.$post_type.'s',
+			'edit_private_posts' => 'edit_private_'.$post_type.'s',
+			'edit_published_posts' => 'edit_published_'.$post_type.'s',
+			'create_posts' => 'create_'.$post_type.'s',
+		),
+		'has_archive'        => false,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'taxonomies'		 => array('campaign-type'),
+		'supports'           => array( 'title', 'thumbnail', 'custom-fields' )
+	);
+
+	register_post_type( $post_type, $args );
+}
+function wpcrm_campaign_taxonomy() {
+	$labels = array(
+		'name'              => __( 'Campaign Types', 'wp-crm-system' ),
+		'singular_name'		=> __( 'Campaign Type', 'wp-crm-system' ),
+		'edit_item'         => __( 'Edit Campaign Type', 'wp-crm-system' ),
+		'update_item'       => __( 'Update Campaign Type', 'wp-crm-system' ),
+		'add_new_item'      => __( 'Add New Campaign Type', 'wp-crm-system' ),
+		'new_item_name'     => __( 'New Campaign Type', 'wp-crm-system' ),
+		'menu_name'         => __( 'Campaign Types', 'wp-crm-system' ),
+	);
+	$args = array(
+		'hierarchical'          => true,
+		'labels'                => $labels,
+		'show_ui'               => true,
+		'show_admin_column'     => true,
+		'update_count_callback' => '_update_post_term_count',
+		'query_var'             => true,
+		'rewrite'               => false,
+	);
+	register_taxonomy( 'campaign-type', 'wpcrm-campaign', $args );
+}
 if ( !class_exists('wpCRMSystemCustomFields') ) {
     class wpCRMSystemCustomFields {
         /**
@@ -547,7 +626,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         /**
         * @var  array  $postTypes  An array of public custom post types, plus the standard "post" and "page" - add the custom types you want to include here
         */
-        var $postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project' );
+        var $postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project','wpcrm-campaign' );
         /**
         * @var  array  $customFields  Defines the custom fields available
         */
@@ -925,6 +1004,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'capability'    => WPCRM_USER_ACCESS
             ),
 			array(
+				'name'          => 'opportunity-attach-to-campaign',
+                'title'         => WPCRM_ATTACH_CAMPAIGN,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'selectcampaign',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
                 'name'          => 'opportunity-description',
                 'title'         => WPCRM_DESCRIPTION,
                 'description'   => '',
@@ -1042,6 +1130,97 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'scope'         => array( 'wpcrm-project' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
+			//Campaign fields
+			array(
+                'name'          => 'campaign-assigned',
+                'title'         => WPCRM_ASSIGNED,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'selectuser',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-active',
+                'title'         => WPCRM_ACTIVE,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'checkbox',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-status',
+                'title'         => WPCRM_STATUS,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'selectstatus',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-startdate',
+                'title'         => WPCRM_START,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'datepicker',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-enddate',
+                'title'         => WPCRM_END,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'datepicker',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-projectedreach',
+                'title'         => WPCRM_REACH,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'number',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-responses',
+                'title'         => WPCRM_RESPONSES,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'number',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-budgetcost',
+                'title'         => WPCRM_BUDGETED_COST,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'currency',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-actualcost',
+                'title'         => WPCRM_ACTUAL_COST,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'currency',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-description',
+                'title'         => WPCRM_ADDITIONAL,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
         );
         /**
         * PHP 5 Constructor
@@ -1104,6 +1283,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                             <?php
                             switch ( $customField[ 'type' ] ) {
 								case 'selectcontact':
+								case 'selectcampaign':
 								case 'selectorganization':
 								case 'selectprogress':
 								case 'selectwonlost':
@@ -1130,6 +1310,23 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 												echo '<option value="'.$user->data->user_login.'" ' . $selected . '>'.$user->data->display_name.'</option>';
 											}
 										echo'</select>';
+									} elseif ( $customField[ 'type' ] == "selectcampaign" ) {
+										//Select Campaign
+										$campaigns = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-campaign'));
+										if ($campaigns) {
+											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
+											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
+											echo '<option value="" ' . $selected . '>Not Assigned</option>';
+											foreach($campaigns as $campaign) {
+												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $campaign->ID) { $selected = 'selected'; } else { $selected = ''; }
+												echo '<option value="' . $campaign->ID . '"' . $selected . '>' . get_the_title($campaign->ID) . '</option>';
+											}
+											echo '</select>';
+										} else {
+											echo '<a href="' . admin_url('edit.php?post_type=wpcrm-campaign') . '">';
+											_e('Please create an campaign first.','wp-crm-system');
+											echo '</a>';
+										}
 									} elseif ( $customField[ 'type' ] == "selectorganization" ) {
 										//Select Organization
 										$orgs = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
@@ -1346,15 +1543,21 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									break;
 								}
 								case 'email': {
-									// Plain text field
+									// Plain text field with email validation
                                     echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
                                     echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
                                     break;
                                 }
 								case 'url': {
-									// Plain text field
+									// Plain text field with url validation
                                     echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
                                     echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_url( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    break;
+                                }
+								case 'number': {
+									// Plain text field with number validation
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
+                                    echo '<input type="number" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
                                     break;
                                 }
                                 default: {
@@ -1392,14 +1595,32 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 						/** Validate and sanitize input **/
 							if ( $customField['type'] == 'selectcontact' ) {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-contact'));
-								if ($allowed) {
-									if (in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
+								$posts = array();
+								foreach ($allowed as $post) {
+									$posts[] = $post->ID;
+								}
+								if ($posts) {
+									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
 							}
 							if ( $customField['type'] == 'selectorganization' ) {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
-								if ($allowed) {
-									if (in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
+								$posts = array();
+								foreach ($allowed as $post) {
+									$posts[] = $post->ID;
+								}
+								if ($posts) {
+									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
+								}
+							}
+							if ( $customField['type'] == 'selectcampaign' ) {
+								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-campaign'));
+								$posts = array();
+								foreach ($allowed as $post) {
+									$posts[] = $post->ID;
+								}
+								if ($posts) {
+									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
 							}
 							if ( $customField['type'] == 'selectprogress' ) {
@@ -1440,7 +1661,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								// Datepicker fields should be strtotime()
 								$safevalue = strtotime($value);
 							}
-							if ( $customField['type'] == 'currency' ) {
+							if ( $customField['type'] == 'currency' || $customField['type'] == 'number' ) {
 								// Save currency only with numbers.
 								$safevalue = preg_replace("/[^0-9]/", "", $value);
 							}
