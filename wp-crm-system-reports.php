@@ -9,7 +9,7 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'overview';
 	<a class="nav-tab <?php echo $active_tab == 'opportunity' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=opportunity"><?php _e('Opportunity', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'organization' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=organization"><?php _e('Organization', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'contact' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=contact"><?php _e('Contact', 'wp-crm-system') ?></a>
-	<a class="nav-tab <?php echo $active_tab == 'campaign' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=campaign"><?php _e('Campaign', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $active_tab == 'campaign' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-reports&tab=campaign"><?php _e('Campaign', 'wp-crm-system') ?></a> 
 </h2>
 <?php
 if ($active_tab == 'overview') {
