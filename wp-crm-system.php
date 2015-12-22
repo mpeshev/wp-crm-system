@@ -1292,7 +1292,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								case 'selectnameprefix':
 								case 'selectuser': {
 									// Select
-									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . $customField[ 'title' ] . '</strong></label>&nbsp;&nbsp;';
+									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';
 									//Select User
 									if ( $customField[ 'type' ] == "selectuser" ) {
 										echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
@@ -1392,8 +1392,8 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								}
 								case 'currency': {
 									if ( $customField[ 'type' ] == "currency" ) { 
-									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . $customField[ 'title' ] . '</strong></label>&nbsp;&nbsp;';?>
-										<input style="width:25%;" type="text" name="<?php echo $this->prefix . $customField[ 'name' ]; ?>" id="<?php echo $this->prefix . $customField[ 'name' ]; ?>" value="<?php echo esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ); ?>" placeholder="<?php echo $customField['placeholder']; ?>" />
+									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';?>
+										<input style="width:25%;" type="text" name="<?php echo $this->prefix . $customField[ 'name' ]; ?>" id="<?php echo $this->prefix . $customField[ 'name' ]; ?>" value="<?php echo esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ); ?>" placeholder="<?php _e($customField['placeholder'],'wp-crm-system'); ?>" />
 										<?php echo strtoupper(get_option('wpcrm_system_default_currency')); ?>
 										<br />
 										<em><?php _e('Only numbers allowed. No thousands separator (commas, spaces, or periods), currency symbols, etc. allowed.', 'wp-crm-system');?></em><?php
@@ -1403,7 +1403,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                                 case 'textarea':
                                 case 'wysiwyg': {
                                     
-										echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
+										echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
 									if ($customField[ 'type' ] == 'textarea') {
 										echo '<textarea name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" columns="30" rows="3">' . esc_textarea( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '</textarea>';
 									}
@@ -1418,7 +1418,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                                 }
 								case 'checkbox': {
                                     // Checkbox
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . $customField[ 'title' ] . '</strong></label>&nbsp;&nbsp;';
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';
                                     echo '<input type="checkbox" name="' . $this->prefix . $customField['name'] . '" id="' . $this->prefix . $customField['name'] . '" value="yes"';
                                     if ( get_post_meta( $post->ID, $this->prefix . $customField['name'], true ) == "yes" )
                                         echo ' checked="checked"';
@@ -1432,8 +1432,8 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 										$date = '';
 									}
 									//Datepicker
-									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . $customField['placeholder'] . '" />'; ?>
+									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />'; ?>
 									<script type="text/javascript">
 									<?php $dateformat = get_option('wpcrm_system_date_format'); echo "var formatOption = '{$dateformat}';"; ?>
 										jQuery(document).ready(function() {
@@ -1544,26 +1544,26 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								}
 								case 'email': {
 									// Plain text field with email validation
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
 								case 'url': {
 									// Plain text field with url validation
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_url( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_url( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
 								case 'number': {
 									// Plain text field with number validation
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
-                                    echo '<input type="number" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="number" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
                                 default: {
                                     // Plain text field
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . $customField[ 'title' ] . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . $customField['placeholder'] . '" />';
+                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
                             }
