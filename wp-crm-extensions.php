@@ -4,6 +4,7 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'overview';
 ?>
 <h2 class="nav-tab-wrapper">
 	<a class="nav-tab <?php echo $active_tab == 'overview' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=overview"><?php _e('Overview', 'wp-crm-system') ?></a>
+	<a class="nav-tab <?php echo $active_tab == 'documents' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=documents"><?php _e('Documents', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'contact-forms' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=contact-forms"><?php _e('Contact Forms', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'import' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=import"><?php _e('Importers', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=notifications"><?php _e('Notifications', 'wp-crm-system') ?></a>
@@ -18,11 +19,24 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 		var $extensionFields = array(
 		
 			array(
+				'title'			=>	'Dropbox Connect',
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'no',
+				'documents'		=>	'yes',
+				'url'			=>	'https://www.wp-crm.com/downloads/dropbox-connect/',
+				'img'			=>	'/dropbox-connect-300x145.png',
+				'desc'			=>	'Add documents from your Dropbox account to any record in WP-CRM System.',
+				'class'			=>	'WPCRM_DROPBOX_CONNECT',
+			),
+			array(
 				'title'			=>	'Contact From User',
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',
 				'import'		=>	'no',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/contact-from-user/',
 				'img'			=>	'/contact-from-user-300x145.png',
 				'desc'			=>	'Quickly create new contacts in WP-CRM from existing users on your WordPress site.',
@@ -34,6 +48,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'yes',
 				'import'		=>	'no',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/gravity-forms-connect/',
 				'img'			=>	'/gravity-forms-connect-300x145.png',
 				'desc'			=>	'Automatically create new contacts from Gravity Form submissions.',
@@ -45,6 +60,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'yes',
 				'import'		=>	'no',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/ninja-form-connect/',
 				'img'			=>	'/ninja-forms-connect-300x145.png',
 				'desc'			=>	'Automatically create new contacts from Ninja Form submissions.',
@@ -56,6 +72,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'yes',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/import-contacts/',
 				'img'			=>	'/import-contacts-300x145.png',
 				'desc'			=>	'Import your contacts from another CRM with an easy to use CSV importer.',
@@ -67,6 +84,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'yes',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/import-opportunities/',
 				'img'			=>	'/import-opportunities-300x145.png',
 				'desc'			=>	'Import your opportunities from another CRM with an easy to use CSV importer.',
@@ -78,6 +96,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'yes',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/import-organizations/',
 				'img'			=>	'/import-organizations-300x145.png',
 				'desc'			=>	'Import your organizations from another CRM with an easy to use CSV importer.',
@@ -89,6 +108,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'yes',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/import-projects/',
 				'img'			=>	'/import-projects-300x145.png',
 				'desc'			=>	'Import your projects from another CRM with an easy to use CSV importer.',
@@ -100,6 +120,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'yes',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/import-campaigns/',
 				'img'			=>	'/import-campaigns-300x145.png',
 				'desc'			=>	'Import your campaigns from another CRM with an easy to use CSV importer.',
@@ -111,6 +132,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'yes',
 				'notifications'	=>	'no',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/import-tasks/',
 				'img'			=>	'/import-tasks-300x145.png',
 				'desc'			=>	'Import your tasks from another CRM with an easy to use CSV importer.',
@@ -122,6 +144,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'no',
 				'notifications'	=>	'yes',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/slack-notifications/',
 				'img'			=>	'/slack-notifications-300x145.png',
 				'desc'			=>	'Send notifications from WP-CRM to a Slack channel.',
@@ -133,6 +156,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'contact-forms'	=>	'no',
 				'import'		=>	'no',
 				'notifications'	=>	'yes',
+				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/email-notifications/',
 				'img'			=>	'/email-notifications-300x145.png',
 				'desc'			=>	'Send notifications from WP-CRM to the assigned user\'s email address.',
@@ -227,6 +251,28 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				</div>
 			</div>
 		<?php }
+		function wpcrm_extensions_documents() {  ?>
+			<div class="wrap">
+				<div>
+					<h2><?php _e('WP CRM System Extensions', 'wp-crm-system'); ?></h2>
+					<p><?php _e('These extensions add features to your WP-CRM System', 'wp-crm-system'); ?></p>
+					<?php foreach($this->extensionFields as $extensionField) { 
+						if ($extensionField['documents'] == 'yes') { ?>
+							<div class="wpcrm-extension">
+								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
+								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo plugins_url('includes/images',__FILE__) .$extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
+								<p><?php echo $extensionField['desc']; ?></p>
+								<?php if(defined($extensionField['class'])) { ?>
+									<a href="" class="button-secondary disabled"><?php _e('Extension Installed','wp-crm-system'); ?></a>
+								<?php } else { ?>
+									<a href="<?php echo $extensionField['url']; ?>" class="button-secondary"><?php _e('Get This Extension','wp-crm-system'); ?></a>
+								<?php } ?>
+							</div>
+					<?php }
+					} ?>
+				</div>
+			</div>
+		<?php }
 	} // End Class
 } // End if class exists statement
 // Instantiate the class
@@ -234,6 +280,9 @@ if ( class_exists('wpCRMSystemExtensions') ) {
     $wpCRMSystemExtensions_var = new wpCRMSystemExtensions();
 	if ($active_tab == 'overview') {
 		$wpCRMSystemExtensions_var->wpcrm_extensions_overview();
+	}
+	if ($active_tab == 'documents') {
+		$wpCRMSystemExtensions_var->wpcrm_extensions_documents();
 	}
 	if ($active_tab == 'contact-forms') {
 		$wpCRMSystemExtensions_var->wpcrm_extensions_contact();

@@ -45,6 +45,19 @@ function wpcrm_admin_page() {
 	add_submenu_page( 'wpcrm', __('Settings', 'wp-crm-system'), __('Settings', 'wp-crm-system'), 'manage_options', 'wpcrm-settings', 'wpcrm_settings_page' );
 	add_submenu_page( 'wpcrm', __('Extensions', 'wp-crm-system'), __('Extensions', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-extensions', 'wpcrm_extensions_page' );
 }
+//Include scripts and styles
+function wpcrm_scripts_styles() {
+	wp_enqueue_script('datepicker');
+	wp_enqueue_script('jquery-ui-datepicker');
+	wp_register_style('jquery-ui-datepicker', plugins_url('/css/jquery-ui.min.css', __FILE__));
+	wp_enqueue_style('jquery-ui-datepicker');
+	wp_register_style('gmap-style', plugins_url('/css/gmap.css', __FILE__));
+	wp_enqueue_style('gmap-style');
+	wp_register_style('wpcrm-style', plugins_url('/css/wp-crm.css', __FILE__));
+	wp_enqueue_style('wpcrm-style');
+	wp_enqueue_script( 'jquery' );
+}
+add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );
 //Display the page content for the plugin settings and reports
 function wpcrm_reports_page() {
 	include('wp-crm-system-reports.php');
@@ -67,6 +80,10 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_report_currency_thousand_separator', ',');
 	add_option('wpcrm_system_date_format', 'MM dd, yy');
 	add_option('wpcrm_system_php_date_format', 'F d, Y');
+	$plugin = 'wp-crm-system-dropbox';
+	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
+		add_option('wpcrm_dropbox_app_key', '');
+	}
 }
 function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_select_user_role');
@@ -76,6 +93,10 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_report_currency_thousand_separator');
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
+	$plugin = 'wp-crm-system-dropbox';
+	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
+		delete_option('wpcrm_dropbox_app_key');
+	}
 }
 function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_select_user_role');
@@ -85,6 +106,10 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_thousand_separator');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
+	$plugin = 'wp-crm-system-dropbox';
+	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
+		register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_dropbox_app_key');
+	}
 }
 
 /**
@@ -626,7 +651,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         /**
         * @var  array  $postTypes  An array of public custom post types, plus the standard "post" and "page" - add the custom types you want to include here
         */
-        var $postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project','wpcrm-campaign' );
+        var $postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project', 'wpcrm-campaign' );
         /**
         * @var  array  $customFields  Defines the custom fields available
         */
@@ -793,6 +818,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'scope'         => array( 'wpcrm-contact' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
+			array(
+                'name'          => 'contact-dropbox',
+                'title'         => 'Link Files From Dropbox',
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'dropbox',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
 			//Task Fields
 			array(
                 'name'          => 'task-assignment',
@@ -872,6 +906,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'description'   => '',
 				'placeholder'   => '',
                 'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'task-dropbox',
+                'title'         => 'Link Files From Dropbox',
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'dropbox',
                 'scope'         => array( 'wpcrm-task' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
@@ -975,6 +1018,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'scope'         => array( 'wpcrm-organization' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
+			array(
+                'name'          => 'organization-dropbox',
+                'title'         => 'Link Files From Dropbox',
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'dropbox',
+                'scope'         => array( 'wpcrm-organization' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
 			//Opportunity Fields
 			array(
                 'name'          => 'opportunity-assigned',
@@ -1057,6 +1109,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'scope'         => array( 'wpcrm-opportunity' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
+			array(
+                'name'          => 'opportunity-dropbox',
+                'title'         => 'Link Files From Dropbox',
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'dropbox',
+                'scope'         => array( 'wpcrm-opportunity' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
 			//Project Fields
 			array(
                 'name'          => 'project-description',
@@ -1127,6 +1188,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'description'   => '',
 				'placeholder'   => '',
                 'type'          => 'selectcontact',
+                'scope'         => array( 'wpcrm-project' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'project-dropbox',
+                'title'         => 'Link Files From Dropbox',
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'dropbox',
                 'scope'         => array( 'wpcrm-project' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
@@ -1218,6 +1288,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'description'   => '',
 				'placeholder'   => '',
                 'type'          => 'wysiwyg',
+                'scope'         => array( 'wpcrm-campaign' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+                'name'          => 'campaign-dropbox',
+                'title'         => 'Link Files From Dropbox',
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'dropbox',
                 'scope'         => array( 'wpcrm-campaign' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
@@ -1445,6 +1524,16 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									<?php
                                     break;
 								}
+								case 'dropbox': {
+									if(is_plugin_active('wp-crm-system-dropbox/wp-crm-system-dropbox.php')) {
+										$field = $this->prefix . $customField[ 'name' ];
+										$title = $customField[ 'title' ];
+										wp_crm_dropbox_content($field,$title);
+									} else {
+										echo '';
+									}
+									break;
+								}
 								case 'gmap': {
 									function geocode($address){
 
@@ -1653,6 +1742,10 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								}
 								if(in_array($value,$wp_crm_users)){$safevalue = $value;}else{$safevalue = '';}
 							}
+							if ( $customField['type'] == 'dropbox' ) {
+								// Save data
+								$safevalue = $value;
+							}
 							if ( $customField['type'] == 'gmap' ) {
 								// Google maps needs no input to be saved.
 								$safevalue = '';
@@ -1691,7 +1784,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								// Sanitize text field
 								$safevalue = sanitize_text_field( $value );
 							}
-                        update_post_meta( $post_id, $this->prefix . $customField[ 'name' ], $safevalue );
+						update_post_meta( $post_id, $this->prefix . $customField[ 'name' ], $safevalue );
                     } else {
                         delete_post_meta( $post_id, $this->prefix . $customField[ 'name' ] );
                     }
@@ -1707,16 +1800,3 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 if ( class_exists('wpCRMSystemCustomFields') ) {
     $wpCRMSystemCustomFields_var = new wpCRMSystemCustomFields();
 }
-
-//Include Datepicker and Google Map scripts
-function add_datepicker_script() {
-	wp_enqueue_script('datepicker');
-	wp_enqueue_script('jquery-ui-datepicker');
-	wp_register_style('jquery-ui-datepicker', plugins_url('/css/jquery-ui.min.css', __FILE__));
-	wp_enqueue_style('jquery-ui-datepicker');
-	wp_register_style('gmap-style', plugins_url('/css/gmap.css', __FILE__));
-	wp_enqueue_style('gmap-style');
-	wp_register_style('wpcrm-style', plugins_url('/css/wp-crm.css', __FILE__));
-	wp_enqueue_style('wpcrm-style');
-}
-add_action( 'admin_enqueue_scripts', 'add_datepicker_script' );

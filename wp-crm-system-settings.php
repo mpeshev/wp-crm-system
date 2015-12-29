@@ -132,7 +132,7 @@ function wpcrm_general_settings_content() { ?>
 										<option value="<?php echo $key; ?>" <?php if (get_option('wpcrm_system_date_format') == $key) {echo 'selected'; } ?> id="<?php echo $value; ?>"><?php echo date($value); ?></option>
 									<?php } ?>
 								</select>
-								<input type="hidden" id="wpcrm_system_php_date_format" name="wpcrm_system_php_date_format" value="<?php echo get_option('wpcrm_system_php_date_format') ?>" />
+								<input type="hidden" id="wpcrm_system_php_date_format" name="wpcrm_system_php_date_format" value="<?php echo get_option('wpcrm_system_php_date_format'); ?>" />
 								<script>
 									jQuery(document).ready(function () {
 										jQuery("#select_date_format").on('change',function() {
@@ -144,6 +144,7 @@ function wpcrm_general_settings_content() { ?>
 									</script>
 							</td>
 						</tr>
+						<?php wpcrm_dropbox_settings_content(); ?>
 						<tr>
 							<td><input type="hidden" name="action" value="update" /><?php submit_button(); ?></td>
 							<td></td>
@@ -206,10 +207,16 @@ function wpcrm_email_settings_content() {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
 	}
 }
+function wpcrm_dropbox_settings_content() {
+	$plugin = 'wp-crm-system-dropbox';
+	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
+		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
+	}
+}
 function wpcrm_license_keys() {
 	// Provides a way to activate license keys only if an add-on plugin is installed.
 	$plugin_base = 'wp-crm-system-';
-	$plugins = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects',$plugin_base.'import-campaigns',$plugin_base.'contact-user',$plugin_base.'gravity-form-connect',$plugin_base.'ninja-form-connect',$plugin_base.'slack-notifications',$plugin_base.'email-notifications'); ?>
+	$plugins = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects',$plugin_base.'import-campaigns',$plugin_base.'contact-user',$plugin_base.'gravity-form-connect',$plugin_base.'ninja-form-connect',$plugin_base.'slack-notifications',$plugin_base.'email-notifications',$plugin_base.'dropbox'); ?>
 	<div class="wrap">
 		<h2><?php _e('Premium Plugin Licenses','wp-crm-system'); ?></h2>
 		<form method="post" action="options.php">
