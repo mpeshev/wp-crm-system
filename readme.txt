@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management
 Requires at least: 3.3.0
 Tested up to: 4.4
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,9 +15,11 @@ WP-CRM System is a fully featured CRM that allows you to use the WordPress inter
 Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System allows you to have an unlimited number of records and lets you give everyone in your organization access to the data they need to drive business.
 
 **More than a CRM**
+
 WP-CRM System allows your team to manage projects, assign individual tasks, track marketing campaigns, and helps convert your opportunities into successes!
 
 **Premium Extensions Available**
+
 There are a number of inexpensive extensions that will allow you to do more with WP-CRM System.
 
 * Dropbox Connect - Attach files from your Dropbox account to any record in WP-CRM System.
@@ -26,6 +28,14 @@ There are a number of inexpensive extensions that will allow you to do more with
 * Ninja Forms/Gravity Forms - Automatically create new contacts in WP-CRM System whenever a visitor fills out a form (requires either Gravity Forms, or Ninja Forms)
 * Import Records - If you have records from another CRM or already in a spreadsheet, you can import them easily into WP-CRM System.
 * Create Contacts from Site Users - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
+
+**Languages**
+
+WP-CRM System is written in American English, and has been translated into the following language:
+
+* Russian - Maxim Glazunov
+
+If you would like to submit a translation, please submit it [through our website](https://www.wp-crm.com/contact).
 
 == Installation ==
 1. Download archive and unzip in wp-content/plugins or install via Plugins - Add New.
@@ -42,6 +52,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.0.9 =
+* Resolved minor issue with date formatting.
 = 1.0.8 =
 * Added Russian translation thanks to Maxim Glazunov.
 * Support for Dropbox extension added.
@@ -67,6 +79,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.0.8 =
-* Added Russian translation thanks to Maxim Glazunov.
-* Support for Dropbox extension added.
+= 1.0.9 =
+* Resolved minor issue with date formatting.
