@@ -32,7 +32,7 @@ function wp_crm_dashboard_widget() {
 function wp_crm_dashboard_notifications() {
 	include('wp-crm-system-dashboard.php');
 }
-	
+
 /* Settings Page */
 
 // Hook for adding admin menu
@@ -72,6 +72,7 @@ function wpcrm_extensions_page() {
 register_activation_hook(__FILE__, 'activate_wpcrm_system_settings');
 register_uninstall_hook(__FILE__, 'deactivate_wpcrm_system_settings');
 add_action('admin_init', 'register_wpcrm_system_settings');
+
 function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_select_user_role', 'manage_options');
 	add_option('wpcrm_system_default_currency', 'USD');
@@ -111,7 +112,20 @@ function register_wpcrm_system_settings() {
 		register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_dropbox_app_key');
 	}
 }
-
+/* Correct the date format if correct format is not being used */
+add_action('admin_init', 'update_date_formats');
+function update_date_formats() {
+	$js_date_format = get_option('wpcrm_system_date_format');
+	$php_date_format = get_option('wpcrm_system_php_date_format');
+	if (!$js_date_format == false || !$php_date_format == false) {
+		$js_acceptable = array('yy-M-d','M d, y','MM dd, yy','dd.mm.y','dd/mm/y','d MM yy','D d MM yy','DD, MM d, yy');
+		$php_acceptable = array('Y-M-j','M j, y','F d, Y','d.m.y','d/m/y','j F Y','D j F Y','l, F j, Y');
+		if(!in_array($js_date_format,$js_acceptable) || !in_array($php_date_format,$php_acceptable)) {
+			update_option('wpcrm_system_date_format','MM dd, yy');
+			update_option('wpcrm_system_php_date_format','F d, Y');
+		}
+	}
+}
 /**
  * Register post types.
  */

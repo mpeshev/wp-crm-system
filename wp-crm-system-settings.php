@@ -126,7 +126,16 @@ function wpcrm_general_settings_content() { ?>
 								<?php _e('Dates in the dropdown menu are today as displayed in the different available formats.', 'wp-crm-system'); ?>
 							</td>
 							<td>
-							<?php $formats = array('yy-M-d'=>'Y-M-j','M d, y'=>'M j, y', 'MM dd, yy'=>'F d, Y','DD.MM.YYYY'=>'d.m.y','DD/MM/YYYY'=>'d/m/y','D MMMM YYYY'=>'j F Y','do MMMM YYYY'=>'jS F Y','ddd do MMMM YYYY'=>'D jS F Y','dddd, MMMM D, YYYY'=>'l, F j, Y');?>
+							<?php $formats = array(
+									'yy-M-d'=>'Y-M-j',
+									'M d, y'=>'M j, y',
+									'MM dd, yy'=>'F d, Y',
+									'dd.mm.y'=>'d.m.y',
+									'dd/mm/y'=>'d/m/y',
+									'd MM yy'=>'j F Y',
+									'D d MM yy'=>'D j F Y',
+									'DD, MM d, yy'=>'l, F j, Y',
+								);?>
 								<select name="wpcrm_system_date_format" id="select_date_format">
 									<?php foreach($formats as $key => $value) { ?>
 										<option value="<?php echo $key; ?>" <?php if (get_option('wpcrm_system_date_format') == $key) {echo 'selected'; } ?> id="<?php echo $value; ?>"><?php echo date($value); ?></option>
