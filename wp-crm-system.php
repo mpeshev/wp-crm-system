@@ -841,6 +841,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'scope'         => array( 'wpcrm-contact' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
+			array(
+                'name'          => 'contact-zendesk',
+                'title'         => 'Zendesk Tickets',
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'zendesk',
+                'scope'         => array( 'wpcrm-contact' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
 			//Task Fields
 			array(
                 'name'          => 'task-assignment',
@@ -1528,7 +1537,10 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
                                     echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />'; ?>
 									<script type="text/javascript">
-									<?php $dateformat = get_option('wpcrm_system_date_format'); echo "var formatOption = '{$dateformat}';"; ?>
+									<?php 
+										$dateformat = get_option('wpcrm_system_date_format'); 
+										echo "var formatOption = '".$dateformat."';";
+									?>
 										jQuery(document).ready(function() {
 											jQuery('.datepicker').datepicker({
 												dateFormat : formatOption //allow date format change in settings
@@ -1545,6 +1557,18 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 										wp_crm_dropbox_content($field,$title);
 									} else {
 										echo '';
+									}
+									break;
+								}
+								case 'zendesk': {
+									if(is_plugin_active('wp-crm-system-zendesk/wp-crm-system-zendesk.php')) {
+										if ((get_option('_wpcrm_zendesk_api_key') && get_option('_wpcrm_zendesk_user') && get_option('_wpcrm_zendesk_subdomain')) != '') {
+											// Set display fields
+											$field = $this->prefix . $customField[ 'name' ];
+											$title = $customField[ 'title' ];
+											$contact = $post->ID;
+											wp_crm_zendesk_content($field,$title,$contact);
+										}
 									}
 									break;
 								}

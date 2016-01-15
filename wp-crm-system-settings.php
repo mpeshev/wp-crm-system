@@ -30,7 +30,10 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'general';
 	if (defined('WPCRM_EMAIL_NOTIFICATIONS')) { ?>
 	<a class="nav-tab <?php echo $active_tab == 'email-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=email-notifications"><?php _e('Email', 'wp-crm-system') ?></a>
 	<?php } 
-	if (defined('WPCRM_CONTACT_FROM_USER') || defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_NINJA_FORMS_CONNECT') || defined('WPCRM_GRAVITY_FORMS_CONNECT') || defined('WPCRM_SLACK_NOTIFICATIONS')) { ?>
+	if (defined('WPCRM_ZENDESK')) { ?>
+	<a class="nav-tab <?php echo $active_tab == 'zendesk' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=zendesk"><?php _e('Zendesk', 'wp-crm-system') ?></a>
+	<?php } 
+	if (defined('WPCRM_CONTACT_FROM_USER') || defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_NINJA_FORMS_CONNECT') || defined('WPCRM_GRAVITY_FORMS_CONNECT') || defined('WPCRM_SLACK_NOTIFICATIONS')|| defined('WPCRM_ZENDESK')) { ?>
 	<a class="nav-tab <?php echo $active_tab == 'licenses' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=licenses"><?php _e('Licenses', 'wp-crm-system') ?></a>
 	<?php } ?>
 </h2>
@@ -55,6 +58,9 @@ if ($active_tab == 'slack-notifications') {
 }
 if ($active_tab == 'email-notifications') {
 	wpcrm_email_settings_content();
+}
+if ($active_tab == 'zendesk') {
+	wpcrm_zendesk_settings_content();
 }
 if ($active_tab == 'licenses') {
 	wpcrm_license_keys();
@@ -216,6 +222,12 @@ function wpcrm_email_settings_content() {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
 	}
 }
+function wpcrm_zendesk_settings_content() {
+	$plugin = 'wp-crm-system-zendesk';
+	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
+		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
+	}
+}
 function wpcrm_dropbox_settings_content() {
 	$plugin = 'wp-crm-system-dropbox';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
@@ -225,7 +237,7 @@ function wpcrm_dropbox_settings_content() {
 function wpcrm_license_keys() {
 	// Provides a way to activate license keys only if an add-on plugin is installed.
 	$plugin_base = 'wp-crm-system-';
-	$plugins = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects',$plugin_base.'import-campaigns',$plugin_base.'contact-user',$plugin_base.'gravity-form-connect',$plugin_base.'ninja-form-connect',$plugin_base.'slack-notifications',$plugin_base.'email-notifications',$plugin_base.'dropbox'); ?>
+	$plugins = array($plugin_base.'import-organizations',$plugin_base.'import-contacts',$plugin_base.'import-opportunities',$plugin_base.'import-tasks',$plugin_base.'import-projects',$plugin_base.'import-campaigns',$plugin_base.'contact-user',$plugin_base.'gravity-form-connect',$plugin_base.'ninja-form-connect',$plugin_base.'slack-notifications',$plugin_base.'email-notifications',$plugin_base.'dropbox',$plugin_base.'zendesk'); ?>
 	<div class="wrap">
 		<h2><?php _e('Premium Plugin Licenses','wp-crm-system'); ?></h2>
 		<form method="post" action="options.php">
