@@ -1,9 +1,9 @@
 === WP-CRM System ===
 Contributors: scott.deluzio
-Tags:  user management, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management
+Tags:  user management, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk
 Requires at least: 3.3.0
-Tested up to: 4.4
-Stable tag: 1.0.9
+Tested up to: 4.4.1
+Stable tag: 1.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,12 +22,13 @@ WP-CRM System allows your team to manage projects, assign individual tasks, trac
 
 There are a number of inexpensive extensions that will allow you to do more with WP-CRM System.
 
-* Dropbox Connect - Attach files from your Dropbox account to any record in WP-CRM System.
-* Slack Notifications - Alert your team through a Slack channel whenever a project, task, or opportunity is updated.
-* Email Notifications - Alert assigned users via email whenever a project, task, or opportunity is updated.
-* Ninja Forms/Gravity Forms - Automatically create new contacts in WP-CRM System whenever a visitor fills out a form (requires either Gravity Forms, or Ninja Forms)
-* Import Records - If you have records from another CRM or already in a spreadsheet, you can import them easily into WP-CRM System.
-* Create Contacts from Site Users - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
+* [Dropbox Connect](https://www.wp-crm.com/downloads/dropbox-connect/) - Attach files from your Dropbox account to any record in WP-CRM System.
+* [Slack Notifications](https://www.wp-crm.com/downloads/slack-notifications/) - Alert your team through a Slack channel whenever a project, task, or opportunity is updated.
+* [Email Notifications](https://www.wp-crm.com/downloads/email-notifications/) - Alert assigned users via email whenever a project, task, or opportunity is updated.
+* [Ninja Forms](https://www.wp-crm.com/downloads/ninja-form-connect/)/[Gravity Forms](https://www.wp-crm.com/downloads/gravity-forms-connect/) - Automatically create new contacts in WP-CRM System whenever a visitor fills out a form (requires either Gravity Forms, or Ninja Forms)
+* [Import Records](https://www.wp-crm.com/downloads/import-bundle/) - If you have records from another CRM or already in a spreadsheet, you can import them easily into WP-CRM System.
+* [Create Contacts from Site Users](https://www.wp-crm.com/downloads/contact-from-user/) - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
+* Zendesk Connect - Coming Soon. View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
 
 **Languages**
 
@@ -52,6 +53,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.0.10 =
+* Added support for Zendesk extension.
 = 1.0.9 =
 * Resolved minor issue with date formatting.
 = 1.0.8 =
@@ -79,5 +82,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.0.9 =
-* Resolved minor issue with date formatting.
+= 1.0.10 =
+* Added support for Zendesk extension.
