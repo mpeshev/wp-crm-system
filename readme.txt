@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk
 Requires at least: 3.3.0
 Tested up to: 4.4.1
-Stable tag: 1.0.10
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,13 @@ There are a number of inexpensive extensions that will allow you to do more with
 * [Ninja Forms](https://www.wp-crm.com/downloads/ninja-form-connect/)/[Gravity Forms](https://www.wp-crm.com/downloads/gravity-forms-connect/) - Automatically create new contacts in WP-CRM System whenever a visitor fills out a form (requires either Gravity Forms, or Ninja Forms)
 * [Import Records](https://www.wp-crm.com/downloads/import-bundle/) - If you have records from another CRM or already in a spreadsheet, you can import them easily into WP-CRM System.
 * [Create Contacts from Site Users](https://www.wp-crm.com/downloads/contact-from-user/) - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
-* Zendesk Connect - Coming Soon. View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
+* [Zendesk Connect](https://www.wp-crm.com/downloads/zendesk-connect/) - View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
+
+** Need Help? **
+
+Documentation for WP-CRM System and extensions can be [found on our website](https://www.wp-crm.com/document).
+
+Get support from the WordPress [support page](http://wordpress.org/support/plugin/wp-crm-system) for this plugin, or on our [support forum](https://www.wp-crm.com/support).
 
 **Languages**
 
@@ -53,6 +59,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.1 =
+* New Feature: Send emails to contacts directly from WP-CRM System.
+* Minor update: Added category edit page for Campaigns.
 = 1.0.10 =
 * Added support for Zendesk extension.
 = 1.0.9 =
@@ -82,5 +91,6 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.0.10 =
-* Added support for Zendesk extension.
+= 1.1 =
+* New Feature: Send emails to contacts directly from WP-CRM System.
+* Minor update: Added category edit page for Campaigns.
