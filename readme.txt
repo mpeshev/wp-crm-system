@@ -30,7 +30,7 @@ There are a number of inexpensive extensions that will allow you to do more with
 * [Create Contacts from Site Users](https://www.wp-crm.com/downloads/contact-from-user/) - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
 * [Zendesk Connect](https://www.wp-crm.com/downloads/zendesk-connect/) - View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
 
-** Need Help? **
+**Need Help?**
 
 Documentation for WP-CRM System and extensions can be [found on our website](https://www.wp-crm.com/document).
 
