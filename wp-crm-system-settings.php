@@ -171,7 +171,7 @@ function wpcrm_general_settings_content() { ?>
 	</div>
 <?php }
 function wpcrm_categories_settings_content() {
-	$categories = array('contact-type'=>'Contact Categories','task-type'=>'Task Categories','organization-type'=>'Organization Categories','opportunity-type'=>'Opportunity Categories','project-type'=>'Project Categories');?>
+	$categories = array('contact-type'=>'Contact Categories','task-type'=>'Task Categories','organization-type'=>'Organization Categories','opportunity-type'=>'Opportunity Categories','project-type'=>'Project Categories','campaign-type'=>'Campaign Categories');?>
 	<div class="wrap">
 		<div>
 			<h2><?php _e('WP CRM System Categories', 'wp-crm-system'); ?></h2>

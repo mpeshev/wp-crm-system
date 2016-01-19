@@ -9,7 +9,7 @@
    Text Domain: wp-crm-system
    */
    
-	/*  Copyright 2015  Scott DeLuzio (email : support (at) wp-crm.com)	*/
+	/*  Copyright 2016  Scott DeLuzio (email : support (at) wp-crm.com)	*/
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -41,6 +41,7 @@ add_action('admin_menu', 'wpcrm_admin_page');
 function wpcrm_admin_page() {
     // Add a new menu:
     add_menu_page(__('WP CRM', 'wp-crm-system'), __('WP CRM', 'wp-crm-system'),WPCRM_USER_ACCESS,'wpcrm','wpcrm_settings_page', 'dashicons-id');
+	add_submenu_page( 'wpcrm', __('Email', 'wp-crm-system'), __('Email', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-email', 'wpcrm_email_page' );
 	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-reports', 'wpcrm_reports_page' );
 	add_submenu_page( 'wpcrm', __('Settings', 'wp-crm-system'), __('Settings', 'wp-crm-system'), 'manage_options', 'wpcrm-settings', 'wpcrm_settings_page' );
 	add_submenu_page( 'wpcrm', __('Extensions', 'wp-crm-system'), __('Extensions', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-extensions', 'wpcrm_extensions_page' );
@@ -59,6 +60,9 @@ function wpcrm_scripts_styles() {
 }
 add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );
 //Display the page content for the plugin settings and reports
+function wpcrm_email_page() {
+	include('wp-crm-system-email.php');
+}
 function wpcrm_reports_page() {
 	include('wp-crm-system-reports.php');
 }
