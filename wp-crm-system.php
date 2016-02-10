@@ -3,7 +3,7 @@
    Plugin Name: WP-CRM System
    Plugin URI: https://www.wp-crm.com
    Description: A complete CRM for WordPress
-   Version: 1.1
+   Version: 1.1.1
    Author: Scott DeLuzio
    Author URI: https://www.wp-crm.com
    Text Domain: wp-crm-system
@@ -177,6 +177,7 @@ function wpcrm_add_role_caps() {
 				$role->add_cap( 'edit_private_'.$post_type.'s');
 				$role->add_cap( 'edit_published_'.$post_type.'s');
 				$role->add_cap( 'create_'.$post_type.'s');
+				$role->add_cap( 'manage_wp_crm');
 			} else {
 			// Remove the capabilities if the role isn't supposed to edit the CPT. Allows for admin to change to a higher role if too much access was previously given.
 				$role->remove_cap( 'edit_'.$post_type);
@@ -194,6 +195,7 @@ function wpcrm_add_role_caps() {
 				$role->remove_cap( 'edit_private_'.$post_type.'s');
 				$role->remove_cap( 'edit_published_'.$post_type.'s');
 				$role->remove_cap( 'create_'.$post_type.'s');
+				$role->remove_cap( 'manage_wp_crm');
 			}
 		}
 	}
@@ -583,7 +585,7 @@ function wpcrm_project_taxonomy() {
 	);
 	register_taxonomy( 'project-type', 'wpcrm-project', $args );
 }
-/* Projects post type. */
+/* Campaign post type. */
 function wpcrm_campaign_init() {
 	$post_type = 'wpcrm-campaign';
 	$labels = array(
@@ -879,6 +881,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                 'description'   => '',
 				'placeholder'   => '',
                 'type'          => 'selectcontact',
+                'scope'         => array( 'wpcrm-task' ),
+                'capability'    => WPCRM_USER_ACCESS
+            ),
+			array(
+				'name'          => 'task-attach-to-project',
+                'title'         => WPCRM_ATTACH_PROJECT,
+                'description'   => '',
+				'placeholder'   => '',
+                'type'          => 'selectproject',
                 'scope'         => array( 'wpcrm-task' ),
                 'capability'    => WPCRM_USER_ACCESS
             ),
@@ -1348,17 +1359,63 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
             }
         }
         /**
-        * Create the new Custom Fields meta box
+        * Create the new meta boxes
         */
         function createCustomFields() {
             if ( function_exists( 'add_meta_box' ) ) {
-                foreach ( $this->postTypes as $postType ) {
+				foreach ( $this->postTypes as $postType ) {
                     add_meta_box( 'wpcrm-custom-fields', 'Fields', array( &$this, 'wpcrmCustomFields' ), $postType, 'normal', 'high' );
                 }
             }
         }
+		
+		/**
+        * Display the main fields meta box
+        */
+        function wpcrmListTasks() {
+		include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
+		global $post;
+			//List Tasks
+			$meta_key1 = $prefix . 'task-attach-to-project';
+			$meta_key1_value = get_the_ID();
+			$tasks = '';
+			$task_report = '';
+			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-task');
+			$loop = new WP_Query( $args );
+			while ( $loop->have_posts() ) : $loop->the_post();
+				$args = array(
+					'post_type'		=>	'wpcrm-task',
+					'meta_query'	=>	array(
+						array(
+							'key'		=>	$meta_key1,
+							'value'		=>	$meta_key1_value,
+							'compare'	=>	'=',
+						),
+					),
+				);
+			endwhile;
+			$posts = get_posts($args);					
+			if ($posts) {
+				foreach($posts as $post) {
+					$tasks .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a>';
+				}
+			} else {
+				$tasks = '';
+			}
+			if ($tasks == '') {
+				$task_report .= '';
+			} else {
+				$task_report .= '<li>'.$tasks.'</li>';
+			}
+			if ($task_report != '') {
+				echo '<ul>' . $task_report . '</ul>';
+			} else {
+				_e('No tasks assigned to this project','wp-crm-system');
+			} 
+			wp_reset_query();
+		}
         /**
-        * Display the new Custom Fields meta box
+        * Display the main fields meta box
         */
         function wpcrmCustomFields() {
             global $post;
@@ -1389,6 +1446,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                             <?php
                             switch ( $customField[ 'type' ] ) {
 								case 'selectcontact':
+								case 'selectproject':
 								case 'selectcampaign':
 								case 'selectorganization':
 								case 'selectprogress':
@@ -1424,10 +1482,13 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
 											echo '<option value="" ' . $selected . '>Not Assigned</option>';
 											foreach($campaigns as $campaign) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $campaign->ID) { $selected = 'selected'; } else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $campaign->ID) { $selected = 'selected'; $linkcampaign = $campaign->ID; } else { $selected = ''; }
 												echo '<option value="' . $campaign->ID . '"' . $selected . '>' . get_the_title($campaign->ID) . '</option>';
 											}
 											echo '</select>';
+											if (isset($linkcampaign)) {
+												echo '<br /><a href="' . get_edit_post_link($linkcampaign) . '">' . __('Go to ','wp-crm-system') . get_the_title($linkcampaign) . '</a>';
+											}
 										} else {
 											echo '<a href="' . admin_url('edit.php?post_type=wpcrm-campaign') . '">';
 											_e('Please create an campaign first.','wp-crm-system');
@@ -1439,12 +1500,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 										if ($orgs) {
 											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
 											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
-											echo '<option value="" ' . $selected . '>Not Assigned</option>';
+											echo '<option value="" ' . $selected . '>' . __('Not Assigned','wp-crm-system') . '</option>';
 											foreach($orgs as $org) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $org->ID) { $selected = 'selected'; } else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $org->ID) { $selected = 'selected'; $linkorg = $org->ID;} else { $selected = ''; }
 												echo '<option value="' . $org->ID . '"' . $selected . '>' . get_the_title($org->ID) . '</option>';
 											}
 											echo '</select>';
+											if (isset($linkorg)) {
+												echo '<br /><a href="' . get_edit_post_link($linkorg) . '">' . __('Go to ','wp-crm-system') . get_the_title($linkorg) . '</a>';
+											}
 										} else {
 											echo '<a href="' . admin_url('edit.php?post_type=wpcrm-organization') . '">';
 											_e('Please create an organization first.','wp-crm-system');
@@ -1456,12 +1520,35 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 										if ($contacts) {
 											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
 											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
-											echo '<option value="" ' . $selected . '>' . _e('Not Assigned','wp-crm-system') . '</option>';
+											echo '<option value="" ' . $selected . '>' . __('Not Assigned','wp-crm-system') . '</option>';
 											foreach($contacts as $contact) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $contact->ID) { $selected = 'selected'; } else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $contact->ID) { $selected = 'selected'; $linkcontact = $contact->ID; } else { $selected = ''; }
 												echo '<option value="' . $contact->ID . '"' . $selected . '>' . get_the_title($contact->ID) . '</option>';
 											}
 											echo '</select>';
+											if (isset($linkcontact)) {
+												echo '<br /><a href="' . get_edit_post_link($linkcontact) . '">' . __('Go to ','wp-crm-system') . get_the_title($linkcontact) . '</a>';
+											}
+										} else {
+											echo '<a href="' . admin_url('edit.php?post_type=wpcrm-contact') . '">';
+											_e('Please create a contact first.','wp-crm-system');
+											echo '</a>';
+										}
+									} elseif ( $customField[ 'type' ] == "selectproject" ) {
+										//Select Project
+										$projects = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-project'));
+										if ($projects) {
+											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
+											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
+											echo '<option value="" ' . $selected . '>' . __('Not Assigned','wp-crm-system') . '</option>';
+											foreach($projects as $project) {
+												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $project->ID) { $selected = 'selected'; $linkproject = $project->ID;} else { $selected = ''; }
+												echo '<option value="' . $project->ID . '"' . $selected . '>' . get_the_title($project->ID) . '</option>';
+											}
+											echo '</select>';
+											if (isset($linkproject)) {
+												echo '<br /><a href="' . get_edit_post_link($linkproject) . '">' . __('Go to ','wp-crm-system') . get_the_title($linkproject) . '</a>';
+											}
 										} else {
 											echo '<a href="' . admin_url('edit.php?post_type=wpcrm-contact') . '">';
 											_e('Please create a contact first.','wp-crm-system');
@@ -1553,7 +1640,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									</script>
 									<?php
                                     break;
-								}
+								}								
 								case 'dropbox': {
 									if(is_plugin_active('wp-crm-system-dropbox/wp-crm-system-dropbox.php')) {
 										$field = $this->prefix . $customField[ 'name' ];
@@ -1726,6 +1813,16 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 						/** Validate and sanitize input **/
 							if ( $customField['type'] == 'selectcontact' ) {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-contact'));
+								$posts = array();
+								foreach ($allowed as $post) {
+									$posts[] = $post->ID;
+								}
+								if ($posts) {
+									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
+								}
+							}
+							if ( $customField['type'] == 'selectproject' ) {
+								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-project'));
 								$posts = array();
 								foreach ($allowed as $post) {
 									$posts[] = $post->ID;

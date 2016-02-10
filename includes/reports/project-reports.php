@@ -285,8 +285,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$project_report = '<tr><td>' . __('No projects to report.', 'wp-crm-system') . '</td></tr>';
 			}
 			break;
+		case 'listtasks':
+			$meta_key1 = $prefix . 'task-attach-to-project';
+			$project_report = '';
+			$projects = '';
+			$report_title = __('Tasks assigned to Projects', 'wp-crm-system');
+			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-project');
+			$loop = new WP_Query( $args );
+			while ( $loop->have_posts() ) : $loop->the_post();
+				$meta_key1_value = get_the_ID();
+				$meta_key1_display = get_the_title();
+				$args = array(
+					'post_type'		=>	'wpcrm-task',
+					'meta_query'	=> array(
+						array(
+							'key'		=>	$meta_key1,
+							'value'		=>	$meta_key1_value,
+							'compare'	=>	'=',
+						),
+					),
+				);
+				$posts = get_posts($args);					
+				if ($posts) {
+					foreach($posts as $post) {
+						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
+					}
+				} else {
+					$projects = '';
+				}
+				if ($projects == '') {
+					$project_report .= '';
+				} else {
+					$project_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $projects . '</td></tr>';
+				}
+				$projects = '';//reset projects for next contact
+			endwhile;
+			if ($project_report == '') {
+				$project_report = '<tr><td>' . __('No tasks are linked to projects. Please add or edit a task and link it to a project for this report to show.', 'wp-crm-system');
+			}
+			break;
 		default:
-			$reports = array('user_projects'=>'Projects by User','organization_projects'=>'Projects by Organization','contact_projects'=>'Projects by Contact','overdue_projects'=>'Overdue Projects','upcoming_projects'=>'Upcoming Projects','pct_complete_projects'=>'Projects by Percentage Completion','status_projects'=>'Projects by Status','type_project'=>'Projects by Type');
+			$reports = array('user_projects'=>'Projects by User','organization_projects'=>'Projects by Organization','contact_projects'=>'Projects by Contact','overdue_projects'=>'Overdue Projects','upcoming_projects'=>'Upcoming Projects','pct_complete_projects'=>'Projects by Percentage Completion','status_projects'=>'Projects by Status','type_project'=>'Projects by Type','listtasks'=>'Tasks per Project');
 			$project_report = '';
 			$report_title = 'Project Reports';
 			foreach ($reports as $key => $value) {

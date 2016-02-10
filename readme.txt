@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  user management, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk
 Requires at least: 3.3.0
-Tested up to: 4.4.1
-Stable tag: 1.1
+Tested up to: 4.4.2
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.1.1 =
+* Added new reports - list all tasks assigned to a project, and list all projects assigned to an organization.
+* Added ability to assign tasks to projects.
 = 1.1 =
 * New Feature: Send emails to contacts directly from WP-CRM System.
 * Minor update: Added category edit page for Campaigns.
@@ -91,6 +94,6 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.1 =
-* New Feature: Send emails to contacts directly from WP-CRM System.
-* Minor update: Added category edit page for Campaigns.
+= 1.1.1 =
+* Added new reports - list all tasks assigned to a project, and list all projects assigned to an organization.
+* Added ability to assign tasks to projects.

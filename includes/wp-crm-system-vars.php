@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $prefix = '_wpcrm_';
 $postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project' );
 if (!defined('WPCRM_USER_ACCESS')){
-	define( 'WPCRM_USER_ACCESS', get_option('wpcrm_system_select_user_role') );
+	define( 'WPCRM_USER_ACCESS', 'manage_wp_crm' );
 }
 if (!defined('WPCRM_BASE_STORE_URL')){
 	define( 'WPCRM_BASE_STORE_URL', 'http://wp-crm.com' );
@@ -42,6 +42,9 @@ if (!defined('WPCRM_ATTACH_CONTACT')){
 }
 if (!defined('WPCRM_ATTACH_ORG')){
 	define( 'WPCRM_ATTACH_ORG', __('Attach to Organization', 'wp-crm-system') );
+}
+if (!defined('WPCRM_ATTACH_PROJECT')){
+	define( 'WPCRM_ATTACH_PROJECT', __('Attach to Project', 'wp-crm-system') );
 }
 if (!defined('WPCRM_BUDGETED_COST')){
 	define( 'WPCRM_BUDGETED_COST', __('Budgeted Cost', 'wp-crm-system') );

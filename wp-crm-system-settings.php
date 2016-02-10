@@ -33,7 +33,7 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'general';
 	if (defined('WPCRM_ZENDESK')) { ?>
 	<a class="nav-tab <?php echo $active_tab == 'zendesk' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=zendesk"><?php _e('Zendesk', 'wp-crm-system') ?></a>
 	<?php } 
-	if (defined('WPCRM_CONTACT_FROM_USER') || defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_NINJA_FORMS_CONNECT') || defined('WPCRM_GRAVITY_FORMS_CONNECT') || defined('WPCRM_SLACK_NOTIFICATIONS')|| defined('WPCRM_ZENDESK')) { ?>
+	if (defined('WPCRM_CONTACT_FROM_USER') || defined('WPCRM_DROPBOX_CONNECT') || defined('WPCRM_EMAIL_NOTIFICATIONS') || defined('WPCRM_GRAVITY_FORMS_CONNECT') || defined('WPCRM_IMPORT_CAMPAIGNS') || defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_NINJA_FORMS_CONNECT') || defined('WPCRM_SLACK_NOTIFICATIONS') || defined('WPCRM_ZENDESK')) { ?>
 	<a class="nav-tab <?php echo $active_tab == 'licenses' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=licenses"><?php _e('Licenses', 'wp-crm-system') ?></a>
 	<?php } ?>
 </h2>

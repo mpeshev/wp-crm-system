@@ -116,8 +116,47 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$organization_report = '<tr><td>' . __('No tasks are linked to an organization. Please add or edit a task and link it to a organization for this report to show.', 'wp-crm-system');
 			}
 			break;
+		case 'project_organizations':
+			$meta_key1 = $prefix . 'project-attach-to-organization';
+			$organization_report = '';
+			$tasks = '';
+			$report_title = __('Projects Attached to Organizations', 'wp-crm-system');
+			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-organization');
+			$loop = new WP_Query( $args );
+			while ( $loop->have_posts() ) : $loop->the_post();
+				$meta_key1_value = get_the_ID();
+				$meta_key1_display = get_the_title();
+				$args = array(
+					'post_type'		=>	'wpcrm-project',
+					'meta_query'	=> array(
+						array(
+							'key'		=>	$meta_key1,
+							'value'		=>	$meta_key1_value,
+							'compare'	=>	'=',
+						),
+					),
+				);
+				$posts = get_posts($args);					
+				if ($posts) {
+					foreach($posts as $post) {
+						$organizations .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
+					}
+				} else {
+					$organizations = '';
+				}
+				if ($organizations == '') {
+					$organization_report .= '';
+				} else {
+					$organization_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $organizations . '</td></tr>';
+				}
+				$organizations = '';//reset projects for next organization
+			endwhile;
+			if ($organization_report == '') {
+				$organization_report = '<tr><td>' . __('No projects are linked to an organization. Please add or edit a project and link it to a organization for this report to show.', 'wp-crm-system');
+			}
+			break;
 		default:
-			$reports = array('contacts_organization'=>'Contacts by Organization','task_organizations'=>'Organizations Associated With Tasks','type_orgnaizations'=>'Organizations by Type');
+			$reports = array('contacts_organization'=>'Contacts by Organization','task_organizations'=>'Organizations Associated With Tasks','type_orgnaizations'=>'Organizations by Type','project_organizations'=>'Projects Attached to Organizations');
 			$organization_report = '';
 			$report_title = 'Organization Reports';
 			foreach ($reports as $key => $value) {
