@@ -3,7 +3,7 @@
    Plugin Name: WP-CRM System
    Plugin URI: https://www.wp-crm.com
    Description: A complete CRM for WordPress
-   Version: 1.1.1
+   Version: 1.1.2
    Author: Scott DeLuzio
    Author URI: https://www.wp-crm.com
    Text Domain: wp-crm-system
@@ -56,6 +56,8 @@ function wpcrm_scripts_styles() {
 	wp_enqueue_style('gmap-style');
 	wp_register_style('wpcrm-style', plugins_url('/css/wp-crm.css', __FILE__));
 	wp_enqueue_style('wpcrm-style');
+	wp_enqueue_script('jquery-ui-accordion');
+	wp_enqueue_script('wpcrm-system-accordion',	plugins_url( '/js/accordion.js',__FILE__) );
 	wp_enqueue_script( 'jquery' );
 }
 add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );
@@ -85,9 +87,17 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_report_currency_thousand_separator', ',');
 	add_option('wpcrm_system_date_format', 'MM dd, yy');
 	add_option('wpcrm_system_php_date_format', 'F d, Y');
+	add_option('wpcrm_system_email_organization_filter', '');
 	$plugin = 'wp-crm-system-dropbox';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		add_option('wpcrm_dropbox_app_key', '');
+	}
+	
+	$terms = get_terms('contact-type');
+	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+		foreach ( $terms as $term ) {
+			add_option($term->slug.'-email-filter','');
+		}
 	}
 }
 function deactivate_wpcrm_system_settings() {
@@ -98,9 +108,17 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_report_currency_thousand_separator');
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
+	delete_option('wpcrm_system_email_organization_filter');
 	$plugin = 'wp-crm-system-dropbox';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		delete_option('wpcrm_dropbox_app_key');
+	}
+	
+	$terms = get_terms('contact-type');
+	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+		foreach ( $terms as $term ) {
+			delete_option($term->slug.'-email-filter');
+		}
 	}
 }
 function register_wpcrm_system_settings() {
@@ -111,9 +129,17 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_thousand_separator');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
+	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );
 	$plugin = 'wp-crm-system-dropbox';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_dropbox_app_key');
+	}
+	
+	$terms = get_terms('contact-type');
+	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+		foreach ( $terms as $term ) {
+			register_setting('wpcrm_system_email_group',$term->slug.'-email-filter');
+		}
 	}
 }
 /* Correct the date format if correct format is not being used */
