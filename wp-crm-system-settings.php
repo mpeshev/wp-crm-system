@@ -15,26 +15,29 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'general';
 <h2 class="nav-tab-wrapper">
 	<a class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=general"><?php _e('General', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'categories' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=categories"><?php _e('Categories', 'wp-crm-system') ?></a>
-	<?php if (defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_IMPORT_CAMPAIGNS')) { ?>
-	<a class="nav-tab <?php echo $active_tab == 'import' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=import"><?php _e('Import', 'wp-crm-system') ?></a>
+	<?php if (defined('WPCRM_CUSTOM_FIELDS')) { ?>
+		<a class="nav-tab <?php echo $active_tab == 'custom' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=custom"><?php _e('Custom Fields', 'wp-crm-system') ?></a>
+	<?php } 
+	if (defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_IMPORT_CAMPAIGNS')) { ?>
+		<a class="nav-tab <?php echo $active_tab == 'import' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=import"><?php _e('Import', 'wp-crm-system') ?></a>
 	<?php } 
 	if (defined('WPCRM_NINJA_FORMS_CONNECT')) { ?>
-	<a class="nav-tab <?php echo $active_tab == 'ninja-connect' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=ninja-connect"><?php _e('Ninja Forms', 'wp-crm-system') ?></a>
+		<a class="nav-tab <?php echo $active_tab == 'ninja-connect' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=ninja-connect"><?php _e('Ninja Forms', 'wp-crm-system') ?></a>
 	<?php } 
 	if (defined('WPCRM_GRAVITY_FORMS_CONNECT')) { ?>
-	<a class="nav-tab <?php echo $active_tab == 'gravity-connect' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=gravity-connect"><?php _e('Gravity Forms', 'wp-crm-system') ?></a>
+		<a class="nav-tab <?php echo $active_tab == 'gravity-connect' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=gravity-connect"><?php _e('Gravity Forms', 'wp-crm-system') ?></a>
 	<?php } 
 	if (defined('WPCRM_SLACK_NOTIFICATIONS')) { ?>
-	<a class="nav-tab <?php echo $active_tab == 'slack-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=slack-notifications"><?php _e('Slack', 'wp-crm-system') ?></a>
+		<a class="nav-tab <?php echo $active_tab == 'slack-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=slack-notifications"><?php _e('Slack', 'wp-crm-system') ?></a>
 	<?php } 
 	if (defined('WPCRM_EMAIL_NOTIFICATIONS')) { ?>
-	<a class="nav-tab <?php echo $active_tab == 'email-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=email-notifications"><?php _e('Email', 'wp-crm-system') ?></a>
+		<a class="nav-tab <?php echo $active_tab == 'email-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=email-notifications"><?php _e('Email', 'wp-crm-system') ?></a>
 	<?php } 
 	if (defined('WPCRM_ZENDESK')) { ?>
-	<a class="nav-tab <?php echo $active_tab == 'zendesk' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=zendesk"><?php _e('Zendesk', 'wp-crm-system') ?></a>
+		<a class="nav-tab <?php echo $active_tab == 'zendesk' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=zendesk"><?php _e('Zendesk', 'wp-crm-system') ?></a>
 	<?php } 
-	if (defined('WPCRM_CONTACT_FROM_USER') || defined('WPCRM_DROPBOX_CONNECT') || defined('WPCRM_EMAIL_NOTIFICATIONS') || defined('WPCRM_GRAVITY_FORMS_CONNECT') || defined('WPCRM_IMPORT_CAMPAIGNS') || defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_NINJA_FORMS_CONNECT') || defined('WPCRM_SLACK_NOTIFICATIONS') || defined('WPCRM_ZENDESK')) { ?>
-	<a class="nav-tab <?php echo $active_tab == 'licenses' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=licenses"><?php _e('Licenses', 'wp-crm-system') ?></a>
+	if (defined('WPCRM_CONTACT_FROM_USER') || defined('WPCRM_CUSTOM_FIELDS') || defined('WPCRM_DROPBOX_CONNECT') || defined('WPCRM_EMAIL_NOTIFICATIONS') || defined('WPCRM_GRAVITY_FORMS_CONNECT') || defined('WPCRM_IMPORT_CAMPAIGNS') || defined('WPCRM_IMPORT_CONTACTS') || defined('WPCRM_IMPORT_OPPORTUNITIES') || defined('WPCRM_IMPORT_ORGANIZATIONS') || defined('WPCRM_IMPORT_PROJECTS') || defined('WPCRM_IMPORT_TASKS') || defined('WPCRM_NINJA_FORMS_CONNECT') || defined('WPCRM_SLACK_NOTIFICATIONS') || defined('WPCRM_ZENDESK')) { ?>
+		<a class="nav-tab <?php echo $active_tab == 'licenses' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=licenses"><?php _e('Licenses', 'wp-crm-system') ?></a>
 	<?php } ?>
 </h2>
 <?php 
@@ -43,6 +46,9 @@ if ($active_tab == 'general') {
 }
 if ($active_tab == 'categories') {
 	wpcrm_categories_settings_content();
+}
+if ($active_tab == 'custom') {
+	wpcrm_custom_fields_content();
 }
 if ($active_tab == 'import') {
 	wpcrm_import_settings_content();
@@ -170,6 +176,14 @@ function wpcrm_general_settings_content() { ?>
 		</div>
 	</div>
 <?php }
+function wpcrm_custom_fields_content() { 
+	$plugin = 'wp-crm-system-custom-fields';
+	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
+		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
+	} else {
+		return;
+	}
+}
 function wpcrm_categories_settings_content() {
 	$categories = array('contact-type'=>'Contact Categories','task-type'=>'Task Categories','organization-type'=>'Organization Categories','opportunity-type'=>'Opportunity Categories','project-type'=>'Project Categories','campaign-type'=>'Campaign Categories');?>
 	<div class="wrap">
@@ -202,36 +216,48 @@ function wpcrm_nf_settings_content() {
 	$plugin = 'wp-crm-system-ninja-form-connect';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/import.php');
+	} else {
+		return;
 	}
 }
 function wpcrm_gf_settings_content() {
 	$plugin = 'wp-crm-system-gravity-form-connect';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/import.php');
+	} else {
+		return;
 	}
 }
 function wpcrm_sn_settings_content() {
 	$plugin = 'wp-crm-system-slack-notifications';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
+	} else {
+		return;
 	}
 }
 function wpcrm_email_settings_content() {
 	$plugin = 'wp-crm-system-email-notifications';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
+	} else {
+		return;
 	}
 }
 function wpcrm_zendesk_settings_content() {
 	$plugin = 'wp-crm-system-zendesk';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
+	} else {
+		return;
 	}
 }
 function wpcrm_dropbox_settings_content() {
 	$plugin = 'wp-crm-system-dropbox';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/settings.php');
+	} else {
+		return;
 	}
 }
 function wpcrm_license_keys() {

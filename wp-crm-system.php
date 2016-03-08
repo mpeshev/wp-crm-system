@@ -3,7 +3,7 @@
    Plugin Name: WP-CRM System
    Plugin URI: https://www.wp-crm.com
    Description: A complete CRM for WordPress
-   Version: 1.1.3
+   Version: 1.1.4
    Author: Scott DeLuzio
    Author URI: https://www.wp-crm.com
    Text Domain: wp-crm-system
@@ -40,7 +40,7 @@ add_action('admin_menu', 'wpcrm_admin_page');
 // action function for above hook
 function wpcrm_admin_page() {
     // Add a new menu:
-    add_menu_page(__('WP CRM', 'wp-crm-system'), __('WP CRM', 'wp-crm-system'),WPCRM_USER_ACCESS,'wpcrm','wpcrm_settings_page', 'dashicons-id');
+    add_menu_page(__('WP CRM System', 'wp-crm-system'), __('WP CRM System', 'wp-crm-system'),WPCRM_USER_ACCESS,'wpcrm','wpcrm_settings_page', 'dashicons-id');
 	add_submenu_page( 'wpcrm', __('Email', 'wp-crm-system'), __('Email', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-email', 'wpcrm_email_page' );
 	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-reports', 'wpcrm_reports_page' );
 	add_submenu_page( 'wpcrm', __('Settings', 'wp-crm-system'), __('Settings', 'wp-crm-system'), 'manage_options', 'wpcrm-settings', 'wpcrm_settings_page' );
@@ -699,9 +699,9 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         */
         var $postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project', 'wpcrm-campaign' );
         /**
-        * @var  array  $customFields  Defines the custom fields available
+        * @var  array  $defaultFields  Defines the custom fields available
         */
-        var $customFields = array(
+        var $defaultFields = array(
 			// Contact Fields
             array(
                 'name'          => 'contact-name-prefix',
@@ -1369,15 +1369,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         * PHP 5 Constructor
         */
         function __construct() {
-            add_action( 'admin_menu', array( &$this, 'createCustomFields' ) );
-            add_action( 'save_post', array( &$this, 'saveCustomFields' ), 1, 2 );
+            add_action( 'admin_menu', array( &$this, 'createWPCRMSystemFields' ) );
+            add_action( 'save_post', array( &$this, 'saveWPCRMSystemFields' ), 1, 2 );
             // Remove default custom field meta box
-            add_action( 'do_meta_boxes', array( &$this, 'removeDefaultCustomFields' ), 10, 3 );
+            add_action( 'do_meta_boxes', array( &$this, 'removeDefaultFields' ), 10, 3 );
         }
         /**
-        * Remove the default Custom Fields meta box
+        * Remove the default Fields meta box
         */
-        function removeDefaultCustomFields( $type, $context, $post ) {
+        function removeDefaultFields( $type, $context, $post ) {
             foreach ( array( 'normal', 'advanced', 'side' ) as $context ) {
                 foreach ( $this->postTypes as $postType ) {
                     remove_meta_box( 'postcustom', $postType, $context );
@@ -1387,10 +1387,10 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         /**
         * Create the new meta boxes
         */
-        function createCustomFields() {
+        function createWPCRMSystemFields() {
             if ( function_exists( 'add_meta_box' ) ) {
 				foreach ( $this->postTypes as $postType ) {
-                    add_meta_box( 'wpcrm-custom-fields', 'Fields', array( &$this, 'wpcrmCustomFields' ), $postType, 'normal', 'high' );
+                    add_meta_box( 'wpcrm-default-fields', 'Fields', array( &$this, 'wpcrmDefaultFields' ), $postType, 'normal', 'high' );
                 }
             }
         }
@@ -1443,15 +1443,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         /**
         * Display the main fields meta box
         */
-        function wpcrmCustomFields() {
+        function wpcrmDefaultFields() {
             global $post;
             ?>
             <div class="form-wrap">
                 <?php
                 wp_nonce_field( 'wpcrm-fields', 'wpcrm-fields_wpnonce', false, true );
-                foreach ( $this->customFields as $customField ) {
+                foreach ( $this->defaultFields as $defaultField ) {
                     // Check scope
-                    $scope = $customField[ 'scope' ];
+                    $scope = $defaultField[ 'scope' ];
                     $output = false;
                     foreach ( $scope as $scopeItem ) {
                         switch ( $scopeItem ) {
@@ -1464,13 +1464,13 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                         if ( $output ) break;
                     }
                     // Check capability
-                    if ( !current_user_can( $customField['capability'], $post->ID ) )
+                    if ( !current_user_can( $defaultField['capability'], $post->ID ) )
                         $output = false;
                     // Output if allowed
                     if ( $output ) { ?>
                         <div class="form-field form-required">
                             <?php
-                            switch ( $customField[ 'type' ] ) {
+                            switch ( $defaultField[ 'type' ] ) {
 								case 'selectcontact':
 								case 'selectproject':
 								case 'selectcampaign':
@@ -1482,11 +1482,11 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								case 'selectnameprefix':
 								case 'selectuser': {
 									// Select
-									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';
+									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';
 									//Select User
-									if ( $customField[ 'type' ] == "selectuser" ) {
-										echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
-										if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
+									if ( $defaultField[ 'type' ] == "selectuser" ) {
+										echo'<select name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+										if ( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
 										echo '<option value="" ' . $selected . '>Not Assigned</option>';
 											$users = get_users();
 											$wp_crm_users = array();
@@ -1496,19 +1496,19 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 												}
 											}
 											foreach( $wp_crm_users as $user) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $user->data->user_login) { $selected = 'selected'; } else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == $user->data->user_login) { $selected = 'selected'; } else { $selected = ''; }
 												echo '<option value="'.$user->data->user_login.'" ' . $selected . '>'.$user->data->display_name.'</option>';
 											}
 										echo'</select>';
-									} elseif ( $customField[ 'type' ] == "selectcampaign" ) {
+									} elseif ( $defaultField[ 'type' ] == "selectcampaign" ) {
 										//Select Campaign
 										$campaigns = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-campaign'));
 										if ($campaigns) {
-											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
-											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
+											echo'<select name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+											if ( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
 											echo '<option value="" ' . $selected . '>Not Assigned</option>';
 											foreach($campaigns as $campaign) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $campaign->ID) { $selected = 'selected'; $linkcampaign = $campaign->ID; } else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == $campaign->ID) { $selected = 'selected'; $linkcampaign = $campaign->ID; } else { $selected = ''; }
 												echo '<option value="' . $campaign->ID . '"' . $selected . '>' . get_the_title($campaign->ID) . '</option>';
 											}
 											echo '</select>';
@@ -1520,15 +1520,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 											_e('Please create an campaign first.','wp-crm-system');
 											echo '</a>';
 										}
-									} elseif ( $customField[ 'type' ] == "selectorganization" ) {
+									} elseif ( $defaultField[ 'type' ] == "selectorganization" ) {
 										//Select Organization
 										$orgs = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
 										if ($orgs) {
-											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
-											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
+											echo'<select name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+											if ( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
 											echo '<option value="" ' . $selected . '>' . __('Not Assigned','wp-crm-system') . '</option>';
 											foreach($orgs as $org) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $org->ID) { $selected = 'selected'; $linkorg = $org->ID;} else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == $org->ID) { $selected = 'selected'; $linkorg = $org->ID;} else { $selected = ''; }
 												echo '<option value="' . $org->ID . '"' . $selected . '>' . get_the_title($org->ID) . '</option>';
 											}
 											echo '</select>';
@@ -1540,15 +1540,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 											_e('Please create an organization first.','wp-crm-system');
 											echo '</a>';
 										}
-									} elseif ( $customField[ 'type' ] == "selectcontact" ) {
+									} elseif ( $defaultField[ 'type' ] == "selectcontact" ) {
 										//Select Contact
 										$contacts = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-contact'));
 										if ($contacts) {
-											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
-											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
+											echo'<select name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+											if ( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
 											echo '<option value="" ' . $selected . '>' . __('Not Assigned','wp-crm-system') . '</option>';
 											foreach($contacts as $contact) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $contact->ID) { $selected = 'selected'; $linkcontact = $contact->ID; } else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == $contact->ID) { $selected = 'selected'; $linkcontact = $contact->ID; } else { $selected = ''; }
 												echo '<option value="' . $contact->ID . '"' . $selected . '>' . get_the_title($contact->ID) . '</option>';
 											}
 											echo '</select>';
@@ -1560,15 +1560,15 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 											_e('Please create a contact first.','wp-crm-system');
 											echo '</a>';
 										}
-									} elseif ( $customField[ 'type' ] == "selectproject" ) {
+									} elseif ( $defaultField[ 'type' ] == "selectproject" ) {
 										//Select Project
 										$projects = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-project'));
 										if ($projects) {
-											echo'<select name="' . $this->prefix . $customField[ 'name' ] . '">';
-											if ( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
+											echo'<select name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+											if ( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == '') { $selected = 'selected'; } else { $selected = ''; }
 											echo '<option value="" ' . $selected . '>' . __('Not Assigned','wp-crm-system') . '</option>';
 											foreach($projects as $project) {
-												if (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) == $project->ID) { $selected = 'selected'; $linkproject = $project->ID;} else { $selected = ''; }
+												if (get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) == $project->ID) { $selected = 'selected'; $linkproject = $project->ID;} else { $selected = ''; }
 												echo '<option value="' . $project->ID . '"' . $selected . '>' . get_the_title($project->ID) . '</option>';
 											}
 											echo '</select>';
@@ -1582,27 +1582,27 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 										}
 									} else {										
 										// Select progress
-										if ( $customField[ 'type' ] == "selectprogress" ) {
+										if ( $defaultField[ 'type' ] == "selectprogress" ) {
 											$args = array('zero'=>0,5=>5,10=>10,15=>15,20=>20,25=>25,30=>30,35=>35,40=>40,45=>45,50=>50,55=>55,60=>60,65=>65,70=>70,75=>75,80=>80,85=>85,90=>90,95=>95,100=>100); 
 										}
 										//Select Won/Lost
-										if ( $customField[ 'type' ] == "selectwonlost" ) {
+										if ( $defaultField[ 'type' ] == "selectwonlost" ) {
 											$args = array('not-set'=>__('Select an option', 'wp-crm-system'),'won'=>_x('Won','Successful, a winner.','wp-crm-system'),'lost'=>_x('Lost','Unsuccessful, a loser.','wp-crm-system'),'suspended'=>_x('Suspended','Temporarily ended, but may resume again.','wp-crm-system'),'abandoned'=>_x('Abandoned','No longer actively working on.','wp-crm-system'));
 										}
-										if ( $customField[ 'type' ] == "selectpriority" ) { 
+										if ( $defaultField[ 'type' ] == "selectpriority" ) { 
 											$args = array(''=>__('Select an option', 'wp-crm-system'),'low'=>_x('Low','Not of great importance','wp-crm-system'),'medium'=>_x('Medium','Average priority','wp-crm-system'),'high'=>_x('High','Greatest importance','wp-crm-system'));
 										}
 										//Select status
-										if ( $customField[ 'type' ] == "selectstatus" ) {
+										if ( $defaultField[ 'type' ] == "selectstatus" ) {
 											$args = array('not-started'=>_x('Not Started','Work has not yet begun.','wp-crm-system'),'in-progress'=>_x('In Progress','Work has begun but is not complete.','wp-crm-system'),'complete'=>_x('Complete','All tasks are finished. No further work is needed.','wp-crm-system'),'on-hold'=>_x('On Hold','Work may be in various stages of completion, but has been stopped for one reason or another.','wp-crm-system'));
 										}
 										//Select prefix
-										if ( $customField[ 'type' ] == "selectnameprefix" ) {
+										if ( $defaultField[ 'type' ] == "selectnameprefix" ) {
 											$args = array(''=>__('Select an Option','wp-crm-system'),'mr'=>_x('Mr.','Title for male without a higher professional title.','wp-crm-system'),'mrs'=>_x('Mrs.','Married woman or woman who has been married with no higher professional title.','wp-crm-system'),'miss'=>_x('Miss','An unmarried woman. Also Ms.','wp-crm-system'),'dr'=>_x('Dr.','Doctor','wp-crm-system'),'master'=>_x('Master','Title used for young men.','wp-crm-system'),'rev'=>_x('Rev.','Title of a priest or religous clergy - Reverend ','wp-crm-system'),'fr'=>_x('Fr.','Title of a priest or religous clergy - Father','wp-crm-system'),'atty'=>_x('Atty.','Attorney, or lawyer','wp-crm-system'),'prof'=>_x('Prof.','Professor, as in a teacher at a university.','wp-crm-system'),'hon'=>_x('Hon.','Honorable - often used for elected officials or judges.','wp-crm-system'),'pres'=>_x('Pres.','Term given to the head of an organization or country. As in President of a University or President of the United States','wp-crm-system'),'gov'=>_x('Gov.','Governor, as in the Governor of the State of New York.','wp-crm-system'),'ofc'=>_x('Ofc.','Officer as in a police officer.','wp-crm-system'),'supt'=>_x('Supt.','Superintendent','wp-crm-system'),'rep'=>_x('Rep.','Representative - as in an elected official to the House of Representatives','wp-crm-system'),'sen'=>_x('Sen.','An elected official - Senator.','wp-crm-system'),'amb'=>_x('Amb.','Ambassador - a diplomatic official.','wp-crm-system'));
 										} ?>
-										<select name="<?php echo $this->prefix . $customField[ 'name' ]; ?>">
+										<select name="<?php echo $this->prefix . $defaultField[ 'name' ]; ?>">
 										<?php foreach ($args as $key => $value) { ?>
-											<option value="<?php echo $key; ?>" <?php if (esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) == $key) { echo 'selected'; } ?> ><?php echo $value; if ( $customField[ 'type' ] == "selectprogress" ) { echo '%'; }?></option>
+											<option value="<?php echo $key; ?>" <?php if (esc_html( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ) == $key) { echo 'selected'; } ?> ><?php echo $value; if ( $defaultField[ 'type' ] == "selectprogress" ) { echo '%'; }?></option>
 										<?php } ?>
 										</select>
 										<?php
@@ -1610,9 +1610,9 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									break;
 								}
 								case 'currency': {
-									if ( $customField[ 'type' ] == "currency" ) { 
-									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';?>
-										<input style="width:25%;" type="text" name="<?php echo $this->prefix . $customField[ 'name' ]; ?>" id="<?php echo $this->prefix . $customField[ 'name' ]; ?>" value="<?php echo esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ); ?>" placeholder="<?php _e($customField['placeholder'],'wp-crm-system'); ?>" />
+									if ( $defaultField[ 'type' ] == "currency" ) { 
+									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';?>
+										<input style="width:25%;" type="text" name="<?php echo $this->prefix . $defaultField[ 'name' ]; ?>" id="<?php echo $this->prefix . $defaultField[ 'name' ]; ?>" value="<?php echo esc_html( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ); ?>" placeholder="<?php _e($defaultField['placeholder'],'wp-crm-system'); ?>" />
 										<?php echo strtoupper(get_option('wpcrm_system_default_currency')); ?>
 										<br />
 										<em><?php _e('Only numbers allowed. No thousands separator (commas, spaces, or periods), currency symbols, etc. allowed.', 'wp-crm-system');?></em><?php
@@ -1622,37 +1622,37 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
                                 case 'textarea':
                                 case 'wysiwyg': {
                                     
-										echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
-									if ($customField[ 'type' ] == 'textarea') {
-										echo '<textarea name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" columns="30" rows="3">' . esc_textarea( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '</textarea>';
+										echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+									if ($defaultField[ 'type' ] == 'textarea') {
+										echo '<textarea name="' . $this->prefix . $defaultField[ 'name' ] . '" id="' . $this->prefix . $defaultField[ 'name' ] . '" columns="30" rows="3">' . esc_textarea( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ) . '</textarea>';
 									}
                                     // WYSIWYG
-                                    if ( $customField[ 'type' ] == "wysiwyg" ) { 
+                                    if ( $defaultField[ 'type' ] == "wysiwyg" ) { 
 										$post = get_post( get_the_ID(), OBJECT, 'edit' );
-										$content = get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true );
-										$editor_id = $this->prefix . $customField[ 'name' ];
+										$content = get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true );
+										$editor_id = $this->prefix . $defaultField[ 'name' ];
 										wp_editor($content, $editor_id);
                                     }
                                     break;
                                 }
 								case 'checkbox': {
                                     // Checkbox
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'" style="display:inline;"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';
-                                    echo '<input type="checkbox" name="' . $this->prefix . $customField['name'] . '" id="' . $this->prefix . $customField['name'] . '" value="yes"';
-                                    if ( get_post_meta( $post->ID, $this->prefix . $customField['name'], true ) == "yes" )
+                                    echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>&nbsp;&nbsp;';
+                                    echo '<input type="checkbox" name="' . $this->prefix . $defaultField['name'] . '" id="' . $this->prefix . $defaultField['name'] . '" value="yes"';
+                                    if ( get_post_meta( $post->ID, $this->prefix . $defaultField['name'], true ) == "yes" )
                                         echo ' checked="checked"';
                                     echo '" style="width: auto;" />';
                                     break;
                                 }
 								case 'datepicker': {
-									if (!null == (get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ]))) { 
-										$date = date(get_option('wpcrm_system_php_date_format'),esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) ); 
+									if (!null == (get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ]))) { 
+										$date = date(get_option('wpcrm_system_php_date_format'),esc_html( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ) ); 
 									} else { 
 										$date = '';
 									}
 									//Datepicker
-									echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />'; ?>
+									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $defaultField[ 'name' ] . '" id="' . $this->prefix . $defaultField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />'; ?>
 									<script type="text/javascript">
 									<?php 
 										$dateformat = get_option('wpcrm_system_date_format'); 
@@ -1669,8 +1669,8 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								}								
 								case 'dropbox': {
 									if(is_plugin_active('wp-crm-system-dropbox/wp-crm-system-dropbox.php')) {
-										$field = $this->prefix . $customField[ 'name' ];
-										$title = $customField[ 'title' ];
+										$field = $this->prefix . $defaultField[ 'name' ];
+										$title = $defaultField[ 'title' ];
 										wp_crm_dropbox_content($field,$title);
 									} else {
 										echo '';
@@ -1681,8 +1681,8 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									if(is_plugin_active('wp-crm-system-zendesk/wp-crm-system-zendesk.php')) {
 										if ((get_option('_wpcrm_zendesk_api_key') && get_option('_wpcrm_zendesk_user') && get_option('_wpcrm_zendesk_subdomain')) != '') {
 											// Set display fields
-											$field = $this->prefix . $customField[ 'name' ];
-											$title = $customField[ 'title' ];
+											$field = $this->prefix . $defaultField[ 'name' ];
+											$title = $defaultField[ 'title' ];
 											$contact = $post->ID;
 											wp_crm_zendesk_content($field,$title,$contact);
 										}
@@ -1735,10 +1735,10 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 											return false;
 										}
 									}
-									if ($customField['name'] == 'contact-gmap'){
+									if ($defaultField['name'] == 'contact-gmap'){
 										$addressString = get_post_meta( $post->ID, $this->prefix . 'contact-address1', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'contact-address2', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'contact-city', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'contact-state', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'contact-postal', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'contact-country', true );
 									}
-									if ($customField['name'] == 'organization-gmap'){
+									if ($defaultField['name'] == 'organization-gmap'){
 										$addressString = get_post_meta( $post->ID, $this->prefix . 'organization-address1', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'organization-address2', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'organization-city', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'organization-state', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'organization-postal', true ) . ' ' . get_post_meta( $post->ID, $this->prefix . 'organization-country', true );
 									}
 									// get latitude, longitude and formatted address
@@ -1788,31 +1788,31 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								}
 								case 'email': {
 									// Plain text field with email validation
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
+                                    echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $defaultField[ 'name' ] . '" id="' . $this->prefix . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
 								case 'url': {
 									// Plain text field with url validation
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_url( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
+                                    echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $defaultField[ 'name' ] . '" id="' . $this->prefix . $defaultField[ 'name' ] . '" value="' . esc_url( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
 								case 'number': {
 									// Plain text field with number validation
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
-                                    echo '<input type="number" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
+                                    echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="number" name="' . $this->prefix . $defaultField[ 'name' ] . '" id="' . $this->prefix . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
                                 default: {
                                     // Plain text field
-                                    echo '<label for="' . $this->prefix . $customField[ 'name' ] .'"><strong>' . __($customField[ 'title' ],'wp-crm-system') . '</strong></label>';
-                                    echo '<input type="text" name="' . $this->prefix . $customField[ 'name' ] . '" id="' . $this->prefix . $customField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $customField[ 'name' ], true ) ) . '" placeholder="' . __($customField['placeholder'],'wp-crm-system') . '" />';
+                                    echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                                    echo '<input type="text" name="' . $this->prefix . $defaultField[ 'name' ] . '" id="' . $this->prefix . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, $this->prefix . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
                                     break;
                                 }
                             }
                             ?>
-                            <?php if ( $customField[ 'description' ] ) echo '<p>' . $customField[ 'description' ] . '</p>'; ?>
+                            <?php if ( $defaultField[ 'description' ] ) echo '<p>' . $defaultField[ 'description' ] . '</p>'; ?>
                         </div>
                     <?php
                     }
@@ -1823,21 +1823,21 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
         /**
         * Save the new Custom Fields values
         */
-        function saveCustomFields( $post_id, $post ) {
+        function saveWPCRMSystemFields( $post_id, $post ) {
             if ( !isset( $_POST[ 'wpcrm-fields_wpnonce' ] ) || !wp_verify_nonce( $_POST[ 'wpcrm-fields_wpnonce' ], 'wpcrm-fields' ) )
                 return;
             if ( !current_user_can( 'edit_post', $post_id ) )
                 return;
             if ( ! in_array( $post->post_type, $this->postTypes ) )
                 return;
-            foreach ( $this->customFields as $customField ) {
-                if ( current_user_can( $customField['capability'], $post_id ) ) {
-                    if ( isset( $_POST[ $this->prefix . $customField['name'] ] ) && trim( $_POST[ $this->prefix . $customField['name'] ] ) ) {
+            foreach ( $this->defaultFields as $defaultField ) {
+                if ( current_user_can( $defaultField['capability'], $post_id ) ) {
+                    if ( isset( $_POST[ $this->prefix . $defaultField['name'] ] ) && trim( $_POST[ $this->prefix . $defaultField['name'] ] ) ) {
 						//Get field's value
-                        $value = $_POST[ $this->prefix . $customField['name'] ];
+                        $value = $_POST[ $this->prefix . $defaultField['name'] ];
 						$safevalue = '';
 						/** Validate and sanitize input **/
-							if ( $customField['type'] == 'selectcontact' ) {
+							if ( $defaultField['type'] == 'selectcontact' ) {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-contact'));
 								$posts = array();
 								foreach ($allowed as $post) {
@@ -1847,7 +1847,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
 							}
-							if ( $customField['type'] == 'selectproject' ) {
+							if ( $defaultField['type'] == 'selectproject' ) {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-project'));
 								$posts = array();
 								foreach ($allowed as $post) {
@@ -1857,7 +1857,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
 							}
-							if ( $customField['type'] == 'selectorganization' ) {
+							if ( $defaultField['type'] == 'selectorganization' ) {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
 								$posts = array();
 								foreach ($allowed as $post) {
@@ -1867,7 +1867,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
 							}
-							if ( $customField['type'] == 'selectcampaign' ) {
+							if ( $defaultField['type'] == 'selectcampaign' ) {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-campaign'));
 								$posts = array();
 								foreach ($allowed as $post) {
@@ -1877,27 +1877,27 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
 							}
-							if ( $customField['type'] == 'selectprogress' ) {
+							if ( $defaultField['type'] == 'selectprogress' ) {
 								$allowed = array('zero',5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100);
 								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = 'zero';}
 							}
-							if ( $customField['type'] == 'selectwonlost' ) {
+							if ( $defaultField['type'] == 'selectwonlost' ) {
 								$allowed = array('not-set','won','lost','suspended','abandoned');
 								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = 'not-set';}
 							}
-							if ( $customField['type'] == 'selectpriority' ) {
+							if ( $defaultField['type'] == 'selectpriority' ) {
 								$allowed = array('','low','medium','high');
 								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
 							}
-							if ( $customField['type'] == 'selectstatus' ) {
+							if ( $defaultField['type'] == 'selectstatus' ) {
 								$allowed = array('not-started','in-progress','complete','on-hold');
 								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = 'not-started';}
 							}
-							if ( $customField['type'] == 'selectnameprefix' ) {
+							if ( $defaultField['type'] == 'selectnameprefix' ) {
 								$allowed = array('','mr','mrs','miss','dr','master','rev','fr','atty','prof','hon','pres','gov','ofc','supt','rep','sen','amb');
 								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
 							}
-							if ( $customField['type'] == 'selectuser' ) {
+							if ( $defaultField['type'] == 'selectuser' ) {
 								$users = get_users();
 								$wp_crm_users = array();
 								foreach( $users as $user ){
@@ -1907,51 +1907,51 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 								}
 								if(in_array($value,$wp_crm_users)){$safevalue = $value;}else{$safevalue = '';}
 							}
-							if ( $customField['type'] == 'dropbox' ) {
+							if ( $defaultField['type'] == 'dropbox' ) {
 								// Save data
 								$safevalue = $value;
 							}
-							if ( $customField['type'] == 'gmap' ) {
+							if ( $defaultField['type'] == 'gmap' ) {
 								// Google maps needs no input to be saved.
 								$safevalue = '';
 							}
-							if ( $customField['type'] == 'datepicker' ) {
+							if ( $defaultField['type'] == 'datepicker' ) {
 								// Datepicker fields should be strtotime()
 								$safevalue = strtotime($value);
 							}
-							if ( $customField['type'] == 'currency' || $customField['type'] == 'number' ) {
+							if ( $defaultField['type'] == 'currency' || $defaultField['type'] == 'number' ) {
 								// Save currency only with numbers.
 								$safevalue = preg_replace("/[^0-9]/", "", $value);
 							}
-							if ( $customField['type'] == 'wysiwyg' ) {
+							if ( $defaultField['type'] == 'wysiwyg' ) {
 								// Auto-paragraphs for any WYSIWYG. Sanitize content for allowed HTML
 								$safevalue = wp_kses_post( wpautop( $value ) );
 							}
-							if ( $customField['type'] == 'textarea' ) {
+							if ( $defaultField['type'] == 'textarea' ) {
 								//Sanitize content for allowed textarea content.
 								$safevalue = esc_textarea( $value );
 							}
-							if ( $customField['type'] == 'url' ) {
+							if ( $defaultField['type'] == 'url' ) {
 								//Sanitize URLs
 								$safevalue = esc_url_raw( $value );
 							}
-							if ( $customField['type'] == 'email' ) {
+							if ( $defaultField['type'] == 'email' ) {
 								// Sanitize email field and make sure value is actually an email
 								$email = sanitize_email( $value );
 								if ( is_email($email)) {$safevalue = $email;} else {$safevalue = '';}
 							}
-							if ( $customField['type'] == 'checkbox' ) {
+							if ( $defaultField['type'] == 'checkbox' ) {
 								//Option will either be yes or blank
 								$allowed = array('','yes');
 								if(in_array($value,$allowed)){$safevalue = $value;}else{$safevalue = '';}
 							}
-							if ( $customField['type'] == 'default' ) {
+							if ( $defaultField['type'] == 'default' ) {
 								// Sanitize text field
 								$safevalue = sanitize_text_field( $value );
 							}
-						update_post_meta( $post_id, $this->prefix . $customField[ 'name' ], $safevalue );
+						update_post_meta( $post_id, $this->prefix . $defaultField[ 'name' ], $safevalue );
                     } else {
-                        delete_post_meta( $post_id, $this->prefix . $customField[ 'name' ] );
+                        delete_post_meta( $post_id, $this->prefix . $defaultField[ 'name' ] );
                     }
                 }
             }

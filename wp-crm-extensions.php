@@ -17,7 +17,30 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
         * @var  array  $extensionFields Defines the extension fields available
         */
 		var $extensionFields = array(
-		
+			array(
+				'title'			=>	'Custom Fields',
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'yes',
+				'notifications'	=>	'no',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/custom-fields/',
+				'img'			=>	'/custom-fields-300x145.png',
+				'desc'			=>	'Collect custom information for records in WP-CRM System.',
+				'class'			=>	'WPCRM_CUSTOM_FIELDS',
+			),
+			array(
+				'title'			=>	'Zendesk Connect',
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/zendesk-connect/',
+				'img'			=>	'/zendesk-connect-300x145.png',
+				'desc'			=>	'Get up to date Zendesk ticket information from your WP-CRM System contacts.',
+				'class'			=>	'WPCRM_ZENDESK_CONNECT',
+			),
 			array(
 				'title'			=>	'Dropbox Connect',
 				'overview'		=>	'yes',
@@ -31,6 +54,18 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'class'			=>	'WPCRM_DROPBOX_CONNECT',
 			),
 			array(
+				'title'			=>	'Slack Notifications',
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/slack-notifications/',
+				'img'			=>	'/slack-notifications-300x145.png',
+				'desc'			=>	'Send notifications from WP-CRM System to a Slack channel.',
+				'class'			=>	'WPCRM_SLACK_NOTIFICATIONS',
+			),
+			array(
 				'title'			=>	'Contact From User',
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',
@@ -39,7 +74,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/contact-from-user/',
 				'img'			=>	'/contact-from-user-300x145.png',
-				'desc'			=>	'Quickly create new contacts in WP-CRM from existing users on your WordPress site.',
+				'desc'			=>	'Quickly create new contacts in WP-CRM System from existing users on your WordPress site.',
 				'class'			=>	'WPCRM_CONTACT_FROM_USER',
 			),
 			array(
@@ -139,18 +174,6 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'class'			=>	'WPCRM_IMPORT_TASKS',
 			),
 			array(
-				'title'			=>	'Slack Notifications',
-				'overview'		=>	'yes',
-				'contact-forms'	=>	'no',
-				'import'		=>	'no',
-				'notifications'	=>	'yes',
-				'documents'		=>	'no',
-				'url'			=>	'https://www.wp-crm.com/downloads/slack-notifications/',
-				'img'			=>	'/slack-notifications-300x145.png',
-				'desc'			=>	'Send notifications from WP-CRM to a Slack channel.',
-				'class'			=>	'WPCRM_SLACK_NOTIFICATIONS',
-			),
-			array(
 				'title'			=>	'Email Notifications',
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',
@@ -159,7 +182,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'documents'		=>	'no',
 				'url'			=>	'https://www.wp-crm.com/downloads/email-notifications/',
 				'img'			=>	'/email-notifications-300x145.png',
-				'desc'			=>	'Send notifications from WP-CRM to the assigned user\'s email address.',
+				'desc'			=>	'Send notifications from WP-CRM System to the assigned user\'s email address.',
 				'class'			=>	'WPCRM_EMAIL_NOTIFICATIONS',
 			),
 		);		

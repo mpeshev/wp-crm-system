@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 } 
 $prefix = '_wpcrm_';
-$postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project' );
+$postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project', 'wpcrm-campaign' );
 if (!defined('WPCRM_USER_ACCESS')){
 	define( 'WPCRM_USER_ACCESS', 'manage_wp_crm' );
 }
