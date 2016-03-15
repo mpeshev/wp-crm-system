@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk, custom fields
 Requires at least: 3.3.0
 Tested up to: 4.4.2
-Stable tag: 1.1.4
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,10 @@ Why spend hundreds or thousands of dollars on a CRM that charges based on the nu
 **More than a CRM**
 
 WP-CRM System allows your team to manage projects, assign individual tasks, track marketing campaigns, and helps convert your opportunities into successes!
+
+**Try the Demo!**
+
+Not sure if WP-CRM System is right for you? [Try out the demo](http://demo.wp-crm.com) to see how it works.
 
 **Premium Extensions Available**
 
@@ -51,7 +55,7 @@ If you would like to submit a translation, please submit it [through our website
 
 == Frequently Asked Questions ==
 = What makes WP-CRM System different from other CRM\'s? =
-Many other CRM\'s are hosted on the CRM company\'s servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System gives you control over your data by keeping it all contained on your website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer\'s information.
+Many other CRM's are hosted on the CRM company\'s servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System gives you control over your data by keeping it all contained on your website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer's information.
 
 = What if I am coming from another CRM, can I import my data? = 
 Absolutely. There are inexpensive extensions that allow you to import as little or as much information as you need to into WP-CRM System.
@@ -60,6 +64,10 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.1.6 =
+* Minor update to fix included images.
+= 1.1.5 =
+* Fixed minor URL issue on extensions.
 = 1.1.4 =
 * Added support for custom fields extension.
 * Minor updates to UI in administration areas.
@@ -102,6 +110,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.1.4 =
-* Added support for custom fields extension.
-* Minor updates to UI in administration areas.
+= 1.1.6 =
+* Minor update to fix included images.
