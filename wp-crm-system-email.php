@@ -137,6 +137,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 							endwhile; ?>
 							
 						<?php } else {
+							$term_id = array();
 							if($filter_cats != 'yes') {
 								foreach ( $terms as $term ) {
 									$term_id[] = $term->slug;

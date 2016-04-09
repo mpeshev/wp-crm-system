@@ -48,6 +48,7 @@ function wpcrm_admin_page() {
 }
 //Include scripts and styles
 function wpcrm_scripts_styles() {
+	$active_tab = isset( $_GET[ 'page' ] ) ? $_GET[ 'page' ] : '';
 	wp_enqueue_script('datepicker');
 	wp_enqueue_script('jquery-ui-datepicker');
 	wp_register_style('jquery-ui-datepicker', plugins_url('/css/jquery-ui.min.css', __FILE__));
@@ -56,8 +57,10 @@ function wpcrm_scripts_styles() {
 	wp_enqueue_style('gmap-style');
 	wp_register_style('wpcrm-style', plugins_url('/css/wp-crm.css', __FILE__));
 	wp_enqueue_style('wpcrm-style');
-	wp_enqueue_script('jquery-ui-accordion');
-	wp_enqueue_script('wpcrm-system-accordion',	plugins_url( '/js/accordion.js',__FILE__) );
+	if ( $active_tab == 'wpcrm-email' ) {
+		wp_enqueue_script('jquery-ui-accordion');
+		wp_enqueue_script('wpcrm-system-accordion',	plugins_url( '/js/accordion.js',__FILE__) );
+	}
 	wp_enqueue_script( 'jquery' );
 }
 add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );

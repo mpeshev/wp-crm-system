@@ -18,6 +18,18 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
         */
 		var $extensionFields = array(
 			array(
+				'title'			=>	'Invoicing',
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'no',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/invoicing/',
+				'img'			=>	'/invoicing-300x145.png',
+				'desc'			=>	'Send invoices and accept payments directly through WP-CRM System.',
+				'class'			=>	'WPCRM_INVOICING',
+			),
+			array(
 				'title'			=>	'Custom Fields',
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',
@@ -39,7 +51,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'url'			=>	'https://www.wp-crm.com/downloads/zendesk-connect/',
 				'img'			=>	'/zendesk-connect-300x145.png',
 				'desc'			=>	'Get up to date Zendesk ticket information from your WP-CRM System contacts.',
-				'class'			=>	'WPCRM_ZENDESK_CONNECT',
+				'class'			=>	'WPCRM_ZENDESK',
 			),
 			array(
 				'title'			=>	'Dropbox Connect',
