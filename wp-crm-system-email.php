@@ -97,23 +97,36 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 							while ( $loop->have_posts() ) : $loop->the_post();
 								$meta_key1_value = get_the_ID();
 								$meta_key1_display = get_the_title();
-								$args = array(
-									'post_type'		=>	'wpcrm-contact',
-									'meta_query'	=> array(
-										array(
-											'key'		=>	$meta_key1,
-											'value'		=>	$meta_key1_value,
-											'compare'	=>	'=',
-										),
-									),
-									'tax_query'		=> array(
+								if($filter_cats == 'yes') {
+									$args = array(
+										'post_type'		=>	'wpcrm-contact',
+										'meta_query'	=> array(
 											array(
-												'taxonomy'	=> 'contact-type',
-												'field'		=> 'slug',
-												'terms'		=> $term_id,
+												'key'		=>	$meta_key1,
+												'value'		=>	$meta_key1_value,
+												'compare'	=>	'=',
 											),
 										),
-								);
+										'tax_query'		=> array(
+												array(
+													'taxonomy'	=> 'contact-type',
+													'field'		=> 'slug',
+													'terms'		=> $term_id,
+												),
+											),
+									);
+								} else {
+									$args = array(
+										'post_type'		=>	'wpcrm-contact',
+										'meta_query'	=> array(
+											array(
+												'key'		=>	$meta_key1,
+												'value'		=>	$meta_key1_value,
+												'compare'	=>	'=',
+											),
+										),
+									);
+								}
 								$posts = get_posts($args);
 								if ($posts) { ?>
 									<select class="wp-crm-email" name="wpcrm-email-recipients[]" id="wpcrm-email-recipients" multiple>
@@ -132,28 +145,34 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 									} ?>
 									</select>
 								<?php } else {
-									_e('Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
+									_e('1Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
 								}
 							endwhile; ?>
 							
 						<?php } else {
 							$term_id = array();
-							if($filter_cats != 'yes') {
+							if($filter_cats == 'yes') {
 								foreach ( $terms as $term ) {
 									$term_id[] = $term->slug;
 								}
-							}
-							$args = array(
-								'posts_per_page'	=> -1,
-								'post_type'			=> 'wpcrm-contact',
-								'tax_query'			=> array(
-									array(
-										'taxonomy'	=> 'contact-type',
-										'field'		=> 'slug',
-										'terms'		=> $term_id,
+								$args = array(
+									'posts_per_page'	=> -1,
+									'post_type'			=> 'wpcrm-contact',
+									'tax_query'			=> array(
+										array(
+											'taxonomy'	=> 'contact-type',
+											'field'		=> 'slug',
+											'terms'		=> $term_id,
+										),
 									),
-								),
-							);
+								);
+							} else {
+								$args = array(
+									'posts_per_page'	=> -1,
+									'post_type'			=> 'wpcrm-contact',
+								);
+							}
+							
 							$contacts = get_posts($args);
 							if($contacts) { ?>
 								<select class="wp-crm-email" name="wpcrm-email-recipients[]" id="wpcrm-email-recipients" multiple>
@@ -172,7 +191,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 									} ?>
 								</select>
 							<?php } else {
-								_e('Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
+								_e('2Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
 							}
 						} ?>
 						</td>
