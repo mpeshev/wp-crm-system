@@ -1760,7 +1760,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 									<div id="gmap_canvas"><?php _e('Loading map...','wp-crm-system'); ?></div>
 									<div id='map-label'><?php _e('Map shows approximate location.','wp-crm-system'); ?></div>
 									<!-- JavaScript to show google map included here to retrieve local variables -->
-									<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+									<script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
 									<script type="text/javascript">
 										function init_map() {
 											var myOptions = {
