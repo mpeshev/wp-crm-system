@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, invoice, Stripe, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk, custom fields
 Requires at least: 3.3.0
 Tested up to: 4.5
-Stable tag: 1.1.10
+Stable tag: 1.1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.1.11 =
+* Corrected a bug that prevented Google Maps from loading in Contacts and Organizations when viewed over a secure HTTPS connection.
 = 1.1.10 =
 * Corrected a bug that caused no contacts to be loaded on the Email page if at least one contact category was not present.
 = 1.1.9 =
@@ -125,5 +127,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.1.10 =
-* Corrected a bug that caused no contacts to be loaded on the Email page if at least one contact category was not present.
+= 1.1.11 =
+* Corrected a bug that prevented Google Maps from loading in Contacts and Organizations when viewed over a secure HTTPS connection.
