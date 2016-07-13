@@ -1,13 +1,13 @@
 <?php defined( 'ABSPATH' ) OR exit;
-function wp_crm_user_projects() {
+function wp_crm_user_projects( $report ) {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
+	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
 	$meta_key1 = $prefix . 'project-assigned';
 	$meta_key2 = $prefix . 'project-status';
 	$meta_key2_value = 'complete';
 	$project_report = '';
 	$projects = '';
-	
+
 	$user = wp_get_current_user();
 	if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
 		$meta_key1_value = $user->user_login;
@@ -15,7 +15,7 @@ function wp_crm_user_projects() {
 		global $post;
 		$args = array(
 			'post_type'		=>	'wpcrm-project',
-			'posts_per_page'	=> 5,
+			'posts_per_page'	=> -1,
 			'meta_query'	=> array(
 				'relation'		=>	'AND',
 				array(
@@ -30,40 +30,63 @@ function wp_crm_user_projects() {
 				),
 			),
 		);
-		$posts = get_posts($args);					
+		$posts = get_posts($args);
 		if ($posts) {
-			foreach($posts as $post) {
-				if (get_post_meta($post->ID,$prefix . 'project-closedate',true)) {
-					$close = ' - ' .  date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'project-closedate',true));
-				} else {
-					$close = '';
+			if ( 'value' == $report ) {
+				$value = array();
+				foreach($posts as $post) {
+					$value[] = get_post_meta($post->ID,$prefix . 'project-value',true);
 				}
-				$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a>' . $close . '<br />';
+				$active_currency = get_option( 'wpcrm_system_default_currency' );
+				foreach ( $wpcrm_currencies as $currency => $symbol ){
+					if ( $active_currency == $currency ){
+						$currency_symbol = $symbol;
+					}
+				}
+				echo ': ' . $currency_symbol . number_format(array_sum( $value ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')) . '<span class="dashicons dashicons-editor-help" title="' . __('Total value of all active, incomplete projects assigned to you.') . '"></span>';
+			}
+			if ( 'list' == $report ) {
+				foreach($posts as $post) {
+					if (get_post_meta($post->ID,$prefix . 'project-closedate',true)) {
+						$close = ' - ' .  date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'project-closedate',true));
+					} else {
+						$close = '';
+					}
+					$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a>' . $close . '<br />';
+				}
+				if ($projects == '') {
+					$project_report .= '';
+				} else {
+					$project_report .= '<li>' . $projects . '</li>';
+				}
+				if ($project_report == '') {
+					$project_report = '<li>' . __('You have no projects assigned', 'wp-crm-system') . '</li>';
+				}
+				echo '<ul>';
+				echo $project_report;
+				echo '</ul>';
 			}
 		} else {
-			$projects = '';
+			if ( 'value' == $report ) {
+				return;
+			}
+			if ( 'list' == $report ) {
+				_e('You have no projects assigned', 'wp-crm-system');
+			}
 		}
-		if ($projects == '') {
-			$project_report .= '';
-		} else {
-			$project_report .= '<li>' . $projects . '</li>';
-		}
+	} else {
+		return;
 	}
-		
-	if ($project_report == '') {
-		$project_report = '<li>' . __('You have no projects assigned', 'wp-crm-system') . '</li>';
-	}
-	echo $project_report;
 }
 function wp_crm_user_tasks() {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
+	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
 	$meta_key1 = $prefix . 'task-assignment';
 	$meta_key2 = $prefix . 'task-status';
 	$meta_key2_value = 'complete';
 	$task_report = '';
 	$tasks = '';
-	
+
 	$user = wp_get_current_user();
 	if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
 		$meta_key1_value = $user->user_login;
@@ -71,7 +94,7 @@ function wp_crm_user_tasks() {
 		global $post;
 		$args = array(
 			'post_type'		=>	'wpcrm-task',
-			'posts_per_page'	=> 5,
+			'posts_per_page'	=> -1,
 			'meta_query'	=> array(
 				'relation'		=>	'AND',
 				array(
@@ -86,7 +109,7 @@ function wp_crm_user_tasks() {
 				),
 			),
 		);
-		$posts = get_posts($args);					
+		$posts = get_posts($args);
 		if ($posts) {
 			foreach($posts as $post) {
 				if (get_post_meta($post->ID,$prefix . 'task-due-date',true)) {
@@ -105,21 +128,23 @@ function wp_crm_user_tasks() {
 			$task_report .= '<li>' . $tasks . '</li>';
 		}
 	}
-		
+
 	if ($task_report == '') {
 		$task_report = '<li>' . __('You have no tasks assigned', 'wp-crm-system') . '</li>';
 	}
+	echo '<ul>';
 	echo $task_report;
+	echo '</ul>';
 }
-function wp_crm_user_opportunities() {
+function wp_crm_user_opportunities( $report ) {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
+	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
 	$meta_key1 = $prefix . 'opportunity-assigned';
 	$meta_key2 = $prefix . 'opportunity-wonlost';
 	$meta_key2_value = 'not-set';
 	$opportunity_report = '';
 	$opportunities = '';
-	
+
 	$user = wp_get_current_user();
 	if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
 		$meta_key1_value = $user->user_login;
@@ -127,7 +152,7 @@ function wp_crm_user_opportunities() {
 		global $post;
 		$args = array(
 			'post_type'		=>	'wpcrm-opportunity',
-			'posts_per_page'	=> 5,
+			'posts_per_page'	=> -1,
 			'meta_query'	=> array(
 				'relation'		=>	'AND',
 				array(
@@ -142,34 +167,57 @@ function wp_crm_user_opportunities() {
 				),
 			),
 		);
-		$posts = get_posts($args);					
+		$posts = get_posts($args);
 		if ($posts) {
-			foreach($posts as $post) {
-				if (get_post_meta($post->ID,$prefix . 'opportunity-closedate',true)){
-					$close = ' - ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'opportunity-closedate',true));
-				} else {
-					$close = '';
+			if ( 'value' == $report ) {
+				$value = array();
+				foreach($posts as $post) {
+					$value[] = get_post_meta($post->ID,$prefix . 'opportunity-value',true);
 				}
-				$opportunities .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a>' . $close . '<br />';
+				$active_currency = get_option( 'wpcrm_system_default_currency' );
+				foreach ( $wpcrm_currencies as $currency => $symbol ){
+					if ( $active_currency == $currency ){
+						$currency_symbol = $symbol;
+					}
+				}
+				echo ': ' . $currency_symbol . number_format(array_sum( $value ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')) . '<span class="dashicons dashicons-editor-help" title="' . __('Total value of all active, opportunities assigned to you.') . '"></span>';
+			}
+			if ( 'list' == $report ) {
+				foreach($posts as $post) {
+					if (get_post_meta($post->ID,$prefix . 'opportunity-closedate',true)){
+						$close = ' - ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'opportunity-closedate',true));
+					} else {
+						$close = '';
+					}
+					$opportunities .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a>' . $close . '<br />';
+				}
+				if ($opportunities == '') {
+					$opportunity_report .= '';
+				} else {
+					$opportunity_report .= '<li>' . $opportunities . '</li>';
+				}
+				if ($opportunity_report == '') {
+					$opportunity_report = '<li>' . __('You have no opportunities assigned', 'wp-crm-system') . '</li>';
+				}
+				echo '<ul>';
+				echo $opportunity_report;
+				echo '</ul>';
 			}
 		} else {
-			$opportunities = '';
+			if ( 'value' == $report ) {
+				return;
+			}
+			if ( 'list' == $report ) {
+				_e('You have no opportunities assigned', 'wp-crm-system');
+			}
 		}
-		if ($opportunities == '') {
-			$opportunity_report .= '';
-		} else {
-			$opportunity_report .= '<li>' . $opportunities . '</li>';
-		}
+	} else {
+		return;
 	}
-		
-	if ($opportunity_report == '') {
-		$opportunity_report = '<li>' . __('You have no opportunities assigned', 'wp-crm-system') . '</li>';
-	}
-	echo $opportunity_report;
 }
 function wp_crm_user_campaigns() {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
+	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
 	$meta_key1 = $prefix . 'campaign-assigned';
 	$meta_key2 = $prefix . 'campaign-active';
 	$meta_key2_value = 'yes';
@@ -177,7 +225,7 @@ function wp_crm_user_campaigns() {
 	$meta_key3_value = 'complete';
 	$campaign_report = '';
 	$campaigns = '';
-	
+
 	$user = wp_get_current_user();
 	if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
 		$meta_key1_value = $user->user_login;
@@ -185,7 +233,7 @@ function wp_crm_user_campaigns() {
 		global $post;
 		$args = array(
 			'post_type'		=>	'wpcrm-campaign',
-			'posts_per_page'	=> 5,
+			'posts_per_page'	=> -1,
 			'meta_query'	=> array(
 				'relation'		=>	'AND',
 				array(
@@ -205,7 +253,7 @@ function wp_crm_user_campaigns() {
 				),
 			),
 		);
-		$posts = get_posts($args);					
+		$posts = get_posts($args);
 		if ($posts) {
 			foreach($posts as $post) {
 				if (get_post_meta($post->ID,$prefix . 'campaign-enddate',true)){
@@ -224,40 +272,11 @@ function wp_crm_user_campaigns() {
 			$campaign_report .= '<li>' . $campaigns . '</li>';
 		}
 	}
-		
+
 	if ($campaign_report == '') {
 		$campaign_report = '<li>' . __('You have no campaigns assigned', 'wp-crm-system') . '</li>';
 	}
+	echo '<ul>';
 	echo $campaign_report;
+	echo '</ul>';
 }
-?>
-<div class="wp-crm-widget">
-<h3><?php _e('Your Projects','wp-crm-system'); ?></h3>
-<ul>
-<li><strong><?php _e('Project Name - Due Date','wp-crm-system'); ?></strong></li>
-<?php wp_crm_user_projects(); ?>
-</ul>
-</div>
-<div class="wp-crm-widget">
-<h3><?php _e('Your Tasks','wp-crm-system'); ?></h3>
-<ul>
-<li><strong><?php _e('Task Name - Due Date','wp-crm-system'); ?></strong></li>
-<?php wp_crm_user_tasks(); ?>
-</div>
-<div class="wp-crm-widget">
-<h3><?php _e('Your Opportunities','wp-crm-system'); ?></h3>
-<ul>
-<li><strong><?php _e('Opportunity Name - Forecasted Close Date','wp-crm-system'); ?></strong></li>
-<?php wp_crm_user_opportunities(); ?>
-</ul>
-</div>
-<div class="wp-crm-widget">
-<h3><?php _e('Your Campaigns','wp-crm-system'); ?></h3>
-<ul>
-<li><strong><?php _e('Campaign Name - End Date','wp-crm-system'); ?></strong></li>
-<?php wp_crm_user_campaigns(); ?>
-</ul>
-</div>
-<div class="wp-crm-widget">
-<a href="<?php echo admin_url('admin.php?page=wpcrm-reports'); ?>"><?php _e('View Reports','wp-crm-system'); ?></a> | <a href="<?php echo admin_url('admin.php?page=wpcrm-extensions'); ?>"><?php _e('Browse Extensions','wp-crm-system'); ?></a>
-</div>

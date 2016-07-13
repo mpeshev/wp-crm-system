@@ -1,5 +1,4 @@
-<?php defined( 'ABSPATH' ) OR exit; ?>
-<?php 
+<?php defined( 'ABSPATH' ) OR exit;
 $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'overview';
 ?>
 <h2 class="nav-tab-wrapper">
@@ -9,10 +8,10 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'overview';
 	<a class="nav-tab <?php echo $active_tab == 'import' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=import"><?php _e('Importers', 'wp-crm-system') ?></a>
 	<a class="nav-tab <?php echo $active_tab == 'notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-extensions&tab=notifications"><?php _e('Notifications', 'wp-crm-system') ?></a>
 </h2>
-<?php 
+<?php
 if ( !class_exists('wpCRMSystemExtensions') ) {
     class wpCRMSystemExtensions {
-		
+
 		/**
         * @var  array  $extensionFields Defines the extension fields available
         */
@@ -197,13 +196,13 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'desc'			=>	'Send notifications from WP-CRM System to the assigned user\'s email address.',
 				'class'			=>	'WPCRM_EMAIL_NOTIFICATIONS',
 			),
-		);		
+		);
 		function wpcrm_extensions_overview() {  ?>
 			<div class="wrap">
 				<div>
 					<h2><?php _e('WP CRM System Extensions', 'wp-crm-system'); ?></h2>
 					<p><?php _e('These extensions add features to your WP-CRM System', 'wp-crm-system'); ?></p>
-					<?php foreach($this->extensionFields as $extensionField) { 
+					<?php foreach($this->extensionFields as $extensionField) {
 						if ($extensionField['overview'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
@@ -225,7 +224,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				<div>
 					<h2><?php _e('WP CRM System Extensions', 'wp-crm-system'); ?></h2>
 					<p><?php _e('These extensions add features to your WP-CRM System', 'wp-crm-system'); ?></p>
-					<?php foreach($this->extensionFields as $extensionField) { 
+					<?php foreach($this->extensionFields as $extensionField) {
 						if ($extensionField['contact-forms'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
@@ -247,7 +246,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				<div>
 					<h2><?php _e('WP CRM System Extensions', 'wp-crm-system'); ?></h2>
 					<p><?php _e('These extensions add features to your WP-CRM System', 'wp-crm-system'); ?></p>
-					<?php foreach($this->extensionFields as $extensionField) { 
+					<?php foreach($this->extensionFields as $extensionField) {
 						if ($extensionField['import'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
@@ -269,7 +268,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				<div>
 					<h2><?php _e('WP CRM System Extensions', 'wp-crm-system'); ?></h2>
 					<p><?php _e('These extensions add features to your WP-CRM System', 'wp-crm-system'); ?></p>
-					<?php foreach($this->extensionFields as $extensionField) { 
+					<?php foreach($this->extensionFields as $extensionField) {
 						if ($extensionField['notifications'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
@@ -291,7 +290,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				<div>
 					<h2><?php _e('WP CRM System Extensions', 'wp-crm-system'); ?></h2>
 					<p><?php _e('These extensions add features to your WP-CRM System', 'wp-crm-system'); ?></p>
-					<?php foreach($this->extensionFields as $extensionField) { 
+					<?php foreach($this->extensionFields as $extensionField) {
 						if ($extensionField['documents'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
