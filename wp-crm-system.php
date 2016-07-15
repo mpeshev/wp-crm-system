@@ -73,8 +73,10 @@ function wpcrm_system_custom_menu_order( $menu_ord ) {
 }
 //Include scripts and styles
 function wpcrm_scripts_styles() {
+	include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
 	$active_page = isset( $_GET[ 'page' ] ) ? $_GET[ 'page' ] : '';
 	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : '';
+	global $post_type;
 	wp_enqueue_script('datepicker');
 	wp_enqueue_script('jquery-ui-datepicker');
 
@@ -101,8 +103,10 @@ function wpcrm_scripts_styles() {
 		wp_register_script('wp_crm_system_tooltips_js', plugins_url('/js/tooltip.js', __FILE__), 1.0, false);
 		wp_enqueue_script('wp_crm_system_tooltips_js');
 	}
-	wp_register_script('wp_crm_system_edit_js', plugins_url('/js/edit.js', __FILE__), 1.0, false);
-	wp_enqueue_script('wp_crm_system_edit_js');
+	if ( in_array( $post_type, $postTypes ) || $post_type == 'wpcrm-invoice'){
+		wp_register_script('wp_crm_system_edit_js', plugins_url('/js/edit.js', __FILE__), 1.0, false);
+		wp_enqueue_script('wp_crm_system_edit_js');
+	}
 }
 add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );
 
@@ -3018,11 +3022,10 @@ function wpcrmDefaultFields() {
 						switch ( $defaultField[ 'type' ] ) {
 							case 'selectcontact': {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-contact'));
-								$posts = array();
+								$posts = array('do not show');
 								foreach ($allowed as $post) {
 									$posts[] = $post->ID;
 								}
-								$posts[] = 'do not show';
 								if ($posts) {
 									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
@@ -3041,11 +3044,10 @@ function wpcrmDefaultFields() {
 							}
 							case 'selectorganization': {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
-								$posts = array();
+								$posts = array('do not show');
 								foreach ($allowed as $post) {
 									$posts[] = $post->ID;
 								}
-								$posts[] = 'do not show';
 								if ($posts) {
 									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}
@@ -3053,11 +3055,10 @@ function wpcrmDefaultFields() {
 							}
 							case 'selectcampaign': {
 								$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-campaign'));
-								$posts = array();
+								$posts = array('do not show');
 								foreach ($allowed as $post) {
 									$posts[] = $post->ID;
 								}
-								$posts[] = 'do not show';
 								if ($posts) {
 									if (in_array($value,$posts)){$safevalue = $value;}else{$safevalue = '';}
 								}

@@ -75,7 +75,7 @@ include('includes/wp-crm-system-dashboard-reports.php');
 <div class="wp-crm-dashboard-boxes">
 	<h2><?php _e( 'Categories', 'wp-crm-system' ); ?></h2>
 	<?php
-	$categories = array('organization-type'=>'Organization Categories','contact-type'=>'Contact Categories','opportunity-type'=>'Opportunity Categories','project-type'=>'Project Categories','task-type'=>'Task Categories','campaign-type'=>'Campaign Categories');?>
+	$categories = array('organization-type'=>__('Organization Categories','wp-crm-system'),'contact-type'=>__('Contact Categories','wp-crm-system'),'opportunity-type'=>__('Opportunity Categories','wp-crm-system'),'project-type'=>__('Project Categories','wp-crm-system'),'task-type'=>__('Task Categories','wp-crm-system'),'campaign-type'=>__('Campaign Categories','wp-crm-system'));?>
 
 	<ul>
 

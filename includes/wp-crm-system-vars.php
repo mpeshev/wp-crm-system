@@ -85,6 +85,96 @@ if ( !defined( 'WPCRM_EMAIL' ) ){
 if ( !defined( 'WPCRM_END' ) ){
 	define( 'WPCRM_END', __( 'End Date', 'wp-crm-system' ) );
 }
+if ( !defined( 'WPCRM_EXTENSION_CONTACT_USER' ) ){
+	define( 'WPCRM_EXTENSION_CONTACT_USER', __( 'Contact From User', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_CUSTOM_FIELDS' ) ){
+	define( 'WPCRM_EXTENSION_CUSTOM_FIELDS', __( 'Custom Fields', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DROPBOX' ) ){
+	define( 'WPCRM_EXTENSION_DROPBOX', __( 'Dropbox Connect', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_EMAIL_NOTIFICATIONS' ) ){
+	define( 'WPCRM_EXTENSION_EMAIL_NOTIFICATIONS', __( 'Email Notifications', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_GRAVITY_FORMS' ) ){
+	define( 'WPCRM_EXTENSION_GRAVITY_FORMS', __( 'Gravity Forms Connect', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_IMPORT_CAMPAIGNS' ) ){
+	define( 'WPCRM_EXTENSION_IMPORT_CAMPAIGNS', __( 'Import Campaigns', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_IMPORT_CONTACTS' ) ){
+	define( 'WPCRM_EXTENSION_IMPORT_CONTACTS', __( 'Import Contacts', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_IMPORT_OPPORTUNITIES' ) ){
+	define( 'WPCRM_EXTENSION_IMPORT_OPPORTUNITIES', __( 'Import Opportunities', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_IMPORT_ORGANIZATIONS' ) ){
+	define( 'WPCRM_EXTENSION_IMPORT_ORGANIZATIONS', __( 'Import Organizations', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_IMPORT_PROJECTS' ) ){
+	define( 'WPCRM_EXTENSION_IMPORT_PROJECTS', __( 'Import Projects', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_IMPORT_TASKS' ) ){
+	define( 'WPCRM_EXTENSION_IMPORT_TASKS', __( 'Import Tasks', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_INVOICING' ) ){
+	define( 'WPCRM_EXTENSION_INVOICING', __( 'Invoicing', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_NINJA_FORMS' ) ){
+	define( 'WPCRM_EXTENSION_NINJA_FORMS', __( 'Ninja Forms Connect', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_SLACK' ) ){
+	define( 'WPCRM_EXTENSION_SLACK', __( 'Slack Notifications', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_ZENDESK' ) ){
+	define( 'WPCRM_EXTENSION_ZENDESK', __( 'Zendesk Connect', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_CONTACT_USER' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_CONTACT_USER', __( 'Quickly create new contacts in WP-CRM System from existing users on your WordPress site.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_CUSTOM_FIELDS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_CUSTOM_FIELDS', __( 'Collect custom information for records in WP-CRM System.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_DROPBOX' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_DROPBOX', __( 'Add documents from your Dropbox account to any record in WP-CRM System.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_EMAIL_NOTIFICATIONS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_EMAIL_NOTIFICATIONS', __( 'Send notifications from WP-CRM System to the assigned user\'s email address.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_GRAVITY_FORMS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_GRAVITY_FORMS', __( 'Automatically create new contacts from Gravity Form submissions.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_CAMPAIGNS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_CAMPAIGNS', __( 'Import your campaigns from another CRM with an easy to use CSV importer.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_CONTACTS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_CONTACTS', __( 'Import your contacts from another CRM with an easy to use CSV importer.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_OPPORTUNITIES' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_OPPORTUNITIES', __( 'Import your opportunities from another CRM with an easy to use CSV importer.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_ORGANIZATIONS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_ORGANIZATIONS', __( 'Import your organizations from another CRM with an easy to use CSV importer.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_PROJECTS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_PROJECTS', __( 'Import your projects from another CRM with an easy to use CSV importer.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_TASKS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_TASKS', __( 'Import your tasks from another CRM with an easy to use CSV importer.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_INVOICING' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_INVOICING', __( 'Send invoices and accept payments directly through WP-CRM System.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_NINJA_FORMS' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_NINJA_FORMS', __( 'Automatically create new contacts from Ninja Form submissions.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_SLACK' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_SLACK', __( 'Send notifications from WP-CRM System to a Slack channel.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_ZENDESK' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_ZENDESK', __( 'Get up to date Zendesk ticket information from your WP-CRM System contacts.', 'wp-crm-system' ) );
+}
 if ( !defined( 'WPCRM_FAX' ) ){
 	define( 'WPCRM_FAX', __( 'Fax', 'wp-crm-system' ) );
 }
