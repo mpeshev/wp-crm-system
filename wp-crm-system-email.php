@@ -145,7 +145,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 									} ?>
 									</select>
 								<?php } else {
-									_e('1Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
+									_e('Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
 								}
 							endwhile; ?>
 							
@@ -191,7 +191,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 									} ?>
 								</select>
 							<?php } else {
-								_e('2Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
+								_e('Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
 							}
 						} ?>
 						</td>

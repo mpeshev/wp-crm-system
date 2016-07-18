@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WP-CRM System\n"
-"POT-Creation-Date: 2016-07-15 15:49-0700\n"
-"PO-Revision-Date: 2016-07-15 15:47-0700\n"
+"POT-Creation-Date: 2016-07-18 10:26-0700\n"
+"PO-Revision-Date: 2016-07-18 10:24-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -988,15 +988,9 @@ msgstr ""
 msgid "Select Recipients"
 msgstr ""
 
-#: wp-crm-system-email.php:148
+#: wp-crm-system-email.php:148 wp-crm-system-email.php:194
 msgid ""
-"1Well this is awkward. It seems like you have no one to email. Why not add "
-"some contacts first then come back to try again."
-msgstr ""
-
-#: wp-crm-system-email.php:194
-msgid ""
-"2Well this is awkward. It seems like you have no one to email. Why not add "
+"Well this is awkward. It seems like you have no one to email. Why not add "
 "some contacts first then come back to try again."
 msgstr ""
 
