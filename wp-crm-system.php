@@ -2104,7 +2104,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 		$projectFromOpportunity = "//" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '&wpcrm-system-action=new-project-from-opportunity';
 		echo WPCRM_SAVE_CHANGES;
 		echo '<ul>';
-		echo '<li><a href="' . $projectFromOpportunity . '">' . __( 'Create Project From Opportunity', 'wp-crm-system' ) . '</a></li>';
+		echo '<li><a class="button" href="' . $projectFromOpportunity . '">' . __( 'Create Project From Opportunity', 'wp-crm-system' ) . '</a></li>';
 		echo '</ul>';
 
 		if ( isset( $_GET['wpcrm-system-action'] ) ) {
@@ -2505,8 +2505,10 @@ function wpcrmDefaultFields() {
 									}
 								}
 								foreach( $wp_crm_users as $user) {
-									if ($selection == $user->data->user_login) { $selected = 'selected'; $display_name = $user->data->display_name; } else { $selected = ''; }
+									if ($selection == $user->data->user_login) { $selected = 'selected'; $display_name = $user->data->display_name; } else { $selected = ''; $display_name = $user->data->display_name;}
 									echo '<option value="'.$user->data->user_login.'" ' . $selected . '>'.$display_name.'</option>';
+									if ($selection == $user->data->user_login) { $display_name = $user->data->display_name; }
+									if (!$selection || '' == $selection) { $display_name = __('Not Assigned', 'wp-crm-system'); }
 								}
 								echo'</select>';
 								echo '<span id="' . $this->prefix . $defaultField[ 'name' ] . '-text" style="display:inline">' . $display_name . '</span>';
@@ -2514,7 +2516,6 @@ function wpcrmDefaultFields() {
 							} else {
 								echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
 								echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
-								if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 								echo '<option value="" selected>Not Assigned</option>';
 								$users = get_users();
 								$wp_crm_users = array();
@@ -2525,7 +2526,7 @@ function wpcrmDefaultFields() {
 								}
 								foreach( $wp_crm_users as $user) {
 									$display_name = $user->data->display_name;
-									echo '<option value="'.$user->data->user_login.'" ' . $selected . '>'.$display_name.'</option>';
+									echo '<option value="'.$user->data->user_login.'">'.$display_name.'</option>';
 								}
 								echo'</select>';
 								echo '<span id="' . $this->prefix . $defaultField[ 'name' ] . '-edit"></span>';
