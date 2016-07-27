@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, invoice, Stripe, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk, custom fields
 Requires at least: 3.3.0
 Tested up to: 4.5.3
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 1.2.4 =
+* Removed Gravity Forms connect settings page in WP-CRM System Dashboard as new update does not require a settings page.
+* Minor bug fix to user display in records.
 = 1.2.3 =
 * Added button to the "Create Project from Opportunity" link.
 * Fixed bug in user display when no user was selected.
@@ -144,6 +147,6 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.2.3 =
-* Added button to the "Create Project from Opportunity" link.
-* Fixed bug in user display when no user was selected.
+= 1.2.4 =
+* Removed Gravity Forms connect settings page in WP-CRM System Dashboard as new update does not require a settings page.
+* Minor bug fix to user display in records.
