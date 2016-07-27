@@ -17,9 +17,6 @@ $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'dashboard';
 	if (defined('WPCRM_NINJA_FORMS_CONNECT')) { ?>
 		<a class="nav-tab <?php echo $active_tab == 'ninja-connect' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=ninja-connect"><?php _e('Ninja Forms', 'wp-crm-system') ?></a>
 	<?php }
-	if (defined('WPCRM_GRAVITY_FORMS_CONNECT')) { ?>
-		<a class="nav-tab <?php echo $active_tab == 'gravity-connect' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=gravity-connect"><?php _e('Gravity Forms', 'wp-crm-system') ?></a>
-	<?php }
 	if (defined('WPCRM_SLACK_NOTIFICATIONS')) { ?>
 		<a class="nav-tab <?php echo $active_tab == 'slack-notifications' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=slack-notifications"><?php _e('Slack', 'wp-crm-system') ?></a>
 	<?php }
@@ -52,9 +49,6 @@ if ($active_tab == 'import') {
 if ($active_tab == 'ninja-connect') {
 	wpcrm_nf_settings_content();
 }
-if ($active_tab == 'gravity-connect') {
-	wpcrm_gf_settings_content();
-}
 if ($active_tab == 'slack-notifications') {
 	wpcrm_sn_settings_content();
 }
@@ -72,7 +66,6 @@ if ($active_tab == 'licenses') {
 }
 function wpcrm_dashboard_settings_content() {
 	include(WP_PLUGIN_DIR .'/wp-crm-system/dashboard.php');
-
 }
 
 function wpcrm_custom_fields_content() {
@@ -96,14 +89,6 @@ function wpcrm_import_settings_content() {
 }
 function wpcrm_nf_settings_content() {
 	$plugin = 'wp-crm-system-ninja-form-connect';
-	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
-		include(WP_PLUGIN_DIR .'/'.$plugin.'/import.php');
-	} else {
-		return;
-	}
-}
-function wpcrm_gf_settings_content() {
-	$plugin = 'wp-crm-system-gravity-form-connect';
 	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
 		include(WP_PLUGIN_DIR .'/'.$plugin.'/import.php');
 	} else {

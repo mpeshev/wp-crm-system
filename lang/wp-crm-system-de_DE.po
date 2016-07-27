@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-CRM System\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-18 10:25-0700\n"
-"PO-Revision-Date: 2016-07-18 10:25-0700\n"
+"POT-Creation-Date: 2016-07-27 11:16-0700\n"
+"PO-Revision-Date: 2016-07-27 11:16-0700\n"
 "Last-Translator: Michael Pekić <michael@pekic.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -233,7 +233,7 @@ msgstr "Kampagnen nach Status"
 msgid "Edit this campaign"
 msgstr "Bearbeite diese Kampagne"
 
-#: includes/reports/campaign-reports.php:67
+#: includes/reports/campaign-reports.php:67 wp-crm-system.php:2511
 msgid "Not Assigned"
 msgstr "Nicht zugewiesen"
 
@@ -488,19 +488,19 @@ msgid "No projects to report."
 msgstr "Keine Projekte zu berichten."
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 wp-crm-system.php:2716
+#: includes/reports/task-reports.php:259 wp-crm-system.php:2717
 msgctxt "Work has not yet begun."
 msgid "Not Started"
 msgstr "Nicht gestartet [Arbeit hat noch nicht begonnen.]"
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 wp-crm-system.php:2716
+#: includes/reports/task-reports.php:259 wp-crm-system.php:2717
 msgctxt "Work has begun but is not complete."
 msgid "In Progress"
 msgstr "In Bearbeitung [Arbeit hat begonnen, ist aber nicht vollständig]"
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 wp-crm-system.php:2716
+#: includes/reports/task-reports.php:259 wp-crm-system.php:2717
 msgctxt ""
 "Work may be in various stages of completion, but has been stopped for one "
 "reason or another."
@@ -590,17 +590,17 @@ msgstr "Aufgaben nach Prozenten vollständig"
 msgid "No tasks to report."
 msgstr "Keine Aufgabe zu berichten."
 
-#: includes/reports/task-reports.php:219 wp-crm-system.php:2711
+#: includes/reports/task-reports.php:219 wp-crm-system.php:2712
 msgctxt "Greatest importance"
 msgid "High"
 msgstr "Hoch [größte Bedeutung]"
 
-#: includes/reports/task-reports.php:219 wp-crm-system.php:2711
+#: includes/reports/task-reports.php:219 wp-crm-system.php:2712
 msgctxt "Average priority"
 msgid "Medium"
 msgstr "Mittel [mittlere Prioriätt]"
 
-#: includes/reports/task-reports.php:219 wp-crm-system.php:2711
+#: includes/reports/task-reports.php:219 wp-crm-system.php:2712
 msgctxt "Not of great importance"
 msgid "Low"
 msgstr "Niedrig [keine große Bedeutung]"
@@ -727,7 +727,7 @@ msgstr ""
 msgid "Due Date"
 msgstr "Fälligkeitsdatum"
 
-#: includes/wp-crm-system-vars.php:83 wp-crm-system-settings.php:27
+#: includes/wp-crm-system-vars.php:83 wp-crm-system-settings.php:24
 #: wp-crm-system.php:37
 msgid "Email"
 msgstr "Email"
@@ -780,7 +780,7 @@ msgstr ""
 msgid "Import Tasks"
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:122 wp-crm-system-settings.php:30
+#: includes/wp-crm-system-vars.php:122 wp-crm-system-settings.php:27
 msgid "Invoicing"
 msgstr ""
 
@@ -816,7 +816,9 @@ msgid ""
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:146
-msgid "Automatically create new contacts from Gravity Form submissions."
+msgid ""
+"Automatically create new records in WP-CRM System from Gravity Form "
+"submissions."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:149
@@ -1117,22 +1119,18 @@ msgid "Ninja Forms"
 msgstr "Ninja Forms"
 
 #: wp-crm-system-settings.php:21
-msgid "Gravity Forms"
-msgstr "Gravity Forms"
-
-#: wp-crm-system-settings.php:24
 msgid "Slack"
 msgstr "Slack"
 
-#: wp-crm-system-settings.php:33
+#: wp-crm-system-settings.php:30
 msgid "Zendesk"
 msgstr "Zendesk"
 
-#: wp-crm-system-settings.php:36
+#: wp-crm-system-settings.php:33
 msgid "Licenses"
 msgstr "Lizenzen"
 
-#: wp-crm-system-settings.php:158
+#: wp-crm-system-settings.php:143
 msgid "Premium Plugin Licenses"
 msgstr "Premium Plugin Lizenzen"
 
@@ -1601,152 +1599,152 @@ msgstr ""
 msgid "No contacts assigned to this organization."
 msgstr ""
 
-#: wp-crm-system.php:2572
+#: wp-crm-system.php:2573
 msgid "Please create a campaign first."
 msgstr ""
 
-#: wp-crm-system.php:2614
+#: wp-crm-system.php:2615
 msgid "Please create an organization first."
 msgstr "Bitte zuerst ein Unternehmen erstellen."
 
-#: wp-crm-system.php:2656 wp-crm-system.php:2696
+#: wp-crm-system.php:2657 wp-crm-system.php:2697
 msgid "Please create a contact first."
 msgstr "Bitte zuerst einen Kontakt erstellen."
 
-#: wp-crm-system.php:2707 wp-crm-system.php:2711
+#: wp-crm-system.php:2708 wp-crm-system.php:2712
 msgid "Select an option"
 msgstr "Wählen Sie eine Option"
 
-#: wp-crm-system.php:2707
+#: wp-crm-system.php:2708
 msgctxt "Successful, a winner."
 msgid "Won"
 msgstr "Gewonnen"
 
-#: wp-crm-system.php:2707
+#: wp-crm-system.php:2708
 msgctxt "Unsuccessful, a loser."
 msgid "Lost"
 msgstr "Verloren"
 
-#: wp-crm-system.php:2707
+#: wp-crm-system.php:2708
 msgctxt "Temporarily ended, but may resume again."
 msgid "Suspended"
 msgstr "Schwebend"
 
-#: wp-crm-system.php:2707
+#: wp-crm-system.php:2708
 msgctxt "No longer actively working on."
 msgid "Abandoned"
 msgstr "Stillgelegt"
 
-#: wp-crm-system.php:2716
+#: wp-crm-system.php:2717
 msgctxt "All tasks are finished. No further work is needed."
 msgid "Complete"
 msgstr "Vollständig"
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgid "Select an Option"
 msgstr "Wählen Sie eine Option"
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Title for male without a higher professional title."
 msgid "Mr."
 msgstr "Herr"
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt ""
 "Married woman or woman who has been married with no higher professional "
 "title."
 msgid "Mrs."
 msgstr "Frau"
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "An unmarried woman. Also Ms."
 msgid "Miss"
 msgstr "Fräulein"
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "An unmarried woman. Also Miss."
 msgid "Ms."
 msgstr ""
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Doctor"
 msgid "Dr."
 msgstr "Dr."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Title used for young men."
 msgid "Master"
 msgstr "Master"
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Title used for the person in charge of a sports team"
 msgid "Coach"
 msgstr ""
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Title of a priest or religous clergy - Reverend "
 msgid "Rev."
 msgstr "Rev."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Title of a priest or religous clergy - Father"
 msgid "Fr."
 msgstr "Fr."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Attorney, or lawyer"
 msgid "Atty."
 msgstr "Atty."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Professor, as in a teacher at a university."
 msgid "Prof."
 msgstr "Prof."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Honorable - often used for elected officials or judges."
 msgid "Hon."
 msgstr "Hon."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt ""
 "Term given to the head of an organization or country. As in President of a "
 "University or President of the United States"
 msgid "Pres."
 msgstr "Pres."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Governor, as in the Governor of the State of New York."
 msgid "Gov."
 msgstr "Gov"
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Officer as in a police officer."
 msgid "Ofc."
 msgstr "OFC."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Superintendent"
 msgid "Supt."
 msgstr "Supt."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt ""
 "Representative - as in an elected official to the House of Representatives"
 msgid "Rep."
 msgstr "Rep."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "An elected official - Senator."
 msgid "Sen."
 msgstr "Sen."
 
-#: wp-crm-system.php:2721
+#: wp-crm-system.php:2722
 msgctxt "Ambassador - a diplomatic official."
 msgid "Amb."
 msgstr "Amb."
 
-#: wp-crm-system.php:2768 wp-crm-system.php:2771
+#: wp-crm-system.php:2769 wp-crm-system.php:2772
 msgid ""
 "Only numbers allowed. No thousands separator (commas, spaces, or periods), "
 "currency symbols, etc. allowed."
@@ -1766,6 +1764,9 @@ msgstr "Ein vollstäniges CRM für WordPress"
 #. Author of the plugin/theme
 msgid "Scott DeLuzio"
 msgstr "Scott DeLuzio"
+
+#~ msgid "Gravity Forms"
+#~ msgstr "Gravity Forms"
 
 #~ msgid ""
 #~ "Example: Selecting Author will allow access to Author, Editor, and "

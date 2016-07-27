@@ -143,7 +143,7 @@ if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_EMAIL_NOTIFICATIONS' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_EMAIL_NOTIFICATIONS', __( 'Send notifications from WP-CRM System to the assigned user\'s email address.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_GRAVITY_FORMS' ) ){
-	define( 'WPCRM_EXTENSION_DESCRIPTION_GRAVITY_FORMS', __( 'Automatically create new contacts from Gravity Form submissions.', 'wp-crm-system' ) );
+	define( 'WPCRM_EXTENSION_DESCRIPTION_GRAVITY_FORMS', __( 'Automatically create new records in WP-CRM System from Gravity Form submissions.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_CAMPAIGNS' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_CAMPAIGNS', __( 'Import your campaigns from another CRM with an easy to use CSV importer.', 'wp-crm-system' ) );

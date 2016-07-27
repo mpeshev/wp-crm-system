@@ -2505,8 +2505,8 @@ function wpcrmDefaultFields() {
 									}
 								}
 								foreach( $wp_crm_users as $user) {
-									if ($selection == $user->data->user_login) { $selected = 'selected'; $display_name = $user->data->display_name; } else { $selected = ''; $display_name = $user->data->display_name;}
-									echo '<option value="'.$user->data->user_login.'" ' . $selected . '>'.$display_name.'</option>';
+									if ($selection == $user->data->user_login) { $selected = 'selected'; } else { $selected = ''; }
+									echo '<option value="' . $user->data->user_login . '" ' . $selected . '>'. $user->data->display_name .'</option>';
 									if ($selection == $user->data->user_login) { $display_name = $user->data->display_name; }
 									if (!$selection || '' == $selection) { $display_name = __('Not Assigned', 'wp-crm-system'); }
 								}
