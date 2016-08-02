@@ -95,7 +95,7 @@ function wpcrm_scripts_styles() {
 	}
 	wp_enqueue_script( 'jquery' );
 
-	if ( $active_page == 'wpcrm-settings' && ( $active_tab == '' || $active_tab =='dashboard' ) ) {
+	if ( $active_page == 'wpcrm-settings' && ( $active_tab == '' || $active_tab =='dashboard' || $active_tab =='mailchimp' ) ) {
 		wp_enqueue_script( 'jquery-ui-tooltip' );
 		wp_register_style('wp_crm_system_tooltips_css', plugins_url('/css/tooltip.css', __FILE__));
 		wp_enqueue_style('wp_crm_system_tooltips_css');

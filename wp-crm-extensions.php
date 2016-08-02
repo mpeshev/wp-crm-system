@@ -17,6 +17,18 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
         */
 		var $extensionFields = array(
 			array(
+				'title'			=>	WPCRM_EXTENSION_MAILCHIMP_SYNC,
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/mailchimp-sync/',
+				'img'			=>	'/mailchimp-sync-300x145.png',
+				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_MAILCHIMP_SYNC,
+				'class'			=>	'WPCRM_MAILCHIMP_SYNC',
+			),
+			array(
 				'title'			=>	WPCRM_EXTENSION_INVOICING,
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',

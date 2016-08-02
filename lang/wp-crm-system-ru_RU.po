@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-CRM System\n"
-"POT-Creation-Date: 2016-07-27 11:16-0700\n"
-"PO-Revision-Date: 2016-07-27 11:16-0700\n"
+"POT-Creation-Date: 2016-08-02 16:27-0700\n"
+"PO-Revision-Date: 2016-08-02 16:27-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Create New..."
 msgstr ""
 
-#: dashboard.php:10 includes/wp-crm-system-vars.php:206
+#: dashboard.php:10 includes/wp-crm-system-vars.php:212
 #: wp-crm-system-reports.php:10 wp-crm-system.php:578 wp-crm-system.php:580
 msgid "Organization"
 msgstr "Организация"
@@ -67,7 +67,7 @@ msgstr "Дополнения"
 msgid "Active"
 msgstr "Активна"
 
-#: dashboard.php:55 includes/wp-crm-system-vars.php:188
+#: dashboard.php:55 includes/wp-crm-system-vars.php:194
 msgid "Inactive"
 msgstr "Не активен"
 
@@ -766,191 +766,199 @@ msgid "Invoicing"
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:125
-msgid "Ninja Forms Connect"
+msgid "MailChimp Sync"
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:128
-msgid "Slack Notifications"
+msgid "Ninja Forms Connect"
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:131
-msgid "Zendesk Connect"
+msgid "Slack Notifications"
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:134
+msgid "Zendesk Connect"
+msgstr ""
+
+#: includes/wp-crm-system-vars.php:137
 msgid ""
 "Quickly create new contacts in WP-CRM System from existing users on your "
 "WordPress site."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:137
+#: includes/wp-crm-system-vars.php:140
 msgid "Collect custom information for records in WP-CRM System."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:140
+#: includes/wp-crm-system-vars.php:143
 msgid "Add documents from your Dropbox account to any record in WP-CRM System."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:143
+#: includes/wp-crm-system-vars.php:146
 msgid ""
 "Send notifications from WP-CRM System to the assigned user's email address."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:146
+#: includes/wp-crm-system-vars.php:149
 msgid ""
 "Automatically create new records in WP-CRM System from Gravity Form "
 "submissions."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:149
+#: includes/wp-crm-system-vars.php:152
 msgid ""
 "Import your campaigns from another CRM with an easy to use CSV importer."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:152
-msgid "Import your contacts from another CRM with an easy to use CSV importer."
-msgstr ""
-
 #: includes/wp-crm-system-vars.php:155
-msgid ""
-"Import your opportunities from another CRM with an easy to use CSV importer."
+msgid "Import your contacts from another CRM with an easy to use CSV importer."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:158
 msgid ""
-"Import your organizations from another CRM with an easy to use CSV importer."
+"Import your opportunities from another CRM with an easy to use CSV importer."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:161
-msgid "Import your projects from another CRM with an easy to use CSV importer."
+msgid ""
+"Import your organizations from another CRM with an easy to use CSV importer."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:164
-msgid "Import your tasks from another CRM with an easy to use CSV importer."
+msgid "Import your projects from another CRM with an easy to use CSV importer."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:167
-msgid "Send invoices and accept payments directly through WP-CRM System."
+msgid "Import your tasks from another CRM with an easy to use CSV importer."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:170
-msgid "Automatically create new contacts from Ninja Form submissions."
+msgid "Send invoices and accept payments directly through WP-CRM System."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:173
-msgid "Send notifications from WP-CRM System to a Slack channel."
+msgid "Add WP-CRM System contacts to your MailChimp list."
 msgstr ""
 
 #: includes/wp-crm-system-vars.php:176
+msgid "Automatically create new contacts from Ninja Form submissions."
+msgstr ""
+
+#: includes/wp-crm-system-vars.php:179
+msgid "Send notifications from WP-CRM System to a Slack channel."
+msgstr ""
+
+#: includes/wp-crm-system-vars.php:182
 msgid ""
 "Get up to date Zendesk ticket information from your WP-CRM System contacts."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:179
+#: includes/wp-crm-system-vars.php:185
 msgid "Fax"
 msgstr "Факс"
 
-#: includes/wp-crm-system-vars.php:182
+#: includes/wp-crm-system-vars.php:188
 msgid "First Name"
 msgstr "Имя"
 
-#: includes/wp-crm-system-vars.php:185
+#: includes/wp-crm-system-vars.php:191
 msgid "Forecasted Close Date"
 msgstr "Прогнозируемая Дата окончания"
 
-#: includes/wp-crm-system-vars.php:191
+#: includes/wp-crm-system-vars.php:197
 msgid "Last Name"
 msgstr "Фамилия"
 
-#: includes/wp-crm-system-vars.php:194
+#: includes/wp-crm-system-vars.php:200
 msgid "Location"
 msgstr "Местоположение"
 
-#: includes/wp-crm-system-vars.php:197
+#: includes/wp-crm-system-vars.php:203
 msgid "Mobile Phone"
 msgstr "Мобильный телефон"
 
-#: includes/wp-crm-system-vars.php:200
+#: includes/wp-crm-system-vars.php:206
 msgid "Name Prefix"
 msgstr "Обращение"
 
-#: includes/wp-crm-system-vars.php:203
+#: includes/wp-crm-system-vars.php:209
 msgid "Number of Opportunities Created"
 msgstr "Количество возможностей, созданных"
 
-#: includes/wp-crm-system-vars.php:209
+#: includes/wp-crm-system-vars.php:215
 msgid "Phone"
 msgstr "Телефон"
 
-#: includes/wp-crm-system-vars.php:212
+#: includes/wp-crm-system-vars.php:218
 msgid "Postal Code"
 msgstr "Почтовый Индекс"
 
-#: includes/wp-crm-system-vars.php:215
+#: includes/wp-crm-system-vars.php:221
 msgid "Priority"
 msgstr "Приоритет"
 
-#: includes/wp-crm-system-vars.php:218
+#: includes/wp-crm-system-vars.php:224
 msgid "Probability of Winning"
 msgstr "Вероятность успеха"
 
-#: includes/wp-crm-system-vars.php:221
+#: includes/wp-crm-system-vars.php:227
 msgid "Progress"
 msgstr "Прогресс"
 
-#: includes/wp-crm-system-vars.php:224
+#: includes/wp-crm-system-vars.php:230
 msgid "Projected Reach"
 msgstr "Прогнозируется достичь"
 
-#: includes/wp-crm-system-vars.php:227
+#: includes/wp-crm-system-vars.php:233
 msgid "Total Responses"
 msgstr "Всего ответов"
 
-#: includes/wp-crm-system-vars.php:230
+#: includes/wp-crm-system-vars.php:236
 msgid "Return on Investment"
 msgstr "Возврат на инвестиции"
 
-#: includes/wp-crm-system-vars.php:233
+#: includes/wp-crm-system-vars.php:239
 msgid "Role"
 msgstr "Роль"
 
-#: includes/wp-crm-system-vars.php:236
+#: includes/wp-crm-system-vars.php:242
 msgid "Save changes before clicking below."
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:239
+#: includes/wp-crm-system-vars.php:245
 msgid "Start Date"
 msgstr "Дата начала"
 
-#: includes/wp-crm-system-vars.php:242
+#: includes/wp-crm-system-vars.php:248
 msgid "State/Province"
 msgstr "Область/район"
 
-#: includes/wp-crm-system-vars.php:245
+#: includes/wp-crm-system-vars.php:251
 msgid "Status"
 msgstr "Статус"
 
-#: includes/wp-crm-system-vars.php:248
+#: includes/wp-crm-system-vars.php:254
 msgid "Value"
 msgstr "Цена"
 
-#: includes/wp-crm-system-vars.php:251
+#: includes/wp-crm-system-vars.php:257
 msgid "Value of Opportunities Created"
 msgstr "Значение возможностей, созданных"
 
-#: includes/wp-crm-system-vars.php:254
+#: includes/wp-crm-system-vars.php:260
 msgid "Value of Opportunities Won"
 msgstr "Значение возможности выиграл"
 
-#: includes/wp-crm-system-vars.php:257
+#: includes/wp-crm-system-vars.php:263
 msgid "Website"
 msgstr "Сайт"
 
-#: includes/wp-crm-system-vars.php:260
+#: includes/wp-crm-system-vars.php:266
 msgid "Won/Lost"
 msgstr "Успех/Провал"
 
-#: includes/wp-crm-system-vars.php:263
+#: includes/wp-crm-system-vars.php:269
 msgid "Zendesk Tickets"
 msgstr ""
 
@@ -974,27 +982,27 @@ msgstr "Импортеры"
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: wp-crm-extensions.php:203 wp-crm-extensions.php:225
-#: wp-crm-extensions.php:247 wp-crm-extensions.php:269
-#: wp-crm-extensions.php:291
+#: wp-crm-extensions.php:215 wp-crm-extensions.php:237
+#: wp-crm-extensions.php:259 wp-crm-extensions.php:281
+#: wp-crm-extensions.php:303
 msgid "WP CRM System Extensions"
 msgstr "WP CRM System дополнения к плагину"
 
-#: wp-crm-extensions.php:204 wp-crm-extensions.php:226
-#: wp-crm-extensions.php:248 wp-crm-extensions.php:270
-#: wp-crm-extensions.php:292
+#: wp-crm-extensions.php:216 wp-crm-extensions.php:238
+#: wp-crm-extensions.php:260 wp-crm-extensions.php:282
+#: wp-crm-extensions.php:304
 msgid "These extensions add features to your WP-CRM System"
 msgstr "Эти дополнения добавят объекты в ваш WP-CRM System"
 
-#: wp-crm-extensions.php:212 wp-crm-extensions.php:234
-#: wp-crm-extensions.php:256 wp-crm-extensions.php:278
-#: wp-crm-extensions.php:300
+#: wp-crm-extensions.php:224 wp-crm-extensions.php:246
+#: wp-crm-extensions.php:268 wp-crm-extensions.php:290
+#: wp-crm-extensions.php:312
 msgid "Extension Installed"
 msgstr "Дополнение установлено"
 
-#: wp-crm-extensions.php:214 wp-crm-extensions.php:236
-#: wp-crm-extensions.php:258 wp-crm-extensions.php:280
-#: wp-crm-extensions.php:302
+#: wp-crm-extensions.php:226 wp-crm-extensions.php:248
+#: wp-crm-extensions.php:270 wp-crm-extensions.php:292
+#: wp-crm-extensions.php:314
 msgid "Get This Extension"
 msgstr "Приобрести это дополнение"
 
@@ -1106,10 +1114,14 @@ msgid "Zendesk"
 msgstr ""
 
 #: wp-crm-system-settings.php:33
+msgid "MailChimp"
+msgstr ""
+
+#: wp-crm-system-settings.php:36
 msgid "Licenses"
 msgstr "Лицензии"
 
-#: wp-crm-system-settings.php:143
+#: wp-crm-system-settings.php:157
 msgid "Premium Plugin Licenses"
 msgstr "Премиум Плагин Лицензий"
 

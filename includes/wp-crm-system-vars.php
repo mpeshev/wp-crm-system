@@ -121,6 +121,9 @@ if ( !defined( 'WPCRM_EXTENSION_IMPORT_TASKS' ) ){
 if ( !defined( 'WPCRM_EXTENSION_INVOICING' ) ){
 	define( 'WPCRM_EXTENSION_INVOICING', __( 'Invoicing', 'wp-crm-system' ) );
 }
+if ( !defined( 'WPCRM_EXTENSION_MAILCHIMP_SYNC' ) ){
+	define( 'WPCRM_EXTENSION_MAILCHIMP_SYNC', __( 'MailChimp Sync', 'wp-crm-system' ) );
+}
 if ( !defined( 'WPCRM_EXTENSION_NINJA_FORMS' ) ){
 	define( 'WPCRM_EXTENSION_NINJA_FORMS', __( 'Ninja Forms Connect', 'wp-crm-system' ) );
 }
@@ -165,6 +168,9 @@ if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_TASKS' ) ){
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_INVOICING' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_INVOICING', __( 'Send invoices and accept payments directly through WP-CRM System.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_MAILCHIMP_SYNC' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_MAILCHIMP_SYNC', __( 'Add WP-CRM System contacts to your MailChimp list.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_NINJA_FORMS' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_NINJA_FORMS', __( 'Automatically create new contacts from Ninja Form submissions.', 'wp-crm-system' ) );
