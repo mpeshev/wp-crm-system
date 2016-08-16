@@ -2685,9 +2685,9 @@ function wpcrmDefaultFields() {
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="do not show" ' . $selected . '>Not Applicable</option>';
-									foreach($campaigns as $campaign) {
-										if ($selection == $campaign->ID) { $selected = 'selected'; $linkcampaign = $campaign->ID; } else { $selected = ''; }
-										echo '<option value="' . $campaign->ID . '"' . $selected . '>' . get_the_title($campaign->ID) . '</option>';
+									foreach($projects as $project) {
+										if ($selection == $project->ID) { $selected = 'selected'; $linkproject = $project->ID; } else { $selected = ''; }
+										echo '<option value="' . $project->ID . '"' . $selected . '>' . get_the_title($project->ID) . '</option>';
 									}
 									echo '</select>';
 									echo '<span id="' . $this->prefix . $defaultField[ 'name' ] . '-edit"></span>';
