@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, invoice, Stripe, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk, custom fields
 Requires at least: 3.3.0
 Tested up to: 4.6
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 2.0.2 =
+* Bug fix: Categories tab was removed from dashboard page.
 = 2.0.0 =
 * Added hooks to for developers to extend and customize WP-CRM System.
 * Hooks include ability to add or remove user roles, add/remove/move WP-CRM System's dashboard boxes, add custom fields and meta boxes, add custom reports, create custom plugins.
@@ -160,6 +162,8 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
+= 2.0.2 =
+* Bug fix: Categories tab was removed from dashboard page.
 = 2.0.0 =
 * Added hooks to for developers to extend and customize WP-CRM System.
 * Hooks include ability to add or remove user roles, add/remove/move WP-CRM System's dashboard boxes, add custom fields and meta boxes, add custom reports, create custom plugins.
