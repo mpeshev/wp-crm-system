@@ -44,7 +44,7 @@ function wpcrm_system_custom_menu_order( $menu_ord ) {
 	global $submenu;
 	$arr = array();
 	if ( defined( 'WPCRM_INVOICING' ) ) {
-		$arr[] = $submenu['wpcrm'][7]; //Settings
+		$arr[] = $submenu['wpcrm'][7]; //Dashboard
 		$arr[] = $submenu['wpcrm'][3]; //Organizations
 		$arr[] = $submenu['wpcrm'][1]; //Contacts
 		$arr[] = $submenu['wpcrm'][4]; //Opportunities
@@ -57,7 +57,7 @@ function wpcrm_system_custom_menu_order( $menu_ord ) {
 		$arr[] = $submenu['wpcrm'][10]; //Extensions
 		$submenu['wpcrm'] = $arr;
 	} else {
-		$arr[] = $submenu['wpcrm'][6]; //Settings
+		$arr[] = $submenu['wpcrm'][6]; //Dashboard
 		$arr[] = $submenu['wpcrm'][2]; //Organizations
 		$arr[] = $submenu['wpcrm'][0]; //Contacts
 		$arr[] = $submenu['wpcrm'][3]; //Opportunities
@@ -75,7 +75,7 @@ function wpcrm_system_custom_menu_order( $menu_ord ) {
 function wpcrm_scripts_styles() {
 	include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
 	$active_page = isset( $_GET[ 'page' ] ) ? $_GET[ 'page' ] : '';
-	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : '';
+	global $wpcrm_active_tab;
 	global $post_type;
 	wp_enqueue_script('datepicker');
 	wp_enqueue_script('jquery-ui-datepicker');
@@ -95,7 +95,7 @@ function wpcrm_scripts_styles() {
 	}
 	wp_enqueue_script( 'jquery' );
 
-	if ( $active_page == 'wpcrm-settings' && ( $active_tab == '' || $active_tab =='dashboard' || $active_tab =='mailchimp' ) ) {
+	if ( $active_page == 'wpcrm-settings' && ( $wpcrm_active_tab == '' || $wpcrm_active_tab =='dashboard' || $wpcrm_active_tab =='mailchimp' ) ) {
 		wp_enqueue_script( 'jquery-ui-tooltip' );
 		wp_register_style('wp_crm_system_tooltips_css', plugins_url('/css/tooltip.css', __FILE__));
 		wp_enqueue_style('wp_crm_system_tooltips_css');
@@ -274,10 +274,6 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_date_format', $jqueryui_format);
 	add_option('wpcrm_system_php_date_format', $php_format);
 	add_option('wpcrm_system_email_organization_filter', '');
-	$plugin = 'wp-crm-system-dropbox';
-	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
-		add_option('wpcrm_dropbox_app_key', '');
-	}
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -295,10 +291,6 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
 	delete_option('wpcrm_system_email_organization_filter');
-	$plugin = 'wp-crm-system-dropbox';
-	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
-		delete_option('wpcrm_dropbox_app_key');
-	}
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -316,10 +308,6 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
 	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );
-	$plugin = 'wp-crm-system-dropbox';
-	if(is_plugin_active($plugin.'/'.$plugin.'.php')) {
-		register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_dropbox_app_key');
-	}
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -367,51 +355,63 @@ add_action( 'init', 'wpcrm_campaign_taxonomy');
 */
 add_action('admin_init','wpcrm_add_role_caps',999);
 function wpcrm_add_role_caps() {
-	$post_types = array('wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign');
-
-	foreach($post_types as $post_type) {
+	if( isset( $_POST[ 'wpcrm_system_settings_update' ] ) ) {
+		$post_types = array( 'wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign' );
+		
 		// Add the roles you'd like to administer contacts
-		$roles = array('subscriber','contributor','author','editor','administrator');
-
-		// Loop through each role and assign capabilities
-		foreach($roles as $the_role) {
-			$role = get_role($the_role);
-			// Need to check if the role has get_option('wpcrm_system_select_user_role'); capability then add_cap if it does.
-			if($role->has_cap(get_option('wpcrm_system_select_user_role'))) {
-				$role->add_cap( 'edit_'.$post_type);
-				$role->add_cap( 'read_'.$post_type);
-				$role->add_cap( 'delete_'.$post_type);
-				$role->add_cap( 'edit_'.$post_type.'s');
-				$role->add_cap( 'edit_others_'.$post_type.'s');
-				$role->add_cap( 'publish_'.$post_type.'s');
-				$role->add_cap( 'read_private_'.$post_type.'s');
-				$role->add_cap( 'read_'.$post_type);
-				$role->add_cap( 'delete_'.$post_type.'s');
-				$role->add_cap( 'delete_private_'.$post_type.'s');
-				$role->add_cap( 'delete_published_'.$post_type.'s');
-				$role->add_cap( 'delete_others_'.$post_type.'s');
-				$role->add_cap( 'edit_private_'.$post_type.'s');
-				$role->add_cap( 'edit_published_'.$post_type.'s');
-				$role->add_cap( 'create_'.$post_type.'s');
-				$role->add_cap( 'manage_wp_crm');
-			} else {
-				// Remove the capabilities if the role isn't supposed to edit the CPT. Allows for admin to change to a higher role if too much access was previously given.
-				$role->remove_cap( 'edit_'.$post_type);
-				$role->remove_cap( 'read_'.$post_type);
-				$role->remove_cap( 'delete_'.$post_type);
-				$role->remove_cap( 'edit_'.$post_type.'s');
-				$role->remove_cap( 'edit_others_'.$post_type.'s');
-				$role->remove_cap( 'publish_'.$post_type.'s');
-				$role->remove_cap( 'read_private_'.$post_type.'s');
-				$role->remove_cap( 'read_'.$post_type);
-				$role->remove_cap( 'delete_'.$post_type.'s');
-				$role->remove_cap( 'delete_private_'.$post_type.'s');
-				$role->remove_cap( 'delete_published_'.$post_type.'s');
-				$role->remove_cap( 'delete_others_'.$post_type.'s');
-				$role->remove_cap( 'edit_private_'.$post_type.'s');
-				$role->remove_cap( 'edit_published_'.$post_type.'s');
-				$role->remove_cap( 'create_'.$post_type.'s');
-				$role->remove_cap( 'manage_wp_crm');
+		add_filter( 'wpcrm_system_default_user_roles', 'wpcrm_system_check_user_roles', 10 );
+		function wpcrm_system_check_user_roles( $array ){
+			$array = array(
+				'subscriber',
+				'contributor',
+				'author',
+				'editor',
+				'administrator'
+			);
+			return $array;
+		}
+		$wpcrm_system_roles = apply_filters( 'wpcrm_system_default_user_roles', array() );
+		foreach($post_types as $post_type) {
+			// Loop through each role and assign capabilities
+			foreach($wpcrm_system_roles as $the_role) {
+				$role = get_role($the_role);
+				// Need to check if the role has get_option('wpcrm_system_select_user_role'); capability then add_cap if it does.
+				if( $role->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
+					$role->add_cap( 'edit_'.$post_type );
+					$role->add_cap( 'read_'.$post_type );
+					$role->add_cap( 'delete_'.$post_type );
+					$role->add_cap( 'edit_'.$post_type.'s' );
+					$role->add_cap( 'edit_others_'.$post_type.'s' );
+					$role->add_cap( 'publish_'.$post_type.'s' );
+					$role->add_cap( 'read_private_'.$post_type.'s' );
+					$role->add_cap( 'read_'.$post_type );
+					$role->add_cap( 'delete_'.$post_type.'s' );
+					$role->add_cap( 'delete_private_'.$post_type.'s' );
+					$role->add_cap( 'delete_published_'.$post_type.'s' );
+					$role->add_cap( 'delete_others_'.$post_type.'s' );
+					$role->add_cap( 'edit_private_'.$post_type.'s' );
+					$role->add_cap( 'edit_published_'.$post_type.'s' );
+					$role->add_cap( 'create_'.$post_type.'s' );
+					$role->add_cap( 'manage_wp_crm' );
+				} else {
+					// Remove the capabilities if the role isn't supposed to edit the CPT. Allows for admin to change to a higher role if too much access was previously given.
+					$role->remove_cap( 'edit_'.$post_type );
+					$role->remove_cap( 'read_'.$post_type );
+					$role->remove_cap( 'delete_'.$post_type );
+					$role->remove_cap( 'edit_'.$post_type.'s' );
+					$role->remove_cap( 'edit_others_'.$post_type.'s' );
+					$role->remove_cap( 'publish_'.$post_type.'s' );
+					$role->remove_cap( 'read_private_'.$post_type.'s' );
+					$role->remove_cap( 'read_'.$post_type );
+					$role->remove_cap( 'delete_'.$post_type.'s' );
+					$role->remove_cap( 'delete_private_'.$post_type.'s' );
+					$role->remove_cap( 'delete_published_'.$post_type.'s' );
+					$role->remove_cap( 'delete_others_'.$post_type.'s' );
+					$role->remove_cap( 'edit_private_'.$post_type.'s' );
+					$role->remove_cap( 'edit_published_'.$post_type.'s' );
+					$role->remove_cap( 'create_'.$post_type.'s' );
+					$role->remove_cap( 'manage_wp_crm' );
+				}
 			}
 		}
 	}
@@ -1986,6 +1986,8 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 				add_meta_box( 'wpcrm-contacts-opportunities', __( 'Opportunities', 'wp-crm-system' ), array( &$this, 'wpcrmListOpportunitiesinContact' ), 'wpcrm-contact', 'side', 'low' );
 				add_meta_box( 'wpcrm-contacts-projects', __( 'Projects', 'wp-crm-system' ), array( &$this, 'wpcrmListProjectsinContact' ), 'wpcrm-contact', 'side', 'low' );
 				add_meta_box( 'wpcrm-contacts-tasks', __( 'Tasks', 'wp-crm-system' ), array( &$this, 'wpcrmListTasksinContact' ), 'wpcrm-contact', 'side', 'low' );
+				// Add support for custom meta boxes
+				do_action( 'wpcrm_system_custom_meta_boxes' );
 			}
 		}
 
@@ -3276,3 +3278,21 @@ function wpcrmDefaultFields() {
 if ( class_exists('wpCRMSystemCustomFields') ) {
 	$wpCRMSystemCustomFields_var = new wpCRMSystemCustomFields();
 }
+
+// Add Default Settings
+if(!function_exists('wpcrm_system_default_setting_tab')){
+	function wpcrm_system_default_setting_tab() {
+		global $wpcrm_active_tab; ?>
+		<a class="nav-tab <?php echo $wpcrm_active_tab == 'dashboard' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=dashboard"><?php _e('Dashboard', 'wp-crm-system') ?></a>
+	<?php }
+}
+add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_default_setting_tab', 1 );
+
+function wpcrm_dashboard_settings_content() {
+	global $wpcrm_active_tab;
+	if ($wpcrm_active_tab == 'dashboard') {
+		include( plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-dashboard-reports.php' );
+		include( plugin_dir_path( __FILE__ ) . 'dashboard.php' );
+	}
+}
+add_action( 'wpcrm_system_settings_content', 'wpcrm_dashboard_settings_content' );
