@@ -3,7 +3,7 @@
 Plugin Name: WP-CRM System
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 2.0.0
+Version: 2.0.1
 Author: Scott DeLuzio
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system

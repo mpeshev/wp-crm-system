@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  user management, invoice, Stripe, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk, custom fields
 Requires at least: 3.3.0
 Tested up to: 4.6
-Stable tag: 1.2.7
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,7 @@ WP-CRM System is written in American English, and has been translated into the f
 
 * Russian - WP-CRM System Core Plugin by Maxim Glazunov
 * German - WP-CRM System Core Plugin and all premium extensions by Michael Pekic
+* Polish - WP-CRM System Core Plugin by Pawel Michalski
 
 If you would like to submit a translation, please submit it [through our website](https://www.wp-crm.com/contact).
 
@@ -70,6 +71,11 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
 
 == Changelog ==
+= 2.0.0 =
+* Added hooks to for developers to extend and customize WP-CRM System.
+* Hooks include ability to add or remove user roles, add/remove/move WP-CRM System's dashboard boxes, add custom fields and meta boxes, add custom reports, create custom plugins.
+* Updated WP-CRM System dashboard layout to address issues with viewing the dashboard on smaller screens.
+* **This version is required for all 2.0.0+ versions of add-on plugins.**
 = 1.2.7 =
 * Bug fix: New tasks were not able to get assigned to a project correctly. This update addresses that bug.
 = 1.2.6 =
@@ -154,5 +160,8 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 1.2.7 =
-* Bug fix: New tasks were not able to get assigned to a project correctly. This update addresses that bug.
+= 2.0.0 =
+* Added hooks to for developers to extend and customize WP-CRM System.
+* Hooks include ability to add or remove user roles, add/remove/move WP-CRM System's dashboard boxes, add custom fields and meta boxes, add custom reports, create custom plugins.
+* Updated WP-CRM System dashboard layout to address issues with viewing the dashboard on smaller screens.
+* This version is required for all 2.0.0+ versions of add-on plugins.
