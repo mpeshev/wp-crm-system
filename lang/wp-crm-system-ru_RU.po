@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-CRM System\n"
-"POT-Creation-Date: 2016-08-02 16:27-0700\n"
-"PO-Revision-Date: 2016-08-02 16:27-0700\n"
+"POT-Creation-Date: 2016-09-03 14:32-0700\n"
+"PO-Revision-Date: 2016-09-03 14:32-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -20,184 +20,6 @@ msgstr ""
 "_nx_noop:3c,1,2;__ngettext_noop:1,2;_\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-
-#: dashboard.php:8
-msgid "Create New..."
-msgstr ""
-
-#: dashboard.php:10 includes/wp-crm-system-vars.php:212
-#: wp-crm-system-reports.php:10 wp-crm-system.php:578 wp-crm-system.php:580
-msgid "Organization"
-msgstr "Организация"
-
-#: dashboard.php:11 wp-crm-system-reports.php:11 wp-crm-system.php:425
-#: wp-crm-system.php:427
-msgid "Contact"
-msgstr "Контакт"
-
-#: dashboard.php:12 includes/reports/opportunity-reports.php:143
-#: wp-crm-system-reports.php:9 wp-crm-system.php:655 wp-crm-system.php:657
-msgid "Opportunity"
-msgstr "Потенциальная"
-
-#: dashboard.php:13 wp-crm-system-reports.php:7 wp-crm-system.php:732
-#: wp-crm-system.php:734
-msgid "Project"
-msgstr "Проект"
-
-#: dashboard.php:14 wp-crm-system-reports.php:8 wp-crm-system.php:501
-#: wp-crm-system.php:503
-msgid "Task"
-msgstr "Задача"
-
-#: dashboard.php:15 includes/reports/campaign-reports.php:30
-#: wp-crm-system-reports.php:12 wp-crm-system.php:809 wp-crm-system.php:811
-msgid "Campaign"
-msgstr "Кампания"
-
-#: dashboard.php:17
-msgid "Invoice"
-msgstr ""
-
-#: dashboard.php:22 wp-crm-system.php:39
-msgid "Extensions"
-msgstr "Дополнения"
-
-#: dashboard.php:53 includes/wp-crm-system-vars.php:20
-msgid "Active"
-msgstr "Активна"
-
-#: dashboard.php:55 includes/wp-crm-system-vars.php:194
-msgid "Inactive"
-msgstr "Не активен"
-
-#: dashboard.php:63
-#, php-format
-msgid ""
-"Take a look at our <a href=\"%s\">extensions</a> to see how you can get more "
-"out of WP-CRM System."
-msgstr ""
-
-#: dashboard.php:68
-msgid "Manage license here"
-msgid_plural "Manage licenses here"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: dashboard.php:76
-msgid "Categories"
-msgstr "Категории"
-
-#: dashboard.php:78
-msgid "Organization Categories"
-msgstr ""
-
-#: dashboard.php:78
-msgid "Contact Categories"
-msgstr ""
-
-#: dashboard.php:78
-msgid "Opportunity Categories"
-msgstr ""
-
-#: dashboard.php:78
-msgid "Project Categories"
-msgstr ""
-
-#: dashboard.php:78
-msgid "Task Categories"
-msgstr ""
-
-#: dashboard.php:78
-msgid "Campaign Categories"
-msgstr ""
-
-#: dashboard.php:86
-msgid "Invoice Categories"
-msgstr ""
-
-#: dashboard.php:92
-msgid "WP-CRM System Settings"
-msgstr ""
-
-#: dashboard.php:100
-msgid "Access Level"
-msgstr ""
-
-#: dashboard.php:100
-msgid ""
-"Roles are listed in order of seniority (Administrator is highest, Subscriber "
-"is lowest). All roles higher than, and including the role you select will "
-"have access to WP-CRM System."
-msgstr ""
-"Роли перечислены в порядке старшинства (Администратор - наивысшая роль). "
-"Роль, которую вы выберите, а также все старшие роли будут иметь доступ к WP-"
-"CRM System."
-
-#: dashboard.php:105
-msgid "Administrator"
-msgstr "Администратор"
-
-#: dashboard.php:106
-msgid "Editor"
-msgstr "Редактор"
-
-#: dashboard.php:107
-msgid "Author"
-msgstr "Автор"
-
-#: dashboard.php:108
-msgid "Contributor"
-msgstr "Участник"
-
-#: dashboard.php:109
-msgid "Subscriber"
-msgstr "Подписчик"
-
-#: dashboard.php:121
-msgid "Default Currency"
-msgstr ""
-
-#: dashboard.php:121
-msgid "Currency to be used when assigning values to projects or opportunities."
-msgstr ""
-
-#: dashboard.php:134
-msgid "Currency Format"
-msgstr ""
-
-#: dashboard.php:134
-msgid "Set your preferred currency and numeral settings for reports."
-msgstr ""
-
-#: dashboard.php:139
-msgid "Thousands separator"
-msgstr "Разделитель групп разрядов"
-
-#: dashboard.php:142
-msgid "Decimal point"
-msgstr "Десятичный разделитель"
-
-#: dashboard.php:145
-msgid "Number of decimals"
-msgstr "Число десятичных знаков"
-
-#: dashboard.php:168
-msgid "Your Projects"
-msgstr "Ваши проекты"
-
-#: dashboard.php:172
-msgid "Your Tasks"
-msgstr "Ваши задачи"
-
-#: dashboard.php:176
-msgid "Your Opportunities"
-msgstr "Ваши Потенциальные проекты"
-
-#: dashboard.php:180
-msgid "Your Campaigns"
-msgstr "Ваши кампании"
 
 #: includes/reports/campaign-reports.php:14
 msgid "No campaigns to display."
@@ -227,11 +49,17 @@ msgstr "Приостановлена"
 msgid "Campaigns by Status"
 msgstr "Кампании по статусу"
 
+#: includes/reports/campaign-reports.php:30
+#: includes/wp-crm-system-dashboard-reports.php:301
+#: wp-crm-system-reports.php:44 wp-crm-system.php:829 wp-crm-system.php:831
+msgid "Campaign"
+msgstr "Кампания"
+
 #: includes/reports/campaign-reports.php:54
 msgid "Edit this campaign"
 msgstr "Редактировать кампанию"
 
-#: includes/reports/campaign-reports.php:67 wp-crm-system.php:2511
+#: includes/reports/campaign-reports.php:67 wp-crm-system.php:2533
 msgid "Not Assigned"
 msgstr "Не назначать"
 
@@ -368,6 +196,12 @@ msgstr "Заброшенные"
 msgid "Not Set"
 msgstr "Нет"
 
+#: includes/reports/opportunity-reports.php:143
+#: includes/wp-crm-system-dashboard-reports.php:298
+#: wp-crm-system-reports.php:29 wp-crm-system.php:675 wp-crm-system.php:677
+msgid "Opportunity"
+msgstr "Потенциальная"
+
 #: includes/reports/opportunity-reports.php:169
 msgid "Opportunities by Type"
 msgstr "Потенциальные кампании по типу."
@@ -415,6 +249,37 @@ msgstr ""
 #: includes/reports/organization-reports.php:170
 msgid "Back to Organization Reports"
 msgstr "Вернуться к отчету по Организациям"
+
+#: includes/reports/overview-reports.php:8
+msgid "Value of Opportunities"
+msgstr "Стоимость потенциальных проектов"
+
+#: includes/reports/overview-reports.php:26
+msgid "Value of Projects"
+msgstr "Стоимость проектов"
+
+#: includes/reports/overview-reports.php:44
+#: includes/reports/task-reports.php:138
+msgid "Overdue Tasks"
+msgstr "Просроченные Задачи"
+
+#: includes/reports/overview-reports.php:75
+#, php-format
+msgid "There is %d overdue task. "
+msgid_plural "There are %d overdue tasks. "
+msgstr[0] "У вас %d  активаня задача."
+msgstr[1] "У вас %d  активаня задачи."
+msgstr[2] "У вас %d  активаных задач."
+
+#: includes/reports/overview-reports.php:76
+#, php-format
+msgid "<a href=\"%s\">View the overdue task report.</a>"
+msgstr "<a href=\"%s\">Просмотр просроченных задач.</a>"
+
+#: includes/reports/overview-reports.php:79
+#: includes/reports/task-reports.php:140
+msgid "No tasks are overdue!"
+msgstr "Нет просроченых задач!"
 
 #: includes/reports/project-reports.php:14
 msgid "Projects by User"
@@ -476,19 +341,19 @@ msgid "No projects to report."
 msgstr "Нет проектов для отчета"
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 wp-crm-system.php:2717
+#: includes/reports/task-reports.php:259 wp-crm-system.php:2739
 msgctxt "Work has not yet begun."
 msgid "Not Started"
 msgstr "Не началась"
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 wp-crm-system.php:2717
+#: includes/reports/task-reports.php:259 wp-crm-system.php:2739
 msgctxt "Work has begun but is not complete."
 msgid "In Progress"
 msgstr "В процессе"
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 wp-crm-system.php:2717
+#: includes/reports/task-reports.php:259 wp-crm-system.php:2739
 msgctxt ""
 "Work may be in various stages of completion, but has been stopped for one "
 "reason or another."
@@ -545,14 +410,6 @@ msgstr ""
 msgid "Tasks by Contact"
 msgstr "Задачи по контакту"
 
-#: includes/reports/task-reports.php:138 wp-crm-system-reports.php:70
-msgid "Overdue Tasks"
-msgstr "Просроченные Задачи"
-
-#: includes/reports/task-reports.php:140 wp-crm-system-reports.php:105
-msgid "No tasks are overdue!"
-msgstr "Нет просроченых задач!"
-
 #: includes/reports/task-reports.php:143
 msgid "Upcoming Tasks"
 msgstr "Предстоящие  задачи"
@@ -571,17 +428,17 @@ msgstr "Задачи по проценту выполнения"
 msgid "No tasks to report."
 msgstr "Нет задач для отчета"
 
-#: includes/reports/task-reports.php:219 wp-crm-system.php:2712
+#: includes/reports/task-reports.php:219 wp-crm-system.php:2734
 msgctxt "Greatest importance"
 msgid "High"
 msgstr "Высокий"
 
-#: includes/reports/task-reports.php:219 wp-crm-system.php:2712
+#: includes/reports/task-reports.php:219 wp-crm-system.php:2734
 msgctxt "Average priority"
 msgid "Medium"
 msgstr "Средний"
 
-#: includes/reports/task-reports.php:219 wp-crm-system.php:2712
+#: includes/reports/task-reports.php:219 wp-crm-system.php:2734
 msgctxt "Not of great importance"
 msgid "Low"
 msgstr "Низкий"
@@ -627,6 +484,188 @@ msgstr "Нет порученных вам возможностей"
 #: includes/wp-crm-system-dashboard-reports.php:277
 msgid "You have no campaigns assigned"
 msgstr "Нет порученных вам кампаний"
+
+#: includes/wp-crm-system-dashboard-reports.php:294
+msgid "Create New..."
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:296
+#: includes/wp-crm-system-vars.php:212 wp-crm-system-reports.php:34
+#: wp-crm-system.php:598 wp-crm-system.php:600
+msgid "Organization"
+msgstr "Организация"
+
+#: includes/wp-crm-system-dashboard-reports.php:297
+#: wp-crm-system-reports.php:39 wp-crm-system.php:445 wp-crm-system.php:447
+msgid "Contact"
+msgstr "Контакт"
+
+#: includes/wp-crm-system-dashboard-reports.php:299
+#: wp-crm-system-reports.php:19 wp-crm-system.php:752 wp-crm-system.php:754
+msgid "Project"
+msgstr "Проект"
+
+#: includes/wp-crm-system-dashboard-reports.php:300
+#: wp-crm-system-reports.php:24 wp-crm-system.php:521 wp-crm-system.php:523
+msgid "Task"
+msgstr "Задача"
+
+#: includes/wp-crm-system-dashboard-reports.php:303
+msgid "Invoice"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:310 wp-crm-system.php:39
+msgid "Extensions"
+msgstr "Дополнения"
+
+#: includes/wp-crm-system-dashboard-reports.php:341
+#: includes/wp-crm-system-vars.php:20
+msgid "Active"
+msgstr "Активна"
+
+#: includes/wp-crm-system-dashboard-reports.php:343
+#: includes/wp-crm-system-vars.php:194
+msgid "Inactive"
+msgstr "Не активен"
+
+#: includes/wp-crm-system-dashboard-reports.php:351
+#, php-format
+msgid ""
+"Take a look at our <a href=\"%s\">extensions</a> to see how you can get more "
+"out of WP-CRM System."
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:356
+msgid "Manage license here"
+msgid_plural "Manage licenses here"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: includes/wp-crm-system-dashboard-reports.php:365 wp-crm-system.php:3323
+msgid "Categories"
+msgstr "Категории"
+
+#: includes/wp-crm-system-dashboard-reports.php:367 wp-crm-system.php:3330
+msgid "Organization Categories"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:367 wp-crm-system.php:3330
+msgid "Contact Categories"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:367 wp-crm-system.php:3330
+msgid "Opportunity Categories"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:367 wp-crm-system.php:3330
+msgid "Project Categories"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:367 wp-crm-system.php:3330
+msgid "Task Categories"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:367 wp-crm-system.php:3330
+msgid "Campaign Categories"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:375
+msgid "Invoice Categories"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:382
+msgid "WP-CRM System Settings"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:390
+msgid "Access Level"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:390
+msgid ""
+"Roles are listed in order of seniority (Administrator is highest, Subscriber "
+"is lowest). All roles higher than, and including the role you select will "
+"have access to WP-CRM System."
+msgstr ""
+"Роли перечислены в порядке старшинства (Администратор - наивысшая роль). "
+"Роль, которую вы выберите, а также все старшие роли будут иметь доступ к WP-"
+"CRM System."
+
+#: includes/wp-crm-system-dashboard-reports.php:406
+msgid "Administrator"
+msgstr "Администратор"
+
+#: includes/wp-crm-system-dashboard-reports.php:407
+msgid "Editor"
+msgstr "Редактор"
+
+#: includes/wp-crm-system-dashboard-reports.php:408
+msgid "Author"
+msgstr "Автор"
+
+#: includes/wp-crm-system-dashboard-reports.php:409
+msgid "Contributor"
+msgstr "Участник"
+
+#: includes/wp-crm-system-dashboard-reports.php:410
+msgid "Subscriber"
+msgstr "Подписчик"
+
+#: includes/wp-crm-system-dashboard-reports.php:427
+msgid "Default Currency"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:427
+msgid "Currency to be used when assigning values to projects or opportunities."
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:440
+msgid "Currency Format"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:440
+msgid "Set your preferred currency and numeral settings for reports."
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:445
+msgid "Thousands separator"
+msgstr "Разделитель групп разрядов"
+
+#: includes/wp-crm-system-dashboard-reports.php:448
+msgid "Decimal point"
+msgstr "Десятичный разделитель"
+
+#: includes/wp-crm-system-dashboard-reports.php:451
+msgid "Number of decimals"
+msgstr "Число десятичных знаков"
+
+#: includes/wp-crm-system-dashboard-reports.php:467
+msgid "Searchable Menus"
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:467
+msgid ""
+"If you have a large number of records to be displayed in a drop down menu, "
+"this option will allow you to filter results by typing instead of scrolling "
+"through the whole list."
+msgstr ""
+
+#: includes/wp-crm-system-dashboard-reports.php:483
+msgid "Your Projects"
+msgstr "Ваши проекты"
+
+#: includes/wp-crm-system-dashboard-reports.php:489
+msgid "Your Tasks"
+msgstr "Ваши задачи"
+
+#: includes/wp-crm-system-dashboard-reports.php:495
+msgid "Your Opportunities"
+msgstr "Ваши Потенциальные проекты"
+
+#: includes/wp-crm-system-dashboard-reports.php:501
+msgid "Your Campaigns"
+msgstr "Ваши кампании"
 
 #: includes/wp-crm-system-vars.php:23
 msgid "Actual Cost"
@@ -708,8 +747,7 @@ msgstr ""
 msgid "Due Date"
 msgstr "Срок"
 
-#: includes/wp-crm-system-vars.php:83 wp-crm-system-settings.php:24
-#: wp-crm-system.php:37
+#: includes/wp-crm-system-vars.php:83 wp-crm-system.php:37
 msgid "Email"
 msgstr ""
 
@@ -721,7 +759,7 @@ msgstr "Дата завершения"
 msgid "Contact From User"
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:92 wp-crm-system-settings.php:12
+#: includes/wp-crm-system-vars.php:92
 msgid "Custom Fields"
 msgstr ""
 
@@ -761,7 +799,7 @@ msgstr ""
 msgid "Import Tasks"
 msgstr ""
 
-#: includes/wp-crm-system-vars.php:122 wp-crm-system-settings.php:27
+#: includes/wp-crm-system-vars.php:122
 msgid "Invoicing"
 msgstr ""
 
@@ -962,7 +1000,7 @@ msgstr "Успех/Провал"
 msgid "Zendesk Tickets"
 msgstr ""
 
-#: wp-crm-extensions.php:5 wp-crm-system-reports.php:6
+#: wp-crm-extensions.php:5 wp-crm-system-reports.php:14
 msgid "Overview"
 msgstr "Обзор"
 
@@ -1064,64 +1102,23 @@ msgstr ""
 msgid "Email sent successfully."
 msgstr ""
 
-#: wp-crm-system-reports.php:41
+#: wp-crm-system-reports.php:61
 msgid "WP CRM System Reports"
 msgstr "Отчеты WP CRM System"
-
-#: wp-crm-system-reports.php:46
-msgid "Value of Opportunities"
-msgstr "Стоимость потенциальных проектов"
-
-#: wp-crm-system-reports.php:58
-msgid "Value of Projects"
-msgstr "Стоимость проектов"
-
-#: wp-crm-system-reports.php:101
-#, php-format
-msgid "There is %d overdue task. "
-msgid_plural "There are %d overdue tasks. "
-msgstr[0] "У вас %d  активаня задача."
-msgstr[1] "У вас %d  активаня задачи."
-msgstr[2] "У вас %d  активаных задач."
-
-#: wp-crm-system-reports.php:102
-#, php-format
-msgid "<a href=\"%s\">View the overdue task report.</a>"
-msgstr "<a href=\"%s\">Просмотр просроченных задач.</a>"
 
 #: wp-crm-system-settings.php:4
 msgid "Settings saved."
 msgstr "Настройки сохранены."
 
-#: wp-crm-system-settings.php:10 wp-crm-system.php:36
-msgid "Dashboard"
-msgstr ""
-
-#: wp-crm-system-settings.php:15
+#: wp-crm-system-settings.php:14
 msgid "Import"
 msgstr "Импортировать"
 
-#: wp-crm-system-settings.php:18
-msgid "Ninja Forms"
-msgstr ""
-
-#: wp-crm-system-settings.php:21
-msgid "Slack"
-msgstr "Вялый"
-
-#: wp-crm-system-settings.php:30
-msgid "Zendesk"
-msgstr ""
-
-#: wp-crm-system-settings.php:33
-msgid "MailChimp"
-msgstr ""
-
-#: wp-crm-system-settings.php:36
+#: wp-crm-system-settings.php:17
 msgid "Licenses"
 msgstr "Лицензии"
 
-#: wp-crm-system-settings.php:157
+#: wp-crm-system-settings.php:38
 msgid "Premium Plugin Licenses"
 msgstr "Премиум Плагин Лицензий"
 
@@ -1130,11 +1127,15 @@ msgstr "Премиум Плагин Лицензий"
 msgid "WP-CRM System"
 msgstr ""
 
+#: wp-crm-system.php:36 wp-crm-system.php:3306
+msgid "Dashboard"
+msgstr ""
+
 #: wp-crm-system.php:38
 msgid "Reports"
 msgstr "Отчеты"
 
-#: wp-crm-system.php:169
+#: wp-crm-system.php:186
 msgid ""
 "WP-CRM System: Your database needs a quick update. Please back up your "
 "database and run the update now. <form id=\"wpcrm-updater\" action=\"\" "
@@ -1142,603 +1143,607 @@ msgid ""
 "\"wpcrm-update\" class=\"button-primary\" value=\"Update\" /></form>"
 msgstr ""
 
-#: wp-crm-system.php:171
+#: wp-crm-system.php:188
 msgid "WP-CRM System Update Successful!"
 msgstr ""
 
-#: wp-crm-system.php:424 wp-crm-system.php:426 wp-crm-system.php:433
-#: wp-crm-system.php:441 wp-crm-system.php:1985
+#: wp-crm-system.php:444 wp-crm-system.php:446 wp-crm-system.php:453
+#: wp-crm-system.php:461 wp-crm-system.php:2005
 msgid "Contacts"
 msgstr "Контакты"
 
-#: wp-crm-system.php:428 wp-crm-system.php:504 wp-crm-system.php:581
-#: wp-crm-system.php:658 wp-crm-system.php:735 wp-crm-system.php:812
+#: wp-crm-system.php:448 wp-crm-system.php:524 wp-crm-system.php:601
+#: wp-crm-system.php:678 wp-crm-system.php:755 wp-crm-system.php:832
 msgid "Add New"
 msgstr "Добавить"
 
-#: wp-crm-system.php:429
+#: wp-crm-system.php:449
 msgid "Add New Contact"
 msgstr "Добавить контакт"
 
-#: wp-crm-system.php:430
+#: wp-crm-system.php:450
 msgid "New Contact"
 msgstr "Новый контакт"
 
-#: wp-crm-system.php:431
+#: wp-crm-system.php:451
 msgid "Edit Contact"
 msgstr "Редактировать контакт"
 
-#: wp-crm-system.php:432
+#: wp-crm-system.php:452
 msgid "View Contact"
 msgstr "Показать контакт"
 
-#: wp-crm-system.php:434
+#: wp-crm-system.php:454
 msgid "Search Contacts"
 msgstr "Поиск контактов"
 
-#: wp-crm-system.php:435
+#: wp-crm-system.php:455
 msgid "Parent Contact:"
 msgstr "Корневой контакт:"
 
-#: wp-crm-system.php:436
+#: wp-crm-system.php:456
 msgid "No contacts found."
 msgstr "Нет контактов."
 
-#: wp-crm-system.php:437
+#: wp-crm-system.php:457
 msgid "No contacts found in Trash."
 msgstr "Нет контактов в корзине."
 
-#: wp-crm-system.php:477 wp-crm-system.php:483
+#: wp-crm-system.php:497 wp-crm-system.php:503
 msgid "Contact Types"
 msgstr "Тип контакта"
 
-#: wp-crm-system.php:478
+#: wp-crm-system.php:498
 msgid "Contact Type"
 msgstr "Тип контакта"
 
-#: wp-crm-system.php:479
+#: wp-crm-system.php:499
 msgid "Edit Contact Type"
 msgstr "Редактировать тип контакта"
 
-#: wp-crm-system.php:480
+#: wp-crm-system.php:500
 msgid "Update Contact Type"
 msgstr "Обновить тип контакта"
 
-#: wp-crm-system.php:481
+#: wp-crm-system.php:501
 msgid "Add New Contact Type"
 msgstr "Добавить тип контакта"
 
-#: wp-crm-system.php:482
+#: wp-crm-system.php:502
 msgid "New Contact Type"
 msgstr "Новый тип контакта"
 
-#: wp-crm-system.php:500 wp-crm-system.php:502 wp-crm-system.php:509
-#: wp-crm-system.php:518 wp-crm-system.php:1981 wp-crm-system.php:1983
-#: wp-crm-system.php:1988
+#: wp-crm-system.php:520 wp-crm-system.php:522 wp-crm-system.php:529
+#: wp-crm-system.php:538 wp-crm-system.php:2001 wp-crm-system.php:2003
+#: wp-crm-system.php:2008
 msgid "Tasks"
 msgstr "Задачи"
 
-#: wp-crm-system.php:505
+#: wp-crm-system.php:525
 msgid "Add New Task"
 msgstr "Добавить Новую Задачу"
 
-#: wp-crm-system.php:506
+#: wp-crm-system.php:526
 msgid "New Task"
 msgstr "Новая задача"
 
-#: wp-crm-system.php:507
+#: wp-crm-system.php:527
 msgid "Edit Task"
 msgstr "Редактировать задачу"
 
-#: wp-crm-system.php:508
+#: wp-crm-system.php:528
 msgid "View Task"
 msgstr "Показать задачу"
 
-#: wp-crm-system.php:510
+#: wp-crm-system.php:530
 msgid "Search Tasks"
 msgstr "Поиск задачи"
 
-#: wp-crm-system.php:511
+#: wp-crm-system.php:531
 msgid "Parent Task:"
 msgstr "Корневая задача:"
 
-#: wp-crm-system.php:512
+#: wp-crm-system.php:532
 msgid "No tasks found."
 msgstr "Нет задач."
 
-#: wp-crm-system.php:513
+#: wp-crm-system.php:533
 msgid "No tasks found in Trash."
 msgstr "Нет задач в корзине."
 
-#: wp-crm-system.php:554 wp-crm-system.php:560
+#: wp-crm-system.php:574 wp-crm-system.php:580
 msgid "Task Types"
 msgstr "Тип задачи"
 
-#: wp-crm-system.php:555
+#: wp-crm-system.php:575
 msgid "Task Type"
 msgstr "Тип задачи"
 
-#: wp-crm-system.php:556
+#: wp-crm-system.php:576
 msgid "Edit Task Type"
 msgstr "Редактировать тип задачи"
 
-#: wp-crm-system.php:557
+#: wp-crm-system.php:577
 msgid "Update Task Type"
 msgstr "Обновить тип задачи"
 
-#: wp-crm-system.php:558
+#: wp-crm-system.php:578
 msgid "Add New Task Type"
 msgstr "Добавить тип задачи"
 
-#: wp-crm-system.php:559
+#: wp-crm-system.php:579
 msgid "New Task Type"
 msgstr "Новый тип задачи"
 
-#: wp-crm-system.php:577 wp-crm-system.php:579 wp-crm-system.php:586
-#: wp-crm-system.php:595
+#: wp-crm-system.php:597 wp-crm-system.php:599 wp-crm-system.php:606
+#: wp-crm-system.php:615
 msgid "Organizations"
 msgstr "Организации"
 
-#: wp-crm-system.php:582
+#: wp-crm-system.php:602
 msgid "Add New Organization"
 msgstr "Добавить организацию"
 
-#: wp-crm-system.php:583
+#: wp-crm-system.php:603
 msgid "New Organization"
 msgstr "Новая организация"
 
-#: wp-crm-system.php:584
+#: wp-crm-system.php:604
 msgid "Edit Organization"
 msgstr "Редактировать организацию"
 
-#: wp-crm-system.php:585
+#: wp-crm-system.php:605
 msgid "View Organization"
 msgstr "Показать организацию"
 
-#: wp-crm-system.php:587
+#: wp-crm-system.php:607
 msgid "Search Organizations"
 msgstr "Найти организации"
 
-#: wp-crm-system.php:588
+#: wp-crm-system.php:608
 msgid "Parent Organization:"
 msgstr "Корневая Организация:"
 
-#: wp-crm-system.php:589
+#: wp-crm-system.php:609
 msgid "No organizations found."
 msgstr "Нет организаций."
 
-#: wp-crm-system.php:590
+#: wp-crm-system.php:610
 msgid "No organizations found in Trash."
 msgstr "Нет организаций в корзине."
 
-#: wp-crm-system.php:631 wp-crm-system.php:637
+#: wp-crm-system.php:651 wp-crm-system.php:657
 msgid "Organization Types"
 msgstr "Тип организации"
 
-#: wp-crm-system.php:632
+#: wp-crm-system.php:652
 msgid "Organization Type"
 msgstr "Тип организации"
 
-#: wp-crm-system.php:633
+#: wp-crm-system.php:653
 msgid "Edit Organization Type"
 msgstr "Редактировать тип Организации"
 
-#: wp-crm-system.php:634
+#: wp-crm-system.php:654
 msgid "Update Organization Type"
 msgstr "Обновить тип органзиации"
 
-#: wp-crm-system.php:635
+#: wp-crm-system.php:655
 msgid "Add New Organization Type"
 msgstr "Добавить тип организации"
 
-#: wp-crm-system.php:636
+#: wp-crm-system.php:656
 msgid "New Organization Type"
 msgstr "Новый тип органзации"
 
-#: wp-crm-system.php:654 wp-crm-system.php:656 wp-crm-system.php:663
-#: wp-crm-system.php:672 wp-crm-system.php:1984 wp-crm-system.php:1986
+#: wp-crm-system.php:674 wp-crm-system.php:676 wp-crm-system.php:683
+#: wp-crm-system.php:692 wp-crm-system.php:2004 wp-crm-system.php:2006
 msgid "Opportunities"
 msgstr "Потенциальные"
 
-#: wp-crm-system.php:659
+#: wp-crm-system.php:679
 msgid "Add New Opportunity"
 msgstr "Добавить потенциальную задачу"
 
-#: wp-crm-system.php:660
+#: wp-crm-system.php:680
 msgid "New Opportunity"
 msgstr "Новая потенциальная задача"
 
-#: wp-crm-system.php:661
+#: wp-crm-system.php:681
 msgid "Edit Opportunity"
 msgstr "Редактировать потенциальную задачу"
 
-#: wp-crm-system.php:662
+#: wp-crm-system.php:682
 msgid "View Opportunity"
 msgstr "Показать"
 
-#: wp-crm-system.php:664
+#: wp-crm-system.php:684
 msgid "Search Opportunities"
 msgstr "Найти потенциальные задачи"
 
-#: wp-crm-system.php:665
+#: wp-crm-system.php:685
 msgid "Parent Opportunity:"
 msgstr "Вложить в потенциальную задачу:"
 
-#: wp-crm-system.php:666
+#: wp-crm-system.php:686
 msgid "No opportunities found."
 msgstr "Нет потенциальных задач."
 
-#: wp-crm-system.php:667
+#: wp-crm-system.php:687
 msgid "No opportunities found in Trash."
 msgstr "Нет потенциальных задач в корзине"
 
-#: wp-crm-system.php:708 wp-crm-system.php:714
+#: wp-crm-system.php:728 wp-crm-system.php:734
 msgid "Opportunity Types"
 msgstr "Тип потенциальной задачи"
 
-#: wp-crm-system.php:709
+#: wp-crm-system.php:729
 msgid "Opportunity Type"
 msgstr "Тип потенциальной задачи"
 
-#: wp-crm-system.php:710
+#: wp-crm-system.php:730
 msgid "Edit Opportunity Type"
 msgstr "Редактировать тип"
 
-#: wp-crm-system.php:711
+#: wp-crm-system.php:731
 msgid "Update Opportunity Type"
 msgstr "Обновить тип"
 
-#: wp-crm-system.php:712
+#: wp-crm-system.php:732
 msgid "Add New Opportunity Type"
 msgstr "Создать тип"
 
-#: wp-crm-system.php:713
+#: wp-crm-system.php:733
 msgid "New Opportunity Type"
 msgstr "Новый тип потенциальной задачи"
 
-#: wp-crm-system.php:731 wp-crm-system.php:733 wp-crm-system.php:740
-#: wp-crm-system.php:749 wp-crm-system.php:1982 wp-crm-system.php:1987
+#: wp-crm-system.php:751 wp-crm-system.php:753 wp-crm-system.php:760
+#: wp-crm-system.php:769 wp-crm-system.php:2002 wp-crm-system.php:2007
 msgid "Projects"
 msgstr "Проекты"
 
-#: wp-crm-system.php:736
+#: wp-crm-system.php:756
 msgid "Add New Project"
 msgstr "Добавить проект"
 
-#: wp-crm-system.php:737
+#: wp-crm-system.php:757
 msgid "New Project"
 msgstr "Новый проект"
 
-#: wp-crm-system.php:738
+#: wp-crm-system.php:758
 msgid "Edit Project"
 msgstr "Редактировать проект"
 
-#: wp-crm-system.php:739
+#: wp-crm-system.php:759
 msgid "View Project"
 msgstr "Показать проект"
 
-#: wp-crm-system.php:741
+#: wp-crm-system.php:761
 msgid "Search Projects"
 msgstr "Найти проекты"
 
-#: wp-crm-system.php:742
+#: wp-crm-system.php:762
 msgid "Parent Project:"
 msgstr "Корневой проект:"
 
-#: wp-crm-system.php:743
+#: wp-crm-system.php:763
 msgid "No projects found."
 msgstr "Нет проектов."
 
-#: wp-crm-system.php:744
+#: wp-crm-system.php:764
 msgid "No projects found in Trash."
 msgstr "Нет проектов в корзине."
 
-#: wp-crm-system.php:785 wp-crm-system.php:791
+#: wp-crm-system.php:805 wp-crm-system.php:811
 msgid "Project Types"
 msgstr "Тип проекта"
 
-#: wp-crm-system.php:786
+#: wp-crm-system.php:806
 msgid "Project Type"
 msgstr "Тип Проекта"
 
-#: wp-crm-system.php:787
+#: wp-crm-system.php:807
 msgid "Edit Project Type"
 msgstr "Редактировать тип проекта"
 
-#: wp-crm-system.php:788
+#: wp-crm-system.php:808
 msgid "Update Project Type"
 msgstr "Обновить тип проекта"
 
-#: wp-crm-system.php:789
+#: wp-crm-system.php:809
 msgid "Add New Project Type"
 msgstr "Добавить новый тип проекта"
 
-#: wp-crm-system.php:790
+#: wp-crm-system.php:810
 msgid "New Project Type"
 msgstr "Новый тип проекта"
 
-#: wp-crm-system.php:808 wp-crm-system.php:810 wp-crm-system.php:817
-#: wp-crm-system.php:826
+#: wp-crm-system.php:828 wp-crm-system.php:830 wp-crm-system.php:837
+#: wp-crm-system.php:846
 msgid "Campaigns"
 msgstr "Кампании"
 
-#: wp-crm-system.php:813
+#: wp-crm-system.php:833
 msgid "Add New Campaign"
 msgstr "Добавить кампанию"
 
-#: wp-crm-system.php:814
+#: wp-crm-system.php:834
 msgid "New Campaign"
 msgstr "Новая кампания"
 
-#: wp-crm-system.php:815
+#: wp-crm-system.php:835
 msgid "Edit Campaign"
 msgstr "Редактировать кампанию"
 
-#: wp-crm-system.php:816
+#: wp-crm-system.php:836
 msgid "View Campaign"
 msgstr "Показать кампанию"
 
-#: wp-crm-system.php:818
+#: wp-crm-system.php:838
 msgid "Search Campaigns"
 msgstr "Поиск кампании"
 
-#: wp-crm-system.php:819
+#: wp-crm-system.php:839
 msgid "Parent Campaign:"
 msgstr "Родительская кампания:"
 
-#: wp-crm-system.php:820
+#: wp-crm-system.php:840
 msgid "No campaigns found."
 msgstr "Нет кампаний."
 
-#: wp-crm-system.php:821
+#: wp-crm-system.php:841
 msgid "No campaigns found in Trash."
 msgstr "Нет кампаний в корзине."
 
-#: wp-crm-system.php:862 wp-crm-system.php:868
+#: wp-crm-system.php:882 wp-crm-system.php:888
 msgid "Campaign Types"
 msgstr "Тип кампании"
 
-#: wp-crm-system.php:863
+#: wp-crm-system.php:883
 msgid "Campaign Type"
 msgstr "Тип кампании"
 
-#: wp-crm-system.php:864
+#: wp-crm-system.php:884
 msgid "Edit Campaign Type"
 msgstr "Редактировать тип кампании"
 
-#: wp-crm-system.php:865
+#: wp-crm-system.php:885
 msgid "Update Campaign Type"
 msgstr "Обновить тип кампании"
 
-#: wp-crm-system.php:866
+#: wp-crm-system.php:886
 msgid "Add New Campaign Type"
 msgstr "Добавить новый тип кампании"
 
-#: wp-crm-system.php:867
+#: wp-crm-system.php:887
 msgid "New Campaign Type"
 msgstr "Новый тип кампании"
 
-#: wp-crm-system.php:1975
+#: wp-crm-system.php:1995
 msgid "Fields"
 msgstr ""
 
-#: wp-crm-system.php:1978
+#: wp-crm-system.php:1998
 msgid "Map"
 msgstr ""
 
-#: wp-crm-system.php:1980
+#: wp-crm-system.php:2000
 msgid "WP-CRM System Options"
 msgstr ""
 
-#: wp-crm-system.php:2062
+#: wp-crm-system.php:2084
 msgid "Loading map..."
 msgstr "Загрузка карты..."
 
-#: wp-crm-system.php:2063
+#: wp-crm-system.php:2085
 msgid "Map shows approximate location."
 msgstr "Карта показывает приблизительное местоположение."
 
-#: wp-crm-system.php:2090
+#: wp-crm-system.php:2112
 msgid ""
 "No Map Found. Please enter an address or verify the address details are "
 "correct."
 msgstr ""
 "Карта не найдена. Пожалуйста, укажите адрес или проверьте  его правильность."
 
-#: wp-crm-system.php:2107
+#: wp-crm-system.php:2129
 msgid "Create Project From Opportunity"
 msgstr ""
 
-#: wp-crm-system.php:2140
+#: wp-crm-system.php:2162
 msgid "New Project Added!"
 msgstr ""
 
-#: wp-crm-system.php:2142
+#: wp-crm-system.php:2164
 msgid "Project not added. A project with this name already exists: "
 msgstr ""
 
-#: wp-crm-system.php:2173
+#: wp-crm-system.php:2195
 msgid "No tasks assigned to this project."
 msgstr ""
 
-#: wp-crm-system.php:2203
+#: wp-crm-system.php:2225
 msgid "No projects assigned to this contact."
 msgstr ""
 
-#: wp-crm-system.php:2233
+#: wp-crm-system.php:2255
 msgid "No tasks assigned to this contact."
 msgstr ""
 
-#: wp-crm-system.php:2263
+#: wp-crm-system.php:2285
 msgid "No opportunities assigned to this contact."
 msgstr ""
 
-#: wp-crm-system.php:2293
+#: wp-crm-system.php:2315
 msgid "No projects assigned to this organization."
 msgstr ""
 
-#: wp-crm-system.php:2323
+#: wp-crm-system.php:2345
 msgid "No tasks assigned to this organization."
 msgstr ""
 
-#: wp-crm-system.php:2353
+#: wp-crm-system.php:2375
 msgid "No opportunities assigned to this organization."
 msgstr ""
 
-#: wp-crm-system.php:2383
+#: wp-crm-system.php:2405
 msgid "No contacts assigned to this organization."
 msgstr ""
 
-#: wp-crm-system.php:2573
+#: wp-crm-system.php:2595
 msgid "Please create a campaign first."
 msgstr ""
 
-#: wp-crm-system.php:2615
+#: wp-crm-system.php:2637
 msgid "Please create an organization first."
 msgstr "Пожалуйста, создайте свою первую организацию."
 
-#: wp-crm-system.php:2657 wp-crm-system.php:2697
+#: wp-crm-system.php:2679 wp-crm-system.php:2719
 msgid "Please create a contact first."
 msgstr "Пожалуйста, создайте свой первый контакт."
 
-#: wp-crm-system.php:2708 wp-crm-system.php:2712
+#: wp-crm-system.php:2730 wp-crm-system.php:2734
 msgid "Select an option"
 msgstr "Выберите опцию"
 
-#: wp-crm-system.php:2708
+#: wp-crm-system.php:2730
 msgctxt "Successful, a winner."
 msgid "Won"
 msgstr "Успех"
 
-#: wp-crm-system.php:2708
+#: wp-crm-system.php:2730
 msgctxt "Unsuccessful, a loser."
 msgid "Lost"
 msgstr "Провал"
 
-#: wp-crm-system.php:2708
+#: wp-crm-system.php:2730
 msgctxt "Temporarily ended, but may resume again."
 msgid "Suspended"
 msgstr "В подвешенном состоянии"
 
-#: wp-crm-system.php:2708
+#: wp-crm-system.php:2730
 msgctxt "No longer actively working on."
 msgid "Abandoned"
 msgstr "Заброшена"
 
-#: wp-crm-system.php:2717
+#: wp-crm-system.php:2739
 msgctxt "All tasks are finished. No further work is needed."
 msgid "Complete"
 msgstr "Завершена"
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgid "Select an Option"
 msgstr "Выберите вариант"
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Title for male without a higher professional title."
 msgid "Mr."
 msgstr "Мистер."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt ""
 "Married woman or woman who has been married with no higher professional "
 "title."
 msgid "Mrs."
 msgstr "Г-жа."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "An unmarried woman. Also Ms."
 msgid "Miss"
 msgstr "Мисс"
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "An unmarried woman. Also Miss."
 msgid "Ms."
 msgstr ""
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Doctor"
 msgid "Dr."
 msgstr "Доктор."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Title used for young men."
 msgid "Master"
 msgstr "Мастер."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Title used for the person in charge of a sports team"
 msgid "Coach"
 msgstr ""
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Title of a priest or religous clergy - Reverend "
 msgid "Rev."
 msgstr "Преподобный"
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Title of a priest or religous clergy - Father"
 msgid "Fr."
 msgstr "Отец"
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Attorney, or lawyer"
 msgid "Atty."
 msgstr "Адвокат"
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Professor, as in a teacher at a university."
 msgid "Prof."
 msgstr "Проф."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Honorable - often used for elected officials or judges."
 msgid "Hon."
 msgstr "Достопочтенный."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt ""
 "Term given to the head of an organization or country. As in President of a "
 "University or President of the United States"
 msgid "Pres."
 msgstr "Президент."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Governor, as in the Governor of the State of New York."
 msgid "Gov."
 msgstr "Губернатор."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Officer as in a police officer."
 msgid "Ofc."
 msgstr "Офицер."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Superintendent"
 msgid "Supt."
 msgstr "Начальник."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt ""
 "Representative - as in an elected official to the House of Representatives"
 msgid "Rep."
 msgstr "Представитель."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "An elected official - Senator."
 msgid "Sen."
 msgstr "Сенатор."
 
-#: wp-crm-system.php:2722
+#: wp-crm-system.php:2744
 msgctxt "Ambassador - a diplomatic official."
 msgid "Amb."
 msgstr "Посол."
 
-#: wp-crm-system.php:2769 wp-crm-system.php:2772
+#: wp-crm-system.php:2791 wp-crm-system.php:2794
 msgid ""
 "Only numbers allowed. No thousands separator (commas, spaces, or periods), "
 "currency symbols, etc. allowed."
 msgstr "В этом поле указывайте только цифры без запятых, букв и пробелов!"
+
+#: wp-crm-system.php:3333
+msgid "WP CRM System Categories"
+msgstr "WP CRM System категории"
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
@@ -1755,6 +1760,9 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "Scott DeLuzio"
 msgstr "Скотт деЛузио"
+
+#~ msgid "Slack"
+#~ msgstr "Вялый"
 
 #~ msgid "Project Name - Due Date"
 #~ msgstr "Название проекта - Срок"
@@ -1805,9 +1813,6 @@ msgstr "Скотт деЛузио"
 #~ "Dates in the dropdown menu are today as displayed in the different "
 #~ "available formats."
 #~ msgstr "Различные варианты написания дат отображаются в выпадающем меню."
-
-#~ msgid "WP CRM System Categories"
-#~ msgstr "WP CRM System категории"
 
 #~ msgid "Settings"
 #~ msgstr "Параметры"

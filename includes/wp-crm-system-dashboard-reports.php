@@ -391,15 +391,15 @@ function wpcrm_system_dashboard_settings_box() { ?>
 						</td>
 						<td>
 							<?php
-							
-							/*$wpcrm_system_settings_roles = array(
+							/* Default list of user roles
+							$wpcrm_system_settings_roles = array(
 								'manage_options'	=>	__('Administrator', 'wp-crm-system'),
 								'edit_pages'		=>	__('Editor', 'wp-crm-system'),
 								'publish_posts'		=>	__('Author', 'wp-crm-system'),
 								'edit_posts'		=>	__('Contributor', 'wp-crm-system'),
 								'read'				=>	__('Subscriber', 'wp-crm-system')
 							);*/
-							
+
 							add_filter( 'wpcrm_system_user_role_options', 'wpcrm_system_select_user_roles', 10 );
 							function wpcrm_system_select_user_roles( $array ){
 								$array = array(
@@ -463,7 +463,15 @@ function wpcrm_system_dashboard_settings_box() { ?>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
+						<td colspan="2">
+							<strong><?php _e( 'Searchable Menus', 'wp-crm-system' ); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'If you have a large number of records to be displayed in a drop down menu, this option will allow you to filter results by typing instead of scrolling through the whole list.', 'wp-crm-system' ); ?>"></span>
+						</td>
+						<td>
+							<input type="checkbox" value="on" name="wpcrm_system_searchable_dropdown" <?php if( 'on' == get_option( 'wpcrm_system_searchable_dropdown' ) ) echo 'checked'; ?> />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
 					</tr>
 				</tbody>
 			</table>

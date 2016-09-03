@@ -1,9 +1,9 @@
 === WP-CRM System ===
 Contributors: scott.deluzio
-Tags:  user management, invoice, Stripe, users, WordPress CRM, wp crm, CRM, contact form, Gravity Forms, Ninja Forms, Slack, Dropbox, project management, marketing, customer management, Zendesk, custom fields
+Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
 Tested up to: 4.6
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,8 +54,6 @@ WP-CRM System is written in American English, and has been translated into the f
 
 If you would like to submit a translation, please submit it [through our website](https://www.wp-crm.com/contact).
 
-You can earn free premium extensions by translating them into your native language. [Click here](https://www.wp-crm.com/translate-wp-crm-system/) to learn more.
-
 == Installation ==
 1. Download archive and unzip in wp-content/plugins or install via Plugins - Add New.
 2. Activate the plugin through the Plugins menu in WordPress.
@@ -64,13 +62,15 @@ You can earn free premium extensions by translating them into your native langua
 = What makes WP-CRM System different from other CRM's? =
 Many other CRM's are hosted on the CRM company's servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System gives you control over your data by keeping it all contained on your website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer's information.
 
-= What if I am coming from another CRM, can I import my data? = 
+= What if I am coming from another CRM, can I import my data? =
 Absolutely. There are inexpensive extensions that allow you to import as little or as much information as you need to into WP-CRM System.
 
-= Is my data secure? = 
-Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to. 
+= Is my data secure? =
+Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.3 =
+* Added option for certain searchable select/option menus. Specifically, select menus for choosing a user, campaign, organization, contact, or project were added.
 = 2.0.2 =
 * Bug fix: Categories tab was removed from dashboard page.
 = 2.0.0 =
@@ -162,10 +162,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.0.2 =
-* Bug fix: Categories tab was removed from dashboard page.
-= 2.0.0 =
-* Added hooks to for developers to extend and customize WP-CRM System.
-* Hooks include ability to add or remove user roles, add/remove/move WP-CRM System's dashboard boxes, add custom fields and meta boxes, add custom reports, create custom plugins.
-* Updated WP-CRM System dashboard layout to address issues with viewing the dashboard on smaller screens.
-* This version is required for all 2.0.0+ versions of add-on plugins.
+= 2.0.3 =
+* Added option for certain searchable select/option menus. Specifically, select menus for choosing a user, campaign, organization, contact, or project were added.

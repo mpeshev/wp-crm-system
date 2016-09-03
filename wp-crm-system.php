@@ -3,7 +3,7 @@
 Plugin Name: WP-CRM System
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 2.0.2
+Version: 2.0.3
 Author: Scott DeLuzio
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system
@@ -93,6 +93,7 @@ function wpcrm_scripts_styles() {
 		wp_enqueue_script('jquery-ui-accordion');
 		wp_enqueue_script('wpcrm-system-accordion',	plugins_url( '/js/accordion.js',__FILE__) );
 	}
+
 	wp_enqueue_script( 'jquery' );
 
 	if ( $active_page == 'wpcrm-settings' && ( $wpcrm_active_tab == '' || $wpcrm_active_tab =='dashboard' || $wpcrm_active_tab =='mailchimp' ) ) {
@@ -103,9 +104,25 @@ function wpcrm_scripts_styles() {
 		wp_register_script('wp_crm_system_tooltips_js', plugins_url('/js/tooltip.js', __FILE__), 1.0, false);
 		wp_enqueue_script('wp_crm_system_tooltips_js');
 	}
-	if ( in_array( $post_type, $postTypes ) || $post_type == 'wpcrm-invoice'){
-		wp_register_script('wp_crm_system_edit_js', plugins_url('/js/edit.js', __FILE__), 1.0, false);
-		wp_enqueue_script('wp_crm_system_edit_js');
+	if ( in_array( $post_type, $postTypes ) || $post_type == 'wpcrm-invoice' ) {
+		wp_register_script( 'wp_crm_system_edit_js', plugins_url('/js/edit.js', __FILE__ ), 1.0, false );
+		wp_enqueue_script( 'wp_crm_system_edit_js' );
+
+		if ( 'on' == get_option( 'wpcrm_system_searchable_dropdown' ) ) {
+		  //Searchable Dropdown
+		  wp_register_script( 'wp_crm_searchable_core_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/sh/shCore.js', __FILE__ ), array( 'jquery'), 1.0, false);
+		  wp_enqueue_script( 'wp_crm_searchable_core_js' );
+		  wp_register_script( 'wp_crm_searchable_brush_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/sh/shBrushJScript.js', __FILE__ ), array( 'jquery'), 1.0, false);
+		  wp_enqueue_script( 'wp_crm_searchable_brush_js' );
+		  wp_register_script( 'wp_crm_searchable_dropdown_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/jquery.searchabledropdown-1.0.8.min.js', __FILE__ ), array( 'jquery'), 1.0, false);
+		  wp_enqueue_script( 'wp_crm_searchable_dropdown_js' );
+		  wp_register_script( 'wp_crm_searchable', plugins_url( '/js/wpCRMSystemSearchable.js', __FILE__ ), array( 'jquery'), 1.0, false);
+		  wp_enqueue_script( 'wp_crm_searchable' );
+		  wp_register_style( 'wp_crm_system_searchable_core_css', plugins_url('/js/jquery.searchabledropdown-v1.0.8/sh/shCore.css', __FILE__ ) );
+		  wp_enqueue_style( 'wp_crm_system_searchable_core_css' );
+		  wp_register_style( 'wp_crm_system_searchable_default_css', plugins_url('/js/jquery.searchabledropdown-v1.0.8/sh/shThemeDefault.css', __FILE__ ) );
+		  wp_enqueue_style( 'wp_crm_system_searchable_default_css' );
+		}
 	}
 }
 add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );
@@ -271,6 +288,7 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_report_currency_decimals', 0);
 	add_option('wpcrm_system_report_currency_decimal_point', '.');
 	add_option('wpcrm_system_report_currency_thousand_separator', ',');
+	add_option('wpcrm_system_searchable_dropdown', 'off');
 	add_option('wpcrm_system_date_format', $jqueryui_format);
 	add_option('wpcrm_system_php_date_format', $php_format);
 	add_option('wpcrm_system_email_organization_filter', '');
@@ -288,6 +306,7 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_report_currency_decimals');
 	delete_option('wpcrm_system_report_currency_decimal_point');
 	delete_option('wpcrm_system_report_currency_thousand_separator');
+	delete_option('wpcrm_system_searchable_dropdown');
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
 	delete_option('wpcrm_system_email_organization_filter');
@@ -305,6 +324,7 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_decimals');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_decimal_point');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_thousand_separator');
+	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_searchable_dropdown');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
 	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );
@@ -357,7 +377,7 @@ add_action('admin_init','wpcrm_add_role_caps',999);
 function wpcrm_add_role_caps() {
 	if( isset( $_POST[ 'wpcrm_system_settings_update' ] ) ) {
 		$post_types = array( 'wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign' );
-		
+
 		// Add the roles you'd like to administer contacts
 		add_filter( 'wpcrm_system_default_user_roles', 'wpcrm_system_check_user_roles', 10 );
 		function wpcrm_system_check_user_roles( $array ){
@@ -2496,7 +2516,7 @@ function wpcrmDefaultFields() {
 									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
 								}
 								echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:none;" id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-								echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+								echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 								if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 								echo '<option value="" ' . $selected . '>Not Assigned</option>';
 								$users = get_users();
@@ -2517,7 +2537,7 @@ function wpcrmDefaultFields() {
 								echo '<span id="' . $this->prefix . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . $this->prefix . $defaultField[ 'name' ] . '")></span>';
 							} else {
 								echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-								echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+								echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 								echo '<option value="" selected>Not Assigned</option>';
 								$users = get_users();
 								$wp_crm_users = array();
@@ -2539,7 +2559,7 @@ function wpcrmDefaultFields() {
 							if ($campaigns) {
 								if ( isset( $selection ) && '' != $selection ){
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:none;" id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; $linkcampaign = ' '; } else { $selected = ''; }
@@ -2558,7 +2578,7 @@ function wpcrmDefaultFields() {
 									}
 								} else {
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; } else { $selected = ''; }
@@ -2581,7 +2601,7 @@ function wpcrmDefaultFields() {
 							if ($orgs) {
 								if ( isset( $selection ) && '' != $selection ){
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:none;" id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; $linkorg = ' '; } else { $selected = ''; }
@@ -2600,7 +2620,7 @@ function wpcrmDefaultFields() {
 									}
 								} else {
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; } else { $selected = ''; }
@@ -2623,7 +2643,7 @@ function wpcrmDefaultFields() {
 							if ($contacts) {
 								if ( isset( $selection ) && '' != $selection ){
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:none;" id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; $linkcontact = ' '; } else { $selected = ''; }
@@ -2642,7 +2662,7 @@ function wpcrmDefaultFields() {
 									}
 								} else {
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; } else { $selected = ''; }
@@ -2665,7 +2685,7 @@ function wpcrmDefaultFields() {
 							if ($projects) {
 								if ( isset( $selection ) && '' != $selection ){
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:none;" id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" style="display:none;" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									foreach($projects as $project) {
@@ -2682,7 +2702,7 @@ function wpcrmDefaultFields() {
 									}
 								} else {
 									echo '<label for="' . $this->prefix . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . $this->prefix . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
-									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
+									echo '<select id="' . $this->prefix . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . $this->prefix . $defaultField[ 'name' ] . '">';
 									if ( $selection == '') { $selected = 'selected'; } else { $selected = ''; }
 									echo '<option value="" ' . $selected . '>Not Assigned</option>';
 									if ( $selection == 'do not show') { $selected = 'selected'; } else { $selected = ''; }
