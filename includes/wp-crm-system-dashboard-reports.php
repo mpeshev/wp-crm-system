@@ -328,7 +328,8 @@ function wpcrm_system_dashboard_extensions_box() { ?>
 			'slack-notifications'	=> 'wpcrm_slack_notifications_license_status',
 			'email-notifications'	=> 'wpcrm_email_notifications_license_status',
 			'dropbox'				=> 'wpcrm_dropbox_license_status',
-			'zendesk'				=> 'wpcrm_zendesk_license_status'
+			'zendesk'				=> 'wpcrm_zendesk_license_status',
+			'mailchimp'				=> 'wpcrm_mailchimp_license_status'
 		);
 
 		foreach( $plugins as $plugin => $status) {
@@ -377,107 +378,118 @@ function wpcrm_system_dashboard_categories_box() { ?>
 		</ul>
 	</div>
 <?php }
-function wpcrm_system_dashboard_settings_box() { ?>
-	<div class="wpcrm-dashboard">
-	<h2><?php _e('WP-CRM System Settings', 'wp-crm-system'); ?></h2>
-		<form id="wpcrm_settings" name="wpcrm_settings" method='post' action='options.php'>
-			<?php wp_nonce_field( 'update-options' ); ?>
-			<?php settings_fields( 'wpcrm_system_settings_main_group' ); ?>
-			<table>
-				<tbody>
-					<tr>
-						<td colspan="2">
-							<strong><?php _e('Access Level', 'wp-crm-system'); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e('Roles are listed in order of seniority (Administrator is highest, Subscriber is lowest). All roles higher than, and including the role you select will have access to WP-CRM System.', 'wp-crm-system'); ?>"></span>
-						</td>
-						<td>
-							<?php
-							/* Default list of user roles
-							$wpcrm_system_settings_roles = array(
-								'manage_options'	=>	__('Administrator', 'wp-crm-system'),
-								'edit_pages'		=>	__('Editor', 'wp-crm-system'),
-								'publish_posts'		=>	__('Author', 'wp-crm-system'),
-								'edit_posts'		=>	__('Contributor', 'wp-crm-system'),
-								'read'				=>	__('Subscriber', 'wp-crm-system')
-							);*/
-
-							add_filter( 'wpcrm_system_user_role_options', 'wpcrm_system_select_user_roles', 10 );
-							function wpcrm_system_select_user_roles( $array ){
-								$array = array(
+function wpcrm_system_dashboard_settings_box() {
+	//Only show to administrators
+	if ( current_user_can( 'activate_plugins' ) )  { ?>
+		<div class="wpcrm-dashboard">
+		<h2><?php _e('WP-CRM System Settings', 'wp-crm-system'); ?></h2>
+			<form id="wpcrm_settings" name="wpcrm_settings" method='post' action='options.php'>
+				<?php wp_nonce_field( 'update-options' ); ?>
+				<?php settings_fields( 'wpcrm_system_settings_main_group' ); ?>
+				<table>
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<strong><?php _e('Access Level', 'wp-crm-system'); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e('Roles are listed in order of seniority (Administrator is highest, Subscriber is lowest). All roles higher than, and including the role you select will have access to WP-CRM System.', 'wp-crm-system'); ?>"></span>
+							</td>
+							<td>
+								<?php
+								/* Default list of user roles
+								$wpcrm_system_settings_roles = array(
 									'manage_options'	=>	__('Administrator', 'wp-crm-system'),
 									'edit_pages'		=>	__('Editor', 'wp-crm-system'),
 									'publish_posts'		=>	__('Author', 'wp-crm-system'),
 									'edit_posts'		=>	__('Contributor', 'wp-crm-system'),
 									'read'				=>	__('Subscriber', 'wp-crm-system')
-								);
-								return $array;
-							}
+								);*/
 
-							$wpcrm_system_settings_roles = apply_filters( 'wpcrm_system_user_role_options', array() );
-							?>
-							<select name="wpcrm_system_select_user_role"> <?php
-								foreach ($wpcrm_system_settings_roles as $role=>$name){
-								if (get_option('wpcrm_system_select_user_role') == $role) { $selected = 'selected'; } else { $selected = ''; } ?>
-								<option value="<?php echo $role; ?>" <?php echo $selected; ?> ><?php echo $name; ?></option>
-								<?php } ?>
+								add_filter( 'wpcrm_system_user_role_options', 'wpcrm_system_select_user_roles', 10 );
+								function wpcrm_system_select_user_roles( $array ){
+									$array = array(
+										'manage_options'	=>	__('Administrator', 'wp-crm-system'),
+										'edit_pages'		=>	__('Editor', 'wp-crm-system'),
+										'publish_posts'		=>	__('Author', 'wp-crm-system'),
+										'edit_posts'		=>	__('Contributor', 'wp-crm-system'),
+										'read'				=>	__('Subscriber', 'wp-crm-system')
+									);
+									return $array;
+								}
+
+								$wpcrm_system_settings_roles = apply_filters( 'wpcrm_system_user_role_options', array() );
+								?>
+								<select name="wpcrm_system_select_user_role"> <?php
+									foreach ($wpcrm_system_settings_roles as $role=>$name){
+									if (get_option('wpcrm_system_select_user_role') == $role) { $selected = 'selected'; } else { $selected = ''; } ?>
+									<option value="<?php echo $role; ?>" <?php echo $selected; ?> ><?php echo $name; ?></option>
+									<?php } ?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<strong><?php _e('Default Currency', 'wp-crm-system'); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e('Currency to be used when assigning values to projects or opportunities.', 'wp-crm-system'); ?>"></span>
+							</td>
+							<td>
+							<select name="wpcrm_system_default_currency">
+							<?php $args = array('aed'=>'AED','afn'=>'AFN','all'=>'ALL','amd'=>'AMD','ang'=>'ANG','aoa'=>'AOA','ars'=>'ARS','aud'=>'AUD','awg'=>'AWG','azn'=>'AZN','bam'=>'BAM','bbd'=>'BBD','bdt'=>'BDT','bgn'=>'BGN','bhd'=>'BHD','bif'=>'BIF','bmd'=>'BMD','bnd'=>'BND','bob'=>'BOB','brl'=>'BRL','bsd'=>'BSD','btn'=>'BTN','bwp'=>'BWP','byr'=>'BYR','bzd'=>'BZD','cad'=>'CAD','cdf'=>'CDF','chf'=>'CHF','clp'=>'CLP','cny'=>'CNY','cop'=>'COP','crc'=>'CRC','cuc'=>'CUC','cup'=>'CUP','cve'=>'CVE','czk'=>'CZK','djf'=>'DJF','dkk'=>'DKK','dop'=>'DOP','dzd'=>'DZD','egp'=>'EGP','ern'=>'ERN','etb'=>'ETB','eur'=>'EUR','fjd'=>'FJD','fkp'=>'FKP','gbp'=>'GBP','gel'=>'GEL','ggp'=>'GGP','ghs'=>'GHS','gip'=>'GIP','gmd'=>'GMD','gnf'=>'GNF','gtq'=>'GTQ','gyd'=>'GYD','hkd'=>'HKD','hnl'=>'HNL','hrk'=>'HRK','htg'=>'HTG','huf'=>'HUF','idr'=>'IDR','ils'=>'ILS','imp'=>'IMP','inr'=>'INR','iqd'=>'IQD','irr'=>'IRR','isk'=>'ISK','jep'=>'JEP','jmd'=>'JMD','jod'=>'JOD','jpy'=>'JPY','kes'=>'KES','kgs'=>'KGS','khr'=>'KHR','kmf'=>'KMF','kpw'=>'KPW','krw'=>'KRW','kwd'=>'KWD','kyd'=>'KYD','kzt'=>'KZT','lak'=>'LAK','lbp'=>'LBP','lkr'=>'LKR','lrd'=>'LRD','lsl'=>'LSL','lyd'=>'LYD','mad'=>'MAD','mdl'=>'MDL','mga'=>'MGA','mkd'=>'MKD','mmk'=>'MMK','mnt'=>'MNT','mop'=>'MOP','mro'=>'MRO','mur'=>'MUR','mvr'=>'MVR','mwk'=>'MWK','mxn'=>'MXN','myr'=>'MYR','mzn'=>'MZN','nad'=>'NAD','ngn'=>'NGN','nio'=>'NIO','nok'=>'NOK','npr'=>'NPR','nzd'=>'NZD','omr'=>'OMR','pab'=>'PAB','pen'=>'PEN','pgk'=>'PGK','php'=>'PHP','pkr'=>'PKR','pln'=>'PLN','prb'=>'PRB','pyg'=>'PYG','qar'=>'QAR','ron'=>'RON','rsd'=>'RSD','rub'=>'RUB','rwf'=>'RWF','sar'=>'SAR','sbd'=>'SBD','scr'=>'SCR','sdg'=>'SDG','sek'=>'SEK','sgd'=>'SGD','shp'=>'SHP','sll'=>'SLL','sos'=>'SOS','srd'=>'SRD','ssp'=>'SSP','std'=>'STD','syp'=>'SYP','szl'=>'SZL','thb'=>'THB','tjs'=>'TJS','tmt'=>'TMT','tnd'=>'TND','top'=>'TOP','try'=>'TRY','ttd'=>'TTD','twd'=>'TWD','tzs'=>'TZS','uah'=>'UAH','ugx'=>'UGX','usd'=>'USD','uyu'=>'UYU','uzs'=>'UZS','vef'=>'VEF','vnd'=>'VND','vuv'=>'VUV','wst'=>'WST','xaf'=>'XAF','xcd'=>'XCD','xof'=>'XOF','xpf'=>'XPF','yer'=>'YER','zar'=>'ZAR','zmw'=>'ZMW');
+							foreach ($args as $key => $value) { ?>
+								<option value="<?php echo $key; ?>" <?php if (get_option('wpcrm_system_default_currency') == $key) { echo 'selected'; } ?> ><?php echo $value; ?></option>
+							<?php } ?>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<strong><?php _e('Default Currency', 'wp-crm-system'); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e('Currency to be used when assigning values to projects or opportunities.', 'wp-crm-system'); ?>"></span>
-						</td>
-						<td>
-						<select name="wpcrm_system_default_currency">
-						<?php $args = array('aed'=>'AED','afn'=>'AFN','all'=>'ALL','amd'=>'AMD','ang'=>'ANG','aoa'=>'AOA','ars'=>'ARS','aud'=>'AUD','awg'=>'AWG','azn'=>'AZN','bam'=>'BAM','bbd'=>'BBD','bdt'=>'BDT','bgn'=>'BGN','bhd'=>'BHD','bif'=>'BIF','bmd'=>'BMD','bnd'=>'BND','bob'=>'BOB','brl'=>'BRL','bsd'=>'BSD','btn'=>'BTN','bwp'=>'BWP','byr'=>'BYR','bzd'=>'BZD','cad'=>'CAD','cdf'=>'CDF','chf'=>'CHF','clp'=>'CLP','cny'=>'CNY','cop'=>'COP','crc'=>'CRC','cuc'=>'CUC','cup'=>'CUP','cve'=>'CVE','czk'=>'CZK','djf'=>'DJF','dkk'=>'DKK','dop'=>'DOP','dzd'=>'DZD','egp'=>'EGP','ern'=>'ERN','etb'=>'ETB','eur'=>'EUR','fjd'=>'FJD','fkp'=>'FKP','gbp'=>'GBP','gel'=>'GEL','ggp'=>'GGP','ghs'=>'GHS','gip'=>'GIP','gmd'=>'GMD','gnf'=>'GNF','gtq'=>'GTQ','gyd'=>'GYD','hkd'=>'HKD','hnl'=>'HNL','hrk'=>'HRK','htg'=>'HTG','huf'=>'HUF','idr'=>'IDR','ils'=>'ILS','imp'=>'IMP','inr'=>'INR','iqd'=>'IQD','irr'=>'IRR','isk'=>'ISK','jep'=>'JEP','jmd'=>'JMD','jod'=>'JOD','jpy'=>'JPY','kes'=>'KES','kgs'=>'KGS','khr'=>'KHR','kmf'=>'KMF','kpw'=>'KPW','krw'=>'KRW','kwd'=>'KWD','kyd'=>'KYD','kzt'=>'KZT','lak'=>'LAK','lbp'=>'LBP','lkr'=>'LKR','lrd'=>'LRD','lsl'=>'LSL','lyd'=>'LYD','mad'=>'MAD','mdl'=>'MDL','mga'=>'MGA','mkd'=>'MKD','mmk'=>'MMK','mnt'=>'MNT','mop'=>'MOP','mro'=>'MRO','mur'=>'MUR','mvr'=>'MVR','mwk'=>'MWK','mxn'=>'MXN','myr'=>'MYR','mzn'=>'MZN','nad'=>'NAD','ngn'=>'NGN','nio'=>'NIO','nok'=>'NOK','npr'=>'NPR','nzd'=>'NZD','omr'=>'OMR','pab'=>'PAB','pen'=>'PEN','pgk'=>'PGK','php'=>'PHP','pkr'=>'PKR','pln'=>'PLN','prb'=>'PRB','pyg'=>'PYG','qar'=>'QAR','ron'=>'RON','rsd'=>'RSD','rub'=>'RUB','rwf'=>'RWF','sar'=>'SAR','sbd'=>'SBD','scr'=>'SCR','sdg'=>'SDG','sek'=>'SEK','sgd'=>'SGD','shp'=>'SHP','sll'=>'SLL','sos'=>'SOS','srd'=>'SRD','ssp'=>'SSP','std'=>'STD','syp'=>'SYP','szl'=>'SZL','thb'=>'THB','tjs'=>'TJS','tmt'=>'TMT','tnd'=>'TND','top'=>'TOP','try'=>'TRY','ttd'=>'TTD','twd'=>'TWD','tzs'=>'TZS','uah'=>'UAH','ugx'=>'UGX','usd'=>'USD','uyu'=>'UYU','uzs'=>'UZS','vef'=>'VEF','vnd'=>'VND','vuv'=>'VUV','wst'=>'WST','xaf'=>'XAF','xcd'=>'XCD','xof'=>'XOF','xpf'=>'XPF','yer'=>'YER','zar'=>'ZAR','zmw'=>'ZMW');
-						foreach ($args as $key => $value) { ?>
-							<option value="<?php echo $key; ?>" <?php if (get_option('wpcrm_system_default_currency') == $key) { echo 'selected'; } ?> ><?php echo $value; ?></option>
-						<?php } ?>
-						</select>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<strong><?php _e('Currency Format', 'wp-crm-system'); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'Set your preferred currency and numeral settings for reports.', 'wp-crm-system'); ?>"></span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<?php _e('Thousands separator', 'wp-crm-system'); ?>
-						</td>
-						<td>
-							<?php _e('Decimal point', 'wp-crm-system'); ?>
-						</td>
-						<td>
-							<?php _e('Number of decimals', 'wp-crm-system'); ?>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" name="wpcrm_system_report_currency_thousand_separator" size="5" value="<?php echo get_option('wpcrm_system_report_currency_thousand_separator'); ?>" />
-						</td>
-						<td>
-							<input type="text" name="wpcrm_system_report_currency_decimal_point" size="5" value="<?php echo get_option('wpcrm_system_report_currency_decimal_point'); ?>" />
-						</td>
-						<td>
-							<input type="text" name="wpcrm_system_report_currency_decimals" size="5" value="<?php echo get_option('wpcrm_system_report_currency_decimals'); ?>" />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<strong><?php _e( 'Searchable Menus', 'wp-crm-system' ); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'If you have a large number of records to be displayed in a drop down menu, this option will allow you to filter results by typing instead of scrolling through the whole list.', 'wp-crm-system' ); ?>"></span>
-						</td>
-						<td>
-							<input type="checkbox" value="on" name="wpcrm_system_searchable_dropdown" <?php if( 'on' == get_option( 'wpcrm_system_searchable_dropdown' ) ) echo 'checked'; ?> />
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3"><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
-<?php }
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<strong><?php _e('Currency Format', 'wp-crm-system'); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'Set your preferred currency and numeral settings for reports.', 'wp-crm-system'); ?>"></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<?php _e('Thousands separator', 'wp-crm-system'); ?>
+							</td>
+							<td>
+								<?php _e('Decimal point', 'wp-crm-system'); ?>
+							</td>
+							<td>
+								<?php _e('Number of decimals', 'wp-crm-system'); ?>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" name="wpcrm_system_report_currency_thousand_separator" size="5" value="<?php echo get_option('wpcrm_system_report_currency_thousand_separator'); ?>" />
+							</td>
+							<td>
+								<input type="text" name="wpcrm_system_report_currency_decimal_point" size="5" value="<?php echo get_option('wpcrm_system_report_currency_decimal_point'); ?>" />
+							</td>
+							<td>
+								<input type="text" name="wpcrm_system_report_currency_decimals" size="5" value="<?php echo get_option('wpcrm_system_report_currency_decimals'); ?>" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<strong><?php _e( 'Searchable Menus', 'wp-crm-system' ); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'If you have a large number of records to be displayed in a drop down menu, this option will allow you to filter results by typing instead of scrolling through the whole list.', 'wp-crm-system' ); ?>"></span>
+							</td>
+							<td>
+								<input type="checkbox" value="on" name="wpcrm_system_searchable_dropdown" <?php if( 'on' == get_option( 'wpcrm_system_searchable_dropdown' ) ) echo 'checked'; ?> />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<strong><?php _e( 'Hide Other User Content', 'wp-crm-system' ); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'This option will hide any entry in WP-CRM System that the current user did not create. Administrators will still have full access.', 'wp-crm-system' ); ?>"></span>
+							</td>
+							<td>
+								<input type="checkbox" value="yes" name="wpcrm_hide_others_posts" <?php if( 'yes' == get_option( 'wpcrm_hide_others_posts' ) ) echo 'checked'; ?> />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3"><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	<?php }
+}
 function wpcrm_system_dashboard_projects_box() { ?>
 	<div class="wpcrm-dashboard">
 		<h2><?php _e('Your Projects', 'wp-crm-system') . wp_crm_user_projects( 'value' ); ?></h2>

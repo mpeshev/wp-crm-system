@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
-Tested up to: 4.6
-Stable tag: 2.0.3
+Tested up to: 4.6.1
+Stable tag: 2.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,11 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.4 =
+* Fix: Added MailChimp option to dashboard extension list.
+* Fix: WP-CRM System dashboard boxes were displaying at inconsistent heights making the page layout break. JS fix to ensure consistent heights.
+* New: WP-CRM System dashboard is visible to anyone who has access to WP-CRM System. Previously only administrators had access. WP-CRM System settings box is only visible to administrators.
+* New: Added option to restrict users to view their own records only. This only impacts users that are not administrators. Administrators can still view/edit/delete all records.
 = 2.0.3 =
 * Added option for certain searchable select/option menus. Specifically, select menus for choosing a user, campaign, organization, contact, or project were added.
 = 2.0.2 =

@@ -3,7 +3,7 @@
 Plugin Name: WP-CRM System
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 2.0.3
+Version: 2.0.4
 Author: Scott DeLuzio
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system
@@ -33,7 +33,7 @@ add_action('admin_menu', 'wpcrm_admin_page');
 function wpcrm_admin_page() {
 	// Add a new menu:
 	add_menu_page(__('WP-CRM System', 'wp-crm-system'), __('WP-CRM System', 'wp-crm-system'),WPCRM_USER_ACCESS,'wpcrm','wpcrm_settings_page', 'dashicons-id');
-	add_submenu_page( 'wpcrm', __('Dashboard', 'wp-crm-system'), __('Dashboard', 'wp-crm-system'), 'manage_options', 'wpcrm-settings', 'wpcrm_settings_page' );
+	add_submenu_page( 'wpcrm', __('Dashboard', 'wp-crm-system'), __('Dashboard', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-settings', 'wpcrm_settings_page' );
 	add_submenu_page( 'wpcrm', __('Email', 'wp-crm-system'), __('Email', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-email', 'wpcrm_email_page' );
 	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-reports', 'wpcrm_reports_page' );
 	add_submenu_page( 'wpcrm', __('Extensions', 'wp-crm-system'), __('Extensions', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-extensions', 'wpcrm_extensions_page' );
@@ -43,31 +43,33 @@ add_filter( 'custom_menu_order', 'wpcrm_system_custom_menu_order' );
 function wpcrm_system_custom_menu_order( $menu_ord ) {
 	global $submenu;
 	$arr = array();
-	if ( defined( 'WPCRM_INVOICING' ) ) {
-		$arr[] = $submenu['wpcrm'][7]; //Dashboard
-		$arr[] = $submenu['wpcrm'][3]; //Organizations
-		$arr[] = $submenu['wpcrm'][1]; //Contacts
-		$arr[] = $submenu['wpcrm'][4]; //Opportunities
-		$arr[] = $submenu['wpcrm'][5]; //Projects
-		$arr[] = $submenu['wpcrm'][2]; //Tasks
-		$arr[] = $submenu['wpcrm'][6]; //Campaigns
-		$arr[] = $submenu['wpcrm'][0]; //Invoices
-		$arr[] = $submenu['wpcrm'][8]; //Email
-		$arr[] = $submenu['wpcrm'][9]; //Reports
-		$arr[] = $submenu['wpcrm'][10]; //Extensions
-		$submenu['wpcrm'] = $arr;
-	} else {
-		$arr[] = $submenu['wpcrm'][6]; //Dashboard
-		$arr[] = $submenu['wpcrm'][2]; //Organizations
-		$arr[] = $submenu['wpcrm'][0]; //Contacts
-		$arr[] = $submenu['wpcrm'][3]; //Opportunities
-		$arr[] = $submenu['wpcrm'][4]; //Projects
-		$arr[] = $submenu['wpcrm'][1]; //Tasks
-		$arr[] = $submenu['wpcrm'][5]; //Campaigns
-		$arr[] = $submenu['wpcrm'][7]; //Email
-		$arr[] = $submenu['wpcrm'][8]; //Reports
-		$arr[] = $submenu['wpcrm'][9]; //Extensions
-		$submenu['wpcrm'] = $arr;
+	if ( array_key_exists( 'wpcrm', $submenu ) ) {
+		if ( defined( 'WPCRM_INVOICING' ) ) {
+			$arr[] = $submenu['wpcrm'][7]; //Dashboard
+			$arr[] = $submenu['wpcrm'][3]; //Organizations
+			$arr[] = $submenu['wpcrm'][1]; //Contacts
+			$arr[] = $submenu['wpcrm'][4]; //Opportunities
+			$arr[] = $submenu['wpcrm'][5]; //Projects
+			$arr[] = $submenu['wpcrm'][2]; //Tasks
+			$arr[] = $submenu['wpcrm'][6]; //Campaigns
+			$arr[] = $submenu['wpcrm'][0]; //Invoices
+			$arr[] = $submenu['wpcrm'][8]; //Email
+			$arr[] = $submenu['wpcrm'][9]; //Reports
+			$arr[] = $submenu['wpcrm'][10]; //Extensions
+			$submenu['wpcrm'] = $arr;
+		} else {
+			$arr[] = $submenu['wpcrm'][6]; //Dashboard
+			$arr[] = $submenu['wpcrm'][2]; //Organizations
+			$arr[] = $submenu['wpcrm'][0]; //Contacts
+			$arr[] = $submenu['wpcrm'][3]; //Opportunities
+			$arr[] = $submenu['wpcrm'][4]; //Projects
+			$arr[] = $submenu['wpcrm'][1]; //Tasks
+			$arr[] = $submenu['wpcrm'][5]; //Campaigns
+			$arr[] = $submenu['wpcrm'][7]; //Email
+			$arr[] = $submenu['wpcrm'][8]; //Reports
+			$arr[] = $submenu['wpcrm'][9]; //Extensions
+			$submenu['wpcrm'] = $arr;
+		}
 	}
 	return $menu_ord;
 }
@@ -123,6 +125,10 @@ function wpcrm_scripts_styles() {
 		  wp_register_style( 'wp_crm_system_searchable_default_css', plugins_url('/js/jquery.searchabledropdown-v1.0.8/sh/shThemeDefault.css', __FILE__ ) );
 		  wp_enqueue_style( 'wp_crm_system_searchable_default_css' );
 		}
+	}
+	if ( $active_page == 'wpcrm-settings' && ( $wpcrm_active_tab == '' || $wpcrm_active_tab =='dashboard' ) ) {
+		wp_register_script( 'wp_crm_system_dashboard_height', plugins_url( '/js/wp-crm-system-dashboard.js', __FILE__ ), array( 'jquery'), 1.0, false);
+		wp_enqueue_script( 'wp_crm_system_dashboard_height' );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );
@@ -289,6 +295,7 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_report_currency_decimal_point', '.');
 	add_option('wpcrm_system_report_currency_thousand_separator', ',');
 	add_option('wpcrm_system_searchable_dropdown', 'off');
+	add_option('wpcrm_hide_others_posts','no');
 	add_option('wpcrm_system_date_format', $jqueryui_format);
 	add_option('wpcrm_system_php_date_format', $php_format);
 	add_option('wpcrm_system_email_organization_filter', '');
@@ -307,6 +314,7 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_report_currency_decimal_point');
 	delete_option('wpcrm_system_report_currency_thousand_separator');
 	delete_option('wpcrm_system_searchable_dropdown');
+	delete_option('wpcrm_hide_others_posts');
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
 	delete_option('wpcrm_system_email_organization_filter');
@@ -325,6 +333,7 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_decimal_point');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_thousand_separator');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_searchable_dropdown');
+	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_hide_others_posts');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
 	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );
@@ -373,11 +382,10 @@ add_action( 'init', 'wpcrm_campaign_taxonomy');
 /**
 * Adjust capabilities as necessary
 */
-add_action('admin_init','wpcrm_add_role_caps',999);
+add_action( 'admin_init', 'wpcrm_add_role_caps', 999 );
 function wpcrm_add_role_caps() {
 	if( isset( $_POST[ 'wpcrm_system_settings_update' ] ) ) {
 		$post_types = array( 'wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign' );
-
 		// Add the roles you'd like to administer contacts
 		add_filter( 'wpcrm_system_default_user_roles', 'wpcrm_system_check_user_roles', 10 );
 		function wpcrm_system_check_user_roles( $array ){
@@ -436,7 +444,39 @@ function wpcrm_add_role_caps() {
 		}
 	}
 }
-
+/* Functions to restrict users from managing or viewing other user's WP-CRM System Records
+ * Code adapted from Manage/View Your Posts Only plugin by fearnowrath https://wordpress.org/plugins/manageview-your-posts-only/
+ */
+function wpcrm_system_parse_query_useronly( $wp_query ) {
+	if ( 'yes' == get_option( 'wpcrm_hide_others_posts' ) ) {
+		$post_types = array( 'wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign','wpcrm-invoice' );
+		foreach ( $post_types as $post_type ) {
+			if ( strpos( $_SERVER[ 'REQUEST_URI' ], '/wp-admin/edit.php?post_type=' . $post_type ) !== false ) {
+		    if ( !current_user_can( 'activate_plugins' ) )  {
+						add_action( 'views_edit-' . $post_type, 'wpcrm_system_remove_some_post_views' );
+						global $current_user;
+						$wp_query->set( 'author', $current_user->ID );
+		    }
+		  }
+		}
+	}
+}
+add_filter('parse_query', 'wpcrm_system_parse_query_useronly' );
+/**
+ * Remove All, Published and Trashed posts views.
+ *
+ * Requires WP 3.1+.
+ * @param array $views
+ * @return array
+ */
+function wpcrm_system_remove_some_post_views( $views ) {
+	unset($views['all']);
+	unset($views['publish']);
+	unset($views['trash']);
+	unset($views['draft']);
+	unset($views['pending']);
+	return $views;
+}
 /* Contacts post type. */
 function wpcrm_contacts_init() {
 	$post_type = 'wpcrm-contact';
@@ -2998,21 +3038,21 @@ function wpcrmDefaultFields() {
 		* Save the contact's title
 		*/
 		function saveContactTitle( $post_id ) {
+			global $post;
+			if ( empty( $post ) ) {
+				$post = get_post($post_id);
+			}
+
 			if ( $post_id == null || empty($_POST) ){
 				return;
 			}
 
-			if ( !isset( $_POST['post_type'] ) || $_POST['post_type']!='wpcrm-contact' ) {
+			if ( !isset( $_POST['post_type'] ) || 'wpcrm-contact' != $_POST['post_type'] || 'wpcrm-contact' != $post->post_type ) {
 				return;
 			}
 
 			if ( wp_is_post_revision( $post_id ) ) {
 				$post_id = wp_is_post_revision( $post_id );
-			}
-
-			global $post;
-			if ( empty( $post ) ) {
-				$post = get_post($post_id);
 			}
 
 			if ( isset( $_POST[$this->prefix . 'contact-first-name'] ) && $_POST[$this->prefix . 'contact-first-name'] != '' && isset( $_POST[$this->prefix . 'contact-last-name'] ) && $_POST[$this->prefix . 'contact-last-name'] != '' ) {
