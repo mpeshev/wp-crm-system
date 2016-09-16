@@ -482,7 +482,7 @@ function wpcrm_system_dashboard_settings_box() {
 							</td>
 						</tr>
 						<tr>
-							<td colspan="3"><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
+							<td colspan="3"><input type="hidden" name="wpcrm_system_settings_initial" value="set" /><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
 						</tr>
 					</tbody>
 				</table>

@@ -3,7 +3,7 @@
 Plugin Name: WP-CRM System
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 2.0.4
+Version: 2.0.5
 Author: Scott DeLuzio
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system
@@ -24,19 +24,35 @@ add_action('plugins_loaded', 'wp_crm_plugin_init');
 function wp_crm_plugin_init() {
 	load_plugin_textdomain( 'wp-crm-system', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 }
-
+/* Initial install make sure settings are saved */
+function wpcrm_system_initial_settings_notice__warning() {
+	if ( 'set' != get_option( 'wpcrm_system_settings_initial' ) ) {
+		$url = admin_url( 'admin.php?page=wpcrm-settings&tab=dashboard' );
+		$link = sprintf( wp_kses( __( 'Please visit the <a href="%s">WP-CRM System Dashboard</a> page to set your options and complete set up.', 'wp-crm-system' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
+	?>
+		<div class="notice notice-warning">
+			<p><?php echo $link; ?></p>
+		</div>
+<?php	}
+}
+add_action( 'admin_notices', 'wpcrm_system_initial_settings_notice__warning' );
 /* Settings Page */
 
 // Hook for adding admin menu
 add_action('admin_menu', 'wpcrm_admin_page');
 // action function for above hook
 function wpcrm_admin_page() {
+	if( 'set' == get_option( 'wpcrm_system_settings_initial' ) ) {
+		$page_role = WPCRM_USER_ACCESS;
+	} else {
+		$page_role = 'manage_options';
+	}
 	// Add a new menu:
-	add_menu_page(__('WP-CRM System', 'wp-crm-system'), __('WP-CRM System', 'wp-crm-system'),WPCRM_USER_ACCESS,'wpcrm','wpcrm_settings_page', 'dashicons-id');
-	add_submenu_page( 'wpcrm', __('Dashboard', 'wp-crm-system'), __('Dashboard', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-settings', 'wpcrm_settings_page' );
-	add_submenu_page( 'wpcrm', __('Email', 'wp-crm-system'), __('Email', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-email', 'wpcrm_email_page' );
-	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-reports', 'wpcrm_reports_page' );
-	add_submenu_page( 'wpcrm', __('Extensions', 'wp-crm-system'), __('Extensions', 'wp-crm-system'), WPCRM_USER_ACCESS, 'wpcrm-extensions', 'wpcrm_extensions_page' );
+	add_menu_page(__('WP-CRM System', 'wp-crm-system'), __('WP-CRM System', 'wp-crm-system'), $page_role,'wpcrm','wpcrm_settings_page', 'dashicons-id');
+	add_submenu_page( 'wpcrm', __('Dashboard', 'wp-crm-system'), __('Dashboard', 'wp-crm-system'), $page_role, 'wpcrm-settings', 'wpcrm_settings_page' );
+	add_submenu_page( 'wpcrm', __('Email', 'wp-crm-system'), __('Email', 'wp-crm-system'), $page_role, 'wpcrm-email', 'wpcrm_email_page' );
+	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), $page_role, 'wpcrm-reports', 'wpcrm_reports_page' );
+	add_submenu_page( 'wpcrm', __('Extensions', 'wp-crm-system'), __('Extensions', 'wp-crm-system'), $page_role, 'wpcrm-extensions', 'wpcrm_extensions_page' );
 }
 // Set order of submenu pages
 add_filter( 'custom_menu_order', 'wpcrm_system_custom_menu_order' );
@@ -296,6 +312,7 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_report_currency_thousand_separator', ',');
 	add_option('wpcrm_system_searchable_dropdown', 'off');
 	add_option('wpcrm_hide_others_posts','no');
+	add_option('wpcrm_system_settings_initial','');
 	add_option('wpcrm_system_date_format', $jqueryui_format);
 	add_option('wpcrm_system_php_date_format', $php_format);
 	add_option('wpcrm_system_email_organization_filter', '');
@@ -315,6 +332,7 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_report_currency_thousand_separator');
 	delete_option('wpcrm_system_searchable_dropdown');
 	delete_option('wpcrm_hide_others_posts');
+	delete_option('wpcrm_system_settings_initial');
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
 	delete_option('wpcrm_system_email_organization_filter');
@@ -334,6 +352,7 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_thousand_separator');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_searchable_dropdown');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_hide_others_posts');
+	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_settings_initial');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
 	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );

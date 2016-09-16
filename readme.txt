@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
 Tested up to: 4.6.1
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.5 =
+* Fix: New installs of the plugin were not displaying the WP-CRM System dashboard correctly.
 = 2.0.4 =
 * Fix: Added MailChimp option to dashboard extension list.
 * Fix: WP-CRM System dashboard boxes were displaying at inconsistent heights making the page layout break. JS fix to ensure consistent heights.
@@ -167,5 +169,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.0.3 =
-* Added option for certain searchable select/option menus. Specifically, select menus for choosing a user, campaign, organization, contact, or project were added.
+= 2.0.5 =
+* Fix: New installs of the plugin were not displaying the WP-CRM System dashboard correctly.
