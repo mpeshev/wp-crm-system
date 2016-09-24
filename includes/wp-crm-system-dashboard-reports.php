@@ -305,58 +305,49 @@ function wpcrm_system_dashboard_create_new_box() { ?>
 		</ul>
 	</div>
 <?php }
+function wpcrm_system_show_extensions() {
+	global $plugins_active;
+	$plugins_active = '';
+	$plugin_base = 'wp-crm-system-';
+	$active_count = 0;
+
+	$plugins = array();
+	$list = '';
+
+	if(has_filter('wpcrm_system_dashboard_extensions')) {
+		$plugins = apply_filters('wpcrm_system_dashboard_extensions', $plugins);
+		ksort( $plugins, SORT_STRING );
+	}
+
+	foreach($plugins as $plugin => $status) :
+		if( is_plugin_active( $plugin_base . $plugin.'/'.$plugin_base . $plugin.'.php' ) ) {
+			$plugins_active = 'yes';
+			$active_count++;
+			$plugin_nicename = ucwords( str_replace( '-', ' ', $plugin ) );
+			$plugin_status = get_option( $status );
+			if ( $plugin_status !== false && $plugin_status == 'valid' ) {
+				$plugin_display = '<span style="color:green;" id="' . $plugin . '">' . __( 'Active', 'wp-crm-system' ) . '</span>';
+			} else {
+				$plugin_display = '<span style="color:red;">' . __( 'Inactive', 'wp-crm-system' ) . '</span>';
+			}
+			$list .= '<div class="wp-crm-one-half wp-crm-first">' . $plugin_nicename . '</div><div class="wp-crm-one-half">' . $plugin_display . '</div>';
+		}
+	endforeach;
+
+	return $list;
+}
+
 function wpcrm_system_dashboard_extensions_box() { ?>
 	<div class="wpcrm-dashboard">
 		<h2><?php _e('Extensions', 'wp-crm-system'); ?></h2>
 		<?php
-		$plugin_base = 'wp-crm-system-';
-		$plugins_active = '';
-		$active_count = 0;
-
-		$plugins = array(
-			'import-organizations'	=> 'wpcrm_import_organizations_license_status',
-			'import-contacts'		=> 'wpcrm_import_contacts_license_status',
-			'import-opportunities'	=> 'wpcrm_import_opportunities_license_status',
-			'import-tasks'			=> 'wpcrm_import_tasks_license_status',
-			'import-projects'		=> 'wpcrm_import_projects_license_status',
-			'import-campaigns'		=> 'wpcrm_import_campaigns_license_status',
-			'custom-fields'			=> 'wpcrm_custom_fields_license_status',
-			'contact-user'			=> 'wpcrm_contact_from_user_license_status',
-			'gravity-form-connect'	=> 'wpcrm_gravity_forms_connect_license_status',
-			'invoicing'				=> 'wpcrm_invoicing_license_status',
-			'ninja-form-connect'	=> 'wpcrm_ninja_forms_connect_license_status',
-			'slack-notifications'	=> 'wpcrm_slack_notifications_license_status',
-			'email-notifications'	=> 'wpcrm_email_notifications_license_status',
-			'dropbox'				=> 'wpcrm_dropbox_license_status',
-			'zendesk'				=> 'wpcrm_zendesk_license_status',
-			'mailchimp'				=> 'wpcrm_mailchimp_license_status'
-		);
-
-		foreach( $plugins as $plugin => $status) {
-			if( is_plugin_active( $plugin_base . $plugin.'/'.$plugin_base . $plugin.'.php' ) ) {
-				$plugins_active = 'yes';
-				$active_count++;
-				$plugin_nicename = ucwords( str_replace( '-', ' ', $plugin ) );
-				$plugin_status = get_option( $status );
-				if ( $plugin_status !== false && $plugin_status == 'valid' ) {
-					$plugin_display = '<span style="color:green;">' . __( 'Active', 'wp-crm-system' ) . '</span>';
-				} else {
-					$plugin_display = '<span style="color:red;">' . __( 'Inactive', 'wp-crm-system' ) . '</span>';
-				}
-				echo '<div class="wp-crm-one-half wp-crm-first">' . $plugin_nicename . '</div><div class="wp-crm-one-half">' . $plugin_display . '</div>';
-			}
-		} ?>
+			echo wpcrm_system_show_extensions();
+		?>
 		<div class="wp-crm-first">
-		<?php if ( '' == $plugins_active ) {
+		<?php
 			$url = admin_url( 'admin.php?page=wpcrm-extensions' );
 			$link = sprintf( wp_kses( __( 'Take a look at our <a href="%s">extensions</a> to see how you can get more out of WP-CRM System.', 'wp-crm-system' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
-			echo $link;
-		} else {
-			$license_url = admin_url( 'admin.php?page=wpcrm-settings&tab=licenses' );
-			echo '<a href="' . $license_url . '">';
-			printf( esc_html( _n( 'Manage license here', 'Manage licenses here', $active_count, 'wp-crm-system' ) ), $active_count );
-			echo '</a>';
-		}
+			echo '<hr /><strong>' . $link . '</strong>';
 		?>
 		</div>
 	</div>
