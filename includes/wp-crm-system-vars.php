@@ -85,6 +85,9 @@ if ( !defined( 'WPCRM_EMAIL' ) ){
 if ( !defined( 'WPCRM_END' ) ){
 	define( 'WPCRM_END', __( 'End Date', 'wp-crm-system' ) );
 }
+if ( !defined( 'WPCRM_EXTENSION_CLIENT_AREA' ) ){
+	define( 'WPCRM_EXTENSION_CLIENT_AREA', __( 'Client Area', 'wp-crm-system' ) );
+}
 if ( !defined( 'WPCRM_EXTENSION_CONTACT_USER' ) ){
 	define( 'WPCRM_EXTENSION_CONTACT_USER', __( 'Contact From User', 'wp-crm-system' ) );
 }
@@ -121,6 +124,9 @@ if ( !defined( 'WPCRM_EXTENSION_IMPORT_TASKS' ) ){
 if ( !defined( 'WPCRM_EXTENSION_INVOICING' ) ){
 	define( 'WPCRM_EXTENSION_INVOICING', __( 'Invoicing', 'wp-crm-system' ) );
 }
+if ( !defined( 'WPCRM_EXTENSION_LESS_ACCOUNTING' ) ){
+	define( 'WPCRM_EXTENSION_LESS_ACCOUNTING', __( 'Less Accounting', 'wp-crm-system' ) );
+}
 if ( !defined( 'WPCRM_EXTENSION_MAILCHIMP_SYNC' ) ){
 	define( 'WPCRM_EXTENSION_MAILCHIMP_SYNC', __( 'MailChimp Sync', 'wp-crm-system' ) );
 }
@@ -132,6 +138,9 @@ if ( !defined( 'WPCRM_EXTENSION_SLACK' ) ){
 }
 if ( !defined( 'WPCRM_EXTENSION_ZENDESK' ) ){
 	define( 'WPCRM_EXTENSION_ZENDESK', __( 'Zendesk Connect', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_CLIENT_AREA' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_CLIENT_AREA', __( 'Create a portal for clients to see the status of their projects, tasks, campaigns, and invoices.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_CONTACT_USER' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_CONTACT_USER', __( 'Quickly create new contacts in WP-CRM System from existing users on your WordPress site.', 'wp-crm-system' ) );
@@ -168,6 +177,9 @@ if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_IMPORT_TASKS' ) ){
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_INVOICING' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_INVOICING', __( 'Send invoices and accept payments directly through WP-CRM System.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_LESS_ACCOUNTING' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_LESS_ACCOUNTING', __( 'Connect to Less Accounting to manage invoices, and client records.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_MAILCHIMP_SYNC' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_MAILCHIMP_SYNC', __( 'Add WP-CRM System contacts to your MailChimp list.', 'wp-crm-system' ) );

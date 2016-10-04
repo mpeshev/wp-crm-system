@@ -17,6 +17,30 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
         */
 		var $extensionFields = array(
 			array(
+				'title'			=>	WPCRM_EXTENSION_CLIENT_AREA,
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/client-area/',
+				'img'			=>	'/client-area-300x145.png',
+				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_CLIENT_AREA,
+				'class'			=>	'WPCRM_CLIENT_AREA',
+			),
+			array(
+				'title'			=>	WPCRM_EXTENSION_LESS_ACCOUNTING,
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/less-accounting/',
+				'img'			=>	'/less-accounting-300x145.png',
+				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_LESS_ACCOUNTING,
+				'class'			=>	'WPCRM_LESS_ACCOUNTING',
+			),
+			array(
 				'title'			=>	WPCRM_EXTENSION_MAILCHIMP_SYNC,
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',

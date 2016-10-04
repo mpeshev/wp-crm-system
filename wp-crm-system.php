@@ -1999,6 +1999,58 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 				'capability'    => WPCRM_USER_ACCESS
 			),
 			array(
+				'name'          => 'campaign-attach-to-organization',
+				'title'         => WPCRM_ATTACH_ORG,
+				'description'   => '',
+				'placeholder'   => '',
+				'type'          => 'selectorganization',
+				'scope'         => array( 'wpcrm-campaign' ),
+				'style'					=> 'wp-crm-first wp-crm-one-half',
+				'before'				=> '',
+				'after'					=> '',
+				'icon'					=> 'dashicons dashicons-building wpcrm-dashicons',
+				'capability'    => WPCRM_USER_ACCESS
+			),
+			array(
+				'name'          => 'campaign-attach-to-contact',
+				'title'         => WPCRM_ATTACH_CONTACT,
+				'description'   => '',
+				'placeholder'   => '',
+				'type'          => 'selectcontact',
+				'scope'         => array( 'wpcrm-campaign' ),
+				'style'					=> 'wp-crm-one-half',
+				'before'				=> '',
+				'after'					=> '',
+				'icon'					=> 'dashicons dashicons-id wpcrm-dashicons',
+				'capability'    => WPCRM_USER_ACCESS
+			),
+			array(
+				'name'          => 'campaign-attach-to-organization-new',
+				'title'         => WPCRM_CREATE_ORGANIZATION,
+				'description'   => '',
+				'placeholder'   => '',
+				'type'          => 'addorganization',
+				'scope'         => array( 'wpcrm-campaign' ),
+				'style'					=> 'wp-crm-first wp-crm-one-half',
+				'before'				=> '',
+				'after'					=> '',
+				'icon'					=> '',
+				'capability'    => WPCRM_USER_ACCESS
+			),
+			array(
+				'name'          => 'campaign-attach-to-contact-new',
+				'title'         => WPCRM_CREATE_CONTACT,
+				'description'   => '',
+				'placeholder'   => '',
+				'type'          => 'addcontact',
+				'scope'         => array( 'wpcrm-campaign' ),
+				'style'					=> 'wp-crm-one-half',
+				'before'				=> '',
+				'after'					=> '',
+				'icon'					=> '',
+				'capability'    => WPCRM_USER_ACCESS
+			),
+			array(
 				'name'          => 'campaign-description',
 				'title'         => WPCRM_ADDITIONAL,
 				'description'   => '',
