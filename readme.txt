@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
 Tested up to: 4.6.1
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,8 @@ Not sure if WP-CRM System is right for you? [Try out the demo](http://demo.wp-cr
 
 There are a number of inexpensive extensions that will allow you to do more with WP-CRM System.
 
+* [Client Area](https://www.wp-crm.com/downloads/client-area/) - Create a portal for clients to see the status of their projects, tasks, campaigns, and invoices.
+* [Less Accounting](https://www.wp-crm.com/downloads/less-accounting/) - Connect to Less Accounting to manage invoices, and client records.
 * [MailChimp Sync](https://www.wp-crm.com/downloads/mailchimp-sync/) - Subscribe contacts to your MailChimp list easily.
 * [Invoicing](https://www.wp-crm.com/downloads/invoicing/) - Send invoices to customers and accept payments by credit card through Stripe.
 * [Custom Fields](https://www.wp-crm.com/downloads/custom-fields/) - Add extra fields to WP-CRM System. Keep track of an unlimited number of extra data for all of your records.
@@ -69,6 +71,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.8 =
+* New: Added ability to assign campaigns to contacts and organizations.
+* Update: Added information to new extensions.
 = 2.0.7 =
 * Tweak: Update save contact name/title function to enable compatibility with certain 3rd party plugins.
 = 2.0.6 =
@@ -173,5 +178,6 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.0.7 =
-* Tweak: Update save contact name/title function to enable compatibility with certain 3rd party plugins.
+= 2.0.8 =
+* New: Added ability to assign campaigns to contacts and organizations.
+* Update: Added information to new extensions.
