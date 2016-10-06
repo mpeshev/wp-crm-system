@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
 Tested up to: 4.6.1
-Stable tag: 2.0.9
+Stable tag: 2.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.10 =
+* Tweak: Removed depreciated jQuery code used in Searchable Menus setting.
+* New: Included Google Maps API key setting to allow for continued use of Google Maps in Contact and Organization records.
 = 2.0.9 =
 * Fix: Updated date settings function, which was not saving dates correctly.
 = 2.0.8 =
@@ -180,5 +183,6 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.0.9 =
-* Fix: Updated date settings function, which was not saving dates correctly.
+= 2.0.10 =
+* Tweak: Removed depreciated jQuery code used in Searchable Menus setting.
+* New: Included Google Maps API key setting to allow for continued use of Google Maps in Contact and Organization records.
