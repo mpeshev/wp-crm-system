@@ -128,13 +128,13 @@ function wpcrm_scripts_styles() {
 
 		if ( 'on' == get_option( 'wpcrm_system_searchable_dropdown' ) ) {
 		  //Searchable Dropdown
-		  wp_register_script( 'wp_crm_searchable_core_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/sh/shCore.js', __FILE__ ), array( 'jquery'), 1.0, false);
+			wp_register_script( 'wp_crm_searchable_core_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/sh/shCore.js', __FILE__ ), array( 'jquery'), 1.0, false);
 		  wp_enqueue_script( 'wp_crm_searchable_core_js' );
 		  wp_register_script( 'wp_crm_searchable_brush_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/sh/shBrushJScript.js', __FILE__ ), array( 'jquery'), 1.0, false);
 		  wp_enqueue_script( 'wp_crm_searchable_brush_js' );
-		  wp_register_script( 'wp_crm_searchable_dropdown_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/jquery.searchabledropdown-1.0.8.min.js', __FILE__ ), array( 'jquery'), 1.0, false);
+		  wp_register_script( 'wp_crm_searchable_dropdown_js', plugins_url( '/js/jquery.searchabledropdown-v1.0.8/jquery.searchabledropdown-1.0.8.min.js', __FILE__ ), array( 'jquery'), 1.1, false);
 		  wp_enqueue_script( 'wp_crm_searchable_dropdown_js' );
-		  wp_register_script( 'wp_crm_searchable', plugins_url( '/js/wpCRMSystemSearchable.js', __FILE__ ), array( 'jquery'), 1.0, false);
+		  wp_register_script( 'wp_crm_searchable', plugins_url( '/js/wpCRMSystemSearchable.js', __FILE__ ), array( 'jquery' ), 1.0, false);
 		  wp_enqueue_script( 'wp_crm_searchable' );
 		  wp_register_style( 'wp_crm_system_searchable_core_css', plugins_url('/js/jquery.searchabledropdown-v1.0.8/sh/shCore.css', __FILE__ ) );
 		  wp_enqueue_style( 'wp_crm_system_searchable_core_css' );
@@ -256,6 +256,7 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_hide_others_posts','no');
 	add_option('wpcrm_system_settings_initial','');
 	add_option('wpcrm_system_email_organization_filter', '');
+	add_option('wpcrm_system_gmap_api', '');
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -276,6 +277,7 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
 	delete_option('wpcrm_system_email_organization_filter');
+	delete_option('wpcrm_system_gmap_api');
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -295,6 +297,7 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_settings_initial');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
+	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_gmap_api');
 	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );
 
 	$terms = get_terms('contact-type');
@@ -2099,8 +2102,10 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 				foreach ( $this->postTypes as $postType ) {
 					add_meta_box( 'wpcrm-default-fields', __( 'Fields', 'wp-crm-system' ), array( &$this, 'wpcrmDefaultFields' ), $postType, 'normal', 'high' );
 				}
-				foreach ( $this->gmapTypes as $gmapType ) {
-					add_meta_box( 'wpcrm-gmap', __( 'Map', 'wp-crm-system' ), array( &$this, 'wpcrmGmap' ), $gmapType, 'side', 'low' );
+				if ( '' != get_option( 'wpcrm_system_gmap_api' ) ) {
+					foreach ( $this->gmapTypes as $gmapType ) {
+						add_meta_box( 'wpcrm-gmap', __( 'Map', 'wp-crm-system' ), array( &$this, 'wpcrmGmap' ), $gmapType, 'side', 'low' );
+					}
 				}
 				add_meta_box( 'wpcrm-opportunity-options', __( 'WP-CRM System Options', 'wp-crm-system' ), array( &$this, 'wpcrmOpportunityOptions' ), 'wpcrm-opportunity', 'side', 'low' );
 				add_meta_box( 'wpcrm-project-tasks', __( 'Tasks', 'wp-crm-system' ), array( &$this, 'wpcrmListTasksinProjects' ), 'wpcrm-project', 'side', 'low' );
@@ -2120,12 +2125,17 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 		* Display the Google Maps meta box
 		*/
 		function wpcrmGmap() {
+			$key = get_option( 'wpcrm_system_gmap_api' );
+			if ( '' == $key ){
+				return false;
+			}
 			global $post;
 			echo '<div class="form-field form-required">';
 			function geocode($address){
 
 				// url encode the address
 				$address = urlencode($address);
+				$key = get_option( 'wpcrm_system_gmap_api' );
 
 				// google map geocode api url
 				$url = "http://maps.google.com/maps/api/geocode/json?address={$address}";
@@ -2189,7 +2199,7 @@ if ( !class_exists('wpCRMSystemCustomFields') ) {
 			<div id="gmap_canvas"><?php _e('Loading map...','wp-crm-system'); ?></div>
 			<div id='map-label'><?php _e('Map shows approximate location.','wp-crm-system'); ?></div>
 			<!-- JavaScript to show google map included here to retrieve local variables -->
-			<script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
+			<script type="text/javascript" src="//maps.google.com/maps/api/js?key=<?php echo $key; ?>"></script>
 			<script type="text/javascript">
 			function init_map() {
 				var myOptions = {

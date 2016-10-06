@@ -385,15 +385,6 @@ function wpcrm_system_dashboard_settings_box() {
 							</td>
 							<td>
 								<?php
-								/* Default list of user roles
-								$wpcrm_system_settings_roles = array(
-									'manage_options'	=>	__('Administrator', 'wp-crm-system'),
-									'edit_pages'		=>	__('Editor', 'wp-crm-system'),
-									'publish_posts'		=>	__('Author', 'wp-crm-system'),
-									'edit_posts'		=>	__('Contributor', 'wp-crm-system'),
-									'read'				=>	__('Subscriber', 'wp-crm-system')
-								);*/
-
 								add_filter( 'wpcrm_system_user_role_options', 'wpcrm_system_select_user_roles', 10 );
 								function wpcrm_system_select_user_roles( $array ){
 									$array = array(
@@ -470,6 +461,14 @@ function wpcrm_system_dashboard_settings_box() {
 							</td>
 							<td>
 								<input type="checkbox" value="yes" name="wpcrm_hide_others_posts" <?php if( 'yes' == get_option( 'wpcrm_hide_others_posts' ) ) echo 'checked'; ?> />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<strong><?php _e( 'Google Maps API Key', 'wp-crm-system' ); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'Enter a valid Google Maps API key in order to correctly display the map view in Contacts and Organizations.', 'wp-crm-system' ); ?>"></span>
+							</td>
+							<td>
+								<input type="text" value="<?php echo get_option( 'wpcrm_system_gmap_api' ); ?>" name="wpcrm_system_gmap_api" size="10" />
 							</td>
 						</tr>
 						<tr>

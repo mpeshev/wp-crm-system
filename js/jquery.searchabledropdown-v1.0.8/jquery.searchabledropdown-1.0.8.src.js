@@ -57,7 +57,7 @@
         var search = null;
 
 		// do not attach on IE6 or lower
-		if ($.browser.msie && parseInt(jQuery.browser.version) < 7)
+		if ($.support.msie && parseInt(jQuery.support.version) < 7)
 			return this;
 
     	// only active select elements with drop down capability
@@ -70,8 +70,8 @@
         var enabled = false;
 
         // detecting chrome
-        $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
-        if($.browser.chrome) $.browser.safari = false;
+        $.support.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+        if($.support.chrome) $.support.safari = false;
 
         // lets you override the options
         // inside the dom objects class property
@@ -139,7 +139,7 @@
 
 	            // clear selector select element
 	            selector.empty();
-	            this.size(end-begin);
+	            (this.end-this.begin).length;
 
 	            // append options
 	            for (var i=begin; i < end; i++)
@@ -206,16 +206,16 @@
         	// Disabled on opera because of <select> elements always return scrollTop of 0
         	// Affects up to Opera 10 beta 1, can be removed if bug is fixed
             // http://www.greywyvern.com/code/opera/bugs/selectScrollTop
-        	if($.browser.opera && parseFloat(jQuery.browser.version) >= 9.8)
+        	if($.support.opera && parseFloat(jQuery.support.version) >= 9.8)
         		return true;
 
         	// get font-size of option
         	var fs = Math.floor(parseFloat(/([0-9\.]+)px/.exec(selectorHelper.option(0).css("font-size"))));
-        	// calc line height depends on browser
+        	// calc line height depends on support
         	var fsdiff = 4;
-        	if($.browser.opera)
+        	if($.support.opera)
         		fsdiff = 2.5;
-        	if($.browser.safari || $.browser.chrome)
+        	if($.support.safari || $.support.chrome)
         		fsdiff = 3;
         	fs += Math.round(fs / fsdiff);
         	// set selectedIndex depends on mouse position and line height
@@ -319,7 +319,7 @@
             wrapper.css("position", "relative");
             wrapper.css("width", self.outerWidth());
             // relative div needs an z-index (related to IE z-index bug)
-            if($.browser.msie)
+            if($.support.msie)
             	wrapper.css("z-index", zindex);
 
             // overlay div to block events of source select element
@@ -374,39 +374,39 @@
 
     		// adjust search text field
     		// IE7
-    		if($.browser.msie && parseInt(jQuery.browser.version) < 8) {
+    		if($.support.msie && parseInt(jQuery.support.version) < 8) {
     			input.css("padding", "0px");
     			input.css("padding-left", "3px");
     			input.css("border-left-width", "2px");
     			input.css("border-top-width", "3px");
     		}
     		// chrome
-    		else if($.browser.chrome) {
+    		else if($.support.chrome) {
     			input.height(self.innerHeight());
     			input.css("text-transform", "none");
     			input.css("padding-left", parseFloatPx(input.css("padding-left"))+3);
     			input.css("padding-top", 2);
     		}
     		// safari
-    		else if($.browser.safari) {
+    		else if($.support.safari) {
     			input.height(self.innerHeight());
     			input.css("padding-top", 2);
     			input.css("padding-left", 3);
     			input.css("text-transform", "none");
     		}
     		// opera
-    		else if($.browser.opera) {
+    		else if($.support.opera) {
     			input.height(self.innerHeight());
     			var pl = parseFloatPx(self.css("padding-left"));
     			input.css("padding-left", pl == 1 ? pl+1 : pl);
     			input.css("padding-top", 0);
     		}
-    		else if($.browser.mozilla) {
+    		else if($.support.mozilla) {
     			input.css("padding-top", "0px");
     			input.css("border-top", "0px");
     			input.css("padding-left", parseFloatPx(self.css("padding-left"))+3);
     		}
-    		// all other browsers
+    		// all other supports
     		else {
     			input.css("padding-left", parseFloatPx(self.css("padding-left"))+3);
     			input.css("padding-top", parseFloatPx(self.css("padding-top"))+1);
@@ -420,7 +420,7 @@
     		// store css width of source select object then set width
     		// to auto to obtain the maximum width depends on the longest entry.
     		// this is nessesary to set the width of the selector, because min-width
-    		// do not work in all browser.
+    		// do not work in all support.
             var w = self.css("width");
             var ow = self.outerWidth();
             self.css("width", "auto");
@@ -429,7 +429,8 @@
 
             // entries selector replacement
             selector.hide();
-            selectorHelper.size(self.get(0).length);
+						var wpcrmself = self.get(0).length;
+            selectorHelper.wpcrmself;
             selector.css({
                 "position": "absolute",
                 "top": self.outerHeight(),
@@ -590,7 +591,8 @@
         	for(var i=0;i<storage.options.length;i++)
 				selector.append(storage.options[i]);
         	selectorHelper.selectedIndex(storage.index);
-        	selectorHelper.size(storage.options.length);
+					var wpcrmstorage = storage.options.length;
+        	selectorHelper.wpcrmstorage;
         };
 
         /**
@@ -663,7 +665,8 @@
             }
 
             // resize selector
-            selectorHelper.size(matches);
+						var wpcrmmatches = matches.length
+            selectorHelper.wpcrmmatches;
             selector.show();
             timer = null;
         };
@@ -707,7 +710,7 @@
     		// extend default settings
     		settings = $.extend(plugin.defaults, settings);
 
-    		var elmSize = this.size();
+    		var elmSize = this.length;
             return this.each(function(index) {
             	plugin.execute.call(this, settings, elmSize-index);
             });
