@@ -3,9 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 	global $wpdb;
-	include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php');
-	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : ''; 
-	
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
+	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : '';
+
 	switch ($active_report) {
 		case 'user_projects':
 			$meta_key1 = $prefix . 'project-assigned';
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$meta_key1_value = $user->data->user_login;
 				$meta_key1_display = $user->data->display_name;
 				global $post;
-				
+
 				$args = array(
 					'post_type'		=>	'wpcrm-project',
 					'meta_query'	=> array(
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -73,7 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -112,7 +112,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -144,7 +144,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$meta_compare = '>';
 				$no_projects = __('No upcoming projects.', 'wp-crm-system');
 			}
-			
+
 			$meta_key1 = $prefix . 'project-status';
 			$meta_key1_value = 'complete';
 			$meta_key2 = $prefix . 'project-closedate';
@@ -258,7 +258,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		case 'type_project':
 			$project_report = '';
 			$report_title = __('Projects by Type', 'wp-crm-system');
-			
+
 			$taxonomies = array('project-type');
 			$args = array('hide_empty'=>0);
 			$terms = get_terms($taxonomies, $args);
@@ -305,7 +305,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';

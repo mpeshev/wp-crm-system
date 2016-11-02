@@ -2,7 +2,7 @@
 
 function wpcrm_system_opportunity_value_overview_report() {
   global $wpdb;
-  include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php'); ?>
+  include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php'); ?>
   <tr>
     <td>
       <strong><?php _e('Value of Opportunities', 'wp-crm-system'); ?></strong>
@@ -20,7 +20,7 @@ add_action( 'wpcrm_system_overview_reports', 'wpcrm_system_opportunity_value_ove
 
 function wpcrm_system_projects_value_overview_report() {
   global $wpdb;
-  include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php'); ?>
+  include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php'); ?>
   <tr>
     <td>
       <strong><?php _e('Value of Projects', 'wp-crm-system'); ?></strong>
@@ -38,7 +38,7 @@ add_action( 'wpcrm_system_overview_reports', 'wpcrm_system_projects_value_overvi
 
 function wpcrm_system_overdue_tasks_overview_report() {
   global $wpdb;
-  include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php'); ?>
+  include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php'); ?>
   <tr>
     <td>
       <strong><?php _e('Overdue Tasks', 'wp-crm-system'); ?></strong>

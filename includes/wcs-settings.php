@@ -29,7 +29,7 @@ if ($wpcrm_active_tab == 'licenses') {
 
 // Load paid plugin settings if plugins are installed and active.
 function wpcrm_import_settings_content() {
-	include(plugin_dir_path( __FILE__ ) . 'includes/return_bytes.php');
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/return_bytes.php');
   do_action( 'wpcrm_system_import_field' );
 }
 function wpcrm_license_keys() {

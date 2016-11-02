@@ -1,18 +1,18 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
-} 
+}
 	global $wpdb;
-	include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php');
-	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : ''; 
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
+	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : '';
 	$active_campaign = isset( $_GET['campaign'] ) ? $_GET['campaign'] : '';
-	
+
 	switch ($active_report) {
 		case 'all_campaigns':
 			$campaign_report = '';
 			$report_title = '';
 			$no_campaigns = __('No campaigns to display.', 'wp-crm-system');
-				
+
 			$meta_key1 = $prefix . 'campaign-status';
 			$meta_key1_values = array('not-started'=>__('Not Started','wp-crm-system'),'in-progress'=>__('In Progress','wp-crm-system'),'complete'=>__('Complete','wp-crm-system'),'on-hold'=>__('On Hold','wp-crm-system'));
 			$assigned = $prefix . 'campaign-assigned';
@@ -52,18 +52,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 				}
 			} else {
 				$report_title .= get_the_title($active_campaign).' <a href="'.get_edit_post_link($active_campaign).'">'.__('Edit this campaign','wp-crm-system').'</a>';
-				if (get_post_meta($active_campaign,$active,true) == 'yes') { 
-					$is_active = WPCRM_ACTIVE; 
-				} else { 
+				if (get_post_meta($active_campaign,$active,true) == 'yes') {
+					$is_active = WPCRM_ACTIVE;
+				} else {
 					$is_active = WPCRM_INACTIVE;
 				}
 				$campaign_status = get_post_meta($active_campaign,$status,true);
 				$statuses = array(__('Not Started','wp-crm-system')=>'not-started',__('In Progress','wp-crm-system')=>'in-progress',__('Complete','wp-crm-system')=>'complete',__('On Hold','wp-crm-system')=>'on-hold');
 				$display_status = array_search($campaign_status,$statuses);
-				if (get_post_meta($active_campaign,$assigned,true) && get_post_meta($active_campaign,$assigned,true) != '') { 
-					$user = get_user_by('login',get_post_meta($active_campaign,$assigned,true)); 
+				if (get_post_meta($active_campaign,$assigned,true) && get_post_meta($active_campaign,$assigned,true) != '') {
+					$user = get_user_by('login',get_post_meta($active_campaign,$assigned,true));
 					$is_assigned = $user->display_name;
-				} else { 
+				} else {
 					$is_assigned = __('Not Assigned','wp-crm-system');
 				}
 				$attach_campaign = $prefix . 'opportunity-attach-to-campaign';
@@ -82,20 +82,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$wpdb->flush();
 				$won = 'won';
 				$won_key = $prefix . 'opportunity-wonlost';
-				$search_won_opps = $wpdb->get_col($wpdb->prepare("SELECT a.meta_value 
-				FROM $wpdb->postmeta a 
-				INNER JOIN $wpdb->postmeta b 
-					ON a.post_id = b.post_id 
-					AND b.meta_key = %s 
-					AND b.meta_value = %s 
+				$search_won_opps = $wpdb->get_col($wpdb->prepare("SELECT a.meta_value
+				FROM $wpdb->postmeta a
+				INNER JOIN $wpdb->postmeta b
+					ON a.post_id = b.post_id
+					AND b.meta_key = %s
+					AND b.meta_value = %s
 				INNER JOIN $wpdb->postmeta c
 					ON a.post_id = c.post_id
-					AND c.meta_key = %s 
-					AND c.meta_value = %s 
+					AND c.meta_key = %s
+					AND c.meta_value = %s
 				WHERE a.meta_key = %s", $attach_campaign,$active_campaign,$won_key,$won,$opp_val));
 				$value_won_opps = strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(array_sum( $search_won_opps ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
 				$roi = number_format(((array_sum( $search_won_opps )-get_post_meta($active_campaign,$actualcost,true))/get_post_meta($active_campaign,$actualcost,true)*100),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
-				
+
 				$campaign_report .= '<tr><th>'.WPCRM_ASSIGNED.'</th><th>'.WPCRM_ACTIVE.'</th><th>'.WPCRM_STATUS.'</th><th>'.WPCRM_START.'</th><th>'.WPCRM_END.'</th><th>'.WPCRM_REACH.'</th><th>'.WPCRM_RESPONSES.'</th><th>'.WPCRM_OPPORTUNITIES.'</th><th>'.WPCRM_VALUE_OPPS.'</th><th>'.WPCRM_VALUE_WON_OPPS.'</th><th>'.WPCRM_ROI.'</th><th>'.WPCRM_BUDGETED_COST.'</th><th>'.WPCRM_ACTUAL_COST.'</th></tr>';
 				$campaign_report .= '<tr><td>'.$is_assigned.'</td><td>'.$is_active.'</td><td>'.$display_status.'</td><td>'.date(get_option('wpcrm_system_php_date_format'),get_post_meta($active_campaign,$start,true)).'</td><td>'.date(get_option('wpcrm_system_php_date_format'),get_post_meta($active_campaign,$end,true)).'</td><td>'.number_format(get_post_meta($active_campaign,$reach,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td><td>'.number_format(get_post_meta($active_campaign,$responses,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td><td>'.$count_opportunities.'</td><td>'.$value_opportunities.'</td><td>'.$value_won_opps.'</td><td>'.$roi.'%</td><td>'.strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(get_post_meta($active_campaign,$budgetcost,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td><td>'.strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(get_post_meta($active_campaign,$actualcost,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td></tr>';
 			}
@@ -116,7 +116,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$meta_key1_value = $user->data->user_login;
 				$meta_key1_display = $user->data->display_name;
 				global $post;
-				
+
 				$args = array(
 					'post_type'		=>	'wpcrm-campaign',
 					'meta_query'	=> array(
@@ -127,7 +127,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$campaigns .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -149,7 +149,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		case 'type_campaign':
 			$campaign_report = '';
 			$report_title = __('Campaigns by Type', 'wp-crm-system');
-			
+
 			$taxonomies = array('campaign-type');
 			$args = array('hide_empty'=>0);
 			$terms = get_terms($taxonomies, $args);

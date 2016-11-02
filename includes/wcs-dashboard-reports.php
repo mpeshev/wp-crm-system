@@ -1,7 +1,7 @@
 <?php defined( 'ABSPATH' ) OR exit;
 function wp_crm_user_projects( $report ) {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 	$meta_key1 = $prefix . 'project-assigned';
 	$meta_key2 = $prefix . 'project-status';
 	$meta_key2_value = 'complete';
@@ -80,7 +80,7 @@ function wp_crm_user_projects( $report ) {
 }
 function wp_crm_user_tasks() {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 	$meta_key1 = $prefix . 'task-assignment';
 	$meta_key2 = $prefix . 'task-status';
 	$meta_key2_value = 'complete';
@@ -138,7 +138,7 @@ function wp_crm_user_tasks() {
 }
 function wp_crm_user_opportunities( $report ) {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 	$meta_key1 = $prefix . 'opportunity-assigned';
 	$meta_key2 = $prefix . 'opportunity-wonlost';
 	$meta_key2_value = 'not-set';
@@ -217,7 +217,7 @@ function wp_crm_user_opportunities( $report ) {
 }
 function wp_crm_user_campaigns() {
 	global $wpdb;
-	include(plugin_dir_path( __FILE__ ) . 'wp-crm-system-vars.php');
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 	$meta_key1 = $prefix . 'campaign-assigned';
 	$meta_key2 = $prefix . 'campaign-active';
 	$meta_key2_value = 'yes';

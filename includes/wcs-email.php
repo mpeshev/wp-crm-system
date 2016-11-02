@@ -1,5 +1,5 @@
 <?php defined( 'ABSPATH' ) OR exit;
-include(plugin_dir_path( __FILE__ ) . 'includes/wp-crm-system-vars.php');
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
 $current_user = wp_get_current_user();
 wpcrm_send_email();
 $to = array();
@@ -11,7 +11,7 @@ $check = '';
 $fromemail = $current_user->user_email;
 $fromname = $current_user->display_name;
 if(isset($_POST['wpcrm_email_send'])) {
-	if ('' == $_POST['wpcrm-email-recipients'] || '' == $_POST['wpcrm-email-subject'] || '' == $_POST['wpcrm-email-message'] || '' == $_POST['wpcrm-email-from-name'] || '' == $_POST['wpcrm-email-from-address']) { 
+	if ('' == $_POST['wpcrm-email-recipients'] || '' == $_POST['wpcrm-email-subject'] || '' == $_POST['wpcrm-email-message'] || '' == $_POST['wpcrm-email-from-name'] || '' == $_POST['wpcrm-email-from-address']) {
 		$recipients = $_POST['wpcrm-email-recipients'];
 		foreach ($recipients as $recipient) {
 			$to[] = $recipient;
@@ -84,7 +84,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 					<tr>
 						<td><?php _e('Select Recipients','wp-crm-system'); ?></td>
 						<td>
-						<?php 
+						<?php
 						if($filterOrg != '') {
 							if($filter_cats != 'yes') {
 								foreach ( $terms as $term ) {
@@ -130,9 +130,9 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 								$posts = get_posts($args);
 								if ($posts) { ?>
 									<select class="wp-crm-email" name="wpcrm-email-recipients[]" id="wpcrm-email-recipients" multiple>
-								<?php 
+								<?php
 									foreach($posts as $org) {
-										setup_postdata( $org ); 
+										setup_postdata( $org );
 										$custom = get_post_custom($org->ID);
 										$email = $custom['_wpcrm_contact-email'];
 										foreach ( $email as $key => $value ) {
@@ -148,7 +148,7 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 									_e('Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
 								}
 							endwhile; ?>
-							
+
 						<?php } else {
 							$term_id = array();
 							if($filter_cats == 'yes') {
@@ -172,14 +172,14 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 									'post_type'			=> 'wpcrm-contact',
 								);
 							}
-							
+
 							$contacts = get_posts($args);
 							if($contacts) { ?>
 								<select class="wp-crm-email" name="wpcrm-email-recipients[]" id="wpcrm-email-recipients" multiple>
-									<?php foreach ($contacts as $contact) { 
-										setup_postdata( $contact ); 
+									<?php foreach ($contacts as $contact) {
+										setup_postdata( $contact );
 										$custom = get_post_custom($contact->ID);
-										$email = $custom['_wpcrm_contact-email'];
+										$email = array_key_exists( '_wpcrm_contact-email', $custom ) ? $custom['_wpcrm_contact-email'] : array();
 										foreach ( $email as $key => $value ) {
 											$emailaddress = $value;
 										}
@@ -236,7 +236,7 @@ function wpcrm_send_email() {
 	if (isset($_POST['wpcrm_email_send'])) {
 		//All fields are required
 		if ('' == $_POST['wpcrm-email-recipients'] || '' == $_POST['wpcrm-email-subject'] || '' == $_POST['wpcrm-email-message'] || '' == $_POST['wpcrm-email-from-name'] || '' == $_POST['wpcrm-email-from-address']) { ?>
-			<div class="error"><p><?php _e('All fields are required. Please try again.','wp-crm-system'); ?></p></div><?php 
+			<div class="error"><p><?php _e('All fields are required. Please try again.','wp-crm-system'); ?></p></div><?php
 		} else {
 			//Specific data to send in email.
 			$recipients = $_POST['wpcrm-email-recipients'];
@@ -247,10 +247,10 @@ function wpcrm_send_email() {
 			foreach ($recipients as $recipient) {
 				$to[] = sanitize_email($recipient);
 			}
-			
-			// Setup wp_mail 
+
+			// Setup wp_mail
 			wp_mail( $to, $subject, $message, $headers );
-			
+
 			// Success message ?>
 			<div class="updated"><p><?php _e('Email sent successfully.','wp-crm-system'); ?></p></div>
 			<?php return;

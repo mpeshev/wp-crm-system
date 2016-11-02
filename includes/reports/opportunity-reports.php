@@ -3,9 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 	global $wpdb;
-	include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php');
-	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : ''; 
-	
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
+	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : '';
+
 	switch ($active_report) {
 		case 'user_opportunities':
 			$meta_key1 = $prefix . 'opportunity-assigned';
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$meta_key1_value = $user->data->user_login;
 				$meta_key1_display = $user->data->display_name;
 				global $post;
-				
+
 				$args = array(
 					'post_type'		=>	'wpcrm-opportunity',
 					'meta_query'	=> array(
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$opportunities .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -73,7 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$opportunities .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -112,7 +112,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$opportunities .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -135,7 +135,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$opportunity_report = '';
 			$report_title = __('Opportunities by Status', 'wp-crm-system');
 			$no_opportunities = __('No opportunities to display.', 'wp-crm-system');
-				
+
 			$meta_key1 = $prefix . 'opportunity-wonlost';
 			$meta_key1_values = array('won'=>__('Won','wp-crm-system'),'lost'=>__('Lost','wp-crm-system'),'suspended'=>__('Suspended','wp-crm-system'),'abandoned'=>__('Abandoned','wp-crm-system'),'not-set'=>__('Not Set','wp-crm-system'));
 			$meta_key2 = $prefix . 'opportunity-closedate';
@@ -167,7 +167,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		case 'type_opportunity':
 			$opportunity_report = '';
 			$report_title = __('Opportunities by Type', 'wp-crm-system');
-			
+
 			$taxonomies = array('opportunity-type');
 			$args = array('hide_empty'=>0);
 			$terms = get_terms($taxonomies, $args);

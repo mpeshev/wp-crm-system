@@ -242,7 +242,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 						if ($extensionField['overview'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
-								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo plugins_url('includes/images',__FILE__) . $extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
+								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo WP_CRM_SYSTEM_PLUGIN_URL . '/includes/images/' . $extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
 								<p><?php echo $extensionField['desc']; ?></p>
 								<?php if(defined($extensionField['class'])) { ?>
 									<a href="" class="button-secondary disabled"><?php _e('Extension Installed','wp-crm-system'); ?></a>
@@ -264,7 +264,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 						if ($extensionField['contact-forms'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
-								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo plugins_url('includes/images',__FILE__) .$extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
+								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo WP_CRM_SYSTEM_PLUGIN_URL . '/includes/images/' . $extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
 								<p><?php echo $extensionField['desc']; ?></p>
 								<?php if(defined($extensionField['class'])) { ?>
 									<a href="" class="button-secondary disabled"><?php _e('Extension Installed','wp-crm-system'); ?></a>
@@ -286,7 +286,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 						if ($extensionField['import'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
-								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo plugins_url('includes/images',__FILE__) .$extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
+								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo WP_CRM_SYSTEM_PLUGIN_URL . '/includes/images/' . $extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
 								<p><?php echo $extensionField['desc']; ?></p>
 								<?php if(defined($extensionField['class'])) { ?>
 									<a href="" class="button-secondary disabled"><?php _e('Extension Installed','wp-crm-system'); ?></a>
@@ -308,7 +308,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 						if ($extensionField['notifications'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
-								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo plugins_url('includes/images',__FILE__) .$extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
+								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo WP_CRM_SYSTEM_PLUGIN_URL . '/includes/images/' . $extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
 								<p><?php echo $extensionField['desc']; ?></p>
 								<?php if(defined($extensionField['class'])) { ?>
 									<a href="" class="button-secondary disabled"><?php _e('Extension Installed','wp-crm-system'); ?></a>
@@ -330,7 +330,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 						if ($extensionField['documents'] == 'yes') { ?>
 							<div class="wpcrm-extension">
 								<h3 class="wpcrm-extension-title"><?php echo $extensionField['title']; ?></h3>
-								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo plugins_url('includes/images',__FILE__) .$extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
+								<a href="<?php echo $extensionField['url']; ?>"><img width="300px" height="145px" src="<?php echo WP_CRM_SYSTEM_PLUGIN_URL . '/includes/images/' . $extensionField['img']; ?>" alt="<?php echo $extensionField['title']; ?>" /></a>
 								<p><?php echo $extensionField['desc']; ?></p>
 								<?php if(defined($extensionField['class'])) { ?>
 									<a href="" class="button-secondary disabled"><?php _e('Extension Installed','wp-crm-system'); ?></a>

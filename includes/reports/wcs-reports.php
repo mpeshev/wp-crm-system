@@ -55,7 +55,7 @@ add_action( 'wpcrm_system_report_content', 'wpcrm_system_report_campaign_content
 function wpcrm_system_report_overview_content() {
 	global $wpcrm_reports_active_tab;
 	if ($wpcrm_reports_active_tab == 'overview') {
-		include(plugin_dir_path( __FILE__ ) . 'includes/reports/overview-reports.php'); ?>
+		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/overview-reports.php' ); ?>
 		<div class="wrap">
 			<div>
 				<h2><?php _e('WP CRM System Reports', 'wp-crm-system'); ?></h2>
@@ -71,37 +71,37 @@ function wpcrm_system_report_overview_content() {
 function wpcrm_system_report_project_content() {
 	global $wpcrm_reports_active_tab;
 	if ($wpcrm_reports_active_tab == 'project') {
-		include(plugin_dir_path( __FILE__ ) . 'includes/reports/project-reports.php');
+		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/project-reports.php' );
 	}
 }
 function wpcrm_system_report_opportunity_content() {
 	global $wpcrm_reports_active_tab;
 	if ($wpcrm_reports_active_tab == 'opportunity') {
-		include(plugin_dir_path( __FILE__ ) . 'includes/reports/opportunity-reports.php');
+		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/opportunity-reports.php' );
 	}
 }
 function wpcrm_system_report_task_content() {
 	global $wpcrm_reports_active_tab;
 	if ($wpcrm_reports_active_tab == 'task') {
-		include(plugin_dir_path( __FILE__ ) . 'includes/reports/task-reports.php');
+		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/task-reports.php' );
 	}
 }
 function wpcrm_system_report_organization_content() {
 	global $wpcrm_reports_active_tab;
 	if ($wpcrm_reports_active_tab == 'organization') {
-		include(plugin_dir_path( __FILE__ ) . 'includes/reports/organization-reports.php');
+		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/organization-reports.php' );
 	}
 }
 function wpcrm_system_report_contact_content() {
 	global $wpcrm_reports_active_tab;
 	if ($wpcrm_reports_active_tab == 'contact') {
-		include(plugin_dir_path( __FILE__ ) . 'includes/reports/contact-reports.php');
+		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/contact-reports.php' );
 	}
 }
 function wpcrm_system_report_campaign_content() {
 	global $wpcrm_reports_active_tab;
 	if ($wpcrm_reports_active_tab == 'campaign') {
-		include(plugin_dir_path( __FILE__ ) . 'includes/reports/campaign-reports.php');
+		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/reports/campaign-reports.php' );
 	}
 }
 ?>

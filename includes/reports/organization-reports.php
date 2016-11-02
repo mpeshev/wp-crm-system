@@ -3,9 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 	global $wpdb;
-	include(plugin_dir_path( dirname(dirname(__FILE__ ))) . 'includes/wp-crm-system-vars.php');
-	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : ''; 
-	
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
+	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : '';
+
 	switch ($active_report) {
 		case 'contacts_organization':
 			$meta_key1 = $prefix . 'contact-attach-to-organization';
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$organizations .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -46,11 +46,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$organization_report = '<tr><td>' . __('No contacts are linked to organizations. Please add or edit a contact and link it to an organization for this report to show.', 'wp-crm-system');
 			}
 			break;
-		
+
 		case 'type_orgnaizations':
 			$organization_report = '';
 			$report_title = __('Organizations by Type', 'wp-crm-system');
-			
+
 			$taxonomies = array('organization-type');
 			$args = array('hide_empty'=>0);
 			$terms = get_terms($taxonomies, $args);
@@ -97,7 +97,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$organizations .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
@@ -136,7 +136,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						),
 					),
 				);
-				$posts = get_posts($args);					
+				$posts = get_posts($args);
 				if ($posts) {
 					foreach($posts as $post) {
 						$organizations .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
