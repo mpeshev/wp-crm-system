@@ -402,36 +402,37 @@ function geocode($address){
 function wcs_gmap_load_js() {
   global $post;
   $active_page = isset( $_GET[ 'action' ] ) ? $_GET[ 'action' ] : '';
-  if (( 'wpcrm-contact' == $post->post_type ) || ( 'wpcrm-organization' == $post->post_type ) ){
-	  if ( 'edit' == $active_page ) {
-		  $key = get_option( 'wpcrm_system_gmap_api' );
-			wp_enqueue_script( 'wcs_gmap_api_js', '//maps.google.com/maps/api/js?key=' . $key, null, 1.0, true );
-		  $screen = get_current_screen();
-		  if (get_post_type() == 'wpcrm-contact'){
-				$addressString = get_post_meta( $post->ID, '_wpcrm_contact-address1', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-address2', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-city', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-state', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-postal', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-country', true );
-			}
-			if (get_post_type() == 'wpcrm-organization'){
-				$addressString = get_post_meta( $post->ID, '_wpcrm_organization-address1', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-address2', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-city', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-state', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-postal', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-country', true );
-			}
-			// get latitude, longitude and formatted address
-			$data_arr = geocode( $addressString );
+  if( !empty( $post ) ) {
+    if (( 'wpcrm-contact' == $post->post_type ) || ( 'wpcrm-organization' == $post->post_type ) ){
+  	  if ( 'edit' == $active_page ) {
+  		  $key = get_option( 'wpcrm_system_gmap_api' );
+  			wp_enqueue_script( 'wcs_gmap_api_js', '//maps.google.com/maps/api/js?key=' . $key, null, 1.0, true );
+  		  $screen = get_current_screen();
+  		  if (get_post_type() == 'wpcrm-contact'){
+  				$addressString = get_post_meta( $post->ID, '_wpcrm_contact-address1', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-address2', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-city', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-state', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-postal', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_contact-country', true );
+  			}
+  			if (get_post_type() == 'wpcrm-organization'){
+  				$addressString = get_post_meta( $post->ID, '_wpcrm_organization-address1', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-address2', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-city', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-state', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-postal', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-country', true );
+  			}
+  			// get latitude, longitude and formatted address
+  			$data_arr = geocode( $addressString );
 
-			// if able to geocode the address
-			if( $data_arr ){
-				$latitude = $data_arr[0];
-				$longitude = $data_arr[1];
-				$formatted_address = $data_arr[2];
-		  }
-
-		  wp_enqueue_script( 'wcs_gmap_js_handle', WP_CRM_SYSTEM_URL . '/js/show-gmap.js', null, 1.0, true );
-		  wp_localize_script( 'wcs_gmap_js_handle', 'wcs_gmap_vars',
-			array(
-			  'latitude'  => $latitude,
-			  'longitude' => $longitude,
-			  'address'   => $formatted_address
-			)
-		  );
-	  }
+  			// if able to geocode the address
+  			if( $data_arr ){
+  				$latitude = $data_arr[0];
+  				$longitude = $data_arr[1];
+  				$formatted_address = $data_arr[2];
+          wp_enqueue_script( 'wcs_gmap_js_handle', WP_CRM_SYSTEM_URL . '/js/show-gmap.js', null, 1.0, true );
+    		  wp_localize_script( 'wcs_gmap_js_handle', 'wcs_gmap_vars',
+      			array(
+      			  'latitude'  => $latitude,
+      			  'longitude' => $longitude,
+      			  'address'   => $formatted_address
+      			)
+    		  );
+  		  }
+  	  }
+    }
   }
 }
 add_action( 'admin_enqueue_scripts', 'wcs_gmap_load_js' );
@@ -460,7 +461,7 @@ function wpcrmGmap() {
 		<!-- google map will be shown here -->
 		<div id="gmap_canvas"><?php _e('Loading map...','wp-crm-system'); ?></div>
 		<div id='map-label'><?php _e('Map shows approximate location.','wp-crm-system'); ?></div>
-		
+
     <?php
 	} else {
 		_e('No Map Found. Please enter an address or verify the address details are correct.','wp-crm-system');
