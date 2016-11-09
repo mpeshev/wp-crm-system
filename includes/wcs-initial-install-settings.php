@@ -17,8 +17,7 @@ function wpcrm_system_initial_settings_notice__warning() {
 add_action( 'admin_notices', 'wpcrm_system_initial_settings_notice__warning' );
 
 //Register Settings
-register_activation_hook(__FILE__, 'activate_wpcrm_system_settings');
-register_uninstall_hook(__FILE__, 'deactivate_wpcrm_system_settings');
+
 add_action('admin_init', 'register_wpcrm_system_settings');
 function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_select_user_role', 'manage_options');

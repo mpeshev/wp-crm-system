@@ -63,7 +63,8 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-opportunity.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-organization.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-project.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-task.php' );
-
+register_activation_hook(__FILE__, 'activate_wpcrm_system_settings');
+register_uninstall_hook(__FILE__, 'deactivate_wpcrm_system_settings');
 
 
 //* Add TinyMCE Editor and Media Upload to WP-CRM System Comments - To Do
