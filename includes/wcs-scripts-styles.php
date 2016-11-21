@@ -61,7 +61,7 @@ function wpcrm_scripts_styles() {
 		wp_enqueue_script( 'wp_crm_system_dashboard_height' );
 	}
 
-  wp_enqueue_script('wpcrm-ajax', WP_CRM_SYSTEM_PLUGIN_DIR . '/js/wpcrm-update.js', array('jquery'));
+  wp_enqueue_script('wpcrm-ajax', WP_CRM_SYSTEM_PLUGIN_URL . '/js/wpcrm-update.js', array('jquery'));
 	wp_localize_script('wpcrm-ajax', 'wpcrm_vars', array(
 			'wpcrm_nonce' => wp_create_nonce('wpcrm-nonce')
 		)
