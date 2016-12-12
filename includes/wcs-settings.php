@@ -6,6 +6,10 @@ if( isset($_GET['settings-updated']) ) { ?>
 <?php }
 global $wpcrm_active_tab;
 $wpcrm_active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'dashboard';
+
+global $wpcrm_active_subtab;
+$wpcrm_active_subtab = isset( $_GET[ 'subtab' ] ) ? $_GET[ 'subtab' ] : '';
+
 ?>
 <h2 class="nav-tab-wrapper">
   <?php
