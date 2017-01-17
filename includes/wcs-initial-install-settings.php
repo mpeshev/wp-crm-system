@@ -28,6 +28,7 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_searchable_dropdown', 'off');
 	add_option('wpcrm_hide_others_posts','no');
 	add_option('wpcrm_system_settings_initial','');
+	add_option('wpcrm_system_show_org_address','');
 	add_option('wpcrm_system_email_organization_filter', '');
 	add_option('wpcrm_system_gmap_api', '');
 
@@ -47,6 +48,7 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_searchable_dropdown');
 	delete_option('wpcrm_hide_others_posts');
 	delete_option('wpcrm_system_settings_initial');
+	delete_option('wpcrm_system_show_org_address');
 	delete_option('wpcrm_system_date_format');
 	delete_option('wpcrm_system_php_date_format');
 	delete_option('wpcrm_system_email_organization_filter');
@@ -68,6 +70,7 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_searchable_dropdown');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_hide_others_posts');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_settings_initial');
+	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_show_org_address');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_gmap_api');

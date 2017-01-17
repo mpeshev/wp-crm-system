@@ -449,6 +449,14 @@ function wpcrm_system_dashboard_settings_box() {
 						</tr>
 						<tr>
 							<td colspan="2">
+								<strong><?php _e( 'Show Org. Address', 'wp-crm-system' ); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'If you have multiple organizations with the same name and possibly different locations, it would be difficult to distinguish which is which in the various dropdown menus. Check this box to add the Address 1 field for each organization to the dropdown menu.', 'wp-crm-system' ); ?>"></span>
+							</td>
+							<td>
+								<input type="checkbox" value="true" name="wpcrm_system_show_org_address" <?php checked( get_option( 'wpcrm_system_show_org_address' ), 'true' ); ?> />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
 								<strong><?php _e( 'Searchable Menus', 'wp-crm-system' ); ?></strong><span class="dashicons dashicons-editor-help" title="<?php _e( 'If you have a large number of records to be displayed in a drop down menu, this option will allow you to filter results by typing instead of scrolling through the whole list.', 'wp-crm-system' ); ?>"></span>
 							</td>
 							<td>

@@ -964,8 +964,9 @@ $defaultFields = wpcrm_system_fields();
 								if ( $selection == 'do not show') { $selected = 'selected'; $linkorg = ' '; } else { $selected = ''; }
 								echo '<option value="do not show" ' . $selected . '>Not Applicable</option>';
 								foreach($orgs as $org) {
+                  $orgaddress = ( true == get_option( 'wpcrm_system_show_org_address' ) && '' != get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) ) ? ' [' . get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) . ']' : '';
 									if ($selection == $org->ID) { $selected = 'selected'; $linkorg = $org->ID;} else { $selected = ''; }
-									echo '<option value="' . $org->ID . '"' . $selected . '>' . get_the_title($org->ID) . '</option>';
+									echo '<option value="' . $org->ID . '"' . $selected . '>' . get_the_title($org->ID) . $orgaddress . '</option>';
 								}
 								echo '</select>';
 								if (isset($linkorg)) {
@@ -983,8 +984,9 @@ $defaultFields = wpcrm_system_fields();
 								if ( $selection == 'do not show') { $selected = 'selected'; } else { $selected = ''; }
 								echo '<option value="do not show" ' . $selected . '>Not Applicable</option>';
 								foreach($orgs as $org) {
+                  $orgaddress = ( true == get_option( 'wpcrm_system_show_org_address' ) && '' != get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) ) ? ' [' . get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) . ']' : '';
 									if ($selection == $org->ID) { $selected = 'selected'; $linkorg = $org->ID;} else { $selected = ''; }
-									echo '<option value="' . $org->ID . '"' . $selected . '>' . get_the_title($org->ID) . '</option>';
+									echo '<option value="' . $org->ID . '"' . $selected . '>' . get_the_title($org->ID) . $orgaddress . '</option>';
 								}
 								echo '</select>';
 								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
