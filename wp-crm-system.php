@@ -63,6 +63,13 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-opportunity.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-organization.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-project.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-task.php' );
+/* Include custom meta columns */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-campaign.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-contact.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-opportunity.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-organization.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-project.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-task.php' );
 register_activation_hook(__FILE__, 'activate_wpcrm_system_settings');
 register_uninstall_hook(__FILE__, 'deactivate_wpcrm_system_settings');
 
