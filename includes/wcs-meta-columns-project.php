@@ -9,7 +9,7 @@ function wpcrm_system_project_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Task', 'wp-crm-system' ),
+		'title' => __( 'Project', 'wp-crm-system' ),
 		'value' => __( 'Value', 'wp-crm-system' ),
 		'closedate' => __( 'Close Date', 'wp-crm-system' ),
 		'progress' => __( 'Progress', 'wp-crm-system' ),

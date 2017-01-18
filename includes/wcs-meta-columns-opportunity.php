@@ -9,7 +9,7 @@ function wpcrm_system_opportunity_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Task', 'wp-crm-system' ),
+		'title' => __( 'Opportunity', 'wp-crm-system' ),
 		'probability' => __( 'Probability', 'wp-crm-system' ),
 		'closedate' => __( 'Close Date', 'wp-crm-system' ),
 		'value' => __( 'Value', 'wp-crm-system' ),

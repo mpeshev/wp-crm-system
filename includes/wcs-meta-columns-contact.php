@@ -9,7 +9,8 @@ function wpcrm_system_contact_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Task', 'wp-crm-system' ),
+		'title' => __( 'Name', 'wp-crm-system' ),
+		'photo' => __( 'Photo', 'wp-crm-system' ),
 		'org' => __( 'Organization', 'wp-crm-system' ),
 		'phone' => __( 'Phone', 'wp-crm-system' ),
 		'mobile' => __( 'Mobile Phone', 'wp-crm-system' ),
@@ -28,6 +29,26 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 	switch( $column ) {
 
+		/* If displaying the 'photo' column. */
+		case 'photo' :
+
+			/* Get the post meta. */
+			$email = get_post_meta( $post_id, '_wpcrm_contact-email', true );
+			$thumbnail = get_the_post_thumbnail( $post_id, array( 96, 96 ) );
+
+			/* If no duration is found, output a default message. */
+			if ( empty( $email ) && empty( $thumbnail ) )
+				echo __( 'No Photo Set', 'wp-crm-system' );
+
+			/* If there is a photo, display it. */
+			else
+				if ( !empty( $thumbnail ) ){
+					echo $thumbnail;
+				} else {
+					echo get_avatar( $email );
+				}
+
+			break;
 		/* If displaying the 'org' column. */
 		case 'org' :
 
@@ -189,3 +210,57 @@ function wpcrm_system_sort_contact_columns( $vars ) {
 	}
 	return $vars;
 }
+
+/* Start filter contacts by organization */
+add_action( 'restrict_manage_posts', 'wpcrm_system_contact_filter_by_organization' );
+
+function wpcrm_system_contact_filter_by_organization(){
+	global $pagenow;
+    $type = '';
+    if (isset($_GET['post_type'])) {
+        $type = $_GET['post_type'];
+    }
+    if ( 'wpcrm-contact' == $type && is_admin() && $pagenow=='edit.php' ) {
+		global $wpdb;
+		$custom_post_type = 'wpcrm-organization';
+		$allowed = $wpdb->get_results( $wpdb->prepare( "SELECT ID, post_title FROM {$wpdb->posts} WHERE post_type = %s", $custom_post_type ), ARRAY_A );
+		//$allowed = get_posts(array('posts_per_page'=>-1,'post_type' => 'wpcrm-organization'));
+		$values = array();
+		foreach ($allowed as $index => $post) {
+			$values[] = $post['ID'];
+		}
+		if ($values) {
+		?>
+			<select name="wpcrm_system_filter_contact_by_org">
+				<option value=""><?php _e('Filter By Organization', 'wp-crm-system'); ?></option>
+				<?php
+				$current_v = isset($_GET['wpcrm_system_filter_contact_by_org'])? $_GET['wpcrm_system_filter_contact_by_org']:'';
+				foreach ($values as $value) {
+					printf (
+						'<option value="%s"%s>%s</option>',
+						$value,
+						$value == $current_v? ' selected="selected"':'',
+						get_the_title( $value )
+					);
+				}
+				?>
+			</select>
+		<?php
+		}
+    }
+}
+
+add_filter( 'parse_query', 'wpcrm_system_contacts_orgs_filter' );
+
+function wpcrm_system_contacts_orgs_filter( $query ){
+    global $pagenow;
+    $type = '';
+    if (isset($_GET['post_type'])) {
+        $type = $_GET['post_type'];
+    }
+    if ( 'wpcrm-contact' == $type && is_admin() && $pagenow=='edit.php' && isset($_GET['wpcrm_system_filter_contact_by_org']) && $_GET['wpcrm_system_filter_contact_by_org'] != '') {
+        $query->query_vars['meta_key'] = '_wpcrm_contact-attach-to-organization';
+        $query->query_vars['meta_value'] = $_GET['wpcrm_system_filter_contact_by_org'];
+    }
+}
+/* End filter contacts by organization */

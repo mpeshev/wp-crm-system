@@ -9,7 +9,7 @@ function wpcrm_system_campaign_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Task', 'wp-crm-system' ),
+		'title' => __( 'Campaign', 'wp-crm-system' ),
 		'active' => __( 'Active', 'wp-crm-system' ),
 		'status' => __( 'Status', 'wp-crm-system' ),
 		'start' => __( 'Start Date', 'wp-crm-system' ),

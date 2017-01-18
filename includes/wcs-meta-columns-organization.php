@@ -9,7 +9,7 @@ function wpcrm_system_organization_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Task', 'wp-crm-system' ),
+		'title' => __( 'Organization', 'wp-crm-system' ),
 		'phone' => __( 'Phone', 'wp-crm-system' ),
 		'email' => __( 'Email', 'wp-crm-system' ),
 		'address' => __( 'Address', 'wp-crm-system' ),
