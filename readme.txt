@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
 Tested up to: 4.7.1
-Stable tag: 2.0.18
+Stable tag: 2.0.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,10 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.19 =
+* New: Display photo for contacts in the WP-CRM System > Contact page if a "featured image" has been set for the contact, or the email address associated with the contact has a gravatar associated with it.
+* New: Filter contacts on the WP-CRM System > Contact page by organization. This allows you to easily view the contacts you have for a particular organization.
+* Fix: Corrected column title on WP-CRM System > (Contacts, Organizations, Projects, Campaigns, Opportunitites), which incorrectly labeled each as a Task.
 = 2.0.18 =
 * New: Optionally add an organization's address to the dropdown menu. Useful if you have multiple organizations with the same name but different locations.
 = 2.0.17 =
@@ -201,5 +205,7 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.0.18 =
-* New: Optionally add an organization's address to the dropdown menu. Useful if you have multiple organizations with the same name but different locations.
+= 2.0.19 =
+* New: Display photo for contacts in the WP-CRM System > Contact page if a "featured image" has been set for the contact, or the email address associated with the contact has a gravatar associated with it.
+* New: Filter contacts on the WP-CRM System > Contact page by organization. This allows you to easily view the contacts you have for a particular organization.
+* Fix: Corrected column title on WP-CRM System > (Contacts, Organizations, Projects, Campaigns, Opportunitites), which incorrectly labeled each as a Task.
