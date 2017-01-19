@@ -60,11 +60,18 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 		case 'address' :
 
 			/* Get the post meta. */
-			$address1 = !empty( get_post_meta( $post_id, '_wpcrm_organization-address1', true ) ) ? get_post_meta( $post_id, '_wpcrm_organization-address1', true ) : '';
-			$address2 = !empty( get_post_meta( $post_id, '_wpcrm_organization-address2', true ) ) ? ' ' . get_post_meta( $post_id, '_wpcrm_organization-address2', true ) : '';
-			$city = !empty( get_post_meta( $post_id, '_wpcrm_organization-city', true ) ) ? get_post_meta( $post_id, '_wpcrm_organization-city', true ) . ', ' : '';
-			$state = !empty( get_post_meta( $post_id, '_wpcrm_organization-state', true ) ) ? get_post_meta( $post_id, '_wpcrm_organization-state', true ) . ' ' : '';
-			$postal = !empty( get_post_meta( $post_id, '_wpcrm_organization-postal', true ) ) ? get_post_meta( $post_id, '_wpcrm_organization-postal', true ) : '';
+			$address1 = get_post_meta( $post_id, '_wpcrm_organization-address1', true );
+			$address2 = get_post_meta( $post_id, '_wpcrm_organization-address2', true );
+			$city = get_post_meta( $post_id, '_wpcrm_organization-city', true );
+			$state = get_post_meta( $post_id, '_wpcrm_organization-state', true );
+			$postal = get_post_meta( $post_id, '_wpcrm_organization-postal', true );
+
+			$address1 = !empty( $address1 ) ? $address1 : '';
+			$address2 = !empty( $address2 ) ? ' ' . $address2 : '';
+			$city = !empty( $city ) ? $city . ', ' : '';
+			$state = !empty( $state ) ? $state . ' ' : '';
+			$postal = !empty( $postal ) ? $postal : '';
+			
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $address1 ) && empty( $address2 ) && empty( $city ) && empty( $state ) && empty( $postal ) )

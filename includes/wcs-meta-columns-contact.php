@@ -113,11 +113,17 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 		case 'address' :
 
 			/* Get the post meta. */
-			$address1 = !empty( get_post_meta( $post_id, '_wpcrm_contact-address1', true ) ) ? get_post_meta( $post_id, '_wpcrm_contact-address1', true ) : '';
-			$address2 = !empty( get_post_meta( $post_id, '_wpcrm_contact-address2', true ) ) ? ' ' . get_post_meta( $post_id, '_wpcrm_contact-address2', true ) : '';
-			$city = !empty( get_post_meta( $post_id, '_wpcrm_contact-city', true ) ) ? get_post_meta( $post_id, '_wpcrm_contact-city', true ) . ', ' : '';
-			$state = !empty( get_post_meta( $post_id, '_wpcrm_contact-state', true ) ) ? get_post_meta( $post_id, '_wpcrm_contact-state', true ) . ' ' : '';
-			$postal = !empty( get_post_meta( $post_id, '_wpcrm_contact-postal', true ) ) ? get_post_meta( $post_id, '_wpcrm_contact-postal', true ) : '';
+			$address1 = get_post_meta( $post_id, '_wpcrm_contact-address1', true );
+			$address2 = get_post_meta( $post_id, '_wpcrm_contact-address2', true );
+			$city = get_post_meta( $post_id, '_wpcrm_contact-city', true );
+			$state = get_post_meta( $post_id, '_wpcrm_contact-state', true );
+			$postal = get_post_meta( $post_id, '_wpcrm_contact-postal', true );
+
+			$address1 = !empty( $address1 ) ? $address1 : '';
+			$address2 = !empty( $address2 ) ? ' ' . $address2 : '';
+			$city = !empty( $city ) ? $city . ', ' : '';
+			$state = !empty( $state ) ? $state . ' ' : '';
+			$postal = !empty( $postal ) ? $postal : '';
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $address1 ) && empty( $address2 ) && empty( $city ) && empty( $state ) && empty( $postal ) )
