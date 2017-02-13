@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
-Tested up to: 4.7.1
-Stable tag: 2.0.20
+Tested up to: 4.7.2
+Stable tag: 2.0.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.21 =
+* Fix: Errors were displayed on initial installs before settings were updated.
+* Fix: Datepicker script was not functioning correctly when updating existing records.
 = 2.0.20 =
 * Fix: Fatal errors on certain sites using outdated PHP versions.
 = 2.0.19 =
@@ -207,5 +210,6 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.0.20 =
-* Fix: Fatal errors on certain sites using outdated PHP versions.
+= 2.0.21 =
+* Fix: Errors were displayed on initial installs before settings were updated.
+* Fix: Datepicker script was not functioning correctly when updating existing records.
