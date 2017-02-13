@@ -6,6 +6,7 @@ function wpcrm_admin_notice__update() {
 	if ('1.2' == get_option('wpcrm_updated_last_run_version')) {
 		return;
 	}
+	$update_required = 'no';
 	$args = array( 'post_type' => 'wpcrm-contact', 'posts_per_page' => -1 );
 	$loop = new WP_Query( $args );
 	while ( $loop->have_posts() ) : $loop->the_post();
@@ -13,7 +14,6 @@ function wpcrm_admin_notice__update() {
 		$first = get_post_meta($contact_id,'_wpcrm_contact-first-name',true);
 		$last = get_post_meta($contact_id,'_wpcrm_contact-last-name',true);
 		$title = get_the_title($contact_id);
-		$update_required = 'no';
 		if ( empty($first) && empty($last) && '' != $title ){
 			$update_required = 'yes';
 			break;

@@ -39,7 +39,7 @@ add_filter( 'custom_menu_order', 'wpcrm_system_custom_menu_order' );
 function wpcrm_system_custom_menu_order( $menu_ord ) {
 	global $submenu;
 	$arr = array();
-	if ( array_key_exists( 'wpcrm', $submenu ) ) {
+	if ( array_key_exists( 'wpcrm', $submenu ) && 'set' == get_option( 'wpcrm_system_settings_initial' ) ) {
 		if ( defined( 'WPCRM_INVOICING' ) ) {
 			$arr[] = $submenu['wpcrm'][7]; //Dashboard
 			$arr[] = $submenu['wpcrm'][3]; //Organizations

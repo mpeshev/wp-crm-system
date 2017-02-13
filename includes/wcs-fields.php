@@ -1195,6 +1195,19 @@ $defaultFields = wpcrm_system_fields();
 							$before = $defaultField[ 'before' ];
 							$after = $defaultField[ 'after' ];
 							//Datepicker
+               ?>
+                <script type="text/javascript">
+                  <?php
+                  $dateformat = get_option('wpcrm_system_date_format');
+                  echo "var formatOption = '".$dateformat."';";
+                  ?>
+                  jQuery(document).ready(function() {
+                    jQuery('.datepicker').datepicker({
+                      dateFormat : formatOption //allow date format change in settings
+                    });
+                  });
+                </script>
+                <?php
 							echo $before;
 							echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
 							if ( isset( $date ) && '' != $date ) {
@@ -1203,23 +1216,11 @@ $defaultFields = wpcrm_system_fields();
 									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
 								}
 								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline">' . $date . '</span>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
-								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons" onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
 							} else {
 								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />'; ?>
-								<script type="text/javascript">
-									<?php
-									$dateformat = get_option('wpcrm_system_date_format');
-									echo "var formatOption = '".$dateformat."';";
-									?>
-									jQuery(document).ready(function() {
-										jQuery('.datepicker').datepicker({
-											dateFormat : formatOption //allow date format change in settings
-										});
-									});
-								</script>
-								<?php
+								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
 								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
 							}
 							echo '</div>';

@@ -8,15 +8,15 @@ function editField(field) {
 	if(input.style.display == 'none') {
 		input.style.display = 'inline';
 		text.style.display = 'none';
-    if (document.getElementById(field + "-comment") !== null){
-      comment.style.display = 'inline';
-    }
+	    if (document.getElementById(field + "-comment") !== null){
+	      comment.style.display = 'inline';
+	    }
 	} else {
 		input.style.display = 'none';
 		text.style.display = 'inline';
-    if (document.getElementById(field + "-comment") !== null){
-      comment.style.display = 'none';
-    }
+	    if (document.getElementById(field + "-comment") !== null){
+	      comment.style.display = 'none';
+	    }
 	}
 	if (label.style.display == 'none') {
 		label.style.display = 'inline';
