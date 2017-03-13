@@ -239,10 +239,13 @@ function wpcrm_send_email() {
 			<div class="error"><p><?php _e('All fields are required. Please try again.','wp-crm-system'); ?></p></div><?php
 		} else {
 			//Specific data to send in email.
+			$fromName = sanitize_text_field($_POST['wpcrm-email-from-name']);
+			$fromEmail = sanitize_email($_POST['wpcrm-email-from-address']);
+			$sent = strtotime( "now" );
 			$recipients = $_POST['wpcrm-email-recipients'];
 			$subject = sanitize_text_field($_POST['wpcrm-email-subject']);
 			$message = esc_textarea($_POST['wpcrm-email-message']);
-			$headers = 'From: "' . sanitize_text_field($_POST['wpcrm-email-from-name']) . '" <' . sanitize_email($_POST['wpcrm-email-from-address']) .'>' . "\r\n";
+			$headers = 'From: "' . $fromName . '" <' . $fromEmail .'>' . "\r\n";
 			$to = array();
 			foreach ($recipients as $recipient) {
 				$to[] = sanitize_email($recipient);
@@ -250,7 +253,7 @@ function wpcrm_send_email() {
 
 			// Setup wp_mail
 			wp_mail( $to, $subject, $message, $headers );
-
+			wpcrm_save_email_to_contact( $to, $fromName, $fromEmail, $sent, $subject, $message );
 			// Success message ?>
 			<div class="updated"><p><?php _e('Email sent successfully.','wp-crm-system'); ?></p></div>
 			<?php return;
@@ -259,4 +262,14 @@ function wpcrm_send_email() {
 		return;
 	}
 }
-?>
+
+function wpcrm_save_email_to_contact( $to, $fromName, $fromEmail, $sent, $subject, $message ) {
+	$email = array( $fromName, $fromEmail, $sent, $subject, $message );
+	foreach ( $to as $contact ){
+		$queryContacts = new WP_Query( "post_type=wpcrm-contact&meta_key=_wpcrm_contact-email&meta_value=$contact" );
+		if ( $queryContacts->have_posts() ){
+			$post = $queryContacts->posts[0]->ID;
+			add_post_meta( $post, '_wpcrm_system_email', $email, false );
+		}
+	}
+}

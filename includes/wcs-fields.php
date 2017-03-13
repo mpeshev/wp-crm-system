@@ -38,6 +38,7 @@ function createWPCRMSystemFields() {
     add_meta_box( 'wpcrm-contacts-opportunities', __( 'Opportunities', 'wp-crm-system' ), 'wpcrmListOpportunitiesinContact', 'wpcrm-contact', 'side', 'low' );
     add_meta_box( 'wpcrm-contacts-projects', __( 'Projects', 'wp-crm-system' ), 'wpcrmListProjectsinContact', 'wpcrm-contact', 'side', 'low' );
     add_meta_box( 'wpcrm-contacts-tasks', __( 'Tasks', 'wp-crm-system' ), 'wpcrmListTasksinContact', 'wpcrm-contact', 'side', 'low' );
+    add_meta_box( 'wpcrm_custom_meta', __( 'Contact Emails', 'wp-crm-system' ), 'wpcrm_system_display_email',  'wpcrm-contact', 'normal', 'low' );
     // Add support for custom meta boxes
     do_action( 'wpcrm_system_custom_meta_boxes' );
   }
@@ -414,8 +415,11 @@ function wcs_gmap_load_js() {
   			if (get_post_type() == 'wpcrm-organization'){
   				$addressString = get_post_meta( $post->ID, '_wpcrm_organization-address1', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-address2', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-city', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-state', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-postal', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-country', true );
   			}
-  			// get latitude, longitude and formatted address
-  			$data_arr = geocode( $addressString );
+        $data_arr = false;
+        if ( $addressString ){
+    			// get latitude, longitude and formatted address
+    			$data_arr = geocode( $addressString );
+        }
 
   			// if able to geocode the address
   			if( $data_arr ){
@@ -451,8 +455,11 @@ function wpcrmGmap() {
 	if (get_post_type() == 'wpcrm-organization'){
 		$addressString = get_post_meta( $post->ID, '_wpcrm_organization-address1', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-address2', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-city', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-state', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-postal', true ) . ' ' . get_post_meta( $post->ID, '_wpcrm_organization-country', true );
 	}
-	// get latitude, longitude and formatted address
-	$data_arr = geocode( $addressString );
+	$data_arr = false;
+  if ( $addressString ){
+    // get latitude, longitude and formatted address
+    $data_arr = geocode( $addressString );
+  }
 
 	// if able to geocode the address
 	if( $data_arr ){
@@ -1355,3 +1362,26 @@ $defaultFields = wpcrm_system_fields();
 		</div>
 		<?php
 	}
+// Add content to the new meta box
+function wpcrm_system_display_email() {
+  global $post;
+  $contact_emails = get_post_meta( $post->ID, '_wpcrm_system_email', false ); 
+  if ( $contact_emails ){ ?>
+    <div class="contact_email_list">
+    <?php
+    foreach ( $contact_emails as $email ) {
+      $sent = date( get_option( 'wpcrm_system_php_date_format' ),esc_html( $email[2] ) ); ?>
+      <div class="email_info">
+      <?php
+        echo __( 'Sent: ', 'wp-crm-system' ) . $sent . __( ' From: ', 'wp-crm-system' ) . $email[0] . ' ' . $email[1] . '<br />';
+        echo __( 'Subject: ', 'wp-crm-system' ) . $email[3] . '<br />';
+        echo __( 'Message: ', 'wp-crm-system' ) . '<br />' . $email[4];
+        echo '<hr />';
+      ?>
+      </div>
+      <?php
+    } ?>
+    </div>
+    <?php
+  }
+}
