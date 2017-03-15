@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
 Requires at least: 3.3.0
 Tested up to: 4.7.3
-Stable tag: 2.0.23
+Stable tag: 2.0.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,8 +71,11 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.0.24 =
+* Improved: Select menus for Organizations, and other records would extend over items in adjacent columns if the text contained within was too long. Minor CSS fix limits the width of these select menus.
 = 2.0.23 =
 * Improved: Sending emails to contacts in WP-CRM System now saves the email in the contact's record.
+* Fix: Errors when an organization was added without an address. https://wordpress.org/support/topic/debugging-error-when-address-is-omitted-from-organization
 = 2.0.22 =
 * Fix: Overdue task report incorrectly listed only one task regardless of how many tasks were actually overdue.
 = 2.0.20 =
@@ -211,5 +214,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.0.23 =
-* Improved: Sending emails to contacts in WP-CRM System now saves the email in the contact's record.
+= 2.0.24 =
+* Improved: Select menus for Organizations, and other records would extend over items in adjacent columns if the text contained within was too long. Minor CSS fix limits the width of these select menus.
