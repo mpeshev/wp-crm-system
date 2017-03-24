@@ -1,10 +1,11 @@
 function editField(field) {
-  var input = document.getElementById(field + "-input");
+  	var input = document.getElementById(field + "-input");
 	var text = document.getElementById(field + "-text");
 	var label = document.getElementById(field + "-label");
-  if (document.getElementById(field + "-comment") !== null){
-    var comment = document.getElementById(field + "-comment");
-  }
+	if (document.getElementById(field + "-comment") !== null){
+	  var comment = document.getElementById(field + "-comment");
+	}
+	
 	if(input.style.display == 'none') {
 		input.style.display = 'inline';
 		text.style.display = 'none';
@@ -18,6 +19,7 @@ function editField(field) {
 	      comment.style.display = 'none';
 	    }
 	}
+	
 	if (label.style.display == 'none') {
 		label.style.display = 'inline';
 	} else {

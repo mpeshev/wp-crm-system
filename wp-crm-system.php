@@ -30,6 +30,9 @@ function wp_crm_plugin_init() {
 if ( ! defined( 'WP_CRM_SYSTEM' ) ) {
   define( 'WP_CRM_SYSTEM', __FILE__ );
 }
+if ( ! defined( 'WP_CRM_SYSTEM_VERSION' ) ) {
+  define( 'WP_CRM_SYSTEM_VERSION', '2.0.24' );
+}
 if( ! defined( 'WP_CRM_SYSTEM_URL' ) ) {
 	define( 'WP_CRM_SYSTEM_URL', plugins_url( '', __FILE__ ) );
 }
@@ -40,19 +43,21 @@ if( ! defined( 'WP_CRM_SYSTEM_PLUGIN_URL' ) ) {
 	define( 'WP_CRM_SYSTEM_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 }
 /* Include system variables */
-include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
+/* Include system functions */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-functions.php' );
 /* Initial Install Settings Setup */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-initial-install-settings.php' );
 /* Menu Links */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-admin-pages.php' );
-/* Enqueue Scripts and Styles */
-include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-scripts-styles.php' );
 /* Register Custom Post Types */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-post-types.php' );
 /* Setup Dashboard Content */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-dashboard-setup.php' );
 /* Run Updates if Needed */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-updates.php' );
+/* Display System Setup */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-system-setup.php' );
 /* Restrict non-admins from viewing others records */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-restrict-others.php' );
 /* Include default fields */
@@ -63,6 +68,8 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-opportunity.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-organization.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-project.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-fields-task.php' );
+/* Enqueue Scripts and Styles */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-scripts-styles.php' );
 /* Include custom meta columns */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-campaign.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-contact.php' );
@@ -73,11 +80,10 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-task.php' );
 register_activation_hook(__FILE__, 'activate_wpcrm_system_settings');
 register_uninstall_hook(__FILE__, 'deactivate_wpcrm_system_settings');
 
-
 //* Add TinyMCE Editor and Media Upload to WP-CRM System Comments - To Do
 /*add_filter( 'wp_editor_settings', 'comment_editor_visual', 10, 2 );
 function comment_editor_visual( $settings, $editor_id ){
-	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
+	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 	$screen = get_current_screen();
 	if ( in_array( $screen->post_type, $postTypes ) ) {
 		$settings['quicktags'] = true;

@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) {
 /* Initial install make sure settings are saved */
 function wpcrm_system_initial_settings_notice__warning() {
 	if ( 'set' != get_option( 'wpcrm_system_settings_initial' ) ) {
-		$url = admin_url( 'admin.php?page=wpcrm-settings&tab=dashboard' );
+		$url = admin_url( 'admin.php?page=wpcrm-settings&tab=settings&subtab=settings' );
 		$link = sprintf( wp_kses( __( 'Please visit the <a href="%s">WP-CRM System Dashboard</a> page to set your options and complete set up.', 'wp-crm-system' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
 	?>
 		<div class="notice notice-warning">
@@ -15,6 +15,18 @@ function wpcrm_system_initial_settings_notice__warning() {
 <?php	}
 }
 add_action( 'admin_notices', 'wpcrm_system_initial_settings_notice__warning' );
+
+add_filter( 'wpcrm_system_user_role_options', 'wpcrm_system_select_user_roles', 10 );
+function wpcrm_system_select_user_roles( $array ){
+	$array = array(
+		'manage_options'	=>	__('Administrator', 'wp-crm-system'),
+		'edit_pages'		=>	__('Editor', 'wp-crm-system'),
+		'publish_posts'		=>	__('Author', 'wp-crm-system'),
+		'edit_posts'		=>	__('Contributor', 'wp-crm-system'),
+		'read'				=>	__('Subscriber', 'wp-crm-system')
+	);
+	return $array;
+}
 
 //Register Settings
 
@@ -25,7 +37,6 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_report_currency_decimals', 0);
 	add_option('wpcrm_system_report_currency_decimal_point', '.');
 	add_option('wpcrm_system_report_currency_thousand_separator', ',');
-	add_option('wpcrm_system_searchable_dropdown', 'off');
 	add_option('wpcrm_hide_others_posts','no');
 	add_option('wpcrm_system_settings_initial','');
 	add_option('wpcrm_system_show_org_address','');
@@ -45,7 +56,6 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_report_currency_decimals');
 	delete_option('wpcrm_system_report_currency_decimal_point');
 	delete_option('wpcrm_system_report_currency_thousand_separator');
-	delete_option('wpcrm_system_searchable_dropdown');
 	delete_option('wpcrm_hide_others_posts');
 	delete_option('wpcrm_system_settings_initial');
 	delete_option('wpcrm_system_show_org_address');
@@ -67,7 +77,6 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_decimals');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_decimal_point');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_report_currency_thousand_separator');
-	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_searchable_dropdown');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_hide_others_posts');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_settings_initial');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_show_org_address');

@@ -1,5 +1,5 @@
 <?php defined( 'ABSPATH' ) OR exit;
-include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php');
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 $current_user = wp_get_current_user();
 wpcrm_send_email();
 $to = array();

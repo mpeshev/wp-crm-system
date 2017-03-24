@@ -1,27 +1,9 @@
-SyntaxHighlighter.all();
 jQuery(document).ready(function() {
-	jQuery("select.wp-crm-system-searchable").searchable();
+	jQuery("select.wp-crm-system-searchable").chosen({
+    	disable_search_threshold: 1,
+    	allow_single_deselect: true,
+    	disable_search: false,
+    	no_results_text: "Oops, nothing found!",
+    	width: "95%"
+	})
 });
-
-// demo functions
-function modifySelect() {
-	jQuery("select.wp-crm-system-searchable").get(0).selectedIndex = 5;
-}
-
-function appendSelectOption(str) {
-	jQuery("select.wp-crm-system-searchable").append("<option value=\"" + str + "\">" + str + "</option>");
-}
-
-function applyOptions() {
-	jQuery("select.wp-crm-system-searchable").searchable({
-		maxListSize: 100,
-		maxMultiMatch: 50,
-		latency: 200,
-		exactMatch: false,
-		wildcards: true,
-		ignoreCase: true,
-		warnMultiMatch: 'top {0} matches...',
-		warnNoMatch: 'no matches...',
-		zIndex: 'auto'
-	});
-}

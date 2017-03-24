@@ -8,12 +8,13 @@ add_filter( 'manage_edit-wpcrm-organization_columns', 'wpcrm_system_organization
 function wpcrm_system_organization_columns( $columns ) {
 
 	$columns = array(
-		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Organization', 'wp-crm-system' ),
-		'phone' => __( 'Phone', 'wp-crm-system' ),
-		'email' => __( 'Email', 'wp-crm-system' ),
-		'address' => __( 'Address', 'wp-crm-system' ),
-		'date' => __( 'Date', 'wp-crm-system' )
+		'cb'		=> '<input type="checkbox" />',
+		'title'		=> __( 'Organization', 'wp-crm-system' ),
+		'phone'		=> __( 'Phone', 'wp-crm-system' ),
+		'email'		=> __( 'Email', 'wp-crm-system' ),
+		'address'	=> __( 'Address', 'wp-crm-system' ),
+		'contacts'	=> __( 'Contacts', 'wp-crm-system' ),
+		'date'		=> __( 'Date', 'wp-crm-system' )
 	);
 
 	return $columns;
@@ -81,6 +82,12 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 			else
 				echo esc_html( $address1 ) . esc_html( $address2 ) . '<br />';
 				echo esc_html( $city ) . esc_html( $state ) . esc_html( $postal );
+
+			break;
+		case 'contacts' :
+
+			/* Get the post meta. */
+			echo wpcrmListContactsinOrg();
 
 			break;
 		/* Just break out of the switch statement for everything else. */
