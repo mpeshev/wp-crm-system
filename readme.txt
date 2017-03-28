@@ -1,9 +1,9 @@
 === WP-CRM System ===
 Contributors: scott.deluzio
-Tags:  WordPress CRM, wp crm, CRM, project management, marketing, customer management
+Tags:  WordPress CRM, wp crm, CRM, project management, customer management
 Requires at least: 3.3.0
 Tested up to: 4.7.3
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.2 =
+* Fix: If a name prefix (Mr, Mrs, etc.) was not set for a contact, "Select an Option" text would display before the name on the dashboard "Address Book" section.
 = 2.1.0 & 2.1.1 =
 * New: Calendar on the dashboard to show all upcoming campaign, opportunity, project, and task dates.
 * New: System info provided for debugging purposes. 
@@ -226,15 +228,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.1 =
-* New: Calendar on the dashboard to show all upcoming campaign, opportunity, project, and task dates.
-* New: System info provided for debugging purposes. 
-* New: Redesigned dashboard area with calendar, and quick pick for contacts, projects, tasks, and opportunities.
-* New: Filter wpcrmsystem_name_prefix added to allow custom name prefixes to be included.
-* New: Added contacts to the main organization listing page.
-* Improved: Removed option to select searchable dropdowns. All dynamic lists include searchable dropdowns now.
-* Improved: Searchable dropdown menus for all organization, contact, project, campaign, and user select menus.
-* Improved: Tooltip styling improved.
-* Improved: Premium plugin license keys moved under Settings tab.
-* Fix: Set admin capability for managing settings to manage_options. Previous capability activate_plugins caused multisite admins (not super admins) to not be able to update settings.
-* Fix: Tooltip formatting was showing for all links where the tooltip style was being loaded.
+= 2.1.2 =
+* Fix: If a name prefix (Mr, Mrs, etc.) was not set for a contact, "Select an Option" text would display before the name on the dashboard "Address Book" section.
