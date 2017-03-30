@@ -7,12 +7,12 @@ Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP-CRM System is a fully featured CRM designed to work exclusively with WordPress.
+WP-CRM System is a WordPress CRM that is designed to work exclusively with YOUR WordPress site.
 
 == Description ==
 WP-CRM System is a fully featured CRM that allows you to use the WordPress interface you are already familiar with to manage your customers, projects, and tasks with ease.
 
-Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System allows you to have an unlimited number of records and lets you give everyone in your organization access to the data they need to drive business.
+Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System allows you to have an unlimited number of records and lets you give everyone in your organization access to the WordPress CRM data they need to drive business.
 
 **More than a CRM**
 
@@ -24,7 +24,7 @@ Not sure if WP-CRM System is right for you? [Try out the demo](http://demo.wp-cr
 
 **Premium Extensions Available**
 
-There are a number of inexpensive extensions that will allow you to do more with WP-CRM System.
+There are a number of inexpensive WordPress CRM extensions that will allow you to do more with WP-CRM System.
 
 * [Client Area](https://www.wp-crm.com/downloads/client-area/) - Create a portal for clients to see the status of their projects, tasks, campaigns, and invoices.
 * [Less Accounting](https://www.wp-crm.com/downloads/less-accounting/) - Connect to Less Accounting to manage invoices, and client records.
