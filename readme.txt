@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, customer management
 Requires at least: 3.3.0
 Tested up to: 4.7.3
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.3 =
+* Fix: If a record is moved to the trash, it still shows as being linked in the post_meta of other records. For example, a contact that is trashed, but was previously linked to an opportunity would still show as being linked to that opportunity. Fix "hides" the trashed from the record. A record that is restored from trash will retain it's previous position as being linked to other records.
 = 2.1.2 =
 * Fix: If a name prefix (Mr, Mrs, etc.) was not set for a contact, "Select an Option" text would display before the name on the dashboard "Address Book" section.
 = 2.1.0 & 2.1.1 =
@@ -228,5 +230,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.2 =
-* Fix: If a name prefix (Mr, Mrs, etc.) was not set for a contact, "Select an Option" text would display before the name on the dashboard "Address Book" section.
+= 2.1.3 =
+* Fix: If a record is moved to the trash, it still shows as being linked in the post_meta of other records. For example, a contact that is trashed, but was previously linked to an opportunity would still show as being linked to that opportunity. Fix "hides" the trashed from the record. A record that is restored from trash will retain it's previous position as being linked to other records.
