@@ -1,4 +1,4 @@
-=== WP-CRM System ===
+=== WordPress CRM Plugin - WP-CRM System ===
 Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, customer management
 Requires at least: 3.3.0
