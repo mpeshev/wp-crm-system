@@ -910,7 +910,9 @@ $defaultFields = wpcrm_system_fields();
                   if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
                     echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
                   }
-                  echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  if ( get_post_status( $selection ) != 'trash' ){
+                    echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  }
                 }
               }
 
@@ -936,7 +938,9 @@ $defaultFields = wpcrm_system_fields();
                   if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
                     echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
                   }
-                  echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  if ( get_post_status( $selection ) != 'trash' ){
+                    echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  }
                 }
               }
 								echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" class="wp-crm-system-searchable" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
@@ -962,7 +966,9 @@ $defaultFields = wpcrm_system_fields();
 								  if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
                     echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
                   }
-                  echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  if ( get_post_status( $selection ) != 'trash' ){
+                    echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  }
                 }
               }
               echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" class="wp-crm-system-searchable" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
@@ -987,7 +993,9 @@ $defaultFields = wpcrm_system_fields();
                   if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
                     echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
                   }
-                  echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  if ( get_post_status( $selection ) != 'trash' ){
+                    echo '<a id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline;" href="' . get_edit_post_link($selection) . '">' . get_the_title($selection) . '</a></label>';
+                  }
                 }
               }
 								
