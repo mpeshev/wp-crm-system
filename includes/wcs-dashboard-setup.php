@@ -23,9 +23,9 @@ function wpcrm_dashboard_settings_content() {
 		<!-- Add New... Box -->
 		<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
 		<?php
-			$posttypes = array( 
-				'' 						=>	__( 'Add New...', 'wp-crm-system' ), 
-				'wpcrm-campaign' 		=>	__( 'Campaign', 'wp-crm-system' ), 
+			$posttypes = array(
+				'' 						=>	__( 'Add New...', 'wp-crm-system' ),
+				'wpcrm-campaign' 		=>	__( 'Campaign', 'wp-crm-system' ),
 				'wpcrm-contact' 		=>	__( 'Contact', 'wp-crm-system' ),
 				'wpcrm-invoice' 		=>	__( 'Invoice', 'wp-crm-system' ),
 				'wpcrm-opportunity'		=>	__( 'Opportunity', 'wp-crm-system' ),
@@ -38,7 +38,7 @@ function wpcrm_dashboard_settings_content() {
 		    		<option value="post-new.php?post_type=<?php echo $key; ?>"><?php echo $value; ?></option>
 				<?php } else { ?>
 		    		<option value="post-new.php?post_type=<?php echo $key; ?>"><?php echo $value; ?></option>
-		    	<?php } 
+		    	<?php }
 		   	} ?>
 		</select>
 		<!-- Jump to Category Box -->
@@ -54,8 +54,9 @@ function wpcrm_dashboard_settings_content() {
 				'campaign-type'		=> __( 'Campaign Categories','wp-crm-system' )
 			);
 			foreach ($categories as $key => $value) {
+          $post_type = 'wpcrm-' . str_replace('-type', '', $key);
 		?>
-		    <option value="edit-tags.php?taxonomy=<?php echo $key; ?>"><?php echo $value; ?></option>
+		    <option value="edit-tags.php?taxonomy=<?php echo $key; ?>&amp;post_type=<?php echo $post_type; ?>"><?php echo $value; ?></option>
 		<?php } ?>
 		</select>
 		<?php
