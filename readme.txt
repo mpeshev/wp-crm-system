@@ -3,14 +3,14 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, customer management
 Requires at least: 3.3.0
 Tested up to: 4.7.3
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 WP-CRM System is a WordPress CRM that is designed to work exclusively with YOUR WordPress site.
 
 == Description ==
-WP-CRM System is a fully featured CRM that allows you to use the WordPress interface you are already familiar with to manage your customers, projects, and tasks with ease.
+WP-CRM System is a fully featured WordPress CRM that allows you to use the WordPress interface you are already familiar with to manage your customers, projects, and tasks with ease.
 
 Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System allows you to have an unlimited number of records and lets you give everyone in your organization access to the WordPress CRM data they need to drive business.
 
@@ -20,7 +20,7 @@ WP-CRM System allows your team to manage projects, assign individual tasks, trac
 
 **Try the Demo!**
 
-Not sure if WP-CRM System is right for you? [Try out the demo](http://demo.wp-crm.com) to see how it works.
+Not sure if WP-CRM System is the right WordPress CRM for you? [Try out the demo](http://demo.wp-crm.com) to see how it works.
 
 **Premium Extensions Available**
 
@@ -51,7 +51,6 @@ Get support from the WordPress [support page](http://wordpress.org/support/plugi
 WP-CRM System is written in American English, and has been translated into the following languages:
 
 * Russian - WP-CRM System Core Plugin by Maxim Glazunov
-* German - WP-CRM System Core Plugin and all premium extensions by Michael Pekic
 * Polish - WP-CRM System Core Plugin by Pawel Michalski
 
 If you would like to submit a translation, please submit it [through our website](https://www.wp-crm.com/contact).
@@ -62,15 +61,17 @@ If you would like to submit a translation, please submit it [through our website
 
 == Frequently Asked Questions ==
 = What makes WP-CRM System different from other CRM's? =
-Many other CRM's are hosted on the CRM company's servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System gives you control over your data by keeping it all contained on your website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer's information.
+Many other CRM's are hosted on the CRM company's servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System gives you control over your data by keeping it all contained on your WordPress CRM website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer's information.
 
 = What if I am coming from another CRM, can I import my data? =
-Absolutely. There are inexpensive extensions that allow you to import as little or as much information as you need to into WP-CRM System.
+Absolutely. There are inexpensive extensions that allow you to import as little or as much information as you need to into your WordPress CRM.
 
 = Is my data secure? =
-Your data is only accessible through the WordPress dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
+Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.5 =
+* Updated language files
 = 2.1.4 =
 * Fix: Display of name prefix was not rendering in some instances.
 * Fix: Go to Category menu on dashboard was sending users to incorrect category page.
@@ -233,6 +234,5 @@ Your data is only accessible through the WordPress dashboard. None of it will be
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.4 =
-* Fix: Display of name prefix was not rendering in some instances.
-* Fix: Go to Category menu on dashboard was sending users to incorrect category page.
+= 2.1.5 =
+* Updated language files
