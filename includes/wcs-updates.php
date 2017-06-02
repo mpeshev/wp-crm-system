@@ -25,7 +25,7 @@ function wpcrm_admin_notice__update() {
 	} elseif ('yes' == $update_required) {
 		$nagclass = 'notice notice-warning';
 		$wpcrm_version = get_option( 'wpcrm_system_version' );
-		$nagmessage = __( 'WP-CRM System: Your database needs a quick update. Please back up your database and run the update now. <form id="wpcrm-updater" action="" method="POST"><input type="submit" id="wpcrm-update-submit" name="wpcrm-update" class="button-primary" value="Update" /></form>', 'wp-crm-system' );
+		$nagmessage = __( 'WP-CRM System: Your database needs a quick update. Please back up your database and run the update now.', 'wp-crm-system' ) . '<form id="wpcrm-updater" action="" method="POST"><input type="submit" id="wpcrm-update-submit" name="wpcrm-update" class="button-primary" value="Update" /></form>';
 		$successclass = 'notice notice-success';
 		$successmessage = __( 'WP-CRM System Update Successful!', 'wp-crm-system' );
 

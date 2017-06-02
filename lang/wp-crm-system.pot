@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WP-CRM System\n"
-"POT-Creation-Date: 2017-03-24 14:19-0700\n"
-"PO-Revision-Date: 2017-03-24 14:19-0700\n"
+"POT-Creation-Date: 2017-06-02 16:44-0700\n"
+"PO-Revision-Date: 2017-06-02 16:44-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -361,21 +361,21 @@ msgid "No projects to report."
 msgstr ""
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1022
+#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1030
 #: includes/wcs-functions.php:33 includes/wcs-functions.php:55
 msgctxt "Work has not yet begun."
 msgid "Not Started"
 msgstr ""
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1022
+#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1030
 #: includes/wcs-functions.php:33 includes/wcs-functions.php:55
 msgctxt "Work has begun but is not complete."
 msgid "In Progress"
 msgstr ""
 
 #: includes/reports/project-reports.php:219
-#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1022
+#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1030
 #: includes/wcs-functions.php:33 includes/wcs-functions.php:55
 msgctxt ""
 "Work may be in various stages of completion, but has been stopped for one "
@@ -447,19 +447,19 @@ msgstr ""
 msgid "No tasks to report."
 msgstr ""
 
-#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1017
+#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1025
 #: includes/wcs-functions.php:66
 msgctxt "Greatest importance"
 msgid "High"
 msgstr ""
 
-#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1017
+#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1025
 #: includes/wcs-functions.php:66
 msgctxt "Average priority"
 msgid "Medium"
 msgstr ""
 
-#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1017
+#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1025
 #: includes/wcs-functions.php:66
 msgctxt "Not of great importance"
 msgid "Low"
@@ -947,175 +947,175 @@ msgstr ""
 msgid "No contacts assigned to this organization."
 msgstr ""
 
-#: includes/wcs-fields.php:926
+#: includes/wcs-fields.php:928
 msgid "Please create a campaign first."
 msgstr ""
 
-#: includes/wcs-fields.php:952
+#: includes/wcs-fields.php:956
 msgid "Please create an organization first."
 msgstr ""
 
-#: includes/wcs-fields.php:977
+#: includes/wcs-fields.php:983
 msgid "Please create a contact first."
 msgstr ""
 
-#: includes/wcs-fields.php:1002
+#: includes/wcs-fields.php:1010
 msgid "Please create a project first."
 msgstr ""
 
-#: includes/wcs-fields.php:1013 includes/wcs-fields.php:1017
+#: includes/wcs-fields.php:1021 includes/wcs-fields.php:1025
 msgid "Select an option"
 msgstr ""
 
-#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+#: includes/wcs-fields.php:1021 includes/wcs-functions.php:77
 msgctxt "Successful, a winner."
 msgid "Won"
 msgstr ""
 
-#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+#: includes/wcs-fields.php:1021 includes/wcs-functions.php:77
 msgctxt "Unsuccessful, a loser."
 msgid "Lost"
 msgstr ""
 
-#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+#: includes/wcs-fields.php:1021 includes/wcs-functions.php:77
 msgctxt "Temporarily ended, but may resume again."
 msgid "Suspended"
 msgstr ""
 
-#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+#: includes/wcs-fields.php:1021 includes/wcs-functions.php:77
 msgctxt "No longer actively working on."
 msgid "Abandoned"
 msgstr ""
 
-#: includes/wcs-fields.php:1022 includes/wcs-functions.php:33
+#: includes/wcs-fields.php:1030 includes/wcs-functions.php:33
 #: includes/wcs-functions.php:55
 msgctxt "All tasks are finished. No further work is needed."
 msgid "Complete"
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035
 msgid "Select an Option"
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Title for male without a higher professional title."
 msgid "Mr."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt ""
 "Married woman or woman who has been married with no higher professional "
 "title."
 msgid "Mrs."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "An unmarried woman. Also Ms."
 msgid "Miss"
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "An unmarried woman. Also Miss."
 msgid "Ms."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Doctor"
 msgid "Dr."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Title used for young men."
 msgid "Master"
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Title used for the person in charge of a sports team"
 msgid "Coach"
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Title of a priest or religous clergy - Reverend "
 msgid "Rev."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Title of a priest or religous clergy - Father"
 msgid "Fr."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Attorney, or lawyer"
 msgid "Atty."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Professor, as in a teacher at a university."
 msgid "Prof."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Honorable - often used for elected officials or judges."
 msgid "Hon."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt ""
 "Term given to the head of an organization or country. As in President of a "
 "University or President of the United States"
 msgid "Pres."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Governor, as in the Governor of the State of New York."
 msgid "Gov."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Officer as in a police officer."
 msgid "Ofc."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Superintendent"
 msgid "Supt."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt ""
 "Representative - as in an elected official to the House of Representatives"
 msgid "Rep."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "An elected official - Senator."
 msgid "Sen."
 msgstr ""
 
-#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+#: includes/wcs-fields.php:1035 includes/wcs-functions.php:8
 msgctxt "Ambassador - a diplomatic official."
 msgid "Amb."
 msgstr ""
 
-#: includes/wcs-fields.php:1071 includes/wcs-fields.php:1074
+#: includes/wcs-fields.php:1081 includes/wcs-fields.php:1084
 msgid ""
 "Only numbers allowed. No thousands separator (commas, spaces, or periods), "
 "currency symbols, etc. allowed."
 msgstr ""
 
-#: includes/wcs-fields.php:1288
+#: includes/wcs-fields.php:1298
 msgid "Sent: "
 msgstr ""
 
-#: includes/wcs-fields.php:1288
+#: includes/wcs-fields.php:1298
 msgid " From: "
 msgstr ""
 
-#: includes/wcs-fields.php:1289
+#: includes/wcs-fields.php:1299
 msgid "Subject: "
 msgstr ""
 
-#: includes/wcs-fields.php:1290
+#: includes/wcs-fields.php:1300
 msgid "Message: "
 msgstr ""
 
@@ -1735,9 +1735,7 @@ msgstr ""
 #: includes/wcs-updates.php:28
 msgid ""
 "WP-CRM System: Your database needs a quick update. Please back up your "
-"database and run the update now. <form id=\"wpcrm-updater\" action=\"\" "
-"method=\"POST\"><input type=\"submit\" id=\"wpcrm-update-submit\" name="
-"\"wpcrm-update\" class=\"button-primary\" value=\"Update\" /></form>"
+"database and run the update now."
 msgstr ""
 
 #: includes/wcs-updates.php:30

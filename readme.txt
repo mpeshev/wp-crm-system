@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, customer management
 Requires at least: 3.3.0
-Tested up to: 4.7.3
-Stable tag: 2.1.5
+Tested up to: 4.8
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,7 @@ WP-CRM System is written in American English, and has been translated into the f
 
 * Russian - WP-CRM System Core Plugin by Maxim Glazunov
 * Polish - WP-CRM System Core Plugin by Pawel Michalski
+* Spanish - WP-CRM System Core Plugin by Adrián Quinteiro Ayán
 
 If you would like to submit a translation, please submit it [through our website](https://www.wp-crm.com/contact).
 
@@ -70,6 +71,10 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.6 =
+* Added Spanish language files.
+* Updated main POT language file.
+* Minor change to text on a database update notice.
 = 2.1.5 =
 * Updated language files
 = 2.1.4 =
@@ -234,5 +239,7 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.5 =
-* Updated language files
+= 2.1.6 =
+* Added Spanish language files.
+* Updated main POT language file.
+* Minor change to text on a database update notice.
