@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, wp crm, CRM, project management, customer management
 Requires at least: 3.3.0
 Tested up to: 4.8
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.7 =
+* Improved: Added clickable links for phone numbers and email addresses for contacts and organizations in the following areas: record detail page, list page, WP-CRM System dashboard address book.
 = 2.1.6 =
 * Added Spanish language files.
 * Updated main POT language file.
@@ -239,7 +241,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.6 =
-* Added Spanish language files.
-* Updated main POT language file.
-* Minor change to text on a database update notice.
+= 2.1.7 =
+* Improved: Added clickable links for phone numbers and email addresses for contacts and organizations in the following areas: record detail page, list page, WP-CRM System dashboard address book.
