@@ -74,12 +74,13 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 			if ( empty( $number ) )
 				echo __( 'Not Set', 'wp-crm-system' );
 
-			/* If there is a close date, display it in the set date format. */
+			/* If there is a phone number, display it with clickable link. */
 			else
-				echo esc_html( $number );
+				$number = esc_html( $number );
+				echo '<a href="tel:' . $number . '">' . $number . '</a>';
 
 			break;
-		/* If displaying the 'phone' column. */
+		/* If displaying the 'mobile' column. */
 		case 'mobile' :
 
 			/* Get the post meta. */
@@ -89,9 +90,10 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 			if ( empty( $number ) )
 				echo __( 'Not Set', 'wp-crm-system' );
 
-			/* If there is a close date, display it in the set date format. */
+			/* If there is a mobile phone number, display it with clickable link. */
 			else
-				echo esc_html( $number );
+				$number = esc_html( $number );
+				echo '<a href="tel:' . $number . '">' . $number . '</a>';
 
 			break;
 		/* If displaying the 'email' column. */
@@ -106,7 +108,8 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If there is a email, display it. */
 			else
-				echo esc_html( $email );
+				$email = esc_html( $email );
+				echo '<a href="mailto:' . $email . '">' . $email . '</a>';
 
 			break;
 		/* If displaying the 'address' column. */

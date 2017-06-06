@@ -289,7 +289,7 @@ function saveWPCRMSystemFields( $post_id, $post ) {
             }
             break;
           }
-          case 'default': {
+          default: {
             // Sanitize text field
             $safevalue = sanitize_text_field( $value );
             if ( 'contact-first-name' == $defaultField['name'] ) {
@@ -1245,6 +1245,30 @@ $defaultFields = wpcrm_system_fields();
               } else {
                 echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
                 echo '<input class="' . $defaultField[ 'name' ] . '" type="number" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+                echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
+              }
+              echo '</div>';
+              echo $after;
+              break;
+            }
+            case 'phone': {
+              // Plain text field with clickable link to initiate call on mobile devices.
+              $textinput = esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) );
+              $before = $defaultField[ 'before' ];
+              $after = $defaultField[ 'after' ];
+              echo $before;
+              echo '<div onmouseenter=showEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") onmouseleave=hideEdit("' . '_wpcrm_' . $defaultField[ 'name' ] . '") class="form-field form-required ' . $defaultField[ 'style' ] . '">';
+              if ( isset( $textinput ) && '' != $textinput ) {
+                echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:none;" id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
+                if ( '' != '_wpcrm_' . $defaultField[ 'icon' ] ){
+                  echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
+                }
+                echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline"><a href="tel:' . $textinput . '">' . $textinput . '</a></span>';
+                echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" value="' . $textinput . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+                echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons"  onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
+              } else {
+                echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'" style="display:inline;"  id="' . '_wpcrm_' . $defaultField[ 'name' ] .'-label"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label><br />';
+                echo '<input class="' . $defaultField[ 'name' ] . '" type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" value="' . esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
                 echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
               }
               echo '</div>';

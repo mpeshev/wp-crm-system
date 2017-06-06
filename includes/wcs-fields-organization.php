@@ -11,7 +11,7 @@ function wpcrm_system_organization_fields( $fields ) {
       'title'         => WPCRM_PHONE,
       'description'   => '',
       'placeholder'   => '',
-      'type'          => 'default',
+      'type'          => 'phone',
       'scope'         => array( 'wpcrm-organization' ),
       'style'					=> 'wp-crm-first',
       'before'				=> '<div class="wp-crm-first wp-crm-one-half">',

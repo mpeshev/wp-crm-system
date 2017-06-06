@@ -1,0 +1,2125 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: WP-CRM System\n"
+"POT-Creation-Date: 2017-05-05 13:07+0200\n"
+"PO-Revision-Date: 2017-06-02 16:40-0700\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wp-crm-system.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: \n"
+"Language: es_ES\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/reports/campaign-reports.php:14
+msgid "No campaigns to display."
+msgstr "No hay campañas para mostrar."
+
+#: includes/reports/campaign-reports.php:17
+#: includes/reports/campaign-reports.php:61
+#: includes/wcs-meta-columns-campaign.php:157
+#: includes/wcs-meta-columns-project.php:93
+#: includes/wcs-meta-columns-task.php:106
+msgid "Not Started"
+msgstr "No empezado"
+
+#: includes/reports/campaign-reports.php:17
+#: includes/reports/campaign-reports.php:61
+#: includes/wcs-meta-columns-campaign.php:158
+#: includes/wcs-meta-columns-project.php:94
+#: includes/wcs-meta-columns-task.php:107
+msgid "In Progress"
+msgstr "En progreso"
+
+#: includes/reports/campaign-reports.php:17
+#: includes/reports/campaign-reports.php:61
+#: includes/wcs-meta-columns-campaign.php:159
+#: includes/wcs-meta-columns-project.php:95
+#: includes/wcs-meta-columns-task.php:108
+msgid "Complete"
+msgstr "Terminado"
+
+#: includes/reports/campaign-reports.php:17
+#: includes/reports/campaign-reports.php:61
+#: includes/wcs-meta-columns-campaign.php:160
+#: includes/wcs-meta-columns-project.php:96
+#: includes/wcs-meta-columns-task.php:109
+msgid "On Hold"
+msgstr "En espera"
+
+#: includes/reports/campaign-reports.php:29
+msgid "Campaigns by Status"
+msgstr "Campañas por estado"
+
+#: includes/reports/campaign-reports.php:30 includes/reports/wcs-reports.php:44
+#: includes/wcs-dashboard-setup.php:28
+#: includes/wcs-meta-columns-campaign.php:12 includes/wcs-post-types.php:477
+#: includes/wcs-post-types.php:479
+msgid "Campaign"
+msgstr "Campaña"
+
+#: includes/reports/campaign-reports.php:54
+msgid "Edit this campaign"
+msgstr "Editar esta campaña"
+
+#: includes/reports/campaign-reports.php:67 includes/wcs-fields.php:888
+msgid "Not Assigned"
+msgstr "No asignado"
+
+#: includes/reports/campaign-reports.php:107
+msgid "Campaigns by User"
+msgstr "Campañas por usuario"
+
+#: includes/reports/campaign-reports.php:146
+msgid ""
+"No campaigns are linked to users. Please add or edit a campaign and link it "
+"to a user for this report to show."
+msgstr ""
+"No hay campañas vinculadas a los usuarios. Agregue o edite una campaña y "
+"vincúlela a un usuario para que se muestre este informe."
+
+#: includes/reports/campaign-reports.php:151
+msgid "Campaigns by Type"
+msgstr "Campañas por tipo"
+
+#: includes/reports/campaign-reports.php:171
+#: includes/reports/campaign-reports.php:176
+msgid "No campaigns to report."
+msgstr "No hay campañas para mostrar."
+
+#: includes/reports/campaign-reports.php:191
+msgid "Back to Campaign Reports"
+msgstr "Volver a los informes de campaña"
+
+#: includes/reports/contact-reports.php:14
+#: includes/reports/organization-reports.php:14
+msgid "Contacts by Organization"
+msgstr "Contactos por organización"
+
+#: includes/reports/contact-reports.php:46
+#: includes/reports/organization-reports.php:46
+msgid ""
+"No contacts are linked to organizations. Please add or edit a contact and "
+"link it to an organization for this report to show."
+msgstr ""
+"No hay contactos vinculados a organizaciones. Agregue o edite un contacto y "
+"vincúlelo a una organización para que se muestre este informe."
+
+#: includes/reports/contact-reports.php:52
+msgid "Contacts by Type"
+msgstr "Contactos por tipo"
+
+#: includes/reports/contact-reports.php:72
+#: includes/reports/contact-reports.php:77
+msgid "No contacts to report."
+msgstr "No hay contactos para mostrar."
+
+#: includes/reports/contact-reports.php:84
+msgid "Contacts Associated With Tasks"
+msgstr "Contactos asociados con tareas"
+
+#: includes/reports/contact-reports.php:116
+#: includes/reports/task-reports.php:131
+msgid ""
+"No tasks are linked to contacts. Please add or edit a task and link it to a "
+"contact for this report to show."
+msgstr ""
+"No hay tareas vinculadas a los contactos. Agregue o edite una tarea y "
+"vincúlela a un contacto para que se muestre este informe."
+
+#: includes/reports/contact-reports.php:131
+msgid "Back to Contact Reports"
+msgstr "Volver a los informes de contacto"
+
+#: includes/reports/opportunity-reports.php:14
+msgid "Opportunities by User"
+msgstr "Oportunidades por usuario"
+
+#: includes/reports/opportunity-reports.php:53
+msgid ""
+"No opportunities are linked to users. Please add or edit a opportunity and "
+"link it to a user for this report to show."
+msgstr ""
+"No hay oportunidades vinculadas a los usuarios. Agregue o edite una "
+"oportunidad y vincúlela a un usuario para que se muestre este informe."
+
+#: includes/reports/opportunity-reports.php:60
+msgid "Opportunities by Organization"
+msgstr "Oportunidades por organización"
+
+#: includes/reports/opportunity-reports.php:92
+msgid ""
+"No opportunities are linked to organizations. Please add or edit a "
+"opportunity and link it to an organization for this report to show."
+msgstr ""
+"No hay oportunidades vinculadas a las organizaciones. Agregue o edite una "
+"oportunidad y vincúlela a una organización para que se muestre este informe."
+
+#: includes/reports/opportunity-reports.php:99
+#: includes/reports/project-reports.php:99
+msgid "Projects by Contact"
+msgstr "Proyectos por contacto"
+
+#: includes/reports/opportunity-reports.php:131
+msgid ""
+"No opportunities are linked to contacts. Please add or edit a opportunity "
+"and link it to a contact for this report to show."
+msgstr ""
+"No hay oportunidades vinculadas a los contactos. Agregue o edite una "
+"oportunidad y vincúlela a un contacto para que se muestre este informe."
+
+#: includes/reports/opportunity-reports.php:136
+msgid "Opportunities by Status"
+msgstr "Oportunidades por estado"
+
+#: includes/reports/opportunity-reports.php:137
+msgid "No opportunities to display."
+msgstr "No hay oportunidades para mostrar."
+
+#: includes/reports/opportunity-reports.php:140
+#: includes/wcs-meta-columns-opportunity.php:94
+msgid "Won"
+msgstr "Ganada"
+
+#: includes/reports/opportunity-reports.php:140
+#: includes/wcs-meta-columns-opportunity.php:95
+msgid "Lost"
+msgstr "Perdida"
+
+#: includes/reports/opportunity-reports.php:140
+#: includes/wcs-meta-columns-opportunity.php:96
+msgid "Suspended"
+msgstr "Suspendida"
+
+#: includes/reports/opportunity-reports.php:140
+#: includes/wcs-meta-columns-opportunity.php:97
+msgid "Abandoned"
+msgstr "Abandonada"
+
+#: includes/reports/opportunity-reports.php:140 includes/wcs-functions.php:66
+#: includes/wcs-functions.php:77 includes/wcs-meta-columns-campaign.php:68
+#: includes/wcs-meta-columns-campaign.php:83
+#: includes/wcs-meta-columns-campaign.php:98
+#: includes/wcs-meta-columns-campaign.php:113
+#: includes/wcs-meta-columns-campaign.php:128
+#: includes/wcs-meta-columns-campaign.php:143
+#: includes/wcs-meta-columns-campaign.php:165
+#: includes/wcs-meta-columns-contact.php:60
+#: includes/wcs-meta-columns-contact.php:75
+#: includes/wcs-meta-columns-contact.php:90
+#: includes/wcs-meta-columns-contact.php:105
+#: includes/wcs-meta-columns-contact.php:130
+#: includes/wcs-meta-columns-opportunity.php:45
+#: includes/wcs-meta-columns-opportunity.php:60
+#: includes/wcs-meta-columns-opportunity.php:75
+#: includes/wcs-meta-columns-opportunity.php:93
+#: includes/wcs-meta-columns-opportunity.php:102
+#: includes/wcs-meta-columns-organization.php:38
+#: includes/wcs-meta-columns-organization.php:53
+#: includes/wcs-meta-columns-organization.php:79
+#: includes/wcs-meta-columns-project.php:45
+#: includes/wcs-meta-columns-project.php:60
+#: includes/wcs-meta-columns-project.php:75
+#: includes/wcs-meta-columns-project.php:101
+#: includes/wcs-meta-columns-task.php:39 includes/wcs-meta-columns-task.php:54
+#: includes/wcs-meta-columns-task.php:69 includes/wcs-meta-columns-task.php:83
+#: includes/wcs-meta-columns-task.php:90 includes/wcs-meta-columns-task.php:114
+msgid "Not Set"
+msgstr "No establecida"
+
+#: includes/reports/opportunity-reports.php:143
+#: includes/reports/wcs-reports.php:29 includes/wcs-dashboard-setup.php:31
+#: includes/wcs-meta-columns-opportunity.php:12 includes/wcs-post-types.php:323
+#: includes/wcs-post-types.php:325
+msgid "Opportunity"
+msgstr "Oportunidad"
+
+#: includes/reports/opportunity-reports.php:169
+msgid "Opportunities by Type"
+msgstr "Oportunidades por tipo"
+
+#: includes/reports/opportunity-reports.php:189
+#: includes/reports/opportunity-reports.php:194
+msgid "No opportunities to report."
+msgstr "No hay oportunidades para mostrar."
+
+#: includes/reports/opportunity-reports.php:209
+msgid "Back to Opportunity Reports"
+msgstr "Volver a los informes de oportunidades"
+
+#: includes/reports/organization-reports.php:52
+msgid "Organizations by Type"
+msgstr "Organizaciones por tipo"
+
+#: includes/reports/organization-reports.php:72
+#: includes/reports/organization-reports.php:77
+msgid "No organizations to report."
+msgstr "Ninguna organización para mostrar."
+
+#: includes/reports/organization-reports.php:84
+msgid "Organizations Associated With Tasks"
+msgstr "Organizaciones asociadas con tareas"
+
+#: includes/reports/organization-reports.php:116
+msgid ""
+"No tasks are linked to an organization. Please add or edit a task and link "
+"it to a organization for this report to show."
+msgstr ""
+"Ninguna tarea está vinculada a una organización. Agregue o edite una tarea y "
+"vincúlela a una organización para que se muestre este informe."
+
+#: includes/reports/organization-reports.php:123
+msgid "Projects Attached to Organizations"
+msgstr "Proyectos asociados a organizaciones"
+
+#: includes/reports/organization-reports.php:155
+msgid ""
+"No projects are linked to an organization. Please add or edit a project and "
+"link it to a organization for this report to show."
+msgstr ""
+"Ningún proyecto está vinculado a una organización. Agregue o edite un "
+"proyecto y vincúlelo a una organización para que se muestre este informe."
+
+#: includes/reports/organization-reports.php:170
+msgid "Back to Organization Reports"
+msgstr "Volver a los informes de la organización"
+
+#: includes/reports/overview-reports.php:8
+msgid "Value of Opportunities"
+msgstr "Valor de las oportunidades"
+
+#: includes/reports/overview-reports.php:26
+msgid "Value of Projects"
+msgstr "Valor de los proyectos"
+
+#: includes/reports/overview-reports.php:44
+#: includes/reports/task-reports.php:138
+msgid "Overdue Tasks"
+msgstr "Tareas vencidas"
+
+#: includes/reports/overview-reports.php:75
+#, php-format
+msgid "There is %d overdue task. "
+msgid_plural "There are %d overdue tasks. "
+msgstr[0] "Hay un %d de tarea vencida. "
+msgstr[1] "Hay un %d de tareas vencidas. "
+
+#: includes/reports/overview-reports.php:76
+#, php-format
+msgid "<a href=\"%s\">View the overdue task report.</a>"
+msgstr "<a href=\"%s\">Ver el informe de la tarea vencida.</a>"
+
+#: includes/reports/overview-reports.php:79
+#: includes/reports/task-reports.php:140
+msgid "No tasks are overdue!"
+msgstr "¡No hay tareas pendientes!"
+
+#: includes/reports/project-reports.php:14
+msgid "Projects by User"
+msgstr "Proyectos por usuario"
+
+#: includes/reports/project-reports.php:53
+msgid ""
+"No projects are linked to users. Please add or edit a project and link it to "
+"a user for this report to show."
+msgstr ""
+"No hay proyectos vinculados a usuarios. Agregue o edite un proyecto y "
+"vincúlelo a un usuario para que se muestre este informe."
+
+#: includes/reports/project-reports.php:60
+msgid "Projects by Organization"
+msgstr "Proyectos por organización"
+
+#: includes/reports/project-reports.php:92
+msgid ""
+"No projects are linked to organizations. Please add or edit a project and "
+"link it to an organization for this report to show."
+msgstr ""
+"No hay proyectos vinculados a organizaciones. Agregue o modifique un "
+"proyecto y vincúlelo a una organización para que se muestre este informe."
+
+#: includes/reports/project-reports.php:131
+msgid ""
+"No projects are linked to contacts. Please add or edit a project and link it "
+"to a contact for this report to show."
+msgstr ""
+"No hay proyectos vinculados a contactos. Agregue o edite un proyecto y "
+"vincúlelo a un contacto para que este informe se muestre."
+
+#: includes/reports/project-reports.php:138
+msgid "Overdue Projects"
+msgstr "Proyectos vencidos"
+
+#: includes/reports/project-reports.php:140
+msgid "No projects are overdue!"
+msgstr "¡No hay proyectos pendientes!"
+
+#: includes/reports/project-reports.php:143
+msgid "Upcoming Projects"
+msgstr "Próximos proyectos"
+
+#: includes/reports/project-reports.php:145
+msgid "No upcoming projects."
+msgstr "No hay proyectos futuros."
+
+#: includes/reports/project-reports.php:180
+msgid "Projects by Percentage Complete"
+msgstr "Proyectos por porcentaje completado"
+
+#: includes/reports/project-reports.php:215
+#: includes/reports/project-reports.php:255
+#: includes/reports/project-reports.php:280
+#: includes/reports/project-reports.php:285
+msgid "No projects to report."
+msgstr "No hay proyectos a reportar."
+
+#: includes/reports/project-reports.php:219
+#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1022
+#: includes/wcs-functions.php:33 includes/wcs-functions.php:55
+msgctxt "Work has not yet begun."
+msgid "Not Started"
+msgstr "No empezado"
+
+#: includes/reports/project-reports.php:219
+#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1022
+#: includes/wcs-functions.php:33 includes/wcs-functions.php:55
+msgctxt "Work has begun but is not complete."
+msgid "In Progress"
+msgstr "En progreso"
+
+#: includes/reports/project-reports.php:219
+#: includes/reports/task-reports.php:259 includes/wcs-fields.php:1022
+#: includes/wcs-functions.php:33 includes/wcs-functions.php:55
+msgctxt ""
+"Work may be in various stages of completion, but has been stopped for one "
+"reason or another."
+msgid "On Hold"
+msgstr "En espera"
+
+#: includes/reports/project-reports.php:220
+msgid "Projects by Status"
+msgstr "Proyectos por Estado"
+
+#: includes/reports/project-reports.php:260
+msgid "Projects by Type"
+msgstr "Proyectos por tipo"
+
+#: includes/reports/project-reports.php:292
+msgid "Tasks assigned to Projects"
+msgstr "Tareas asignadas a los proyectos"
+
+#: includes/reports/project-reports.php:324
+msgid ""
+"No tasks are linked to projects. Please add or edit a task and link it to a "
+"project for this report to show."
+msgstr ""
+"No hay tareas vinculadas a proyectos. Agregue o edite una tarea y vincúlela "
+"a un proyecto para que se muestre este informe."
+
+#: includes/reports/project-reports.php:339
+msgid "Back to Project Reports"
+msgstr "Volver a los informes del proyecto"
+
+#: includes/reports/task-reports.php:14
+msgid "Tasks by User"
+msgstr "Tareas por usuario"
+
+#: includes/reports/task-reports.php:53
+msgid ""
+"No tasks are linked to users. Please add or edit a task and link it to a "
+"user for this report to show."
+msgstr ""
+"No hay tareas vinculadas a los usuarios. Agregue o edite una tarea y "
+"vincúlela a un usuario para que se muestre este informe."
+
+#: includes/reports/task-reports.php:60
+msgid "Tasks by Organization"
+msgstr "Tareas por organización"
+
+#: includes/reports/task-reports.php:92
+msgid ""
+"No tasks are linked to organizations. Please add or edit a task and link it "
+"to an organization for this report to show."
+msgstr ""
+"No hay tareas vinculadas a organizaciones. Agregue o edite una tarea y "
+"vincúlela a una organización para que se muestre este informe."
+
+#: includes/reports/task-reports.php:99
+msgid "Tasks by Contact"
+msgstr "Tareas por contacto"
+
+#: includes/reports/task-reports.php:143
+msgid "Upcoming Tasks"
+msgstr "Próximas tareas"
+
+#: includes/reports/task-reports.php:145
+msgid "No upcoming tasks."
+msgstr "No hay tareas futuras."
+
+#: includes/reports/task-reports.php:180
+msgid "Tasks by Percentage Complete"
+msgstr "Tareas por porcentaje completado"
+
+#: includes/reports/task-reports.php:215 includes/reports/task-reports.php:255
+#: includes/reports/task-reports.php:295 includes/reports/task-reports.php:320
+#: includes/reports/task-reports.php:325
+msgid "No tasks to report."
+msgstr "No hay tareas que mostrar."
+
+#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1017
+#: includes/wcs-functions.php:66
+msgctxt "Greatest importance"
+msgid "High"
+msgstr "Alta"
+
+#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1017
+#: includes/wcs-functions.php:66
+msgctxt "Average priority"
+msgid "Medium"
+msgstr "Media"
+
+#: includes/reports/task-reports.php:219 includes/wcs-fields.php:1017
+#: includes/wcs-functions.php:66
+msgctxt "Not of great importance"
+msgid "Low"
+msgstr "Baja"
+
+#: includes/reports/task-reports.php:220
+msgid "Tasks by Priority"
+msgstr "Tareas por prioridad"
+
+#: includes/reports/task-reports.php:260
+msgid "Tasks by Status"
+msgstr "Tareas por estado"
+
+#: includes/reports/task-reports.php:300
+msgid "Tasks by Type"
+msgstr "Tareas por tipo"
+
+#: includes/reports/task-reports.php:340
+msgid "Back to Task Reports"
+msgstr "Regresar a los informes de tareas"
+
+#: includes/reports/wcs-reports.php:14 includes/wcs-extensions.php:5
+msgid "Overview"
+msgstr "Visión general"
+
+#: includes/reports/wcs-reports.php:19 includes/wcs-dashboard-setup.php:33
+#: includes/wcs-meta-columns-project.php:12 includes/wcs-post-types.php:400
+#: includes/wcs-post-types.php:402
+msgid "Project"
+msgstr "Proyecto"
+
+#: includes/reports/wcs-reports.php:24 includes/wcs-dashboard-setup.php:34
+#: includes/wcs-meta-columns-task.php:12 includes/wcs-post-types.php:169
+#: includes/wcs-post-types.php:171
+msgid "Task"
+msgstr "Tarea"
+
+#: includes/reports/wcs-reports.php:34 includes/wcs-dashboard-setup.php:32
+#: includes/wcs-meta-columns-contact.php:14
+#: includes/wcs-meta-columns-organization.php:12
+#: includes/wcs-post-types.php:246 includes/wcs-post-types.php:248
+#: includes/wcs-vars.php:224
+msgid "Organization"
+msgstr "Organización"
+
+#: includes/reports/wcs-reports.php:39 includes/wcs-dashboard-setup.php:29
+#: includes/wcs-post-types.php:93 includes/wcs-post-types.php:95
+msgid "Contact"
+msgstr "Contacto"
+
+#: includes/reports/wcs-reports.php:61
+msgid "WP CRM System Reports"
+msgstr "Informes del sistema WP-CRM"
+
+#. Plugin Name of the plugin/theme
+#: includes/wcs-admin-pages.php:16
+msgid "WP-CRM System"
+msgstr "Sistema WP-CRM"
+
+#: includes/wcs-admin-pages.php:17 includes/wcs-dashboard-setup.php:13
+msgid "Dashboard"
+msgstr "Tablero"
+
+#: includes/wcs-admin-pages.php:18 includes/wcs-meta-columns-contact.php:17
+#: includes/wcs-meta-columns-organization.php:14 includes/wcs-vars.php:83
+msgid "Email"
+msgstr "Email"
+
+#: includes/wcs-admin-pages.php:19
+msgid "Reports"
+msgstr "Informes"
+
+#: includes/wcs-admin-pages.php:20 includes/wcs-dashboard-reports.php:187
+msgid "Extensions"
+msgstr "Extensiones"
+
+#: includes/wcs-dashboard-address-book.php:43
+msgid "Click to view contact"
+msgstr "Haga clic para ver el contacto"
+
+#: includes/wcs-dashboard-address-book.php:46
+#: includes/wcs-dashboard-opportunity-list.php:68
+#: includes/wcs-dashboard-project-list.php:104
+#: includes/wcs-dashboard-task-list.php:69
+msgid "Contact Name"
+msgstr "Nombre de contacto"
+
+#: includes/wcs-dashboard-address-book.php:50
+msgid "Contact Email"
+msgstr "Email de contacto"
+
+#: includes/wcs-dashboard-address-book.php:54
+msgid "Contact Company - Click to view company"
+msgstr "Contacto de empresa - Haga click para ver la empresa"
+
+#: includes/wcs-dashboard-address-book.php:58
+msgid "Contact Phone"
+msgstr "Teléfono de contacto"
+
+#: includes/wcs-dashboard-address-book.php:62
+msgid "Contact Mobile"
+msgstr "Móvil de contacto"
+
+#: includes/wcs-dashboard-address-book.php:66
+msgid "Contact Fax"
+msgstr "Fax de contacto"
+
+#: includes/wcs-dashboard-address-book.php:70
+msgid "Contact Address"
+msgstr "Dirección de contacto"
+
+#: includes/wcs-dashboard-opportunity-list.php:48
+msgid "Opportunity Name"
+msgstr "Nombre de la oportunidad"
+
+#: includes/wcs-dashboard-opportunity-list.php:58
+#: includes/wcs-dashboard-project-list.php:94
+#: includes/wcs-dashboard-task-list.php:59
+msgid "Company"
+msgstr "Empresa"
+
+#: includes/wcs-dashboard-opportunity-list.php:78
+msgid "Related Campaign"
+msgstr "Campaña relacionada"
+
+#: includes/wcs-dashboard-opportunity-list.php:88
+#: includes/wcs-dashboard-project-list.php:114
+#: includes/wcs-dashboard-task-list.php:89
+msgid "Assigned to User"
+msgstr "Asignado al usuario"
+
+#: includes/wcs-dashboard-opportunity-list.php:98 includes/wcs-vars.php:236
+msgid "Probability of Winning"
+msgstr "Probabilidad de éxito"
+
+#: includes/wcs-dashboard-opportunity-list.php:108
+#: includes/wcs-dashboard-project-list.php:64
+#: includes/wcs-meta-columns-opportunity.php:14
+#: includes/wcs-meta-columns-project.php:14 includes/wcs-vars.php:56
+msgid "Close Date"
+msgstr "Fecha de cierre"
+
+#: includes/wcs-dashboard-opportunity-list.php:118
+msgid "Value of Opportunity"
+msgstr "Valor de la oportunidad"
+
+#: includes/wcs-dashboard-opportunity-list.php:128
+#: includes/wcs-meta-columns-opportunity.php:16 includes/wcs-vars.php:278
+msgid "Won/Lost"
+msgstr "Ganado / Perdido"
+
+#: includes/wcs-dashboard-project-list.php:44
+msgid "Project Name"
+msgstr "Nombre del proyecto"
+
+#: includes/wcs-dashboard-project-list.php:54
+msgid "Project Value"
+msgstr "Valor del proyecto"
+
+#: includes/wcs-dashboard-project-list.php:74
+msgid "Project Status"
+msgstr "Estado del proyecto"
+
+#: includes/wcs-dashboard-project-list.php:84
+#: includes/wcs-meta-columns-project.php:15
+#: includes/wcs-meta-columns-task.php:15 includes/wcs-vars.php:239
+msgid "Progress"
+msgstr "Progreso"
+
+#: includes/wcs-dashboard-reports.php:28
+msgid "Address Book"
+msgstr "Agenda de contactos"
+
+#: includes/wcs-dashboard-reports.php:40
+msgid "Select a Contact"
+msgstr "Seleccione un contacto"
+
+#: includes/wcs-dashboard-reports.php:51
+msgid "No contacts to display"
+msgstr "No hay contactos que mostrar"
+
+#: includes/wcs-dashboard-reports.php:59 includes/wcs-fields.php:34
+#: includes/wcs-fields.php:39 includes/wcs-post-types.php:399
+#: includes/wcs-post-types.php:401 includes/wcs-post-types.php:408
+#: includes/wcs-post-types.php:417
+msgid "Projects"
+msgstr "Proyectos"
+
+#: includes/wcs-dashboard-reports.php:71
+msgid "Select a Project"
+msgstr "Seleccione un proyecto"
+
+#: includes/wcs-dashboard-reports.php:82
+msgid "No projects to display"
+msgstr "No hay proyectos para mostrar"
+
+#: includes/wcs-dashboard-reports.php:91 includes/wcs-fields.php:33
+#: includes/wcs-fields.php:35 includes/wcs-fields.php:40
+#: includes/wcs-post-types.php:168 includes/wcs-post-types.php:170
+#: includes/wcs-post-types.php:177 includes/wcs-post-types.php:186
+msgid "Tasks"
+msgstr "Tareas"
+
+#: includes/wcs-dashboard-reports.php:103
+msgid "Select a Task"
+msgstr "Seleccione una tarea"
+
+#: includes/wcs-dashboard-reports.php:114
+msgid "No tasks to display"
+msgstr "No hay tareas que mostrar"
+
+#: includes/wcs-dashboard-reports.php:123 includes/wcs-fields.php:36
+#: includes/wcs-fields.php:38 includes/wcs-post-types.php:322
+#: includes/wcs-post-types.php:324 includes/wcs-post-types.php:331
+#: includes/wcs-post-types.php:340
+msgid "Opportunities"
+msgstr "Oportunidades"
+
+#: includes/wcs-dashboard-reports.php:135
+msgid "Select an Opportunity"
+msgstr "Seleccione una oportunidad"
+
+#: includes/wcs-dashboard-reports.php:146
+msgid "No opportunities to display"
+msgstr "No hay oportunidades para mostrar"
+
+#: includes/wcs-dashboard-reports.php:174
+#: includes/wcs-meta-columns-campaign.php:13 includes/wcs-vars.php:20
+msgid "Active"
+msgstr "Activo"
+
+#: includes/wcs-dashboard-reports.php:176 includes/wcs-vars.php:206
+msgid "Inactive"
+msgstr "Inactivo"
+
+#: includes/wcs-dashboard-reports.php:194
+#, php-format
+msgid ""
+"Take a look at our <a href=\"%s\">extensions</a> to see how you can get more "
+"out of WP-CRM System."
+msgstr ""
+"Eche un vistazo a nuestras <a href=\"%s\"> extensiones </a> para ver cómo "
+"puede aprovechar al máximo el sistema WP-CRM."
+
+#: includes/wcs-dashboard-setup.php:27
+msgid "Add New..."
+msgstr "Añadir nuevo ..."
+
+#: includes/wcs-dashboard-setup.php:30
+msgid "Invoice"
+msgstr "Factura"
+
+#: includes/wcs-dashboard-setup.php:48
+msgid "Go to Category..."
+msgstr "Ir a la categoría ..."
+
+#: includes/wcs-dashboard-setup.php:49
+msgid "Organization Categories"
+msgstr "Categorías de la organización"
+
+#: includes/wcs-dashboard-setup.php:50
+msgid "Contact Categories"
+msgstr "Categorías de los contactos"
+
+#: includes/wcs-dashboard-setup.php:51
+msgid "Opportunity Categories"
+msgstr "Categorías de las oportunidades"
+
+#: includes/wcs-dashboard-setup.php:52
+msgid "Project Categories"
+msgstr "Categorías de los proyectos"
+
+#: includes/wcs-dashboard-setup.php:53
+msgid "Task Categories"
+msgstr "Categorías de las tareas"
+
+#: includes/wcs-dashboard-setup.php:54
+msgid "Campaign Categories"
+msgstr "Categorías de las campañas"
+
+#: includes/wcs-dashboard-task-list.php:49
+msgid "Task Name"
+msgstr "Nombre de la tarea"
+
+#: includes/wcs-dashboard-task-list.php:79
+msgid "Related Project"
+msgstr "Proyecto relacionado"
+
+#: includes/wcs-dashboard-task-list.php:99
+#: includes/wcs-meta-columns-campaign.php:15
+#: includes/wcs-meta-columns-task.php:13 includes/wcs-vars.php:257
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+#: includes/wcs-dashboard-task-list.php:109
+#: includes/wcs-meta-columns-task.php:14 includes/wcs-vars.php:80
+msgid "Due Date"
+msgstr "Fecha de vencimiento"
+
+#: includes/wcs-dashboard-task-list.php:119
+#: includes/wcs-meta-columns-task.php:16 includes/wcs-vars.php:233
+msgid "Priority"
+msgstr "Prioridad"
+
+#: includes/wcs-dashboard-task-list.php:129
+#: includes/wcs-meta-columns-campaign.php:14
+#: includes/wcs-meta-columns-project.php:16
+#: includes/wcs-meta-columns-task.php:17 includes/wcs-vars.php:263
+msgid "Status"
+msgstr "Estado"
+
+#: includes/wcs-email.php:43
+msgid "WP-CRM System Send Email"
+msgstr "Enviar Email del sistema WP-CRM"
+
+#: includes/wcs-email.php:51
+msgid "Filter Contacts by Organization"
+msgstr "Filtrar contactos por organización"
+
+#: includes/wcs-email.php:54
+msgid "Do not filter by organization"
+msgstr "No filtrar por organización"
+
+#: includes/wcs-email.php:68
+msgid "Filter Contacts by Categories"
+msgstr "Filtrar contactos por categorías"
+
+#: includes/wcs-email.php:79
+msgid "Filter Recipients"
+msgstr "Destinatarios del filtro"
+
+#: includes/wcs-email.php:85
+msgid "Select Recipients"
+msgstr "Seleccionar destinatarios"
+
+#: includes/wcs-email.php:148 includes/wcs-email.php:194
+msgid ""
+"Well this is awkward. It seems like you have no one to email. Why not add "
+"some contacts first then come back to try again."
+msgstr ""
+"Bueno, esto es incomodo. Parece que no tiene a nadie por correo electrónico. "
+"¿Por qué no añadir algunos contactos primero y luego volver a intentarlo de "
+"nuevo."
+
+#: includes/wcs-email.php:200
+msgid "Email Subject"
+msgstr "Asunto del Email"
+
+#: includes/wcs-email.php:206
+msgid "Email Message"
+msgstr "Mensaje de Email"
+
+#: includes/wcs-email.php:212
+msgid "From Email Address"
+msgstr "De: Dirección de Email"
+
+#: includes/wcs-email.php:218
+msgid "From Name"
+msgstr "De: Nombre"
+
+#: includes/wcs-email.php:224 includes/wcs-email.php:226
+msgid "Send Email"
+msgstr "Enviar Email"
+
+#: includes/wcs-email.php:239
+msgid "All fields are required. Please try again."
+msgstr "Todos los campos son obligatorios. Vuelva a intentarlo."
+
+#: includes/wcs-email.php:258
+msgid "Email sent successfully."
+msgstr "Correo electrónico enviado correctamente."
+
+#: includes/wcs-extensions.php:6
+msgid "Documents"
+msgstr "Documentos"
+
+#: includes/wcs-extensions.php:7
+msgid "Contact Forms"
+msgstr "Formularios de contacto"
+
+#: includes/wcs-extensions.php:8
+msgid "Importers"
+msgstr "Importadores"
+
+#: includes/wcs-extensions.php:9
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: includes/wcs-extensions.php:239 includes/wcs-extensions.php:261
+#: includes/wcs-extensions.php:283 includes/wcs-extensions.php:305
+#: includes/wcs-extensions.php:327
+msgid "WP CRM System Extensions"
+msgstr "Extensiones del sistema WP-CRM"
+
+#: includes/wcs-extensions.php:240 includes/wcs-extensions.php:262
+#: includes/wcs-extensions.php:284 includes/wcs-extensions.php:306
+#: includes/wcs-extensions.php:328
+msgid "These extensions add features to your WP-CRM System"
+msgstr "Estas extensiones añaden funciones a su sistema WP-CRM"
+
+#: includes/wcs-extensions.php:248 includes/wcs-extensions.php:270
+#: includes/wcs-extensions.php:292 includes/wcs-extensions.php:314
+#: includes/wcs-extensions.php:336
+msgid "Extension Installed"
+msgstr "Extensión instalada"
+
+#: includes/wcs-extensions.php:250 includes/wcs-extensions.php:272
+#: includes/wcs-extensions.php:294 includes/wcs-extensions.php:316
+#: includes/wcs-extensions.php:338
+msgid "Get This Extension"
+msgstr "Obtener esta extensión"
+
+#: includes/wcs-fields.php:25
+msgid "Fields"
+msgstr "Campos"
+
+#: includes/wcs-fields.php:29
+msgid "Map"
+msgstr "Mapa"
+
+#: includes/wcs-fields.php:32
+msgid "WP-CRM System Options"
+msgstr "Opciones del sistema WP-CRM"
+
+#: includes/wcs-fields.php:37 includes/wcs-meta-columns-organization.php:16
+#: includes/wcs-post-types.php:92 includes/wcs-post-types.php:94
+#: includes/wcs-post-types.php:101 includes/wcs-post-types.php:109
+msgid "Contacts"
+msgstr "Contactos"
+
+#: includes/wcs-fields.php:41
+msgid "Contact Emails"
+msgstr "Email de contacto"
+
+#: includes/wcs-fields.php:469
+msgid "Loading map..."
+msgstr "Cargando mapa ..."
+
+#: includes/wcs-fields.php:470
+msgid "Map shows approximate location."
+msgstr "El mapa muestra la ubicación aproximada."
+
+#: includes/wcs-fields.php:474
+msgid ""
+"No Map Found. Please enter an address or verify the address details are "
+"correct."
+msgstr ""
+"No se ha encontrado el mapa. Introduzca una dirección o verifique que los "
+"detalles de la dirección sean correctos."
+
+#: includes/wcs-fields.php:492
+msgid "Create Project From Opportunity"
+msgstr "Crear proyecto desde la oportunidad"
+
+#: includes/wcs-fields.php:525
+msgid "New Project Added!"
+msgstr "¡Nuevo Proyecto Agregado!"
+
+#: includes/wcs-fields.php:527
+msgid "Project not added. A project with this name already exists: "
+msgstr "Proyecto no agregado. Ya existe un proyecto con este nombre: "
+
+#: includes/wcs-fields.php:558
+msgid "No tasks assigned to this project."
+msgstr "Ninguna tarea asignada a este proyecto."
+
+#: includes/wcs-fields.php:588
+msgid "No projects assigned to this contact."
+msgstr "No hay proyectos asignados a este contacto."
+
+#: includes/wcs-fields.php:618
+msgid "No tasks assigned to this contact."
+msgstr "Ninguna tarea asignada a este contacto."
+
+#: includes/wcs-fields.php:648
+msgid "No opportunities assigned to this contact."
+msgstr "No hay oportunidades asignadas a este contacto."
+
+#: includes/wcs-fields.php:678
+msgid "No projects assigned to this organization."
+msgstr "No hay proyectos asignados a esta organización."
+
+#: includes/wcs-fields.php:708
+msgid "No tasks assigned to this organization."
+msgstr "Ninguna tarea asignada a esta organización."
+
+#: includes/wcs-fields.php:738
+msgid "No opportunities assigned to this organization."
+msgstr "No hay oportunidades asignadas a esta organización."
+
+#: includes/wcs-fields.php:768
+msgid "No contacts assigned to this organization."
+msgstr "No hay contactos asignados a esta organización."
+
+#: includes/wcs-fields.php:926
+msgid "Please create a campaign first."
+msgstr "Por favor, primero cree una campaña."
+
+#: includes/wcs-fields.php:952
+msgid "Please create an organization first."
+msgstr "Por favor, primero cree una organización."
+
+#: includes/wcs-fields.php:977
+msgid "Please create a contact first."
+msgstr "Por favor, primero cree un contacto."
+
+#: includes/wcs-fields.php:1002
+msgid "Please create a project first."
+msgstr "Por favor, primero cree un proyecto."
+
+#: includes/wcs-fields.php:1013 includes/wcs-fields.php:1017
+msgid "Select an option"
+msgstr "Seleccione una opción"
+
+#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+msgctxt "Successful, a winner."
+msgid "Won"
+msgstr "Ganada"
+
+#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+msgctxt "Unsuccessful, a loser."
+msgid "Lost"
+msgstr "Perdida"
+
+#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+msgctxt "Temporarily ended, but may resume again."
+msgid "Suspended"
+msgstr "Suspendida"
+
+#: includes/wcs-fields.php:1013 includes/wcs-functions.php:77
+msgctxt "No longer actively working on."
+msgid "Abandoned"
+msgstr "Abandonada"
+
+#: includes/wcs-fields.php:1022 includes/wcs-functions.php:33
+#: includes/wcs-functions.php:55
+msgctxt "All tasks are finished. No further work is needed."
+msgid "Complete"
+msgstr "Terminadas"
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgid "Select an Option"
+msgstr "Seleccione una opción"
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Title for male without a higher professional title."
+msgid "Mr."
+msgstr "Sr."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt ""
+"Married woman or woman who has been married with no higher professional "
+"title."
+msgid "Mrs."
+msgstr "Sra."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "An unmarried woman. Also Ms."
+msgid "Miss"
+msgstr "Srta."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "An unmarried woman. Also Miss."
+msgid "Ms."
+msgstr "Srta."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Doctor"
+msgid "Dr."
+msgstr "Dr."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Title used for young men."
+msgid "Master"
+msgstr "Señor"
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Title used for the person in charge of a sports team"
+msgid "Coach"
+msgstr "Entrenador"
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Title of a priest or religous clergy - Reverend "
+msgid "Rev."
+msgstr "Rev."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Title of a priest or religous clergy - Father"
+msgid "Fr."
+msgstr "P."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Attorney, or lawyer"
+msgid "Atty."
+msgstr "Abg."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Professor, as in a teacher at a university."
+msgid "Prof."
+msgstr "Prof."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Honorable - often used for elected officials or judges."
+msgid "Hon."
+msgstr "Hble."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt ""
+"Term given to the head of an organization or country. As in President of a "
+"University or President of the United States"
+msgid "Pres."
+msgstr "Pdte."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Governor, as in the Governor of the State of New York."
+msgid "Gov."
+msgstr "Gob.or"
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Officer as in a police officer."
+msgid "Ofc."
+msgstr "Ofc."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Superintendent"
+msgid "Supt."
+msgstr "Supte."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt ""
+"Representative - as in an elected official to the House of Representatives"
+msgid "Rep."
+msgstr "Rep."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "An elected official - Senator."
+msgid "Sen."
+msgstr "Sen."
+
+#: includes/wcs-fields.php:1027 includes/wcs-functions.php:8
+msgctxt "Ambassador - a diplomatic official."
+msgid "Amb."
+msgstr "Emb."
+
+#: includes/wcs-fields.php:1071 includes/wcs-fields.php:1074
+msgid ""
+"Only numbers allowed. No thousands separator (commas, spaces, or periods), "
+"currency symbols, etc. allowed."
+msgstr ""
+"Solo se permiten números. No se permite ningún separador de miles (comas, "
+"espacios o períodos), símbolos de moneda, etc."
+
+#: includes/wcs-fields.php:1288
+msgid "Sent: "
+msgstr "Enviado: "
+
+#: includes/wcs-fields.php:1288
+msgid " From: "
+msgstr " De: "
+
+#: includes/wcs-fields.php:1289
+msgid "Subject: "
+msgstr "Asunto: "
+
+#: includes/wcs-fields.php:1290
+msgid "Message: "
+msgstr "Mensaje: "
+
+#: includes/wcs-functions.php:113
+msgid "<< Previous Month"
+msgstr "<< Mes anterior"
+
+#: includes/wcs-functions.php:115
+msgid "Next Month >>"
+msgstr "Siguiente mes >>"
+
+#: includes/wcs-functions.php:117
+msgid "Sunday"
+msgstr "Domingo"
+
+#: includes/wcs-functions.php:117
+msgid "Monday"
+msgstr "Lunes"
+
+#: includes/wcs-functions.php:117
+msgid "Tuesday"
+msgstr "Martes"
+
+#: includes/wcs-functions.php:117
+msgid "Wednesday"
+msgstr "Miércoles"
+
+#: includes/wcs-functions.php:117
+msgid "Thursday"
+msgstr "Jueves"
+
+#: includes/wcs-functions.php:117
+msgid "Friday"
+msgstr "Viernes"
+
+#: includes/wcs-functions.php:117
+msgid "Saturday"
+msgstr "Sábado"
+
+#: includes/wcs-initial-install-settings.php:10
+#, php-format
+msgid ""
+"Please visit the <a href=\"%s\">WP-CRM System Dashboard</a> page to set your "
+"options and complete set up."
+msgstr ""
+"Por favor, visite la página <a href=\"%s\">Cuadro de mandos del sistema WP-"
+"CRM</a> para configurar sus opciones y completar la configuración."
+
+#: includes/wcs-initial-install-settings.php:22
+msgid "Administrator"
+msgstr "Administrador"
+
+#: includes/wcs-initial-install-settings.php:23
+msgid "Editor"
+msgstr "Editor"
+
+#: includes/wcs-initial-install-settings.php:24
+msgid "Author"
+msgstr "Autor"
+
+#: includes/wcs-initial-install-settings.php:25
+msgid "Contributor"
+msgstr "Colaborador"
+
+#: includes/wcs-initial-install-settings.php:26
+msgid "Subscriber"
+msgstr "Suscriptor"
+
+#: includes/wcs-meta-columns-campaign.php:16 includes/wcs-vars.php:86
+msgid "End Date"
+msgstr "Fecha final"
+
+#: includes/wcs-meta-columns-campaign.php:17 includes/wcs-vars.php:242
+msgid "Projected Reach"
+msgstr "Alcance del proyecto"
+
+#: includes/wcs-meta-columns-campaign.php:18 includes/wcs-vars.php:245
+msgid "Total Responses"
+msgstr "Total de respuestas"
+
+#: includes/wcs-meta-columns-campaign.php:19
+msgid "Budget Cost"
+msgstr "Coste presupuestado"
+
+#: includes/wcs-meta-columns-campaign.php:20 includes/wcs-vars.php:23
+msgid "Actual Cost"
+msgstr "Coste actual"
+
+#: includes/wcs-meta-columns-campaign.php:21
+#: includes/wcs-meta-columns-contact.php:19
+#: includes/wcs-meta-columns-opportunity.php:17
+#: includes/wcs-meta-columns-organization.php:17
+#: includes/wcs-meta-columns-project.php:17
+#: includes/wcs-meta-columns-task.php:18
+msgid "Date"
+msgstr "Fecha"
+
+#: includes/wcs-meta-columns-campaign.php:49
+#: includes/wcs-meta-columns-campaign.php:56
+msgid "No"
+msgstr "No"
+
+#: includes/wcs-meta-columns-campaign.php:54
+msgid "Yes"
+msgstr "Sí"
+
+#: includes/wcs-meta-columns-contact.php:12
+msgid "Name"
+msgstr "Nombre"
+
+#: includes/wcs-meta-columns-contact.php:13
+msgid "Photo"
+msgstr "Fotografía"
+
+#: includes/wcs-meta-columns-contact.php:15
+#: includes/wcs-meta-columns-organization.php:13 includes/wcs-vars.php:227
+msgid "Phone"
+msgstr "Teléfono"
+
+#: includes/wcs-meta-columns-contact.php:16 includes/wcs-vars.php:215
+msgid "Mobile Phone"
+msgstr "Teléfono Movil"
+
+#: includes/wcs-meta-columns-contact.php:18
+#: includes/wcs-meta-columns-organization.php:15
+msgid "Address"
+msgstr "Dirección"
+
+#: includes/wcs-meta-columns-contact.php:41
+msgid "No Photo Set"
+msgstr "Sin foto"
+
+#: includes/wcs-meta-columns-contact.php:241
+msgid "Filter By Organization"
+msgstr "Filtrar por organización"
+
+#: includes/wcs-meta-columns-opportunity.php:13
+msgid "Probability"
+msgstr "Probabilidad"
+
+#: includes/wcs-meta-columns-opportunity.php:15
+#: includes/wcs-meta-columns-project.php:13 includes/wcs-vars.php:266
+msgid "Value"
+msgstr "Valor"
+
+#: includes/wcs-meta-columns-task.php:84
+msgid "Low"
+msgstr "Bajo"
+
+#: includes/wcs-meta-columns-task.php:85
+msgid "Medium"
+msgstr "Medio"
+
+#: includes/wcs-meta-columns-task.php:86
+msgid "High"
+msgstr "Alto"
+
+#: includes/wcs-post-types.php:96 includes/wcs-post-types.php:172
+#: includes/wcs-post-types.php:249 includes/wcs-post-types.php:326
+#: includes/wcs-post-types.php:403 includes/wcs-post-types.php:480
+msgid "Add New"
+msgstr "Añadir nuevo"
+
+#: includes/wcs-post-types.php:97
+msgid "Add New Contact"
+msgstr "Añadir nuevo contacto"
+
+#: includes/wcs-post-types.php:98
+msgid "New Contact"
+msgstr "Nuevo contacto"
+
+#: includes/wcs-post-types.php:99
+msgid "Edit Contact"
+msgstr "Editar contacto"
+
+#: includes/wcs-post-types.php:100
+msgid "View Contact"
+msgstr "Ver contacto"
+
+#: includes/wcs-post-types.php:102
+msgid "Search Contacts"
+msgstr "Buscar contactos"
+
+#: includes/wcs-post-types.php:103
+msgid "Parent Contact:"
+msgstr "Contacto principal:"
+
+#: includes/wcs-post-types.php:104
+msgid "No contacts found."
+msgstr "No se encontraron contactos."
+
+#: includes/wcs-post-types.php:105
+msgid "No contacts found in Trash."
+msgstr "No se encontraron contactos en la Papelera."
+
+#: includes/wcs-post-types.php:145 includes/wcs-post-types.php:151
+msgid "Contact Types"
+msgstr "Tipos de contactos"
+
+#: includes/wcs-post-types.php:146
+msgid "Contact Type"
+msgstr "Tipo de contacto"
+
+#: includes/wcs-post-types.php:147
+msgid "Edit Contact Type"
+msgstr "Editar tipo de contacto"
+
+#: includes/wcs-post-types.php:148
+msgid "Update Contact Type"
+msgstr "Actualizar tipo de contacto"
+
+#: includes/wcs-post-types.php:149
+msgid "Add New Contact Type"
+msgstr "Añadir nuevo tipo de contacto"
+
+#: includes/wcs-post-types.php:150
+msgid "New Contact Type"
+msgstr "Nuevo tipo de contacto"
+
+#: includes/wcs-post-types.php:173
+msgid "Add New Task"
+msgstr "Añadir nueva tarea"
+
+#: includes/wcs-post-types.php:174
+msgid "New Task"
+msgstr "Nueva tarea"
+
+#: includes/wcs-post-types.php:175
+msgid "Edit Task"
+msgstr "Editar tarea"
+
+#: includes/wcs-post-types.php:176
+msgid "View Task"
+msgstr "Ver tarea"
+
+#: includes/wcs-post-types.php:178
+msgid "Search Tasks"
+msgstr "Buscar tareas"
+
+#: includes/wcs-post-types.php:179
+msgid "Parent Task:"
+msgstr "Tarea principal:"
+
+#: includes/wcs-post-types.php:180
+msgid "No tasks found."
+msgstr "No se han encontrado tareas."
+
+#: includes/wcs-post-types.php:181
+msgid "No tasks found in Trash."
+msgstr "No se encontraron tareas en la Papelera."
+
+#: includes/wcs-post-types.php:222 includes/wcs-post-types.php:228
+msgid "Task Types"
+msgstr "Tipos de tareas"
+
+#: includes/wcs-post-types.php:223
+msgid "Task Type"
+msgstr "Tipo de tarea"
+
+#: includes/wcs-post-types.php:224
+msgid "Edit Task Type"
+msgstr "Editar tipo de tarea"
+
+#: includes/wcs-post-types.php:225
+msgid "Update Task Type"
+msgstr "Actualizar tipo de tarea"
+
+#: includes/wcs-post-types.php:226
+msgid "Add New Task Type"
+msgstr "Añadir nuevo tipo de tarea"
+
+#: includes/wcs-post-types.php:227
+msgid "New Task Type"
+msgstr "Nuevo tipo de tarea"
+
+#: includes/wcs-post-types.php:245 includes/wcs-post-types.php:247
+#: includes/wcs-post-types.php:254 includes/wcs-post-types.php:263
+msgid "Organizations"
+msgstr "Organizaciones"
+
+#: includes/wcs-post-types.php:250
+msgid "Add New Organization"
+msgstr "Añadir nueva organización"
+
+#: includes/wcs-post-types.php:251
+msgid "New Organization"
+msgstr "Nueva organización"
+
+#: includes/wcs-post-types.php:252
+msgid "Edit Organization"
+msgstr "Editar organización"
+
+#: includes/wcs-post-types.php:253
+msgid "View Organization"
+msgstr "Ver organización"
+
+#: includes/wcs-post-types.php:255
+msgid "Search Organizations"
+msgstr "Buscar organizaciones"
+
+#: includes/wcs-post-types.php:256
+msgid "Parent Organization:"
+msgstr "Organización principal:"
+
+#: includes/wcs-post-types.php:257
+msgid "No organizations found."
+msgstr "No se encontraron organizaciones."
+
+#: includes/wcs-post-types.php:258
+msgid "No organizations found in Trash."
+msgstr "No se encontraron organizaciones en la Papelera."
+
+#: includes/wcs-post-types.php:299 includes/wcs-post-types.php:305
+msgid "Organization Types"
+msgstr "Tipos de organizaciones"
+
+#: includes/wcs-post-types.php:300
+msgid "Organization Type"
+msgstr "Tipo de organización"
+
+#: includes/wcs-post-types.php:301
+msgid "Edit Organization Type"
+msgstr "Editar tipo de organización"
+
+#: includes/wcs-post-types.php:302
+msgid "Update Organization Type"
+msgstr "Actualizar tipo de organización"
+
+#: includes/wcs-post-types.php:303
+msgid "Add New Organization Type"
+msgstr "Añadir nuevo tipo de organización"
+
+#: includes/wcs-post-types.php:304
+msgid "New Organization Type"
+msgstr "Nuevo tipo de organización"
+
+#: includes/wcs-post-types.php:327
+msgid "Add New Opportunity"
+msgstr "Añadir nueva oportunidad"
+
+#: includes/wcs-post-types.php:328
+msgid "New Opportunity"
+msgstr "Nueva oportunidad"
+
+#: includes/wcs-post-types.php:329
+msgid "Edit Opportunity"
+msgstr "Editar oportunidad"
+
+#: includes/wcs-post-types.php:330
+msgid "View Opportunity"
+msgstr "Ver oportunidad"
+
+#: includes/wcs-post-types.php:332
+msgid "Search Opportunities"
+msgstr "Buscar oportunidades"
+
+#: includes/wcs-post-types.php:333
+msgid "Parent Opportunity:"
+msgstr "Oportunidad principal:"
+
+#: includes/wcs-post-types.php:334
+msgid "No opportunities found."
+msgstr "No se encontraron oportunidades."
+
+#: includes/wcs-post-types.php:335
+msgid "No opportunities found in Trash."
+msgstr "No se encontraron oportunidades en la Papelera."
+
+#: includes/wcs-post-types.php:376 includes/wcs-post-types.php:382
+msgid "Opportunity Types"
+msgstr "Tipos de oportunidades"
+
+#: includes/wcs-post-types.php:377
+msgid "Opportunity Type"
+msgstr "Tipo de oportunidad"
+
+#: includes/wcs-post-types.php:378
+msgid "Edit Opportunity Type"
+msgstr "Editar tipo de oportunidad"
+
+#: includes/wcs-post-types.php:379
+msgid "Update Opportunity Type"
+msgstr "Actualizar tipo de oportunidad"
+
+#: includes/wcs-post-types.php:380
+msgid "Add New Opportunity Type"
+msgstr "Añadir nuevo tipo de oportunidad"
+
+#: includes/wcs-post-types.php:381
+msgid "New Opportunity Type"
+msgstr "Nuevo tipo de oportunidad"
+
+#: includes/wcs-post-types.php:404
+msgid "Add New Project"
+msgstr "Añadir nuevo proyecto"
+
+#: includes/wcs-post-types.php:405
+msgid "New Project"
+msgstr "Nuevo proyecto"
+
+#: includes/wcs-post-types.php:406
+msgid "Edit Project"
+msgstr "Editar proyecto"
+
+#: includes/wcs-post-types.php:407
+msgid "View Project"
+msgstr "Ver proyecto"
+
+#: includes/wcs-post-types.php:409
+msgid "Search Projects"
+msgstr "Buscar proyectos"
+
+#: includes/wcs-post-types.php:410
+msgid "Parent Project:"
+msgstr "Proyecto principal:"
+
+#: includes/wcs-post-types.php:411
+msgid "No projects found."
+msgstr "No se encontraron proyectos."
+
+#: includes/wcs-post-types.php:412
+msgid "No projects found in Trash."
+msgstr "No se encontraron proyectos en la Papelera."
+
+#: includes/wcs-post-types.php:453 includes/wcs-post-types.php:459
+msgid "Project Types"
+msgstr "Tipos de proyectos"
+
+#: includes/wcs-post-types.php:454
+msgid "Project Type"
+msgstr "Tipo de proyecto"
+
+#: includes/wcs-post-types.php:455
+msgid "Edit Project Type"
+msgstr "Editar tipo de proyecto"
+
+#: includes/wcs-post-types.php:456
+msgid "Update Project Type"
+msgstr "Actualizar tipo de proyecto"
+
+#: includes/wcs-post-types.php:457
+msgid "Add New Project Type"
+msgstr "Añadir nuevo tipo de proyecto"
+
+#: includes/wcs-post-types.php:458
+msgid "New Project Type"
+msgstr "Nuevo tipo de proyecto"
+
+#: includes/wcs-post-types.php:476 includes/wcs-post-types.php:478
+#: includes/wcs-post-types.php:485 includes/wcs-post-types.php:494
+msgid "Campaigns"
+msgstr "Campañas"
+
+#: includes/wcs-post-types.php:481
+msgid "Add New Campaign"
+msgstr "Añadir nueva campaña"
+
+#: includes/wcs-post-types.php:482
+msgid "New Campaign"
+msgstr "Nueva campaña"
+
+#: includes/wcs-post-types.php:483
+msgid "Edit Campaign"
+msgstr "Editar campaña"
+
+#: includes/wcs-post-types.php:484
+msgid "View Campaign"
+msgstr "Ver campaña"
+
+#: includes/wcs-post-types.php:486
+msgid "Search Campaigns"
+msgstr "Buscar campañas"
+
+#: includes/wcs-post-types.php:487
+msgid "Parent Campaign:"
+msgstr "Campaña principal:"
+
+#: includes/wcs-post-types.php:488
+msgid "No campaigns found."
+msgstr "No se encontraron campañas."
+
+#: includes/wcs-post-types.php:489
+msgid "No campaigns found in Trash."
+msgstr "No se encontraron campañas en la Papelera."
+
+#: includes/wcs-post-types.php:530 includes/wcs-post-types.php:536
+msgid "Campaign Types"
+msgstr "Tipos de campañas"
+
+#: includes/wcs-post-types.php:531
+msgid "Campaign Type"
+msgstr "Tipo de campaña"
+
+#: includes/wcs-post-types.php:532
+msgid "Edit Campaign Type"
+msgstr "Editar tipo de campaña"
+
+#: includes/wcs-post-types.php:533
+msgid "Update Campaign Type"
+msgstr "Actualizar tipo de campaña"
+
+#: includes/wcs-post-types.php:534
+msgid "Add New Campaign Type"
+msgstr "Añadir nuevo tipo de campaña"
+
+#: includes/wcs-post-types.php:535
+msgid "New Campaign Type"
+msgstr "Nuevo tipo de campaña"
+
+#: includes/wcs-settings.php:4
+msgid "Settings saved."
+msgstr "Ajustes guardados."
+
+#: includes/wcs-settings.php:18
+msgid "Import"
+msgstr "Importar"
+
+#: includes/wcs-system-setup.php:9 includes/wcs-system-setup.php:17
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/wcs-system-setup.php:21
+msgid "System Info"
+msgstr "Información del sistema"
+
+#: includes/wcs-system-setup.php:26
+msgid "Licenses"
+msgstr "Licencias"
+
+#: includes/wcs-system-setup.php:46
+msgid "WP-CRM System Settings"
+msgstr "Configuración del sistema WP-CRM"
+
+#: includes/wcs-system-setup.php:54
+msgid "Access Level"
+msgstr "Nivel de acceso"
+
+#: includes/wcs-system-setup.php:54
+msgid ""
+"Roles are listed in order of seniority (Administrator is highest, Subscriber "
+"is lowest). All roles higher than, and including the role you select will "
+"have access to WP-CRM System."
+msgstr ""
+"Los roles se enumeran por orden de antigüedad (el administrador es el más "
+"alto, el suscriptor es el más bajo). Todos los roles superiores, e "
+"incluyendo el rol que seleccione, tendrán acceso al sistema WP-CRM."
+
+#: includes/wcs-system-setup.php:70
+msgid "Default Currency"
+msgstr "Moneda predeterminada"
+
+#: includes/wcs-system-setup.php:70
+msgid "Currency to be used when assigning values to projects or opportunities."
+msgstr ""
+"Moneda que se utilizará al asignar valores a proyectos u oportunidades."
+
+#: includes/wcs-system-setup.php:83
+msgid "Currency Format"
+msgstr "Formato de la moneda"
+
+#: includes/wcs-system-setup.php:83
+msgid "Set your preferred currency and numeral settings for reports."
+msgstr ""
+"Establezca la configuración de moneda y numérica preferida para los informes."
+
+#: includes/wcs-system-setup.php:89
+msgid "Thousands separator"
+msgstr "Separador de miles"
+
+#: includes/wcs-system-setup.php:97
+msgid "Decimal point"
+msgstr "Coma decimal"
+
+#: includes/wcs-system-setup.php:105
+msgid "Number of decimals"
+msgstr "Número de decimales"
+
+#: includes/wcs-system-setup.php:113
+msgid "Show Org. Address"
+msgstr "Mostrar la dirección de la organización"
+
+#: includes/wcs-system-setup.php:113
+msgid ""
+"If you have multiple organizations with the same name and possibly different "
+"locations, it would be difficult to distinguish which is which in the "
+"various dropdown menus. Check this box to add the Address 1 field for each "
+"organization to the dropdown menu."
+msgstr ""
+"Si tiene varias organizaciones con el mismo nombre y, posiblemente, "
+"diferentes ubicaciones, sería difícil distinguir qué es lo que en los "
+"diversos menús desplegables. Marqué esta casilla para agregar el campo "
+"Dirección 1 de cada organización al menú desplegable."
+
+#: includes/wcs-system-setup.php:121
+msgid "Hide Other User Content"
+msgstr "Ocultar el contenido de otro usuario"
+
+#: includes/wcs-system-setup.php:121
+msgid ""
+"This option will hide any entry in WP-CRM System that the current user did "
+"not create. Administrators will still have full access."
+msgstr ""
+"Esta opción oculta cualquier entrada en el sistema WP-CRM que el usuario "
+"actual no haya creado. Los administradores seguirán teniendo acceso completo."
+
+#: includes/wcs-system-setup.php:129
+msgid "Google Maps API Key"
+msgstr "Clave API de Google Maps"
+
+#: includes/wcs-system-setup.php:129
+msgid ""
+"Enter a valid Google Maps API key in order to correctly display the map view "
+"in Contacts and Organizations."
+msgstr ""
+"Introduzca una clave válida de la API de Google Maps para mostrar "
+"correctamente la vista del mapa en los contactos y las organizaciones."
+
+#: includes/wcs-system-setup.php:158
+msgid "Premium Plugin Licenses"
+msgstr "Licencias de Plugins Premium"
+
+#: includes/wcs-system-setup.php:202
+msgid "System Information"
+msgstr "Información del sistema"
+
+#: includes/wcs-system-setup.php:203
+msgid ""
+"To copy the system info, click inside the box then press Ctrl + C (PC) or "
+"Cmd + C (Mac)."
+msgstr ""
+"Para copiar la información del sistema, haga clic dentro de la caja y pulse "
+"Ctrl + C (PC) o Cmd + C (Mac)."
+
+#: includes/wcs-updates.php:28
+msgid ""
+"WP-CRM System: Your database needs a quick update. Please back up your "
+"database and run the update now. <form id=\"wpcrm-updater\" action=\"\" "
+"method=\"POST\"><input type=\"submit\" id=\"wpcrm-update-submit\" name="
+"\"wpcrm-update\" class=\"button-primary\" value=\"Update\" /></form>"
+msgstr ""
+"Sistema WP-CRM: Su base de datos necesita una actualización rápida. Por "
+"favor, haga una copia de seguridad de su base de datos y ejecute la "
+"actualización ahora."
+
+#: includes/wcs-updates.php:30
+msgid "WP-CRM System Update Successful!"
+msgstr "¡La actualización del sistema WP-CRM se ha realizado correctamente!"
+
+#: includes/wcs-vars.php:26
+msgid "Additional Information"
+msgstr "Información adicional"
+
+#: includes/wcs-vars.php:29
+msgid "Address 1"
+msgstr "Dirección 1"
+
+#: includes/wcs-vars.php:32
+msgid "Address 2"
+msgstr "Dirección 2"
+
+#: includes/wcs-vars.php:35
+msgid "Assigned To"
+msgstr "Asignado a"
+
+#: includes/wcs-vars.php:38
+msgid "Attach to Campaign"
+msgstr "Adjuntar a la campaña"
+
+#: includes/wcs-vars.php:41
+msgid "Attach to Contact"
+msgstr "Adjuntar al contacto"
+
+#: includes/wcs-vars.php:44
+msgid "Attach to Organization"
+msgstr "Adjuntar a la organización"
+
+#: includes/wcs-vars.php:47
+msgid "Attach to Project"
+msgstr "Adjuntar al proyecto"
+
+#: includes/wcs-vars.php:50
+msgid "Budgeted Cost"
+msgstr "Coste presupuestado"
+
+#: includes/wcs-vars.php:53
+msgid "City"
+msgstr "Ciudad"
+
+#: includes/wcs-vars.php:59
+msgid "Country"
+msgstr "País"
+
+#: includes/wcs-vars.php:62
+msgid "Create New Campaign"
+msgstr "Crear nueva campaña"
+
+#: includes/wcs-vars.php:65
+msgid "Create New Contact"
+msgstr "Crear nuevo contacto"
+
+#: includes/wcs-vars.php:68
+msgid "Create New Organization"
+msgstr "Crear nueva organización"
+
+#: includes/wcs-vars.php:71
+msgid "Create New Project"
+msgstr "Crear nuevo proyecto"
+
+#: includes/wcs-vars.php:74
+msgid "Description"
+msgstr "Descripción"
+
+#: includes/wcs-vars.php:77
+msgid "Link Files From Dropbox"
+msgstr "Vincular archivos desde Dropbox"
+
+#: includes/wcs-vars.php:89
+msgid "Client Area"
+msgstr "Área de Clientes"
+
+#: includes/wcs-vars.php:92
+msgid "Contact From User"
+msgstr "Contacto del usuario"
+
+#: includes/wcs-vars.php:95
+msgid "Custom Fields"
+msgstr "Campos personalizados"
+
+#: includes/wcs-vars.php:98
+msgid "Dropbox Connect"
+msgstr "Conexión con Dropbox"
+
+#: includes/wcs-vars.php:101
+msgid "Email Notifications"
+msgstr "Notificaciónes de Email"
+
+#: includes/wcs-vars.php:104
+msgid "Gravity Forms Connect"
+msgstr "Conexión con Gravity Forms"
+
+#: includes/wcs-vars.php:107
+msgid "Import Campaigns"
+msgstr "Importar campañas"
+
+#: includes/wcs-vars.php:110
+msgid "Import Contacts"
+msgstr "Importar contactos"
+
+#: includes/wcs-vars.php:113
+msgid "Import Opportunities"
+msgstr "Importar oportunidades"
+
+#: includes/wcs-vars.php:116
+msgid "Import Organizations"
+msgstr "Importar organizaciones"
+
+#: includes/wcs-vars.php:119
+msgid "Import Projects"
+msgstr "Importar proyectos"
+
+#: includes/wcs-vars.php:122
+msgid "Import Tasks"
+msgstr "Importar tareas"
+
+#: includes/wcs-vars.php:125
+msgid "Invoicing"
+msgstr "Facturación"
+
+#: includes/wcs-vars.php:128
+msgid "Less Accounting"
+msgstr "Less Accounting"
+
+#: includes/wcs-vars.php:131
+msgid "MailChimp Sync"
+msgstr "Sincronización con MailChimp"
+
+#: includes/wcs-vars.php:134
+msgid "Ninja Forms Connect"
+msgstr "Conexión con Ninja Forms"
+
+#: includes/wcs-vars.php:137
+msgid "Slack Notifications"
+msgstr "Notificaciones Slack"
+
+#: includes/wcs-vars.php:140
+msgid "Zendesk Connect"
+msgstr "Conexión con Zendesk"
+
+#: includes/wcs-vars.php:143
+msgid ""
+"Create a portal for clients to see the status of their projects, tasks, "
+"campaigns, and invoices."
+msgstr ""
+"Crea un portal para que los clientes puedan ver el estado de sus proyectos, "
+"tareas, campañas y facturas."
+
+#: includes/wcs-vars.php:146
+msgid ""
+"Quickly create new contacts in WP-CRM System from existing users on your "
+"WordPress site."
+msgstr ""
+"Crea rápidamente nuevos contactos en el sistema WP-CRM de usuarios "
+"existentes en su sitio de WordPress."
+
+#: includes/wcs-vars.php:149
+msgid "Collect custom information for records in WP-CRM System."
+msgstr ""
+"Recopilar información personalizada para los registros en el sistema WP-CRM."
+
+#: includes/wcs-vars.php:152
+msgid "Add documents from your Dropbox account to any record in WP-CRM System."
+msgstr ""
+"Agregue documentos de su cuenta de Dropbox a cualquier registro en el "
+"sistema WP-CRM."
+
+#: includes/wcs-vars.php:155
+msgid ""
+"Send notifications from WP-CRM System to the assigned user's email address."
+msgstr ""
+"Enviar notificaciones desde el Sistema WP-CRM a la dirección de correo "
+"electrónico del usuario asignado."
+
+#: includes/wcs-vars.php:158
+msgid ""
+"Automatically create new records in WP-CRM System from Gravity Form "
+"submissions."
+msgstr ""
+"Crear automáticamente nuevos registros en el sistema WP-CRM de envíos de "
+"Gravity Form."
+
+#: includes/wcs-vars.php:161
+msgid ""
+"Import your campaigns from another CRM with an easy to use CSV importer."
+msgstr ""
+"Importe sus campañas desde otro CRM con un importador de CSV fácil de usar."
+
+#: includes/wcs-vars.php:164
+msgid "Import your contacts from another CRM with an easy to use CSV importer."
+msgstr ""
+"Importe sus contactos desde otro CRM con un importador de CSV fácil de usar."
+
+#: includes/wcs-vars.php:167
+msgid ""
+"Import your opportunities from another CRM with an easy to use CSV importer."
+msgstr ""
+"Importe sus oportunidades desde otro CRM con un importador de CSV fácil de "
+"usar."
+
+#: includes/wcs-vars.php:170
+msgid ""
+"Import your organizations from another CRM with an easy to use CSV importer."
+msgstr ""
+"Importe sus organizaciones desde otro CRM con un importador de CSV fácil de "
+"usar."
+
+#: includes/wcs-vars.php:173
+msgid "Import your projects from another CRM with an easy to use CSV importer."
+msgstr ""
+"Importe sus proyectos desde otro CRM con un importador de CSV fácil de usar."
+
+#: includes/wcs-vars.php:176
+msgid "Import your tasks from another CRM with an easy to use CSV importer."
+msgstr ""
+"Importe sus tareas desde otro CRM con un importador de CSV fácil de usar."
+
+#: includes/wcs-vars.php:179
+msgid "Send invoices and accept payments directly through WP-CRM System."
+msgstr ""
+"Envíe facturas y acepte pagos directamente a través del sistema WP-CRM."
+
+#: includes/wcs-vars.php:182
+msgid "Connect to Less Accounting to manage invoices, and client records."
+msgstr ""
+"Conectar con Less Accounting para gestionar facturas y registros de clientes."
+
+#: includes/wcs-vars.php:185
+msgid "Add WP-CRM System contacts to your MailChimp list."
+msgstr "Agregue los contactos del sistema WP-CRM a su lista de MailChimp."
+
+#: includes/wcs-vars.php:188
+msgid "Automatically create new contacts from Ninja Form submissions."
+msgstr "Crear automáticamente nuevos contactos de envíos de Ninja Form."
+
+#: includes/wcs-vars.php:191
+msgid "Send notifications from WP-CRM System to a Slack channel."
+msgstr "Envíe notificaciones desde el Sistema WP-CRM a un canal de Slack."
+
+#: includes/wcs-vars.php:194
+msgid ""
+"Get up to date Zendesk ticket information from your WP-CRM System contacts."
+msgstr ""
+"Obtenga información actualizada sobre los tickets de Zendesk desde sus "
+"contactos del sistema WP-CRM."
+
+#: includes/wcs-vars.php:197
+msgid "Fax"
+msgstr "Fax"
+
+#: includes/wcs-vars.php:200
+msgid "First Name"
+msgstr "Nombre"
+
+#: includes/wcs-vars.php:203
+msgid "Forecasted Close Date"
+msgstr "Fecha prevista de cierre"
+
+#: includes/wcs-vars.php:209
+msgid "Last Name"
+msgstr "Apellido"
+
+#: includes/wcs-vars.php:212
+msgid "Location"
+msgstr "Ubicación"
+
+#: includes/wcs-vars.php:218
+msgid "Name Prefix"
+msgstr "Prefijo del nombre"
+
+#: includes/wcs-vars.php:221
+msgid "Number of Opportunities Created"
+msgstr "Número de oportunidades creadas"
+
+#: includes/wcs-vars.php:230
+msgid "Postal Code"
+msgstr "Código postal"
+
+#: includes/wcs-vars.php:248
+msgid "Return on Investment"
+msgstr "Retorno de la inversión"
+
+#: includes/wcs-vars.php:251
+msgid "Role"
+msgstr "Rol"
+
+#: includes/wcs-vars.php:254
+msgid "Save changes before clicking below."
+msgstr "Guarde los cambios antes de hacer clic a continuación."
+
+#: includes/wcs-vars.php:260
+msgid "State/Province"
+msgstr "Estado / Provincia"
+
+#: includes/wcs-vars.php:269
+msgid "Value of Opportunities Created"
+msgstr "Valor de las oportunidades creadas"
+
+#: includes/wcs-vars.php:272
+msgid "Value of Opportunities Won"
+msgstr "Valor de las oportunidades ganadas"
+
+#: includes/wcs-vars.php:275
+msgid "Website"
+msgstr "Sitio web"
+
+#: includes/wcs-vars.php:281
+msgid "Zendesk Tickets"
+msgstr "Tickets Zendesk"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://www.wp-crm.com"
+msgstr "https://www.wp-crm.com"
+
+#. Description of the plugin/theme
+msgid "A complete CRM for WordPress"
+msgstr "Un CRM completo para WordPress"
+
+#. Author of the plugin/theme
+msgid "Scott DeLuzio"
+msgstr "Scott DeLuzio"

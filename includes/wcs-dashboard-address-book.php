@@ -48,7 +48,7 @@ function wp_crm_system_ajax_address_book() {
 	}
 	if ( '' != trim( $contact_info['14'] ) ){ ?>
 		<span class="wpcrm-system-help-tip dashicons dashicons-email wpcrm-dashicons" title="<?php _e( 'Contact Email', 'wp-crm-system' ); ?>"></span>
-		<?php echo $contact_info['14'] . '<br />';
+		<?php echo '<a href="mailto:' . $contact_info['14'] . '">' . $contact_info['14'] . '</a><br />';
 	}
 	if ( '' != trim( $company ) ){ ?>
 		<span class="wpcrm-system-help-tip dashicons dashicons-building wpcrm-dashicons" title="<?php _e( 'Contact Company - Click to view company', 'wp-crm-system' ); ?>"></span>
@@ -56,15 +56,15 @@ function wp_crm_system_ajax_address_book() {
 	}
 	if ( '' != trim( $contact_info['6'] ) ){ ?>
 		<span class="wpcrm-system-help-tip dashicons dashicons-phone wpcrm-dashicons" title="<?php _e( 'Contact Phone', 'wp-crm-system' ); ?>"></span>
-		<?php echo $contact_info['6'] . '<br />';
+		<?php echo '<a href="tel:' . $contact_info['6'] . '">' . $contact_info['6'] . '</a><br />';
 	}
 	if ( '' != trim( $contact_info['7'] ) ){ ?>
 		<span class="wpcrm-system-help-tip dashicons dashicons-smartphone wpcrm-dashicons" title="<?php _e( 'Contact Mobile', 'wp-crm-system' ); ?>"></span>
-		<?php echo $contact_info['7'] . '<br />';
+		<?php echo '<a href="tel:' . $contact_info['7'] . '">' . $contact_info['7'] . '</a><br />';
 	}
 	if ( '' != trim( $contact_info['15'] ) ){ ?>
 		<span class="wpcrm-system-help-tip wpcrm-dashicons-fax" title="<?php _e( 'Contact Fax', 'wp-crm-system' ); ?>"></span>
-		<?php echo $contact_info['15'] . '<br />';
+		<?php echo '<a href="tel:' . $contact_info['15'] . '">' . $contact_info['15'] . '</a><br />';
 	}
 	if ( '' != trim( $address ) ){ ?>
 		<span class="wpcrm-system-help-tip dashicons dashicons-location wpcrm-dashicons" title="<?php _e( 'Contact Address', 'wp-crm-system' ); ?>"></span>
