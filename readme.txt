@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
 Requires at least: 3.3.0
 Tested up to: 4.8
-Stable tag: 2.1.8
+Stable tag: 2.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,7 +71,7 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
-= 2.1.8 =
+= 2.1.8 - 2.1.9 =
 * Improved: Added export class for export plugins to extend. Compatible with WP-CRM System Import/Export plugins version 2.1 or later. Provides the possibility to create your own export plugin that will include custom fields, or other information.
 = 2.1.7 =
 * Improved: Added clickable links for phone numbers and email addresses for contacts and organizations in the following areas: record detail page, list page, WP-CRM System dashboard address book.
@@ -243,5 +243,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.8 =
+= 2.1.9 =
 * Improved: Added export class for export plugins to extend. Compatible with WP-CRM System Import/Export plugins version 2.1 or later. Provides the possibility to create your own export plugin that will include custom fields, or other information.
