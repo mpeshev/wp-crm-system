@@ -39,6 +39,9 @@ if( ! defined( 'WP_CRM_SYSTEM_URL' ) ) {
 if( ! defined( 'WP_CRM_SYSTEM_PLUGIN_DIR' ) ) {
  	define( 'WP_CRM_SYSTEM_PLUGIN_DIR', dirname( __FILE__ ) );
 }
+if( ! defined( 'WP_CRM_SYSTEM_PLUGIN_DIR_PATH' ) ) {
+ 	define( 'WP_CRM_SYSTEM_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
+}
 if( ! defined( 'WP_CRM_SYSTEM_PLUGIN_URL' ) ) {
 	define( 'WP_CRM_SYSTEM_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 }
