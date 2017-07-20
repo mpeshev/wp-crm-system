@@ -462,7 +462,7 @@ function wpcrmGmap() {
   }
 
   // if able to geocode the address
-  if( $data_arr ){
+  if( $data_arr != false ){
     ?>
 
     <!-- google map will be shown here -->
@@ -1116,8 +1116,11 @@ $defaultFields = wpcrm_system_fields();
               break;
             }
             case 'datepicker': {
-              if (!null == (get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ]))) {
-                $date = date(get_option('wpcrm_system_php_date_format'),esc_html( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) ) );
+              $timestamp = absint( get_post_meta( $post->ID, '_wpcrm_' . $defaultField[ 'name' ], true ) );
+              // Should only legitimately be 0 if the date is supposed to be January 1, 1970. No other dates will be affected.
+              // Any other 0 value indicates no value was saved, and therefore shouldn't be output as a date.
+              if ( isset( $timestamp ) && is_numeric( $timestamp ) && 0 != $timestamp ) { 
+                $date = date( get_option( 'wpcrm_system_php_date_format' ), $timestamp );
               } else {
                 $date = '';
               }
