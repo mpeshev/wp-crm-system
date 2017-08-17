@@ -29,6 +29,30 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'class'			=>	'WPCRM_CLIENT_AREA',
 			),
 			array(
+				'title'			=>	WPCRM_EXTENSION_WOOCOMMERCE_CONNECT,
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/woocommerce-connect/',
+				'img'			=>	'/woocommerce-connect-1-300x145.png',
+				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_WOOCOMMERCE_CONNECT,
+				'class'			=>	'WPCRM_WOOCOMMERCE_CONNECT',
+			),
+			array(
+				'title'			=>	WPCRM_EXTENSION_EDD_CONNECT,
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/easy-digital-downloads-connect/',
+				'img'			=>	'/edd-connect-1-300x145.png',
+				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_EDD_CONNECT,
+				'class'			=>	'WPCRM_EDD_CONNECT',
+			),
+			array(
 				'title'			=>	WPCRM_EXTENSION_LESS_ACCOUNTING,
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',
@@ -247,7 +271,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 								<?php if(defined($extensionField['class'])) { ?>
 									<a href="" class="button-secondary disabled"><?php _e('Extension Installed','wp-crm-system'); ?></a>
 								<?php } else { ?>
-									<a href="<?php echo $extensionField['url']; ?>" class="button-secondary"><?php _e('Get This Extension','wp-crm-system'); ?></a>
+									<a href="<?php echo $extensionField['url']; ?>?utm_source=plugin-addons-page&utm_medium=plugin&utm_campaign=WPCRMSystemAddonsPage&utm_content=<?php echo urlencode($extensionField['title']); ?>" class="button-secondary"><?php _e('Get This Extension','wp-crm-system'); ?></a>
 								<?php } ?>
 							</div>
 					<?php }

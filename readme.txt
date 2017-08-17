@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
 Requires at least: 3.3.0
-Tested up to: 4.8
-Stable tag: 2.1.10
+Tested up to: 4.8.1
+Stable tag: 2.1.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,19 +26,21 @@ Not sure if WP-CRM System is the right WordPress CRM for you? [Try out the demo]
 
 There are a number of inexpensive WordPress CRM extensions that will allow you to do more with WP-CRM System.
 
-* [Client Area](https://www.wp-crm.com/downloads/client-area/) - Create a portal for clients to see the status of their projects, tasks, campaigns, and invoices.
-* [Less Accounting](https://www.wp-crm.com/downloads/less-accounting/) - Connect to Less Accounting to manage invoices, and client records.
-* [MailChimp Sync](https://www.wp-crm.com/downloads/mailchimp-sync/) - Subscribe contacts to your MailChimp list easily.
-* [Invoicing](https://www.wp-crm.com/downloads/invoicing/) - Send invoices to customers and accept payments by credit card through Stripe.
-* [Custom Fields](https://www.wp-crm.com/downloads/custom-fields/) - Add extra fields to WP-CRM System. Keep track of an unlimited number of extra data for all of your records.
-* [Dropbox Connect](https://www.wp-crm.com/downloads/dropbox-connect/) - Attach files from your Dropbox account to any record in WP-CRM System.
-* [Slack Notifications](https://www.wp-crm.com/downloads/slack-notifications/) - Alert your team through a Slack channel whenever a project, task, or opportunity is updated.
-* [Email Notifications](https://www.wp-crm.com/downloads/email-notifications/) - Alert assigned users via email whenever a project, task, or opportunity is updated.
-* [Ninja Forms](https://www.wp-crm.com/downloads/ninja-form-connect/) - Automatically create new contacts in WP-CRM System whenever a visitor fills out a contact form on your site (requires Ninja Forms).
-* [Gravity Forms](https://www.wp-crm.com/downloads/gravity-forms-connect/) - Automatically create new records in WP-CRM System whenever a visitor fills out a contact form on your site (requires Gravity Forms).
-* [Import Records](https://www.wp-crm.com/downloads/import-bundle/) - If you have records from another CRM or already in a spreadsheet, you can import them easily into WP-CRM System. This extension also allows you to export your records to a CSV file for use elsewhere.
-* [Create Contacts from Site Users](https://www.wp-crm.com/downloads/contact-from-user/) - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
-* [Zendesk Connect](https://www.wp-crm.com/downloads/zendesk-connect/) - View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
+* [WooCommerce](https://www.wp-crm.com/downloads/woocommerce-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=woocommerce&utm_campaign=readme) - View contact's order history from their record, automatically create new WP-CRM System contacts and organizations on new orders.
+* [Easy Digital Downloads](https://www.wp-crm.com/downloads/easy-digital-downloads-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=edd&utm_campaign=readme) - View contact's order history from their record, automatically create new WP-CRM System contacts and organizations on new orders.
+* [Client Area](https://www.wp-crm.com/downloads/client-area/?utm_source=extensions&utm_medium=description_tab&utm_content=client-area&utm_campaign=readme) - Create a portal for clients to see the status of their projects, tasks, campaigns, and invoices.
+* [Less Accounting](https://www.wp-crm.com/downloads/less-accounting/?utm_source=extensions&utm_medium=description_tab&utm_content=less-accounting&utm_campaign=readme) - Connect to Less Accounting to manage invoices, and client records.
+* [MailChimp Sync](https://www.wp-crm.com/downloads/mailchimp-sync/?utm_source=extensions&utm_medium=description_tab&utm_content=mailchimp&utm_campaign=readme) - Subscribe contacts to your MailChimp list easily.
+* [Invoicing](https://www.wp-crm.com/downloads/invoicing/?utm_source=extensions&utm_medium=description_tab&utm_content=invoicing&utm_campaign=readme) - Send invoices to customers and accept payments by credit card through Stripe.
+* [Custom Fields](https://www.wp-crm.com/downloads/custom-fields/?utm_source=extensions&utm_medium=description_tab&utm_content=custom-fields&utm_campaign=readme) - Add extra fields to WP-CRM System. Keep track of an unlimited number of extra data for all of your records.
+* [Dropbox Connect](https://www.wp-crm.com/downloads/dropbox-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=dropbox&utm_campaign=readme) - Attach files from your Dropbox account to any record in WP-CRM System.
+* [Slack Notifications](https://www.wp-crm.com/downloads/slack-notifications/?utm_source=extensions&utm_medium=description_tab&utm_content=slack-notifications&utm_campaign=readme) - Alert your team through a Slack channel whenever a project, task, or opportunity is updated.
+* [Email Notifications](https://www.wp-crm.com/downloads/email-notifications/?utm_source=extensions&utm_medium=description_tab&utm_content=email-notifications&utm_campaign=readme) - Alert assigned users via email whenever a project, task, or opportunity is updated.
+* [Ninja Forms](https://www.wp-crm.com/downloads/ninja-form-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=ninja-form-connect&utm_campaign=readme) - Automatically create new contacts in WP-CRM System whenever a visitor fills out a contact form on your site (requires Ninja Forms).
+* [Gravity Forms](https://www.wp-crm.com/downloads/gravity-forms-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=gravity-forms-connect&utm_campaign=readme) - Automatically create new records in WP-CRM System whenever a visitor fills out a contact form on your site (requires Gravity Forms).
+* [Import Records](https://www.wp-crm.com/downloads/import-bundle/?utm_source=extensions&utm_medium=description_tab&utm_content=importers&utm_campaign=readme) - If you have records from another CRM or already in a spreadsheet, you can import them easily into WP-CRM System. This extension also allows you to export your records to a CSV file for use elsewhere.
+* [Create Contacts from Site Users](https://www.wp-crm.com/downloads/contact-from-user/?utm_source=extensions&utm_medium=description_tab&utm_content=contact-from-user&utm_campaign=readme) - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
+* [Zendesk Connect](https://www.wp-crm.com/downloads/zendesk-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=zendesk&utm_campaign=readme) - View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
 
 **Need Help?**
 
@@ -71,6 +73,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.11 =
+* Improved: Google Maps scripts were loading when no Maps API key was provided. Maps will not display without an API key, so there is no need to load scripts.
+* Minor update: Added new plugins to extensions page.
 = 2.1.10 =
 * Fix: Output of dates in certain circumstances would produce an error. Fix should prevent invalid dates from being displayed.
 = 2.1.8 - 2.1.9 =
@@ -245,5 +250,6 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.10 =
-* Fix: Output of dates in certain circumstances would produce an error. Fix should prevent invalid dates from being displayed.
+= 2.1.11 =
+* Improved: Google Maps scripts were loading when no Maps API key was provided. Maps will not display without an API key, so there is no need to load scripts.
+* Minor update: Added new plugins to extensions page.

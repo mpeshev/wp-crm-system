@@ -97,6 +97,9 @@ if ( !defined( 'WPCRM_EXTENSION_CUSTOM_FIELDS' ) ){
 if ( !defined( 'WPCRM_EXTENSION_DROPBOX' ) ){
 	define( 'WPCRM_EXTENSION_DROPBOX', __( 'Dropbox Connect', 'wp-crm-system' ) );
 }
+if ( !defined( 'WPCRM_EXTENSION_EDD_CONNECT' ) ){
+	define( 'WPCRM_EXTENSION_EDD_CONNECT', __( 'Easy Digital Downloads Connect', 'wp-crm-system' ) );
+}
 if ( !defined( 'WPCRM_EXTENSION_EMAIL_NOTIFICATIONS' ) ){
 	define( 'WPCRM_EXTENSION_EMAIL_NOTIFICATIONS', __( 'Email Notifications', 'wp-crm-system' ) );
 }
@@ -136,6 +139,9 @@ if ( !defined( 'WPCRM_EXTENSION_NINJA_FORMS' ) ){
 if ( !defined( 'WPCRM_EXTENSION_SLACK' ) ){
 	define( 'WPCRM_EXTENSION_SLACK', __( 'Slack Notifications', 'wp-crm-system' ) );
 }
+if ( !defined( 'WPCRM_EXTENSION_WOOCOMMERCE_CONNECT' ) ){
+	define( 'WPCRM_EXTENSION_WOOCOMMERCE_CONNECT', __( 'WooCommerce Connect', 'wp-crm-system' ) );
+}
 if ( !defined( 'WPCRM_EXTENSION_ZENDESK' ) ){
 	define( 'WPCRM_EXTENSION_ZENDESK', __( 'Zendesk Connect', 'wp-crm-system' ) );
 }
@@ -150,6 +156,9 @@ if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_CUSTOM_FIELDS' ) ){
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_DROPBOX' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_DROPBOX', __( 'Add documents from your Dropbox account to any record in WP-CRM System.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_EDD_CONNECT' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_EDD_CONNECT', __( 'Get customer order history from contact record, and create new contacts from new customers in Easy Digital Downloads.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_EMAIL_NOTIFICATIONS' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_EMAIL_NOTIFICATIONS', __( 'Send notifications from WP-CRM System to the assigned user\'s email address.', 'wp-crm-system' ) );
@@ -189,6 +198,9 @@ if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_NINJA_FORMS' ) ){
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_SLACK' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_SLACK', __( 'Send notifications from WP-CRM System to a Slack channel.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_WOOCOMMERCE_CONNECT' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_WOOCOMMERCE_CONNECT', __( 'Get customer order history from contact record, and create new contacts from new customers in WooCommerce.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_ZENDESK' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_ZENDESK', __( 'Get up to date Zendesk ticket information from your WP-CRM System contacts.', 'wp-crm-system' ) );

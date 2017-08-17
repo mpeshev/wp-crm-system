@@ -18,8 +18,9 @@ add_action( 'admin_menu', 'createWPCRMSystemFields' );
 * Create the new meta boxes
 */
 function createWPCRMSystemFields() {
-  $postTypes = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project', 'wpcrm-campaign' );
-  $gmapTypes = array( 'wpcrm-contact', 'wpcrm-organization' );
+  $postTypes  = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project', 'wpcrm-campaign' );
+  $gmapTypes  = array( 'wpcrm-contact', 'wpcrm-organization' );
+  
   if ( function_exists( 'add_meta_box' ) ) {
     foreach ( $postTypes as $postType ) {
       add_meta_box( 'wpcrm-default-fields', __( 'Fields', 'wp-crm-system' ), 'wpcrmDefaultFields', $postType, 'normal', 'high' );
@@ -28,6 +29,7 @@ function createWPCRMSystemFields() {
       foreach ( $gmapTypes as $gmapType ) {
         add_meta_box( 'wpcrm-gmap', __( 'Map', 'wp-crm-system' ), 'wpcrmGmap', $gmapType, 'side', 'low' );
       }
+      add_action( 'admin_enqueue_scripts', 'wcs_gmap_load_js' );
     }
     add_meta_box( 'wpcrm-opportunity-options', __( 'WP-CRM System Options', 'wp-crm-system' ), 'wpcrmOpportunityOptions', 'wpcrm-opportunity', 'side', 'low' );
     add_meta_box( 'wpcrm-project-tasks', __( 'Tasks', 'wp-crm-system' ), 'wpcrmListTasksinProjects', 'wpcrm-project', 'side', 'low' );
@@ -439,7 +441,6 @@ function wcs_gmap_load_js() {
     }
   }
 }
-add_action( 'admin_enqueue_scripts', 'wcs_gmap_load_js' );
 
 function wpcrmGmap() {
   $key = get_option( 'wpcrm_system_gmap_api' );
