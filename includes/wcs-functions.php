@@ -151,32 +151,35 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 				);
 				$event_query = new WP_Query( $args );
 				if( $event_query->have_posts() ) {
-				  while( $event_query->have_posts() ) {
-				    $event_query->the_post();
-				    $this_type = get_post_type();
-				    switch ( $this_type ) {
-						case 'wpcrm-campaign':
-							$icon = '<span class="dashicons dashicons-megaphone wpcrm-dashicons"></span>';
-							break;
-						case 'wpcrm-opportunity':
-							$icon = '<span class="dashicons dashicons-phone wpcrm-dashicons"></span>';
-							break;
-						case 'wpcrm-project':
-							$icon = '<span class="dashicons dashicons-clipboard wpcrm-dashicons"></span>';
-							break;
-						case 'wpcrm-task':
-							$icon = '<span class="dashicons dashicons-yes wpcrm-dashicons"></span>';
-							break;
-						default:
-							$icon = '';
-							break;
-				    }
-				    $calendar .= '<li>' . $icon . '<a href="' . get_edit_post_link() . '">' . get_the_title() . '</a></li>';
-				    // Do your work...
-				  } // end while
+					while( $event_query->have_posts() ) {
+						$event_query->the_post();
+						$this_type = get_post_type();
+						switch ( $this_type ) {
+							case 'wpcrm-campaign':
+								$icon = '<span class="dashicons dashicons-megaphone wpcrm-dashicons"></span>';
+								break;
+							case 'wpcrm-opportunity':
+								$icon = '<span class="dashicons dashicons-phone wpcrm-dashicons"></span>';
+								break;
+							case 'wpcrm-project':
+								$icon = '<span class="dashicons dashicons-clipboard wpcrm-dashicons"></span>';
+								break;
+							case 'wpcrm-task':
+								$icon = '<span class="dashicons dashicons-yes wpcrm-dashicons"></span>';
+								break;
+							default:
+								$icon = '';
+								break;
+						}
+						$calendar .= '<li>' . $icon . '<a href="' . get_edit_post_link() . '">' . get_the_title() . '</a></li>';
+					} // end while
 				} else {
 				// end if
 					$calendar.= str_repeat('<li>&nbsp;</li>',2);
+				}
+				if( has_filter( 'wpcrm_system_add_calendar_entry' ) ){
+					//Let other plugins add entries to the calendar
+					$calendar = apply_filters( 'wpcrm_system_add_calendar_entry', $calendar, $month, $list_day, $year );
 				}
 				wp_reset_postdata();
 				
