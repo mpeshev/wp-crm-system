@@ -9,6 +9,7 @@ function wpcrm_scripts_styles($hook) {
 	$active_page = isset( $_GET[ 'page' ] ) ? $_GET[ 'page' ] : '';
 	global $wpcrm_active_tab;
 	global $post_type;
+	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'datepicker' );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 
@@ -26,7 +27,6 @@ function wpcrm_scripts_styles($hook) {
 		wp_enqueue_script( 'wpcrm-system-accordion', WP_CRM_SYSTEM_PLUGIN_URL . '/js/accordion.js' );
 	}
 
-	wp_enqueue_script( 'jquery' );
 
 	wp_enqueue_script( 'jquery-ui-tooltip' );
 	wp_register_style( 'wp_crm_system_tooltips_css', WP_CRM_SYSTEM_PLUGIN_URL . '/css/tooltip.css' );

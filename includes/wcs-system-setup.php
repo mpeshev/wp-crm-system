@@ -233,6 +233,7 @@ WP-CRM System Version:    <?php echo WP_CRM_SYSTEM_VERSION . "\n"; ?>
 WordPress Version:        <?php echo get_bloginfo( 'version' ) . "\n"; ?>
 Permalink Structure:      <?php echo get_option( 'permalink_structure' ) . "\n"; ?>
 Active Theme:             <?php echo $theme . "\n"; ?>
+Can Users Register:       <?php echo '1' == get_option( 'users_can_register' ) ? 'Yes' : 'No'; ?> <?php echo "\n"; ?>
 <?php if( $host ) : ?>
 Host:                     <?php echo $host . "\n"; ?>
 <?php endif; ?>

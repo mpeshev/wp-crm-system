@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
 Requires at least: 3.3.0
 Tested up to: 4.8.1
-Stable tag: 2.1.12
+Stable tag: 2.1.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.13 =
+* Fix: Certain extensions were incorrectly displayed as not installed on the WP-CRM System > Extensions page. This has no impact on the functionality of the extensions just the display of whether or not they are installed.
+* Update: Added new information (can users register) to system info report found on WP-CRM System > Dashboard > Settings > System Info.
 = 2.1.12 =
 * New: Added filter wpcrm_system_add_calendar_entry to allow plugin developers to add custom dates to the calendar shown on the WP-CRM System dashboard. Developers can query custom fields, or hard code important dates in the calendar such as holidays.
 = 2.1.11 =
@@ -252,5 +255,6 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.12 =
-* New: Added filter wpcrm_system_add_calendar_entry to allow plugin developers to add custom dates to the calendar shown on the WP-CRM System dashboard. Developers can query custom fields, or hard code important dates in the calendar such as holidays.
+= 2.1.13 =
+* Fix: Certain extensions were incorrectly displayed as not installed on the WP-CRM System > Extensions page. This has no impact on the functionality of the extensions just the display of whether or not they are installed.
+* Update: Added new information (can users register) to system info report found on WP-CRM System > Dashboard > Settings > System Info.

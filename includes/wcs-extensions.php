@@ -38,7 +38,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'url'			=>	'https://www.wp-crm.com/downloads/woocommerce-connect/',
 				'img'			=>	'/woocommerce-connect-1-300x145.png',
 				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_WOOCOMMERCE_CONNECT,
-				'class'			=>	'WPCRM_WOOCOMMERCE_CONNECT',
+				'class'			=>	'WPCRM_WOOCOMMERCE',
 			),
 			array(
 				'title'			=>	WPCRM_EXTENSION_EDD_CONNECT,
@@ -50,7 +50,7 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
 				'url'			=>	'https://www.wp-crm.com/downloads/easy-digital-downloads-connect/',
 				'img'			=>	'/edd-connect-1-300x145.png',
 				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_EDD_CONNECT,
-				'class'			=>	'WPCRM_EDD_CONNECT',
+				'class'			=>	'WPCRM_EDD',
 			),
 			array(
 				'title'			=>	WPCRM_EXTENSION_LESS_ACCOUNTING,
