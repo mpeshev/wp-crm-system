@@ -8,17 +8,18 @@ add_filter( 'manage_edit-wpcrm-campaign_columns', 'wpcrm_system_campaign_columns
 function wpcrm_system_campaign_columns( $columns ) {
 
 	$columns = array(
-		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Campaign', 'wp-crm-system' ),
-		'active' => __( 'Active', 'wp-crm-system' ),
-		'status' => __( 'Status', 'wp-crm-system' ),
-		'start' => __( 'Start Date', 'wp-crm-system' ),
-		'end' => __( 'End Date', 'wp-crm-system' ),
-		'reach' => __( 'Projected Reach', 'wp-crm-system' ),
+		'cb' 		=> '<input type="checkbox" />',
+		'title' 	=> __( 'Campaign', 'wp-crm-system' ),
+		'active' 	=> __( 'Active', 'wp-crm-system' ),
+		'status' 	=> __( 'Status', 'wp-crm-system' ),
+		'start' 	=> __( 'Start Date', 'wp-crm-system' ),
+		'end' 		=> __( 'End Date', 'wp-crm-system' ),
+		'reach' 	=> __( 'Projected Reach', 'wp-crm-system' ),
 		'responses' => __( 'Total Responses', 'wp-crm-system' ),
-		'budget' => __( 'Budget Cost', 'wp-crm-system' ),
-		'actual' => __( 'Actual Cost', 'wp-crm-system' ),
-		'date' => __( 'Date', 'wp-crm-system' )
+		'budget' 	=> __( 'Budget Cost', 'wp-crm-system' ),
+		'actual' 	=> __( 'Actual Cost', 'wp-crm-system' ),
+		'date' 		=> __( 'Date', 'wp-crm-system' ),
+		'category'	=> __( 'Category', 'wp-crm-system' )
 	);
 
 	return $columns;
@@ -171,6 +172,16 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 				}
 
 			break;
+		/* If displaying the 'category' column */
+		case 'category':
+			$categories = get_the_terms( $post_id, 'campaign-type' );
+			sort( $categories );
+			if ( !empty ( $categories ) ){
+				foreach ( $categories as $category ){
+					echo '<a href="' . esc_url( admin_url( 'edit.php?campaign-type=' . $category->slug . '&post_type="wpcrm-campaign"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
+				}
+			}
+			break;
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;
@@ -181,14 +192,14 @@ add_filter( 'manage_edit-wpcrm-campaign_sortable_columns', 'wpcrm_system_campaig
 
 function wpcrm_system_campaign_sortable_columns( $columns ) {
 
-	$columns['active'] = 'active';
-	$columns['status'] = 'status';
-	$columns['start'] = 'start';
-	$columns['end'] = 'end';
-	$columns['reach'] = 'reach';
-	$columns['responses'] = 'responses';
-	$columns['budget'] = 'budget';
-	$columns['actual'] = 'actual';
+	$columns['active'] 		= 'active';
+	$columns['status'] 		= 'status';
+	$columns['start'] 		= 'start';
+	$columns['end'] 		= 'end';
+	$columns['reach'] 		= 'reach';
+	$columns['responses'] 	= 'responses';
+	$columns['budget'] 		= 'budget';
+	$columns['actual'] 		= 'actual';
 
 	return $columns;
 }

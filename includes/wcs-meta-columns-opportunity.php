@@ -8,13 +8,14 @@ add_filter( 'manage_edit-wpcrm-opportunity_columns', 'wpcrm_system_opportunity_c
 function wpcrm_system_opportunity_columns( $columns ) {
 
 	$columns = array(
-		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Opportunity', 'wp-crm-system' ),
-		'probability' => __( 'Probability', 'wp-crm-system' ),
-		'closedate' => __( 'Close Date', 'wp-crm-system' ),
-		'value' => __( 'Value', 'wp-crm-system' ),
-		'wonlost' => __( 'Won/Lost', 'wp-crm-system' ),
-		'date' => __( 'Date', 'wp-crm-system' )
+		'cb'			=> '<input type="checkbox" />',
+		'title'			=> __( 'Opportunity', 'wp-crm-system' ),
+		'probability'	=> __( 'Probability', 'wp-crm-system' ),
+		'closedate'		=> __( 'Close Date', 'wp-crm-system' ),
+		'value'			=> __( 'Value', 'wp-crm-system' ),
+		'wonlost'		=> __( 'Won/Lost', 'wp-crm-system' ),
+		'date'			=> __( 'Date', 'wp-crm-system' ),
+		'category'		=> __( 'Category', 'wp-crm-system' )
 	);
 
 	return $columns;
@@ -108,6 +109,16 @@ function wprcm_system_opportunity_columns_content( $column, $post_id ) {
 				}
 
 			break;
+		/* If displaying the 'category' column */
+		case 'category':
+			$categories = get_the_terms( $post_id, 'opportunity-type' );
+			sort( $categories );
+			if ( !empty ( $categories ) ){
+				foreach ( $categories as $category ){
+					echo '<a href="' . esc_url( admin_url( 'edit.php?opportunity-type=' . $category->slug . '&post_type="wpcrm-opportunity"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
+				}
+			}
+			break;
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;
@@ -118,10 +129,10 @@ add_filter( 'manage_edit-wpcrm-opportunity_sortable_columns', 'wpcrm_system_oppo
 
 function wpcrm_system_opportunity_sortable_columns( $columns ) {
 
-	$columns['closedate'] = 'closedate';
-	$columns['value'] = 'value';
-	$columns['probability'] = 'probability';
-	$columns['wonlost'] = 'wonlost';
+	$columns['closedate']	= 'closedate';
+	$columns['value']		= 'value';
+	$columns['probability']	= 'probability';
+	$columns['wonlost']		= 'wonlost';
 
 	return $columns;
 }

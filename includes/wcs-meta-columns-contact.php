@@ -1,22 +1,23 @@
 <?php
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
-    die( "Sorry, you are not allowed to access this page directly." );
+	die( "Sorry, you are not allowed to access this page directly." );
 }
 add_filter( 'manage_edit-wpcrm-contact_columns', 'wpcrm_system_contact_columns' ) ;
 
 function wpcrm_system_contact_columns( $columns ) {
 
 	$columns = array(
-		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Name', 'wp-crm-system' ),
-		'photo' => __( 'Photo', 'wp-crm-system' ),
-		'org' => __( 'Organization', 'wp-crm-system' ),
-		'phone' => __( 'Phone', 'wp-crm-system' ),
-		'mobile' => __( 'Mobile Phone', 'wp-crm-system' ),
-		'email' => __( 'Email', 'wp-crm-system' ),
-		'address' => __( 'Address', 'wp-crm-system' ),
-		'date' => __( 'Date', 'wp-crm-system' )
+		'cb'		=> '<input type="checkbox" />',
+		'title'		=> __( 'Name', 'wp-crm-system' ),
+		'photo'		=> __( 'Photo', 'wp-crm-system' ),
+		'org'		=> __( 'Organization', 'wp-crm-system' ),
+		'phone'		=> __( 'Phone', 'wp-crm-system' ),
+		'mobile'	=> __( 'Mobile Phone', 'wp-crm-system' ),
+		'email'		=> __( 'Email', 'wp-crm-system' ),
+		'address'	=> __( 'Address', 'wp-crm-system' ),
+		'date'		=> __( 'Date', 'wp-crm-system' ),
+		'category'	=> __( 'Category', 'wp-crm-system' )
 	);
 
 	return $columns;
@@ -138,6 +139,16 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 				echo esc_html( $city ) . esc_html( $state ) . esc_html( $postal );
 
 			break;
+		/* If displaying the 'category' column */
+		case 'category':
+			$categories = get_the_terms( $post_id, 'contact-type' );
+			sort( $categories );
+			if ( !empty ( $categories ) ){
+				foreach ( $categories as $category ){
+					echo '<a href="' . esc_url( admin_url( 'edit.php?contact-type=' . $category->slug . '&post_type="wpcrm-contact"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
+				}
+			}
+			break;
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;
@@ -148,10 +159,10 @@ add_filter( 'manage_edit-wpcrm-contact_sortable_columns', 'wpcrm_system_contact_
 
 function wpcrm_system_contact_sortable_columns( $columns ) {
 
-	$columns['org'] = 'org';
-	$columns['phone'] = 'phone';
-	$columns['mobile'] = 'mobile';
-	$columns['email'] = 'email';
+	$columns['org']		= 'org';
+	$columns['phone']	= 'phone';
+	$columns['mobile']	= 'mobile';
+	$columns['email']	= 'email';
 
 	return $columns;
 }

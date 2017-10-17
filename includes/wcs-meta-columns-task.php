@@ -8,14 +8,15 @@ add_filter( 'manage_edit-wpcrm-task_columns', 'wpcrm_system_task_columns' ) ;
 function wpcrm_system_task_columns( $columns ) {
 
 	$columns = array(
-		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Task', 'wp-crm-system' ),
-		'start' => __( 'Start Date', 'wp-crm-system' ),
-		'due' => __( 'Due Date', 'wp-crm-system' ),
-		'progress' => __( 'Progress', 'wp-crm-system' ),
-		'priority' => __( 'Priority', 'wp-crm-system' ),
-		'status' => __( 'Status', 'wp-crm-system' ),
-		'date' => __( 'Date', 'wp-crm-system' )
+		'cb'		=> '<input type="checkbox" />',
+		'title'		=> __( 'Task', 'wp-crm-system' ),
+		'start'		=> __( 'Start Date', 'wp-crm-system' ),
+		'due'		=> __( 'Due Date', 'wp-crm-system' ),
+		'progress'	=> __( 'Progress', 'wp-crm-system' ),
+		'priority'	=> __( 'Priority', 'wp-crm-system' ),
+		'status'	=> __( 'Status', 'wp-crm-system' ),
+		'date'		=> __( 'Date', 'wp-crm-system' ),
+		'category'	=> __( 'Category', 'wp-crm-system' )
 	);
 
 	return $columns;
@@ -80,10 +81,10 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 			$priority = get_post_meta( $post_id, '_wpcrm_task-priority', true );
 
 			$priorities = array(
-				''	=> __( 'Not Set', 'wp-crm-system' ),
-				'low'	=> __( 'Low', 'wp-crm-system' ),
+				''			=> __( 'Not Set', 'wp-crm-system' ),
+				'low'		=> __( 'Low', 'wp-crm-system' ),
 				'medium'	=> __( 'Medium', 'wp-crm-system' ),
-				'high'	=> __( 'High', 'wp-crm-system' )
+				'high'		=> __( 'High', 'wp-crm-system' )
 			);
 			/* If no duration is found, output a default message. */
 			if ( empty( $priority ) )
@@ -105,8 +106,8 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 			$statuses = array(
 				'not-started'	=> __( 'Not Started', 'wp-crm-system' ),
 				'in-progress'	=> __( 'In Progress', 'wp-crm-system' ),
-				'complete'	=> __( 'Complete', 'wp-crm-system' ),
-				'on-hold'	=> __( 'On Hold', 'wp-crm-system' )
+				'complete'		=> __( 'Complete', 'wp-crm-system' ),
+				'on-hold'		=> __( 'On Hold', 'wp-crm-system' )
 			);
 
 			/* If no duration is found, output a default message. */
@@ -120,6 +121,16 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 				}
 
 			break;
+		/* If displaying the 'category' column */
+		case 'category':
+			$categories = get_the_terms( $post_id, 'task-type' );
+			sort( $categories );
+			if ( !empty ( $categories ) ){
+				foreach ( $categories as $category ){
+					echo '<a href="' . esc_url( admin_url( 'edit.php?task-type=' . $category->slug . '&post_type="wpcrm-task"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
+				}
+			}
+			break;
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;
@@ -130,11 +141,11 @@ add_filter( 'manage_edit-wpcrm-task_sortable_columns', 'wpcrm_system_task_sortab
 
 function wpcrm_system_task_sortable_columns( $columns ) {
 
-	$columns['start'] = 'start';
-	$columns['due'] = 'due';
-	$columns['progress'] = 'progress';
-	$columns['priority'] = 'priority';
-	$columns['status'] = 'status';
+	$columns['start']		= 'start';
+	$columns['due']			= 'due';
+	$columns['progress']	= 'progress';
+	$columns['priority']	= 'priority';
+	$columns['status']		= 'status';
 
 	return $columns;
 }

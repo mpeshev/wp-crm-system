@@ -8,13 +8,14 @@ add_filter( 'manage_edit-wpcrm-project_columns', 'wpcrm_system_project_columns' 
 function wpcrm_system_project_columns( $columns ) {
 
 	$columns = array(
-		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Project', 'wp-crm-system' ),
-		'value' => __( 'Value', 'wp-crm-system' ),
-		'closedate' => __( 'Close Date', 'wp-crm-system' ),
-		'progress' => __( 'Progress', 'wp-crm-system' ),
-		'status' => __( 'Status', 'wp-crm-system' ),
-		'date' => __( 'Date', 'wp-crm-system' )
+		'cb'		=> '<input type="checkbox" />',
+		'title'		=> __( 'Project', 'wp-crm-system' ),
+		'value'		=> __( 'Value', 'wp-crm-system' ),
+		'closedate'	=> __( 'Close Date', 'wp-crm-system' ),
+		'progress'	=> __( 'Progress', 'wp-crm-system' ),
+		'status'	=> __( 'Status', 'wp-crm-system' ),
+		'date'		=> __( 'Date', 'wp-crm-system' ),
+		'category'	=> __( 'Category', 'wp-crm-system' )
 	);
 
 	return $columns;
@@ -92,8 +93,8 @@ function wprcm_system_project_columns_content( $column, $post_id ) {
 			$statuses = array(
 				'not-started'	=> __( 'Not Started', 'wp-crm-system' ),
 				'in-progress'	=> __( 'In Progress', 'wp-crm-system' ),
-				'complete'	=> __( 'Complete', 'wp-crm-system' ),
-				'on-hold'	=> __( 'On Hold', 'wp-crm-system' )
+				'complete'		=> __( 'Complete', 'wp-crm-system' ),
+				'on-hold'		=> __( 'On Hold', 'wp-crm-system' )
 			);
 
 			/* If no duration is found, output a default message. */
@@ -107,6 +108,16 @@ function wprcm_system_project_columns_content( $column, $post_id ) {
 				}
 
 			break;
+		/* If displaying the 'category' column */
+		case 'category':
+			$categories = get_the_terms( $post_id, 'project-type' );
+			sort( $categories );
+			if ( !empty ( $categories ) ){
+				foreach ( $categories as $category ){
+					echo '<a href="' . esc_url( admin_url( 'edit.php?project-type=' . $category->slug . '&post_type="wpcrm-project"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
+				}
+			}
+			break;
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;
@@ -117,10 +128,10 @@ add_filter( 'manage_edit-wpcrm-project_sortable_columns', 'wpcrm_system_project_
 
 function wpcrm_system_project_sortable_columns( $columns ) {
 
-	$columns['closedate'] = 'closedate';
-	$columns['value'] = 'value';
-	$columns['progress'] = 'progress';
-	$columns['status'] = 'status';
+	$columns['closedate']	= 'closedate';
+	$columns['value']		= 'value';
+	$columns['progress']	= 'progress';
+	$columns['status']		= 'status';
 
 	return $columns;
 }

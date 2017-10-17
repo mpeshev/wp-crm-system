@@ -14,7 +14,8 @@ function wpcrm_system_organization_columns( $columns ) {
 		'email'		=> __( 'Email', 'wp-crm-system' ),
 		'address'	=> __( 'Address', 'wp-crm-system' ),
 		'contacts'	=> __( 'Contacts', 'wp-crm-system' ),
-		'date'		=> __( 'Date', 'wp-crm-system' )
+		'date'		=> __( 'Date', 'wp-crm-system' ),
+		'category'	=> __( 'Category', 'wp-crm-system' )
 	);
 
 	return $columns;
@@ -92,6 +93,16 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 			echo wpcrmListContactsinOrg();
 
 			break;
+		/* If displaying the 'category' column */
+		case 'category':
+			$categories = get_the_terms( $post_id, 'organization-type' );
+			sort( $categories );
+			if ( !empty ( $categories ) ){
+				foreach ( $categories as $category ){
+					echo '<a href="' . esc_url( admin_url( 'edit.php?organization-type=' . $category->slug . '&post_type="wpcrm-organization"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
+				}
+			}
+			break;
 		/* Just break out of the switch statement for everything else. */
 		default :
 			break;
@@ -102,9 +113,9 @@ add_filter( 'manage_edit-wpcrm-organization_sortable_columns', 'wpcrm_system_org
 
 function wpcrm_system_organization_sortable_columns( $columns ) {
 
-	$columns['org'] = 'org';
-	$columns['phone'] = 'phone';
-	$columns['email'] = 'email';
+	$columns['org']		= 'org';
+	$columns['phone']	= 'phone';
+	$columns['email']	= 'email';
 
 	return $columns;
 }
