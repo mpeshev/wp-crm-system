@@ -124,8 +124,8 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 		/* If displaying the 'category' column */
 		case 'category':
 			$categories = get_the_terms( $post_id, 'task-type' );
-			sort( $categories );
 			if ( !empty ( $categories ) ){
+				sort( $categories );
 				foreach ( $categories as $category ){
 					echo '<a href="' . esc_url( admin_url( 'edit.php?task-type=' . $category->slug . '&post_type="wpcrm-task"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
 				}

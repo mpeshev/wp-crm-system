@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
 Requires at least: 3.3.0
-Tested up to: 4.8.2
-Stable tag: 2.1.14
+Tested up to: 4.9
+Stable tag: 2.1.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,6 +11,8 @@ WP-CRM System is a WordPress CRM that is designed to work exclusively with YOUR 
 
 == Description ==
 WP-CRM System is a fully featured WordPress CRM that allows you to use the WordPress interface you are already familiar with to manage your customers, projects, and tasks with ease.
+
+[youtube https://www.youtube.com/watch?v=re5MqqX94-I&rel=0&showinfo=0]
 
 Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System allows you to have an unlimited number of records and lets you give everyone in your organization access to the WordPress CRM data they need to drive business.
 
@@ -42,11 +44,15 @@ There are a number of inexpensive WordPress CRM extensions that will allow you t
 * [Create Contacts from Site Users](https://www.wp-crm.com/downloads/contact-from-user/?utm_source=extensions&utm_medium=description_tab&utm_content=contact-from-user&utm_campaign=readme) - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
 * [Zendesk Connect](https://www.wp-crm.com/downloads/zendesk-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=zendesk&utm_campaign=readme) - View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
 
+**Have a suggestion for a new feature?**
+
+We're always looking to add new features to WP-CRM System. If you have a third party app you would like to integrate with, or a new feature we should include [we want to hear about it](https://www.wp-crm.com/contact)!
+
 **Need Help?**
 
 Documentation for WP-CRM System and extensions can be [found on our website](https://www.wp-crm.com/document).
 
-Get support from the WordPress [support page](http://wordpress.org/support/plugin/wp-crm-system) for this plugin, or on our [support forum](https://www.wp-crm.com/support).
+Get support from the WordPress [support page](http://wordpress.org/support/plugin/wp-crm-system) for this plugin, or [contact support](https://www.wp-crm.com/contact).
 
 **Languages**
 
@@ -66,6 +72,9 @@ If you would like to submit a translation, please submit it [through our website
 = What makes WP-CRM System different from other CRM's? =
 Many other CRM's are hosted on the CRM company's servers, which requires you to maintain an active subscription in order to access YOUR data. WP-CRM System gives you control over your data by keeping it all contained on your WordPress CRM website. You own it all and no one can ever keep you from it - just like it should be. There are no expensive contracts required in order for you to access your customer's information.
 
+= Can I Share Information With Customers? =
+Sure! We have a [Client Area](https://www.wp-crm.com/downloads/client-area/?utm_source=extensions&utm_medium=description_tab&utm_content=client-area&utm_campaign=readme) add-on, which lets you assign projects, tasks, campaigns, and even invoices (with our [Invoicing](https://www.wp-crm.com/downloads/invoicing/?utm_source=extensions&utm_medium=description_tab&utm_content=invoicing&utm_campaign=readme) add-on) to your contacts. When your contact logs into their account, they'll be able to see everything you're working on for them.
+
 = What if I am coming from another CRM, can I import my data? =
 Absolutely. There are inexpensive extensions that allow you to import as little or as much information as you need to into your WordPress CRM.
 
@@ -73,6 +82,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.1.15 =
+* Fix: Sort function on record categories would return an error when no categories were assigned to a record. Moved the sorting into the check to see if record has categories.
+* Update: Compatible with WordPress 4.9
 = 2.1.14 =
 * Update: Added a category column to each of the overview pages (Contact, Organization, Project, Task, Opportunity, Campaign). Allows for easier navigation to the various category overview pages.
 = 2.1.13 =
@@ -257,5 +269,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.14 =
-* Update: Added a category column to each of the overview pages (Contact, Organization, Project, Task, Opportunity, Campaign). Allows for easier navigation to the various category overview pages.
+= 2.1.15 =
+* Fix: Sort function on record categories would return an error when no categories were assigned to a record. Moved the sorting into the check to see if record has categories.

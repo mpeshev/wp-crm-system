@@ -142,8 +142,8 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 		/* If displaying the 'category' column */
 		case 'category':
 			$categories = get_the_terms( $post_id, 'contact-type' );
-			sort( $categories );
 			if ( !empty ( $categories ) ){
+				sort( $categories );
 				foreach ( $categories as $category ){
 					echo '<a href="' . esc_url( admin_url( 'edit.php?contact-type=' . $category->slug . '&post_type="wpcrm-contact"', 'admin' ) ) . '">' . esc_html( $category->name ) . '</a><br />';
 				}
