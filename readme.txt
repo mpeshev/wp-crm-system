@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
 Requires at least: 3.3.0
-Tested up to: 4.9
-Stable tag: 2.1.15
+Tested up to: 4.9.2
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,7 @@ Not sure if WP-CRM System is the right WordPress CRM for you? [Try out the demo]
 
 There are a number of inexpensive WordPress CRM extensions that will allow you to do more with WP-CRM System.
 
+* [Zapier](https://www.wp-crm.com/downloads/zapier-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=zapier&utm_campaign=readme) - Connect WP-CRM System to over 750 different apps with Zapier. Send WP-CRM System to other apps, or create/update records in WP-CRM System from data in other apps.
 * [WooCommerce](https://www.wp-crm.com/downloads/woocommerce-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=woocommerce&utm_campaign=readme) - View contact's order history from their record, automatically create new WP-CRM System contacts and organizations on new orders.
 * [Easy Digital Downloads](https://www.wp-crm.com/downloads/easy-digital-downloads-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=edd&utm_campaign=readme) - View contact's order history from their record, automatically create new WP-CRM System contacts and organizations on new orders.
 * [Client Area](https://www.wp-crm.com/downloads/client-area/?utm_source=extensions&utm_medium=description_tab&utm_content=client-area&utm_campaign=readme) - Create a portal for clients to see the status of their projects, tasks, campaigns, and invoices.
@@ -82,6 +83,10 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.2.0 =
+* New: Added WPCRM_System_Create class to enable developers to create new records in WP-CRM System.
+* New: Added filters to each record's field type to allow developers to modify the default fields that are shown.
+* Fix: Minor CSS update.
 = 2.1.15 =
 * Fix: Sort function on record categories would return an error when no categories were assigned to a record. Moved the sorting into the check to see if record has categories.
 * Update: Compatible with WordPress 4.9
@@ -116,7 +121,7 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Fix: If a name prefix (Mr, Mrs, etc.) was not set for a contact, "Select an Option" text would display before the name on the dashboard "Address Book" section.
 = 2.1.0 & 2.1.1 =
 * New: Calendar on the dashboard to show all upcoming campaign, opportunity, project, and task dates.
-* New: System info provided for debugging purposes. 
+* New: System info provided for debugging purposes.
 * New: Redesigned dashboard area with calendar, and quick pick for contacts, projects, tasks, and opportunities.
 * New: Filter wpcrmsystem_name_prefix added to allow custom name prefixes to be included.
 * New: Added contacts to the main organization listing page.
@@ -269,5 +274,7 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.1.15 =
-* Fix: Sort function on record categories would return an error when no categories were assigned to a record. Moved the sorting into the check to see if record has categories.
+= 2.2.0 =
+* New: Added WPCRM_System_Create class to enable developers to create new records in WP-CRM System.
+* New: Added filters to each record's field type to allow developers to modify the default fields that are shown.
+* Fix: Minor CSS update.
