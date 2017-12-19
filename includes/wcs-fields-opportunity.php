@@ -177,5 +177,6 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
   );
   $fields = array_merge( $opportunityFields, $fields );
+  $fields = apply_filters( 'wpcrm_system_opportunity_fields', $fields );
   return $fields;
 }

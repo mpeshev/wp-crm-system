@@ -190,5 +190,6 @@ function wpcrm_system_task_fields( $fields ) {
     ),
   );
   $fields = array_merge( $taskFields, $fields );
+  $fields = apply_filters( 'wpcrm_system_task_fields', $fields );
   return $fields;
 }

@@ -10,6 +10,7 @@
 	color: #dedede !important;
 	max-width: 300px !important;
 	padding: 7px !important;
+	word-wrap: break-word;
 	text-rendering: optimizeLegibility;
 	text-shadow: none !important;
 	z-index: 9999 !important;

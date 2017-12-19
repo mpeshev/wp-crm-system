@@ -151,5 +151,6 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
   );
   $fields = array_merge( $organizationFields, $fields );
+  $fields = apply_filters( 'wpcrm_system_organization_fields', $fields );
   return $fields;
 }

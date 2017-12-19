@@ -267,5 +267,6 @@ function wpcrm_system_contact_fields( $fields ) {
     ),
   );
   $fields = array_merge( $contactFields, $fields );
+  $fields = apply_filters( 'wpcrm_system_contact_fields', $fields );
   return $fields;
 }

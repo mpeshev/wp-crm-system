@@ -151,5 +151,6 @@ function wpcrm_system_project_fields( $fields ) {
     ),
   );
   $fields = array_merge( $projectFields, $fields );
+  $fields = apply_filters( 'wpcrm_system_project_fields', $fields );
   return $fields;
 }

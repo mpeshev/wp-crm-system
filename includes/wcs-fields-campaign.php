@@ -203,5 +203,6 @@ function wpcrm_system_campaign_fields( $fields ) {
     ),
   );
   $fields = array_merge( $campaignFields, $fields );
+  $fields = apply_filters( 'wpcrm_system_campaign_fields', $fields );
   return $fields;
 }
