@@ -147,13 +147,16 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 								<?php } else {
 									_e('Well this is awkward. It seems like you have no one to email. Why not add some contacts first then come back to try again.','wp-crm-system');
 								}
-							endwhile; ?>
+							endwhile;
+							wp_reset_postdata();?>
 
 						<?php } else {
 							$term_id = array();
 							if($filter_cats == 'yes') {
 								foreach ( $terms as $term ) {
-									$term_id[] = $term->slug;
+									if( get_option( $term->slug.'-email-filter') == 'yes' ){
+										$term_id[] = $term->slug;
+									}
 								}
 								$args = array(
 									'posts_per_page'	=> -1,
@@ -174,7 +177,8 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 							}
 
 							$contacts = get_posts($args);
-							if($contacts) { ?>
+
+							if( $contacts ) { ?>
 								<select class="wp-crm-email" name="wpcrm-email-recipients[]" id="wpcrm-email-recipients" multiple>
 									<?php foreach ($contacts as $contact) {
 										setup_postdata( $contact );

@@ -26,19 +26,16 @@ add_action( 'admin_init', 'wpcrm_add_role_caps', 999 );
 function wpcrm_add_role_caps() {
 	if( isset( $_POST[ 'wpcrm_system_settings_update' ] ) ) {
 		$post_types = array( 'wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign' );
-		// Add the roles you'd like to administer contacts
-		add_filter( 'wpcrm_system_default_user_roles', 'wpcrm_system_check_user_roles', 10 );
-		function wpcrm_system_check_user_roles( $array ){
-			$array = array(
-				'subscriber',
-				'contributor',
-				'author',
-				'editor',
-				'administrator'
-			);
-			return $array;
-		}
-		$wpcrm_system_roles = apply_filters( 'wpcrm_system_default_user_roles', array() );
+
+		$roles = array(
+			'subscriber',
+			'contributor',
+			'author',
+			'editor',
+			'administrator'
+		);
+
+		$wpcrm_system_roles = apply_filters( 'wpcrm_system_default_user_roles', $roles );
 		foreach($post_types as $post_type) {
 			// Loop through each role and assign capabilities
 			foreach($wpcrm_system_roles as $the_role) {

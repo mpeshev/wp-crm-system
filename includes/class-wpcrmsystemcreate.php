@@ -93,7 +93,7 @@ class WPCRM_System_Create{
 		}
 
 		if ( is_object( $name ) && $update == true ){
-			//Contact exists, and we're supposed to update an existing contact
+			//Organization exists, and we're supposed to update an existing organization
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
 		}
@@ -130,13 +130,13 @@ class WPCRM_System_Create{
 		$fields			= array_merge( $default_fields, $custom_fields );
 
 		if ( null == $name && $update == false ){
-			// Organization does not exist and we're supposed to create a new organization so we can create it.
+			// Project does not exist and we're supposed to create a new project so we can create it.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
 		if ( is_object( $name ) && $update == true ){
-			//Contact exists, and we're supposed to update an existing contact
+			//Project exists, and we're supposed to update an existing project
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
 		}
@@ -175,13 +175,13 @@ class WPCRM_System_Create{
 		$fields			= array_merge( $default_fields, $custom_fields );
 
 		if ( null == $name && $update == false ){
-			// Organization does not exist and we're supposed to create a new organization so we can create it.
+			// Task does not exist and we're supposed to create a new task so we can create it.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
 		if ( is_object( $name ) && $update == true ){
-			//Contact exists, and we're supposed to update an existing contact
+			//Task exists, and we're supposed to update an existing task
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
 		}
@@ -219,13 +219,60 @@ class WPCRM_System_Create{
 		$fields			= array_merge( $default_fields, $custom_fields );
 
 		if ( null == $name && $update == false ){
-			// Organization does not exist and we're supposed to create a new organization so we can create it.
+			// Opportunity does not exist and we're supposed to create a new opportunity so we can create it.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
 		if ( is_object( $name ) && $update == true ){
-			//Contact exists, and we're supposed to update an existing contact
+			//Opportunity exists, and we're supposed to update an existing opportunity
+			$post_id = $name->ID;
+			self::post_fields( $post_id, $fields, 'update' );
+		}
+
+		if ( is_array( $categories ) && isset( $post_id ) ){
+			wp_set_post_terms( $post_id, $categories, $tax,  true );
+		}
+	}
+
+	public static function campaigns( $fields = array(), $custom_fields = '', $categories = '', $status = 'publish', $author = '', $update = false ){
+
+		$type		= 'wpcrm-campaign';
+		$tax		= 'campaign-type';
+
+		$title		= sanitize_text_field( $fields['title'] );
+
+		$name		= get_page_by_title( $title, OBJECT, $type );
+
+		$categories	= self::format_categories( $categories, $tax );
+
+		$default_fields = array(
+			'_wpcrm_campaign-active'					=> self::get_checkbox( $fields['active'] ),
+			'_wpcrm_campaign-assigned'					=> self::get_assigned( $fields['assigned'] ),
+			'_wpcrm_campaign-status'					=> self::get_status( $fields['status'] ),
+			'_wpcrm_campaign-startdate'					=> strtotime( $fields['start_date'] ),
+			'_wpcrm_campaign-enddate'					=> strtotime( $fields['end_date'] ),
+			'_wpcrm_campaign-projectedreach'			=> number_format( $fields['reach'], 0, '', '' ),
+			'_wpcrm_campaign-responses'					=> number_format( $fields['responses'], 0, '', '' ),
+			'_wpcrm_campaign-budgetcost'				=> number_format( $fields['budget'], 0, '', '' ),
+			'_wpcrm_campaign-actualcost'				=> number_format( $fields['actual'], 0, '', '' ),
+			'_wpcrm_campaign-attach-to-organization'	=> self::get_organization( $fields['org'] ),
+			'_wpcrm_campaign-attach-to-contact'			=> self::get_contact( $fields['contact'] ),
+			'_wpcrm_campaign-description'				=> wp_kses_post( wpautop( $fields['additional'] ) ),
+		);
+
+		$custom_fields	= self::get_custom_fields( $type, $custom_fields );
+
+		$fields			= array_merge( $default_fields, $custom_fields );
+
+		if ( null == $name && $update == false ){
+			// Campaign does not exist and we're supposed to create a new campaign so we can create it.
+			$post_id = self::create_new( $title, $status, $type, $author );
+			self::post_fields( $post_id, $fields, 'new' );
+		}
+
+		if ( is_object( $name ) && $update == true ){
+			//Campaign exists, and we're supposed to update an existing campaign
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
 		}
@@ -339,6 +386,19 @@ class WPCRM_System_Create{
 			}
 		}
 		return $output;
+	}
+
+	public static function get_checkbox( $check ){
+		switch ( $check ) {
+			case 'yes':
+				$value = 'yes';
+				break;
+
+			default:
+				$value = 'no';
+				break;
+		}
+		return $value;
 	}
 
 	public static function get_prefix( $prefix ){
