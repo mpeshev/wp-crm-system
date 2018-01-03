@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
 Requires at least: 3.3.0
 Tested up to: 4.9.2
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,7 +83,7 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
-= 2.2.1 =
+= 2.2.1 & 2.2.2 =
 * Fix: Included campaigns to WPCRM_System_Create class.
 * Fix: Corrected error in contact category filter on email page.
 = 2.2.0 =
@@ -277,6 +277,6 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.2.1 =
+= 2.2.2 =
 * Fix: Included campaigns to WPCRM_System_Create class.
 * Fix: Corrected error in contact category filter on email page.
