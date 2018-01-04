@@ -122,7 +122,7 @@ class WPCRM_System_Create{
 			'_wpcrm_project-attach-to-organization'		=> self::get_organization( $fields['org'] ),
 			'_wpcrm_project-attach-to-contact'			=> self::get_contact( $fields['contact'] ),
 			'_wpcrm_project-assigned'					=> self::get_assigned( $fields['assigned'] ),
-			'_wpcrm_project-additional'					=> wp_kses_post( wpautop( $fields['additional'] ) )
+			'_wpcrm_project-description'				=> wp_kses_post( wpautop( $fields['additional'] ) )
 		);
 
 		$custom_fields	= self::get_custom_fields( $type, $custom_fields );
@@ -435,7 +435,7 @@ class WPCRM_System_Create{
 	}
 
 	public static function get_status( $status ){
-		$status		= sanitize_text_field( $status );
+		$status		= strtolower( sanitize_text_field( $status ) );
 		$statuses	= array(
 			'not-started'	=>	'not-started',
 			'not started'	=>	'not-started',
@@ -449,8 +449,8 @@ class WPCRM_System_Create{
 
 		$statuses	= apply_filters( 'wpcrm_system_create_statuses', $statuses );
 
-		if( isset( $statuses[strtolower( $status )] ) ){
-			return $statuses[strtolower( $status )];
+		if( isset( $statuses[$status] ) ){
+			return $statuses[$status];
 		} else {
 			return 'not-started';
 		}

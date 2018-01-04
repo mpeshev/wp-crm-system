@@ -122,7 +122,7 @@ function wprcm_system_campaign_columns_content( $column, $post_id ) {
 		case 'reach' :
 
 			/* Get the post meta. */
-			$reach = get_post_meta( $post_id, '_wpcrm_campaign-reach', true );
+			$reach = get_post_meta( $post_id, '_wpcrm_campaign-projectedreach', true );
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $reach ) )
