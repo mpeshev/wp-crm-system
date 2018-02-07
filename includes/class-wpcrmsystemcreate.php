@@ -41,14 +41,14 @@ class WPCRM_System_Create{
 
 		$fields			= array_merge( $default_fields, $custom_fields );
 
-		if ( null == $name && $update == false ){
-			// Contact does not exist and we're not supposed to update an existing contact.
+		if ( null == $name && in_array( $update, array( false, 'create', 'update-create' ) ) ){
+			// Contact does not exist and we're supposed to create one.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
-		if ( is_object( $name ) && $update == true ){
-			//Contact exists, and we're supposed to update an existing contact
+		if ( is_object( $name ) && in_array( $update, array( true, 'update', 'update-create' ) ) ){
+			//Contact exists, and we're supposed to update an existing contact.
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
 		}
@@ -86,13 +86,13 @@ class WPCRM_System_Create{
 
 		$fields			= array_merge( $default_fields, $custom_fields );
 
-		if ( null == $name && $update == false ){
-			// Organization does not exist and we're supposed to create a new organization so we can create it.
+		if ( null == $name && in_array( $update, array( false, 'create', 'update-create' ) ) ){
+			// Organization does not exist and we're supposed to create a new organization.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
-		if ( is_object( $name ) && $update == true ){
+		if ( is_object( $name ) && in_array( $update, array( true, 'update', 'update-create' ) ) ){
 			//Organization exists, and we're supposed to update an existing organization
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
@@ -129,13 +129,13 @@ class WPCRM_System_Create{
 
 		$fields			= array_merge( $default_fields, $custom_fields );
 
-		if ( null == $name && $update == false ){
+		if ( null == $name && in_array( $update, array( false, 'create', 'update-create' ) ) ){
 			// Project does not exist and we're supposed to create a new project so we can create it.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
-		if ( is_object( $name ) && $update == true ){
+		if ( is_object( $name ) && in_array( $update, array( true, 'update', 'update-create' ) ) ){
 			//Project exists, and we're supposed to update an existing project
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
@@ -174,13 +174,13 @@ class WPCRM_System_Create{
 
 		$fields			= array_merge( $default_fields, $custom_fields );
 
-		if ( null == $name && $update == false ){
+		if ( null == $name && in_array( $update, array( false, 'create', 'update-create' ) ) ){
 			// Task does not exist and we're supposed to create a new task so we can create it.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
-		if ( is_object( $name ) && $update == true ){
+		if ( is_object( $name ) && in_array( $update, array( true, 'update', 'update-create' ) ) ){
 			//Task exists, and we're supposed to update an existing task
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
@@ -218,13 +218,13 @@ class WPCRM_System_Create{
 
 		$fields			= array_merge( $default_fields, $custom_fields );
 
-		if ( null == $name && $update == false ){
+		if ( null == $name && in_array( $update, array( false, 'create', 'update-create' ) ) ){
 			// Opportunity does not exist and we're supposed to create a new opportunity so we can create it.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
-		if ( is_object( $name ) && $update == true ){
+		if ( is_object( $name ) && in_array( $update, array( true, 'update', 'update-create' ) ) ){
 			//Opportunity exists, and we're supposed to update an existing opportunity
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
@@ -265,13 +265,13 @@ class WPCRM_System_Create{
 
 		$fields			= array_merge( $default_fields, $custom_fields );
 
-		if ( null == $name && $update == false ){
+		if ( null == $name && in_array( $update, array( false, 'create', 'update-create' ) ) ){
 			// Campaign does not exist and we're supposed to create a new campaign so we can create it.
 			$post_id = self::create_new( $title, $status, $type, $author );
 			self::post_fields( $post_id, $fields, 'new' );
 		}
 
-		if ( is_object( $name ) && $update == true ){
+		if ( is_object( $name ) && in_array( $update, array( true, 'update', 'update-create' ) ) ){
 			//Campaign exists, and we're supposed to update an existing campaign
 			$post_id = $name->ID;
 			self::post_fields( $post_id, $fields, 'update' );
@@ -351,7 +351,64 @@ class WPCRM_System_Create{
 				}
 
 				if ( $input ){
+					$separator = apply_filters( 'wpcrm_system_custom_field_separator', '|' );
 					switch ( $type ) {
+						case 'repeater-text':
+							$existing	= get_post_meta( $post_id, '_wpcrm_custom_field_id_' . $value );
+							$incoming	= explode( $separator, $input );
+							$new		= array();
+							if( array() != $existing ){
+
+								$incoming	= array_merge( $incoming, $existing[0] );
+
+							}
+							$count	= count( $incoming );
+							for( $i = 0; $i < $count; $i++ ){
+								if( $incoming[$i] != '' ){
+									$new[$i] = sanitize_text_field( $incoming[$i] );
+								}
+							}
+							$safevalue = $new;
+							break;
+						case 'repeater-textarea':
+							$existing	= get_post_meta( $post_id, '_wpcrm_custom_field_id_' . $value );
+							$incoming	= explode( $separator, $input );
+							$new		= array();
+							if( array() != $existing ){
+
+								$incoming	= array_merge( $incoming, $existing[0] );
+
+							}
+							$count	= count( $incoming );
+							for( $i = 0; $i < $count; $i++ ){
+								if( $incoming[$i] != '' ){
+									$new[$i] = esc_textarea( $incoming[$i] );
+								}
+							}
+							$safevalue = $new;
+							break;
+						case 'repeater-date':
+							$existing	= get_post_meta( $post_id, '_wpcrm_custom_field_id_' . $value );
+							$incoming	= explode( $separator, $input );
+							$new		= array();
+							if( array() != $existing ){
+
+								$incoming	= array_merge( $incoming, $existing[0] );
+
+							}
+							$count	= count( $incoming );
+							for( $i = 0; $i < $count; $i++ ){
+								if( $incoming[$i] != '' ){
+									// If the value is numeric, it already existed as a timestamp.
+									if ( is_numeric( $incoming[$i] ) ){
+										$new[$i] = $incoming[$i];
+									} else {
+										$new[$i] = strtotime( $incoming[$i] );
+									}
+								}
+							}
+							$safevalue = $new;
+							break;
 						case 'select':
 							$select_options = get_option( '_wpcrm_custom_field_options_' . $value );
 							$options 		= explode( ',', $select_options );
