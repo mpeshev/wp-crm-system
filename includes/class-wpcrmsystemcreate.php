@@ -10,10 +10,25 @@ class WPCRM_System_Create{
 		$type		= 'wpcrm-contact';
 		$tax		= 'contact-type';
 
+		$email_key	= apply_filters( 'wpcrm_system_create_contacts_email_key', false );
+
 		$first		= sanitize_text_field( $fields['first_name'] );
 		$last		= sanitize_text_field( $fields['last_name'] );
+		$email		= sanitize_email( $fields['email'] );
 		$title		= $first . ' ' . $last;
-		$name		= get_page_by_title( $title, OBJECT, $type );
+
+		if ( false == $email_key ){
+			$name = get_page_by_title( $title, OBJECT, $type );
+		} else {
+			$pages = get_posts(
+				array(
+					'post_type' 	=> $type,
+					'meta_key'		=> '_wpcrm_contact-email',
+					'meta_value'	=> $email
+				)
+			);
+			$name = ( is_array( $pages ) && !empty( $pages ) ) ? $pages[0]: null;
+		}
 
 		$categories	= self::format_categories( $categories, $tax );
 
@@ -303,6 +318,13 @@ class WPCRM_System_Create{
 				foreach ( $fields as $key => $value ) {
 					update_post_meta( $post_id, $key, $value );
 				}
+				if ( 'wpcrm-contact' == get_post_type( $post_id ) ){
+					$post_info = array(
+						'ID'			=> $post_id,
+						'post_title'	=> $fields['_wpcrm_contact-first-name'] . ' ' . $fields['_wpcrm_contact-last-name']
+					);
+					wp_update_post( $post_info );
+				}
 				break;
 
 			case 'new':
@@ -320,7 +342,9 @@ class WPCRM_System_Create{
 		$ids		= array();
 		foreach ( $categories  as $category ) {
 			$id		= get_term_by( 'name', $category, $type );
-			$ids[]	= $id->term_id;
+			if ( $id ){
+				$ids[]	= $id->term_id;
+			}
 		}
 		return $ids;
 	}
@@ -344,6 +368,7 @@ class WPCRM_System_Create{
 
 		if( isset( $custom_field_ids ) ){
 			foreach ( $custom_field_ids as $key => $value) {
+				$input	= false;
 				$type 	= get_option( '_wpcrm_custom_field_type_' . $value );
 				$name	= get_option( '_wpcrm_custom_field_name_' . $value );
 				if ( isset( $custom_fields[$name] ) ){
@@ -437,8 +462,8 @@ class WPCRM_System_Create{
 							$safevalue 		= sanitize_text_field( $input );
 							break;
 					}
+					$output['_wpcrm_custom_field_id_' . $value]	= $safevalue;
 				}
-				$output['_wpcrm_custom_field_id_' . $value]	= $safevalue;
 				$input										= false; // reset for next field
 			}
 		}
