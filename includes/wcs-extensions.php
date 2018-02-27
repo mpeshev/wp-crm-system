@@ -17,6 +17,18 @@ if ( !class_exists('wpCRMSystemExtensions') ) {
         */
 		var $extensionFields = array(
 			array(
+				'title'			=>	WPCRM_EXTENSION_ZAPIER,
+				'overview'		=>	'yes',
+				'contact-forms'	=>	'no',
+				'import'		=>	'no',
+				'notifications'	=>	'yes',
+				'documents'		=>	'no',
+				'url'			=>	'https://www.wp-crm.com/downloads/zapier-connect/',
+				'img'			=>	'/zapier-connect-300x145.png',
+				'desc'			=>	WPCRM_EXTENSION_DESCRIPTION_ZAPIER,
+				'class'			=>	'WPCRM_ZAPIER_CONNECT',
+			),
+			array(
 				'title'			=>	WPCRM_EXTENSION_CLIENT_AREA,
 				'overview'		=>	'yes',
 				'contact-forms'	=>	'no',

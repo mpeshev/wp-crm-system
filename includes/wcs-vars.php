@@ -142,6 +142,9 @@ if ( !defined( 'WPCRM_EXTENSION_SLACK' ) ){
 if ( !defined( 'WPCRM_EXTENSION_WOOCOMMERCE_CONNECT' ) ){
 	define( 'WPCRM_EXTENSION_WOOCOMMERCE_CONNECT', __( 'WooCommerce Connect', 'wp-crm-system' ) );
 }
+if ( !defined( 'WPCRM_EXTENSION_ZAPIER' ) ){
+	define( 'WPCRM_EXTENSION_ZAPIER', __( 'Zapier Connect', 'wp-crm-system' ) );
+}
 if ( !defined( 'WPCRM_EXTENSION_ZENDESK' ) ){
 	define( 'WPCRM_EXTENSION_ZENDESK', __( 'Zendesk Connect', 'wp-crm-system' ) );
 }
@@ -201,6 +204,9 @@ if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_SLACK' ) ){
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_WOOCOMMERCE_CONNECT' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_WOOCOMMERCE_CONNECT', __( 'Get customer order history from contact record, and create new contacts from new customers in WooCommerce.', 'wp-crm-system' ) );
+}
+if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_ZAPIER' ) ){
+	define( 'WPCRM_EXTENSION_DESCRIPTION_ZAPIER', __( 'Connect WP-CRM System data to over 1000 third party apps through Zapier.', 'wp-crm-system' ) );
 }
 if ( !defined( 'WPCRM_EXTENSION_DESCRIPTION_ZENDESK' ) ){
 	define( 'WPCRM_EXTENSION_DESCRIPTION_ZENDESK', __( 'Get up to date Zendesk ticket information from your WP-CRM System contacts.', 'wp-crm-system' ) );
