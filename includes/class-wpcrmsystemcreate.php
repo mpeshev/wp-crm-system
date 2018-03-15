@@ -11,6 +11,7 @@ class WPCRM_System_Create{
 		$tax		= 'contact-type';
 
 		$email_key	= apply_filters( 'wpcrm_system_create_contacts_email_key', false );
+		$status		= apply_filters( 'wpcrm_system_create_contacts_email_key_status', 'publish' );
 
 		$first		= sanitize_text_field( $fields['first_name'] );
 		$last		= sanitize_text_field( $fields['last_name'] );
@@ -22,9 +23,10 @@ class WPCRM_System_Create{
 		} else {
 			$pages = get_posts(
 				array(
-					'post_type' 	=> $type,
+					'post_type'		=> $type,
 					'meta_key'		=> '_wpcrm_contact-email',
-					'meta_value'	=> $email
+					'meta_value'	=> $email,
+					'post_status'	=> $status
 				)
 			);
 			$name = ( is_array( $pages ) && !empty( $pages ) ) ? $pages[0]: null;

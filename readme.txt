@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
 Requires at least: 3.3.0
 Tested up to: 4.9.4
-Stable tag: 2.2.5
+Stable tag: 2.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -83,6 +83,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.2.6 =
+* Update: Provided filter `wpcrm_system_create_contacts_email_key_status`, which can be used to change the `post_status` value when searching for existing contacts by email address. Default value is `publish` as this is the default `post_status` value, which was used previously.
 = 2.2.5 =
 * Update: Provided filter 'wpcrm_system_create-contacts_email_key' which should return true or false. False is default, and will cause contacts to be created or updated based on the contact's name. True would cause contacts to be created or updated based on the contact's email address.
 * Add Zapier to list of extensions.

@@ -12,8 +12,10 @@ function wpcrm_admin_page() {
 	} else {
 		$page_role = 'manage_options';
 	}
+	$menu_name = apply_filters( 'wpcrm_system_menu_name', __('WP-CRM System', 'wp-crm-system') );
+	$menu_icon = apply_filters( 'wpcrm_system_menu_icon', 'dashicons-id' );
 	// Add a new menu:
-	add_menu_page(__('WP-CRM System', 'wp-crm-system'), __('WP-CRM System', 'wp-crm-system'), $page_role,'wpcrm','wpcrm_settings_page', 'dashicons-id');
+	add_menu_page( $menu_name, $menu_name, $page_role,'wpcrm','wpcrm_settings_page', $menu_icon );
 	add_submenu_page( 'wpcrm', __('Dashboard', 'wp-crm-system'), __('Dashboard', 'wp-crm-system'), $page_role, 'wpcrm-settings', 'wpcrm_settings_page' );
 	add_submenu_page( 'wpcrm', __('Email', 'wp-crm-system'), __('Email', 'wp-crm-system'), $page_role, 'wpcrm-email', 'wpcrm_email_page' );
 	add_submenu_page( 'wpcrm', __('Reports', 'wp-crm-system'), __('Reports', 'wp-crm-system'), $page_role, 'wpcrm-reports', 'wpcrm_reports_page' );
