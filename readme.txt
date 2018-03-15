@@ -292,6 +292,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.2.3 =
-* Fix: Campaign list table was pulling the incorrect information in the projected reach column.
-* Fix: WPCRM_System_Create projects had an incorrect key for the project description field, causing project creation to not set the description correctly.
+= 2.2.7 =
+* Fix: Variable $status used in WPCRM_System_Create for a new filter, which incorrectly caused the $status variable passed to the function to be overridden.
