@@ -215,6 +215,7 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 
 if ( !function_exists( 'wpcrm_system_random_string' ) ){
 	function wpcrm_system_random_string(){
+		$length				= apply_filters( 'wpcrm_system_random_string_length', 50 );
 		$characters			= '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$charactersLength	= strlen( $characters );
 		$randomString = '';
