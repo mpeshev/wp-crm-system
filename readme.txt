@@ -1,9 +1,9 @@
 === WordPress CRM Plugin - WP-CRM System ===
 Contributors: scott.deluzio
-Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress
+Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
-Tested up to: 4.9.4
-Stable tag: 2.2.7
+Tested up to: 4.9.5
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,13 @@ Why spend hundreds or thousands of dollars on a CRM that charges based on the nu
 **More than a CRM**
 
 WP-CRM System allows your team to manage projects, assign individual tasks, track marketing campaigns, and helps convert your opportunities into successes!
+
+**Assists with GDPR compliance**
+WP-CRM System has optional features, which can assist with GDPR compliance if that is something your business requires. Please note that this plugin does not guarantee GDPR compliance as no plugin can provide 100% compliance. Compliance requires actions on the part of your business that this plugin cannot provide.
+
+Available features include a way for your contacts to view the data that is stored on them in WP-CRM System, the ability for your contacts to export that data, and the ability for contacts to request that their data be deleted.
+
+Not sure what GDPR is or if it applies to your business? [Read our blog post on GDPR](https://www.wp-crm.com/will-your-crm-be-gdpr-compliant/).
 
 **Try the Demo!**
 
@@ -76,13 +83,18 @@ Many other CRM's are hosted on the CRM company's servers, which requires you to 
 = Can I Share Information With Customers? =
 Sure! We have a [Client Area](https://www.wp-crm.com/downloads/client-area/?utm_source=extensions&utm_medium=description_tab&utm_content=client-area&utm_campaign=readme) add-on, which lets you assign projects, tasks, campaigns, and even invoices (with our [Invoicing](https://www.wp-crm.com/downloads/invoicing/?utm_source=extensions&utm_medium=description_tab&utm_content=invoicing&utm_campaign=readme) add-on) to your contacts. When your contact logs into their account, they'll be able to see everything you're working on for them.
 
+If you need to show your contacts the data that you have on them for GDPR purposes, you will be able to use the GDPR settings to handle this without the need for any additional plugins.
+
 = What if I am coming from another CRM, can I import my data? =
 Absolutely. There are inexpensive extensions that allow you to import as little or as much information as you need to into your WordPress CRM.
 
 = Is my data secure? =
-Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website. This allows you to provide access to as few or as many people as you need to.
+Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.3.0 =
+* New: Introduced features to allow users to more easily comply with GDPR rules. Those features include a way for your contacts to view the data that is stored on them in WP-CRM System, the ability for your contacts to export that data, and the ability for contacts to request that their data be deleted. **This plugin by itself does not guarantee GDPR compliance.**
+* Change: register taxonomies on the plugins_loaded action rather than init as was done previously. This allows taxonomies to be exported in reports since the export is done around the setup_theme hook, which takes place prior to init.
 = 2.2.7 =
 * Fix: Variable $status used in WPCRM_System_Create for a new filter, which incorrectly caused the $status variable passed to the function to be overridden.
 = 2.2.6 =
@@ -292,5 +304,6 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.2.7 =
-* Fix: Variable $status used in WPCRM_System_Create for a new filter, which incorrectly caused the $status variable passed to the function to be overridden.
+= 2.3.0 =
+* New: Introduced features to allow users to more easily comply with GDPR rules. Those features include a way for your contacts to view the data that is stored on them in WP-CRM System, the ability for your contacts to export that data, and the ability for contacts to request that their data be deleted. **This plugin by itself does not guarantee GDPR compliance.**
+* Change: register taxonomies on the plugins_loaded action rather than init as was done previously. This allows taxonomies to be exported in reports since the export is done around the setup_theme hook, which takes place prior to init.

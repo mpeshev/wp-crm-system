@@ -42,6 +42,7 @@ function activate_wpcrm_system_settings() {
 	add_option('wpcrm_system_show_org_address','');
 	add_option('wpcrm_system_email_organization_filter', '');
 	add_option('wpcrm_system_gmap_api', '');
+	add_option('wpcrm_system_gdpr_page_id', '');
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -63,6 +64,7 @@ function deactivate_wpcrm_system_settings() {
 	delete_option('wpcrm_system_php_date_format');
 	delete_option('wpcrm_system_email_organization_filter');
 	delete_option('wpcrm_system_gmap_api');
+	delete_option('wpcrm_system_gdpr_page_id');
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -83,6 +85,7 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_php_date_format');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_gmap_api');
+	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_gdpr_page_id');
 	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );
 
 	$terms = get_terms('contact-type');

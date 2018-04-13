@@ -1,10 +1,10 @@
 <?php
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
-    die( "Sorry, you are not allowed to access this page directly." );
+	die( "Sorry, you are not allowed to access this page directly." );
 }
 function wpcrm_system_system_info_tab() {
-  //Get current dashboard tab name
+	//Get current dashboard tab name
 	global $wpcrm_active_tab; ?>
 	<a class="nav-tab <?php echo $wpcrm_active_tab == 'settings' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=settings"><?php _e('Settings', 'wp-crm-system') ?></a>
 <?php }
@@ -103,7 +103,7 @@ function wpcrm_system_main_settings() {
 							<tr>
 								<td>
 									<strong><?php _e('Number of decimals', 'wp-crm-system'); ?></strong>
-								</td>							
+								</td>
 								<td>
 									<input type="text" name="wpcrm_system_report_currency_decimals" size="5" value="<?php echo get_option('wpcrm_system_report_currency_decimals'); ?>" />
 								</td>
@@ -133,6 +133,18 @@ function wpcrm_system_main_settings() {
 								</td>
 							</tr>
 							<tr>
+								<td>
+									<strong><?php _e( 'GDPR Page', 'wp-crm-system' ); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'Select the page that has the [wpcrm_system_gdpr] shortcode. If you do not have contacts who are located in the European Union, you do not need to select a page here.', 'wp-crm-system' ); ?>"></span>
+								</td>
+								<td>
+									<?php wp_dropdown_pages( array(
+										'show_option_none'	=> __( 'Select a GDPR Page', 'wp-crm-system' ),
+										'name'				=> 'wpcrm_system_gdpr_page_id',
+										'selected'			=> get_option( 'wpcrm_system_gdpr_page_id' )
+										) ); ?>
+								</td>
+							</tr>
+							<tr>
 								<td><input type="hidden" name="wpcrm_system_settings_initial" value="set" /><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
 								<td></td>
 							</tr>
@@ -145,7 +157,7 @@ function wpcrm_system_main_settings() {
 }
 
 /**
- * Create the licence key section
+ * Create the license key section
  *
  */
 add_action( 'wpcrm_system_settings_content', 'wpcrm_system_license_keys' );
@@ -190,7 +202,7 @@ function wpcrm_system_info() {
 			$theme      = $theme_data->Name . ' ' . $theme_data->Version;
 		}
 
-		// Try to identifty the hosting provider
+		// Try to identify the hosting provider
 		$host = false;
 		if( defined( 'WPE_APIKEY' ) ) {
 			$host = 'WP Engine';
@@ -256,6 +268,7 @@ PHP Time Limit:           <?php echo ini_get( 'max_execution_time' ) . "\n"; ?>
 PHP Max Input Vars:       <?php echo ini_get( 'max_input_vars' ) . "\n"; ?>
 PHP Arg Separator:        <?php echo ini_get( 'arg_separator.output' ) . "\n"; ?>
 PHP Allow URL File Open:  <?php echo ini_get( 'allow_url_fopen' ) ? "Yes" : "No\n"; ?>
+PHP mail() function:      <?php echo function_exists( 'mail' ) ? "Yes" : "No\n"; ?>
 
 WP_DEBUG:                 <?php echo defined( 'WP_DEBUG' ) ? WP_DEBUG ? 'Enabled' . "\n" : 'Disabled' . "\n" : 'Not set' . "\n" ?>
 

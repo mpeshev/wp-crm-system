@@ -182,7 +182,7 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 					$calendar = apply_filters( 'wpcrm_system_add_calendar_entry', $calendar, $month, $list_day, $year );
 				}
 				wp_reset_postdata();
-				
+
 			$calendar.= '</td>';
 			if($running_day == 6):
 				$calendar.= '</tr>';
@@ -207,8 +207,64 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 
 		/* end the table */
 		$calendar.= '</table>';
-		
+
 		/* all done, return result */
 		return $calendar;
+	}
+}
+
+if ( !function_exists( 'wpcrm_system_random_string' ) ){
+	function wpcrm_system_random_string(){
+		$characters			= '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength	= strlen( $characters );
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+}
+
+if ( !function_exists( 'wpcrm_system_gdpr_page' ) ){
+	function wpcrm_system_gdpr_page( $post_id, $secret ){
+		$gdpr_id = get_option( 'wpcrm_system_gdpr_page_id' );
+		if ( !$gdpr_id ){
+			$message = __( 'No GDPR Page has been set. Please visit WP-CRM System Dashboard Settings tab to set the GDPR page.', 'wp-crm-system' );
+		} else {
+			switch ( $secret ) {
+				case '':
+					$message = __( 'Please set a secret key above, then update this contact to get the GDPR URL.', 'wp-crm-system' );
+					break;
+
+				default:
+					$url = add_query_arg( array(
+						'contact_id' 	=> $post_id,
+						'secret'		=> $secret,
+					), esc_url( get_permalink( $gdpr_id ) ) );
+
+					$success = __( 'Copied the URL: ', 'wp-crm-system' );
+
+					$message = '<script>
+						function copyGDPRURL() {
+							/* Get the text field */
+							var copyText = document.getElementById("wpcrm_system_gdpr_url");
+
+							/* Select the text field */
+							copyText.select();
+
+							/* Copy the text inside the text field */
+							document.execCommand("Copy");
+
+							/* Alert the copied text */
+							alert("' . $success . '" + copyText.value);
+						}
+					</script>
+					<br />
+					<label for="wpcrm_system_gdpr_url">' . __( 'GDPR Compliance Link', 'wp-crm-system' ) . '</label>
+					<input type="text" value="' . $url . '" id="wpcrm_system_gdpr_url" /><a class="button" onclick="copyGDPRURL()">' . __( 'Copy GDPR URL', 'wp-crm-system' ) . '</a>';
+					break;
+			}
+		}
+		return '<br />' . $message;
 	}
 }

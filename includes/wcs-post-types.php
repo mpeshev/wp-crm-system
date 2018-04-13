@@ -4,20 +4,23 @@ if ( !defined( 'ABSPATH' ) ) {
     die( "Sorry, you are not allowed to access this page directly." );
 }
 /**
-* Register post types.
+* Register post types and taxonomies.
+* Taxonomies used to be added in init as the post types were.
+* This caused a problem when exporting as the taxonomy was not created yet and would return an invalid taxonomy error.
+* 'plugins_loaded' loads earlier than init, and allows the export to fire without issue.
 */
 add_action( 'init', 'wpcrm_contacts_init' );
-add_action( 'init', 'wpcrm_contact_taxonomy');
+add_action( 'plugins_loaded', 'wpcrm_contact_taxonomy');
 add_action( 'init', 'wpcrm_tasks_init' );
-add_action( 'init', 'wpcrm_task_taxonomy');
+add_action( 'plugins_loaded', 'wpcrm_task_taxonomy');
 add_action( 'init', 'wpcrm_organizations_init' );
-add_action( 'init', 'wpcrm_organization_taxonomy');
+add_action( 'plugins_loaded', 'wpcrm_organization_taxonomy');
 add_action( 'init', 'wpcrm_opportunities_init' );
-add_action( 'init', 'wpcrm_opportunity_taxonomy');
+add_action( 'plugins_loaded', 'wpcrm_opportunity_taxonomy');
 add_action( 'init', 'wpcrm_projects_init' );
-add_action( 'init', 'wpcrm_project_taxonomy');
+add_action( 'plugins_loaded', 'wpcrm_project_taxonomy');
 add_action( 'init', 'wpcrm_campaign_init' );
-add_action( 'init', 'wpcrm_campaign_taxonomy');
+add_action( 'plugins_loaded', 'wpcrm_campaign_taxonomy');
 
 /**
 * Adjust capabilities as necessary

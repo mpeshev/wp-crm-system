@@ -3,6 +3,21 @@
 if ( !defined( 'ABSPATH' ) ) {
 	die( "Sorry, you are not allowed to access this page directly." );
 }
+
+function wpcrm_system_gdpr_marked_deletion_post_status(){
+	register_post_status( 'gdpr_deletion', array(
+		'label'						=> _x( 'Marked For Deletion', 'wp-crm-system' ),
+		'public'					=> false,
+		'private'					=> true,
+		'internal'					=> true,
+		'exclude_from_search'		=> true,
+		'show_in_admin_all_list'	=> true,
+		'show_in_admin_status_list'	=> true,
+		'label_count'				=> _n_noop( 'Marked for Deletion <span class="count">(%s)</span>', 'Marked for Deletion <span class="count">(%s)</span>' ),
+	) );
+}
+add_action( 'init', 'wpcrm_system_gdpr_marked_deletion_post_status' );
+
 add_filter( 'manage_edit-wpcrm-contact_columns', 'wpcrm_system_contact_columns' ) ;
 
 function wpcrm_system_contact_columns( $columns ) {
