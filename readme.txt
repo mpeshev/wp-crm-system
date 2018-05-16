@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
-Tested up to: 4.9.5
-Stable tag: 2.3.0
+Tested up to: 4.9.6
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.4.0 =
+* New: Introduced features to integrate with the WordPress privacy tools included in WordPress version 4.9.6. Includes the ability to export or erase information on a contact when the contact's email address is entered into the export or erase tool in WordPress.
+* New: Included text to assist users when drafting their website's privacy policy. Legal guidance is not provided. Only information about the types of information that is collected in WP-CRM System and where it is located.
 = 2.3.0 =
 * New: Introduced features to allow users to more easily comply with GDPR rules. Those features include a way for your contacts to view the data that is stored on them in WP-CRM System, the ability for your contacts to export that data, and the ability for contacts to request that their data be deleted. **This plugin by itself does not guarantee GDPR compliance.**
 * Change: register taxonomies on the plugins_loaded action rather than init as was done previously. This allows taxonomies to be exported in reports since the export is done around the setup_theme hook, which takes place prior to init.

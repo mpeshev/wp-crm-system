@@ -134,7 +134,7 @@ function wpcrm_system_main_settings() {
 							</tr>
 							<tr>
 								<td>
-									<strong><?php _e( 'GDPR Page', 'wp-crm-system' ); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'Select the page that has the [wpcrm_system_gdpr] shortcode. If you do not have contacts who are located in the European Union, you do not need to select a page here.', 'wp-crm-system' ); ?>"></span>
+									<strong><?php _e( 'GDPR Page', 'wp-crm-system' ); ?></strong> <?php _e( 'This setting will be depreciated. Use WordPress built in Privacy Tools.', 'wp-crm-system' ); ?><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'Select the page that has the [wpcrm_system_gdpr] shortcode. If you do not have contacts who are located in the European Union, you do not need to select a page here.', 'wp-crm-system' ); ?>"></span>
 								</td>
 								<td>
 									<?php wp_dropdown_pages( array(

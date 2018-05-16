@@ -3,9 +3,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+if ( !function_exists( 'wpcrm_system_get_crm_nicename_by_id' ) ){
+	function wpcrm_system_get_crm_nicename_by_id( $id ){
+		$return = '';
+		$user = new WP_User( $id );
+		if( $user->has_cap( get_option('wpcrm_system_select_user_role') ) ){
+			$return = $user->data->user_nicename;
+		}
+		return $return;
+	}
+}
+
 if ( !function_exists( 'wpcrm_system_display_name_prefix' ) ){
 	function wpcrm_system_display_name_prefix( $prefix ){
-		$wpcrm_prefixes = array(''=> '','mr'=>_x('Mr.','Title for male without a higher professional title.','wp-crm-system'),'mrs'=>_x('Mrs.','Married woman or woman who has been married with no higher professional title.','wp-crm-system'),'miss'=>_x('Miss','An unmarried woman. Also Ms.','wp-crm-system'),'ms'=>_x('Ms.','An unmarried woman. Also Miss.','wp-crm-system'),'dr'=>_x('Dr.','Doctor','wp-crm-system'),'master'=>_x('Master','Title used for young men.','wp-crm-system'),'coach'=>_x('Coach','Title used for the person in charge of a sports team','wp-crm-system'),'rev'=>_x('Rev.','Title of a priest or religous clergy - Reverend ','wp-crm-system'),'fr'=>_x('Fr.','Title of a priest or religous clergy - Father','wp-crm-system'),'atty'=>_x('Atty.','Attorney, or lawyer','wp-crm-system'),'prof'=>_x('Prof.','Professor, as in a teacher at a university.','wp-crm-system'),'hon'=>_x('Hon.','Honorable - often used for elected officials or judges.','wp-crm-system'),'pres'=>_x('Pres.','Term given to the head of an organization or country. As in President of a University or President of the United States','wp-crm-system'),'gov'=>_x('Gov.','Governor, as in the Governor of the State of New York.','wp-crm-system'),'ofc'=>_x('Ofc.','Officer as in a police officer.','wp-crm-system'),'supt'=>_x('Supt.','Superintendent','wp-crm-system'),'rep'=>_x('Rep.','Representative - as in an elected official to the House of Representatives','wp-crm-system'),'sen'=>_x('Sen.','An elected official - Senator.','wp-crm-system'),'amb'=>_x('Amb.','Ambassador - a diplomatic official.','wp-crm-system'));
+		$wpcrm_prefixes = array(''=> '','mr'=>_x('Mr.','Title for male without a higher professional title.','wp-crm-system'),'mrs'=>_x('Mrs.','Married woman or woman who has been married with no higher professional title.','wp-crm-system'),'miss'=>_x('Miss','An unmarried woman. Also Ms.','wp-crm-system'),'ms'=>_x('Ms.','An unmarried woman. Also Miss.','wp-crm-system'),'dr'=>_x('Dr.','Doctor','wp-crm-system'),'master'=>_x('Master','Title used for young men.','wp-crm-system'),'coach'=>_x('Coach','Title used for the person in charge of a sports team','wp-crm-system'),'rev'=>_x('Rev.','Title of a priest or religious clergy - Reverend ','wp-crm-system'),'fr'=>_x('Fr.','Title of a priest or religious clergy - Father','wp-crm-system'),'atty'=>_x('Atty.','Attorney, or lawyer','wp-crm-system'),'prof'=>_x('Prof.','Professor, as in a teacher at a university.','wp-crm-system'),'hon'=>_x('Hon.','Honorable - often used for elected officials or judges.','wp-crm-system'),'pres'=>_x('Pres.','Term given to the head of an organization or country. As in President of a University or President of the United States','wp-crm-system'),'gov'=>_x('Gov.','Governor, as in the Governor of the State of New York.','wp-crm-system'),'ofc'=>_x('Ofc.','Officer as in a police officer.','wp-crm-system'),'supt'=>_x('Supt.','Superintendent','wp-crm-system'),'rep'=>_x('Rep.','Representative - as in an elected official to the House of Representatives','wp-crm-system'),'sen'=>_x('Sen.','An elected official - Senator.','wp-crm-system'),'amb'=>_x('Amb.','Ambassador - a diplomatic official.','wp-crm-system'));
 		if ( has_filter( 'wpcrmsystem_name_prefix' ) ){
 			$wpcrm_prefixes = apply_filters( 'wpcrmsystem_name_prefix', $wpcrm_prefixes );
 		}
@@ -268,4 +279,186 @@ if ( !function_exists( 'wpcrm_system_gdpr_page' ) ){
 		}
 		return '<br />' . $message;
 	}
+}
+
+
+function wpcrm_system_get_contact_ids_by_email_address( $email_address, $number = 500, $page = 1 ){
+	global $post;
+	// On the first iteration we don't want to offset at all (500 * ( 1-1 ) = 0)
+	// On the second iteration we want to offset by 500 ( 500 * ( 2-1 ) = 500)
+	// And so on.
+	$offset	= $number * ( $page - 1 );
+	$ids	= false;
+	$contacts	= get_posts(
+		array(
+			'post_type'			=> 'wpcrm-contact',
+			'meta_key'			=> '_wpcrm_contact-email',
+			'meta_value'		=> $email_address,
+			'post_status'		=> 'any',
+			'posts_per_page'	=> $number,
+			'offset'			=> $offset,
+			'orderby'			=> 'date',
+			'order'				=> 'DESC',
+		)
+	);
+
+	foreach ( $contacts as $contact ) {
+		setup_postdata( $contact );
+		$ids[]	= $contact->ID;
+	}
+
+	return $ids;
+
+}
+
+function wpcrm_system_get_records_by_contact_email_address( $email_address, $record_type, $number = 500, $page = 1 ){
+
+	// On the first iteration ($page == 1) we don't want to offset at all (500 * ( 1-1 ) = 0)
+	// On the second iteration ($page == 2) we want to offset by 500 ( 500 * ( 2-1 ) = 500)
+	// And so on.
+	$offset	= $number * ( $page - 1 );
+
+	switch ( $record_type ) {
+		case 'campaign':
+			$post_type	= 'wpcrm-campaign';
+			$meta_key	= '_wpcrm_campaign-attach-to-contact';
+			break;
+
+		case 'opportunity':
+			$post_type	= 'wpcrm-opportunity';
+			$meta_key	= '_wpcrm_opportunity-attach-to-contact';
+			break;
+
+		case 'project':
+			$post_type	= 'wpcrm-project';
+			$meta_key	= '_wpcrm_project-attach-to-contact';
+			break;
+
+		case 'task':
+			$post_type	= 'wpcrm-task';
+			$meta_key	= '_wpcrm_task-attach-to-contact';
+			break;
+
+		case 'invoice':
+			$post_type	= 'wpcrm-invoice';
+			$meta_key	= '_wpcrm_invoice-attach-to-contact';
+
+		default:
+			$post_type	= '';
+			$meta_key	= '';
+			break;
+	}
+
+	$ids	= wpcrm_system_get_contact_ids_by_email_address( $email_address );
+
+	$return	= array();
+
+	if ( $ids ){
+
+		foreach ( (array) $ids as $id ){
+
+			global $post;
+
+			$records = get_posts(
+				array(
+					'post_type'			=> $post_type,
+					'meta_key'			=> $meta_key,
+					'meta_value'		=> $id,
+					'post_status'		=> 'any',
+					'posts_per_page'	=> $number,
+					'offset'			=> $offset,
+					'orderby'			=> 'date',
+					'order'				=> 'DESC',
+				)
+			);
+
+			foreach ( $records as $record ) {
+
+				setup_postdata( $record );
+
+				$return[] = $record->ID;
+
+			}
+
+		}
+
+	}
+
+	return (array) $return;
+
+}
+
+function wpcrm_system_get_records_by_contact_ids( $ids, $record_type, $number = 500, $page = 1 ){
+
+	// On the first iteration ($page == 1) we don't want to offset at all (500 * ( 1-1 ) = 0)
+	// On the second iteration ($page == 2) we want to offset by 500 ( 500 * ( 2-1 ) = 500)
+	// And so on.
+	$offset	= $number * ( $page - 1 );
+
+	switch ( $record_type ) {
+		case 'campaign':
+			$post_type	= 'wpcrm-campaign';
+			$meta_key	= '_wpcrm_campaign-attach-to-contact';
+			break;
+
+		case 'opportunity':
+			$post_type	= 'wpcrm-opportunity';
+			$meta_key	= '_wpcrm_opportunity-attach-to-contact';
+			break;
+
+		case 'project':
+			$post_type	= 'wpcrm-project';
+			$meta_key	= '_wpcrm_project-attach-to-contact';
+			break;
+
+		case 'task':
+			$post_type	= 'wpcrm-task';
+			$meta_key	= '_wpcrm_task-attach-to-contact';
+			break;
+
+		case 'invoice':
+			$post_type	= 'wpcrm-invoice';
+			$meta_key	= '_wpcrm_invoice-attach-to-contact';
+
+		default:
+			$post_type	= '';
+			$meta_key	= '';
+			break;
+	}
+
+	$return = array();
+
+	if ( $ids ){
+
+		foreach ( (array) $ids as $id ){
+
+			global $post;
+
+			$records = get_posts(
+				array(
+					'post_type'			=> $post_type,
+					'meta_key'			=> $meta_key,
+					'meta_value'		=> $id,
+					'post_status'		=> 'any',
+					'posts_per_page'	=> $number,
+					'offset'			=> $offset,
+					'orderby'			=> 'date',
+					'order'				=> 'DESC',
+				)
+			);
+
+			foreach ( $records as $record ) {
+
+				setup_postdata( $record );
+
+				$return[] = $record->ID;
+
+			}
+
+		}
+
+	}
+
+	return (array) $return;
+
 }

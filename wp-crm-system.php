@@ -3,7 +3,7 @@
 Plugin Name: WP-CRM System
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 2.3.0
+Version: 2.4.0
 Author: Scott DeLuzio
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system
@@ -31,7 +31,7 @@ if ( ! defined( 'WP_CRM_SYSTEM' ) ) {
   define( 'WP_CRM_SYSTEM', __FILE__ );
 }
 if ( ! defined( 'WP_CRM_SYSTEM_VERSION' ) ) {
-  define( 'WP_CRM_SYSTEM_VERSION', '2.3.0' );
+  define( 'WP_CRM_SYSTEM_VERSION', '2.4.0' );
 }
 if( ! defined( 'WP_CRM_SYSTEM_URL' ) ) {
 	define( 'WP_CRM_SYSTEM_URL', plugins_url( '', __FILE__ ) );
@@ -47,10 +47,23 @@ if( ! defined( 'WP_CRM_SYSTEM_PLUGIN_URL' ) ) {
 }
 /* Include system variables */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
+/* Welcome screen */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-welcome-screen.php' );
 /* Include system functions */
-include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-functions.php' );
+include_once( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-functions.php' );
 /* Include GDPR Functionality */
-include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/gdpr-shortcode.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-export-campaign.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-export-contact.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-export-opportunity.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-export-project.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-export-task.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-eraser-campaign.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-eraser-contact.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-eraser-opportunity.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-eraser-project.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-eraser-task.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/privacy/gdpr-privacy-policy-content.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/legacy/gdpr-shortcode.php' );
 /* Include Create Class */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/class-wpcrmsystemcreate.php' );
 /* Initial Install Settings Setup */
