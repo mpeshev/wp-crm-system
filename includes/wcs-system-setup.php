@@ -8,7 +8,7 @@ function wpcrm_system_system_info_tab() {
 	global $wpcrm_active_tab; ?>
 	<a class="nav-tab <?php echo $wpcrm_active_tab == 'settings' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=settings"><?php _e('Settings', 'wp-crm-system') ?></a>
 <?php }
-add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_system_info_tab' );
+add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_system_info_tab', 2 );
 
 function wpcrm_system_system_info_subtab() {
 	global $wpcrm_active_tab, $wpcrm_active_subtab;

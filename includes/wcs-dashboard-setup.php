@@ -35,11 +35,11 @@ function wpcrm_dashboard_settings_content() {
 			);
 			foreach ( $posttypes as $key => $value ){
 				if ( 'wpcrm-invoice' == $key && defined( 'WPCRM_INVOICING' ) ) { ?>
-		    		<option value="post-new.php?post_type=<?php echo $key; ?>"><?php echo $value; ?></option>
+					<option value="post-new.php?post_type=<?php echo $key; ?>"><?php echo $value; ?></option>
 				<?php } else { ?>
-		    		<option value="post-new.php?post_type=<?php echo $key; ?>"><?php echo $value; ?></option>
-		    	<?php }
-		   	} ?>
+					<option value="post-new.php?post_type=<?php echo $key; ?>"><?php echo $value; ?></option>
+				<?php }
+			} ?>
 		</select>
 		<!-- Jump to Category Box -->
 		<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
@@ -54,10 +54,10 @@ function wpcrm_dashboard_settings_content() {
 				'campaign-type'		=> __( 'Campaign Categories','wp-crm-system' )
 			);
 			foreach ($categories as $key => $value) {
-          $post_type = 'wpcrm-' . str_replace('-type', '', $key);
-		?>
-		    <option value="edit-tags.php?taxonomy=<?php echo $key; ?>&amp;post_type=<?php echo $post_type; ?>"><?php echo $value; ?></option>
-		<?php } ?>
+				$post_type = 'wpcrm-' . str_replace('-type', '', $key);
+				?>
+				<option value="edit-tags.php?taxonomy=<?php echo $key; ?>&amp;post_type=<?php echo $post_type; ?>"><?php echo $value; ?></option>
+			<?php } ?>
 		</select>
 		<?php
 		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-dashboard-reports.php' );

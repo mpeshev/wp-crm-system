@@ -1,6 +1,5 @@
 /* Calendar */
 table.calendar		{ border-left:1px solid #999; }
-tr.calendar-row	{  }
 td.calendar-day	{ min-height:80px; font-size:11px; position:relative; } * html div.calendar-day { height:80px; }
 td.calendar-day:hover	{ background:#eceff5; }
 td.calendar-day-np	{ background:#eee; min-height:80px; } * html div.calendar-day-np { height:80px; }
@@ -18,24 +17,24 @@ td.calendar-day ul { margin-top: auto; }
 	margin-top: 10px;
 }
 .wpcrm-circle {
-    border-radius: 50%;
+	border-radius: 50%;
 }
 #system-info-textarea {
-    background: none;
-    font-family: Menlo,Monaco,monospace;
-    display: block;
-    overflow: auto;
-    white-space: pre;
-    width: 800px;
-    height: 400px;
+	background: none;
+	font-family: Menlo,Monaco,monospace;
+	display: block;
+	overflow: auto;
+	white-space: pre;
+	width: 800px;
+	height: 400px;
 }
 .dashicons.wpcrm-dashicons:before {
 	width: 13px;
-    height: 13px;
-    display: inline-block;
-    font-size: 13px;
-    vertical-align: top;
-    margin-top: 3px;
+	height: 13px;
+	display: inline-block;
+	font-size: 13px;
+	vertical-align: top;
+	margin-top: 3px;
 }
 .wpcrm-dashicons-fax {
 	background-image: url('../includes/images/fax.png');
@@ -44,7 +43,7 @@ td.calendar-day ul { margin-top: auto; }
 	height: 13px;
 	margin-top: 3px;
 	display: inline-block;
-  padding-right: 3px;
+	padding-right: 3px;
 }
 .wp-crm-dashboard-boxes span.dashicons{
 	color: #0073aa;
@@ -87,7 +86,6 @@ td.calendar-day ul { margin-top: auto; }
 }
 .wp-crm-inline{
 	float:left;
-	display:inline;
 	padding-right:3px;
 }
 .wp-crm-five-sixths,
@@ -146,6 +144,12 @@ td.calendar-day ul { margin-top: auto; }
 	margin-left: 0;
 }
 
+/* Upsell page */
+ul.upsell-features {
+	list-style: disc;
+	margin-left: 20px;
+}
+
 @media only screen and (min-width: 1603px){
 	.wpcrm-dashboard{
 		margin: 0 15px 55px 0;
@@ -170,5 +174,6 @@ td.calendar-day ul { margin-top: auto; }
 	.wp-crm-one-fifth {
 		margin-left: 0;
 		margin-top: 2.564102564102564%;
+		width: 100%;
 	}
 }
