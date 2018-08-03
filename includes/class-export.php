@@ -19,12 +19,7 @@ class WPCRM_System_Export{
 	 * @return bool Whether we can export or not
 	 */
 	public function can_export() {
-		if( 'set' == get_option( 'wpcrm_system_settings_initial' ) ) {
-			$page_role = WPCRM_USER_ACCESS;
-		} else {
-			$page_role = 'manage_options';
-		}
-		return (bool) apply_filters( 'wpcrmsystem_export_capability', current_user_can( $page_role ) );
+		return (bool) apply_filters( 'wpcrmsystem_export_capability', current_user_can( wpcrm_system_get_required_user_role() ) );
 	}
 
 	public function get_cpt_post_ids(){

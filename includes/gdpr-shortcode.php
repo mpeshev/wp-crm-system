@@ -9,6 +9,13 @@ function wpcrm_system_gdpr_check( $atts ){
 	if( !$_GET || !$_GET['contact_id'] || !$_GET['secret'] )
 		return __( 'Error: Incorrect URL given. Please request a valid URL.', 'wp-crm-system' ); // Possibly add an error message of some sort here.
 
+	$gdpr_page = get_option( 'wpcrm_system_gdpr_page_id' );
+	if( !$gdpr_page || !is_numeric( $gdpr_page ) )
+		return __( 'Error: Privacy settings are not enabled.', 'wp-crm-system' ); // GDPR Page must be set for this to work
+
+	if( get_the_ID() != $gdpr_page )
+		return __( 'Error: Attempting to access the wrong URL. Please contact the administrator for a valid URL.', 'wp-crm-system' ); // Make sure the GDPR page is the one we're expecting.
+
 	$id	= $_GET['contact_id'];
 	if ( 'wpcrm-contact' != get_post_type( $id ) )
 		return __( 'Error: Incorrect contact URL given. Please request a valid contact URL.'); // Possibly add an error message indicating that the contact ID is not a valid WP-CRM System contact ID.

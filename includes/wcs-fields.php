@@ -1,7 +1,7 @@
 <?php
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
-		die( "Sorry, you are not allowed to access this page directly." );
+	die( "Sorry, you are not allowed to access this page directly." );
 }
 
 add_action( 'admin_init', 'wpcrm_system_fields');
@@ -18,13 +18,15 @@ add_action( 'admin_menu', 'createWPCRMSystemFields' );
 * Create the new meta boxes
 */
 function createWPCRMSystemFields() {
-	$postTypes  = array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project', 'wpcrm-campaign' );
-	$gmapTypes  = array( 'wpcrm-contact', 'wpcrm-organization' );
+	$postTypes		= array( 'wpcrm-contact', 'wpcrm-task', 'wpcrm-organization', 'wpcrm-opportunity', 'wpcrm-project', 'wpcrm-campaign' );
+	$gmapTypes		= array( 'wpcrm-contact', 'wpcrm-organization' );
+	// $recurringTypes	= array( 'wpcrm-project', 'wpcrm-task' );
 
 	if ( function_exists( 'add_meta_box' ) ) {
 		foreach ( $postTypes as $postType ) {
 			add_meta_box( 'wpcrm-default-fields', __( 'Fields', 'wp-crm-system' ), 'wpcrmDefaultFields', $postType, 'normal', 'high' );
 		}
+
 		if ( '' != get_option( 'wpcrm_system_gmap_api' ) ) {
 			foreach ( $gmapTypes as $gmapType ) {
 				add_meta_box( 'wpcrm-gmap', __( 'Map', 'wp-crm-system' ), 'wpcrmGmap', $gmapType, 'side', 'low' );
@@ -365,7 +367,7 @@ function removeDefaultFields( $type, $context, $post ) {
 /**
 * Display the Google Maps meta box
 */
-function geocode($address){
+function wpcrm_system_geocode($address){
 
 	// url encode the address
 	$address = urlencode($address);
@@ -424,7 +426,7 @@ function wcs_gmap_load_js() {
 				$data_arr = false;
 				if ( $addressString ){
 					// get latitude, longitude and formatted address
-					$data_arr = geocode( $addressString );
+					$data_arr = wpcrm_system_geocode( $addressString );
 				}
 
 				// if able to geocode the address
@@ -463,7 +465,7 @@ function wpcrmGmap() {
 	$data_arr = false;
 	if ( $addressString ){
 		// get latitude, longitude and formatted address
-		$data_arr = geocode( $addressString );
+		$data_arr = wpcrm_system_geocode( $addressString );
 	}
 
 	// if able to geocode the address
@@ -1175,7 +1177,7 @@ $defaultFields = wpcrm_system_fields();
 							$before = $defaultField[ 'before' ];
 							$after = $defaultField[ 'after' ];
 							//Datepicker
-							 ?>
+							?>
 								<script type="text/javascript">
 									<?php
 									$dateformat = get_option('wpcrm_system_date_format');

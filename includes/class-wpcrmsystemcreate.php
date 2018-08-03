@@ -73,6 +73,10 @@ class WPCRM_System_Create{
 		if ( is_array( $categories ) && isset( $post_id ) ){
 			wp_set_post_terms( $post_id, $categories, $tax,  true );
 		}
+
+		if( isset( $post_id ) ){
+			return $post_id;
+		}
 	}
 
 	public static function organizations( $fields = array(), $custom_fields = '', $categories = '', $status = 'publish', $author = '', $update = false ){
@@ -118,6 +122,11 @@ class WPCRM_System_Create{
 		if ( is_array( $categories ) && isset( $post_id ) ){
 			wp_set_post_terms( $post_id, $categories, $tax,  true );
 		}
+
+		if( isset( $post_id ) ){
+			return $post_id;
+		}
+
 	}
 
 	public static function projects( $fields = array(), $custom_fields = '', $categories = '', $status = 'publish', $author = '', $update = false ){
@@ -161,6 +170,11 @@ class WPCRM_System_Create{
 		if ( is_array( $categories ) && isset( $post_id ) ){
 			wp_set_post_terms( $post_id, $categories, $tax,  true );
 		}
+
+		if( isset( $post_id ) ){
+			return $post_id;
+		}
+
 	}
 
 	public static function tasks( $fields = array(), $custom_fields = '', $categories = '', $status = 'publish', $author = '', $update = false ){
@@ -206,6 +220,11 @@ class WPCRM_System_Create{
 		if ( is_array( $categories ) && isset( $post_id ) ){
 			wp_set_post_terms( $post_id, $categories, $tax,  true );
 		}
+
+		if( isset( $post_id ) ){
+			return $post_id;
+		}
+
 	}
 
 	public static function opportunities( $fields = array(), $custom_fields = '', $categories = '', $status = 'publish', $author = '', $update = false ){
@@ -250,6 +269,11 @@ class WPCRM_System_Create{
 		if ( is_array( $categories ) && isset( $post_id ) ){
 			wp_set_post_terms( $post_id, $categories, $tax,  true );
 		}
+
+		if( isset( $post_id ) ){
+			return $post_id;
+		}
+
 	}
 
 	public static function campaigns( $fields = array(), $custom_fields = '', $categories = '', $status = 'publish', $author = '', $update = false ){
@@ -297,6 +321,11 @@ class WPCRM_System_Create{
 		if ( is_array( $categories ) && isset( $post_id ) ){
 			wp_set_post_terms( $post_id, $categories, $tax,  true );
 		}
+
+		if( isset( $post_id ) ){
+			return $post_id;
+		}
+
 	}
 
 	public static function create_new( $title, $status, $type, $author = '' ){
@@ -664,6 +693,9 @@ class WPCRM_System_Create{
 	}
 
 	public static function get_contact( $title ){
+		if ( ! $title || '' == $title ){
+			return;
+		}
 		$get_contact	= get_page_by_title( sanitize_text_field( $title ), OBJECT, 'wpcrm-contact' );
 
 		if ( is_object( $get_contact ) ){

@@ -462,3 +462,64 @@ function wpcrm_system_get_records_by_contact_ids( $ids, $record_type, $number = 
 	return (array) $return;
 
 }
+
+function wpcrm_system_get_required_user_role(){
+	if( 'set' == get_option( 'wpcrm_system_settings_initial' ) ) {
+		$page_role = WPCRM_USER_ACCESS;
+	} else {
+		$page_role = 'manage_options';
+	}
+	return $page_role;
+}
+
+function wp_crm_system_get_post_type_list( $id = false, $post_type = false, $field_name = 'wp_crm_system_entry_ids' ){
+	if ( !$post_type ){
+		return;
+	}
+
+	$args = array();
+	$args['post_type'] 				= $post_type;
+	$args['order']					= 'ASC';
+	$args['orderby']				= array( 'type', 'title' );
+	$args['post_status'] 			= apply_filters( 'wp_crm_system_get_post_type_list_status', 'publish' );
+	$args['posts_per_page'] 		= apply_filters( 'wp_crm_system_get_post_type_list_posts_per_page', -1 );
+	$posts 							= new WP_QUERY( $args );
+
+	ob_start();
+	?>
+	<select class="wp-crm-system-searchable" name="<?php echo $field_name; ?>">
+		<?php
+		if ( $posts->have_posts() ){ ?>
+			<option value=""><?php _e( 'Select an entry', 'wp-crm-system' ); ?></option>
+		<?php }
+		while ( $posts->have_posts() ) : $posts->the_post();
+		switch ( get_post_type( get_the_ID() ) ) {
+			case 'wpcrm-project':
+				$type = ' (' . __( 'Project', 'wp-crm-system' ) . ')';
+				break;
+				case 'wpcrm-task':
+				$type = ' (' . __( 'Task', 'wp-crm-system' ) . ')';
+				break;
+
+			default:
+				$type = '';
+				break;
+		}
+		?>
+
+		<option value="<?php echo get_the_ID(); ?>" <?php selected( get_the_ID(), $id ); ?>><?php the_title(); echo $type; ?></option>
+
+		<?php
+
+		endwhile;
+		?>
+	</select>
+	<?php
+	return ob_get_clean();
+}
+
+function wp_crm_system_process_datetime( $date ){
+	$timestamp	= strtotime( $date );
+	$output		= date( "Y-m-d H:i:s", $timestamp );
+	return $output;
+}

@@ -20,6 +20,10 @@ function wpcrm_system_system_info_subtab() {
 			|
 			<a class="<?php echo $wpcrm_active_subtab == 'system-info' ? 'current' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=settings&subtab=system-info' ); ?>"><?php _e( 'System Info', 'wp-crm-system' ); ?> </a>
 		</li>
+		<li>
+			|
+			<a class="<?php echo $wpcrm_active_subtab == 'recurring-entries' ? 'current' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries' ); ?>"><?php _e( 'Recurring Entries', 'wp-crm-system' ); ?> </a>
+		</li>
 		<?php if ( has_action( 'wpcrm_system_license_key_field' ) ) { ?>
 		<li>
 			|
@@ -33,7 +37,6 @@ add_action( 'wpcrm_system_settings_subtab', 'wpcrm_system_system_info_subtab' );
 
 /**
  * Create the main settings page
- *
  */
 add_action( 'wpcrm_system_settings_content', 'wpcrm_system_main_settings' );
 
@@ -132,6 +135,9 @@ function wpcrm_system_main_settings() {
 									<input type="text" value="<?php echo get_option( 'wpcrm_system_gmap_api' ); ?>" name="wpcrm_system_gmap_api" size="10" />
 								</td>
 							</tr>
+							<?php
+							$gdpr_page = get_option( 'wpcrm_system_gdpr_page_id' );
+							if ( $gdpr_page && is_numeric( $gdpr_page ) ){ ?>
 							<tr>
 								<td>
 									<strong><?php _e( 'GDPR Page', 'wp-crm-system' ); ?></strong> <?php _e( 'This setting will be depreciated. Use WordPress built in Privacy Tools.', 'wp-crm-system' ); ?><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'Select the page that has the [wpcrm_system_gdpr] shortcode. If you do not have contacts who are located in the European Union, you do not need to select a page here.', 'wp-crm-system' ); ?>"></span>
@@ -144,6 +150,7 @@ function wpcrm_system_main_settings() {
 										) ); ?>
 								</td>
 							</tr>
+							<?php } ?>
 							<tr>
 								<td><input type="hidden" name="wpcrm_system_settings_initial" value="set" /><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
 								<td></td>

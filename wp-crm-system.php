@@ -3,7 +3,7 @@
 Plugin Name: WP-CRM System
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 2.4.1
+Version: 2.5.0
 Author: Scott DeLuzio
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system
@@ -24,6 +24,9 @@ function wp_crm_plugin_init() {
 	load_plugin_textdomain( 'wp-crm-system', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 }
 
+global $wpdb, $wpcrm_system_recurring_db_name, $wpcrm_system_db_version;
+$wpcrm_system_recurring_db_name	= $wpdb->prefix . 'wpcrm_system_recurring_entries';
+$wpcrm_system_db_version		= 1.0;
 /*
  * Includes for WP-CRM System
  */
@@ -31,7 +34,7 @@ if ( ! defined( 'WP_CRM_SYSTEM' ) ) {
   define( 'WP_CRM_SYSTEM', __FILE__ );
 }
 if ( ! defined( 'WP_CRM_SYSTEM_VERSION' ) ) {
-  define( 'WP_CRM_SYSTEM_VERSION', '2.4.1' );
+  define( 'WP_CRM_SYSTEM_VERSION', '2.5.0' );
 }
 if( ! defined( 'WP_CRM_SYSTEM_URL' ) ) {
 	define( 'WP_CRM_SYSTEM_URL', plugins_url( '', __FILE__ ) );
@@ -80,6 +83,10 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-updates.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/wcs-upsell-tabs.php' );
 /* Display System Setup */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-system-setup.php' );
+/* Display Recurring Entries Settings */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-recurring-entries.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-recurring-entries-process.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-recurring-entries-create.php' );
 /* Restrict non-admins from viewing others records */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-restrict-others.php' );
 /* Include default fields */

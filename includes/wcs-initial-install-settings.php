@@ -1,7 +1,7 @@
 <?php
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
-    die( "Sorry, you are not allowed to access this page directly." );
+	die( "Sorry, you are not allowed to access this page directly." );
 }
 /* Initial install make sure settings are saved */
 function wpcrm_system_initial_settings_notice__warning() {
@@ -30,8 +30,11 @@ function wpcrm_system_select_user_roles( $array ){
 
 //Register Settings
 
-add_action('admin_init', 'register_wpcrm_system_settings');
 function activate_wpcrm_system_settings() {
+	global $wpdb;
+	global $wpcrm_system_recurring_db_name;
+	global $wpcrm_system_db_version;
+
 	add_option('wpcrm_system_select_user_role', 'manage_options');
 	add_option('wpcrm_system_default_currency', 'USD');
 	add_option('wpcrm_system_report_currency_decimals', 0);
@@ -49,6 +52,31 @@ function activate_wpcrm_system_settings() {
 		foreach ( $terms as $term ) {
 			add_option($term->slug.'-email-filter','');
 		}
+	}
+
+	$charset_collate = $wpdb->get_charset_collate();
+
+	// create the database table for recurring entries
+	if ( $wpdb->get_var( "show tables like '$wpcrm_system_recurring_db_name'" ) != $wpcrm_system_recurring_db_name ) {
+		$sql = "CREATE TABLE " . $wpcrm_system_recurring_db_name . " (
+		id mediumint(9) NOT NULL AUTO_INCREMENT,
+		project_task tinytext NOT NULL,
+		project_task_id tinytext NOT NULL,
+		start_date datetime NOT NULL,
+		end_date datetime NOT NULL,
+		frequency tinytext NOT NULL,
+		number_per_frequency tinytext NOT NULL,
+		UNIQUE KEY id (id)
+		) $charset_collate;";
+
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		@dbDelta( $sql );
+
+		add_option( 'wpcrm_system_db_version', $wpcrm_system_db_version );
+	}
+	// Creates the schedule for recurring entries
+	if ( !wp_next_scheduled( 'wp_crm_system_recurring_entry_processor' ) ){
+		wp_schedule_event( time(), 'hourly', 'wp_crm_system_recurring_entry_processor' );
 	}
 }
 function deactivate_wpcrm_system_settings() {
@@ -72,7 +100,10 @@ function deactivate_wpcrm_system_settings() {
 			delete_option($term->slug.'-email-filter');
 		}
 	}
+	// Clears schedule for recurring entries
+	wp_clear_scheduled_hook( 'wp_crm_system_recurring_entry_processor' );
 }
+add_action( 'admin_init', 'register_wpcrm_system_settings' );
 function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_select_user_role');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_default_currency');
