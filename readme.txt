@@ -71,7 +71,7 @@ WP-CRM System is written in American English, and has been translated into the f
 * Spanish - WP-CRM System Core Plugin by Adrián Quinteiro Ayán
 
 If you would like to submit a translation, please submit it [through our website](https://www.wp-crm.com/contact).
-
+[](http://coderisk.com/wp/plugin/wp-crm-system/RIPS-y3WYUq0K-D)
 == Installation ==
 1. Download archive and unzip in wp-content/plugins or install via Plugins - Add New.
 2. Activate the plugin through the Plugins menu in WordPress.
