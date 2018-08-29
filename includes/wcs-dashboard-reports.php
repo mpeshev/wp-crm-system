@@ -8,10 +8,10 @@ add_action( 'wpcrm_system_custom_dashboard_boxes', 'wpcrm_system_dashboard_oppor
 
 function wpcrm_system_dashboard_calendar(){ ?>
 	<div class="wpcrm-dashboard-calendar">
-		<?php 
+		<?php
 			if ( isset( $_GET ) && isset( $_GET['wpcrm-cal-month'] ) && isset( $_GET['wpcrm-cal-year'] ) ){
-				$month 	= $_GET['wpcrm-cal-month'];
-				$year 	= $_GET['wpcrm-cal-year'];
+				$month 	= sanitize_text_field( $_GET['wpcrm-cal-month'] );
+				$year 	= sanitize_text_field( $_GET['wpcrm-cal-year'] );
 			} else {
 				$month 	= date( 'n' );
 				$year 	= date( 'Y' );

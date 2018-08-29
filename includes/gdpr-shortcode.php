@@ -16,11 +16,11 @@ function wpcrm_system_gdpr_check( $atts ){
 	if( get_the_ID() != $gdpr_page )
 		return __( 'Error: Attempting to access the wrong URL. Please contact the administrator for a valid URL.', 'wp-crm-system' ); // Make sure the GDPR page is the one we're expecting.
 
-	$id	= $_GET['contact_id'];
+	$id	= sanitize_text_field( $_GET['contact_id'] );
 	if ( 'wpcrm-contact' != get_post_type( $id ) )
 		return __( 'Error: Incorrect contact URL given. Please request a valid contact URL.'); // Possibly add an error message indicating that the contact ID is not a valid WP-CRM System contact ID.
 
-	$secret			= $_GET['secret'];
+	$secret			= sanitize_text_field( $_GET['secret'] );
 	$contact_secret	= get_post_meta( $id, '_wpcrm_system_gdpr_secret', true );
 
 	if( $secret != $contact_secret )

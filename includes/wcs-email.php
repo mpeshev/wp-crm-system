@@ -16,10 +16,10 @@ if(isset($_POST['wpcrm_email_send'])) {
 		foreach ($recipients as $recipient) {
 			$to[] = $recipient;
 		}
-		$subject = $_POST['wpcrm-email-subject'];
-		$message = $_POST['wpcrm-email-message'];
-		$fromemail = $_POST['wpcrm-email-from-address'];
-		$fromname = $_POST['wpcrm-email-from-name'];
+		$subject	= sanitize_text_field( $_POST['wpcrm-email-subject'] );
+		$message	= sanitize_textarea_field( $_POST['wpcrm-email-message'] );
+		$fromemail	= sanitize_email( $_POST['wpcrm-email-from-address'] );
+		$fromname	= sanitize_text_field( $_POST['wpcrm-email-from-name'] );
 	}
 }
 
