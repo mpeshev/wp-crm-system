@@ -10,8 +10,8 @@ function wpcrm_system_dashboard_calendar(){ ?>
 	<div class="wpcrm-dashboard-calendar">
 		<?php
 			if ( isset( $_GET ) && isset( $_GET['wpcrm-cal-month'] ) && isset( $_GET['wpcrm-cal-year'] ) ){
-				$month 	= sanitize_text_field( $_GET['wpcrm-cal-month'] );
-				$year 	= sanitize_text_field( $_GET['wpcrm-cal-year'] );
+				$month 	= absint( $_GET['wpcrm-cal-month'] );
+				$year 	= absint( $_GET['wpcrm-cal-year'] );
 			} else {
 				$month 	= date( 'n' );
 				$year 	= date( 'Y' );

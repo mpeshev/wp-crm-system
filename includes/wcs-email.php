@@ -2,19 +2,19 @@
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 $current_user = wp_get_current_user();
 wpcrm_send_email();
-$to = array();
-$subject = '';
-$message = '';
-$filterOrg = '';
-$filter_cats = '';
-$check = '';
-$fromemail = $current_user->user_email;
-$fromname = $current_user->display_name;
+$to				= array();
+$subject		= '';
+$message		= '';
+$filterOrg		= '';
+$filter_cats	= '';
+$check			= '';
+$fromemail		= $current_user->user_email;
+$fromname		= $current_user->display_name;
 if(isset($_POST['wpcrm_email_send'])) {
 	if ('' == $_POST['wpcrm-email-recipients'] || '' == $_POST['wpcrm-email-subject'] || '' == $_POST['wpcrm-email-message'] || '' == $_POST['wpcrm-email-from-name'] || '' == $_POST['wpcrm-email-from-address']) {
 		$recipients = $_POST['wpcrm-email-recipients'];
-		foreach ($recipients as $recipient) {
-			$to[] = $recipient;
+		foreach ( $recipients as $recipient ) {
+			$to[] = sanitize_email( $recipient );
 		}
 		$subject	= sanitize_text_field( $_POST['wpcrm-email-subject'] );
 		$message	= sanitize_textarea_field( $_POST['wpcrm-email-message'] );
@@ -203,25 +203,25 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 					<tr>
 						<td><?php _e('Email Subject','wp-crm-system'); ?></td>
 						<td>
-							<input class="wp-crm-email" type="text" name="wpcrm-email-subject" id="wpcrm-email-subject" value="<?php echo $subject; ?>" />
+							<input class="wp-crm-email" type="text" name="wpcrm-email-subject" id="wpcrm-email-subject" value="<?php echo esc_attr( $subject ); ?>" />
 						</td>
 					</tr>
 					<tr>
 						<td><?php _e('Email Message','wp-crm-system'); ?></td>
 						<td>
-							<textarea class="wp-crm-email" name="wpcrm-email-message" id="wpcrm-email-message"><?php echo $message; ?></textarea>
+							<textarea class="wp-crm-email" name="wpcrm-email-message" id="wpcrm-email-message"><?php echo esc_textarea( $message ); ?></textarea>
 						</td>
 					</tr>
 					<tr>
 						<td><?php _e('From Email Address','wp-crm-system'); ?></td>
 						<td>
-							<input class="wp-crm-email" type="text" name="wpcrm-email-from-address" id="wpcrm-email-from-address" value="<?php echo $fromemail; ?>" />
+							<input class="wp-crm-email" type="text" name="wpcrm-email-from-address" id="wpcrm-email-from-address" value="<?php echo esc_attr( $fromemail ); ?>" />
 						</td>
 					</tr>
 					<tr>
 						<td><?php _e('From Name','wp-crm-system'); ?></td>
 						<td>
-							<input class="wp-crm-email" type="text" name="wpcrm-email-from-name" id="wpcrm-email-from-name" value="<?php echo $fromname; ?>"/>
+							<input class="wp-crm-email" type="text" name="wpcrm-email-from-name" id="wpcrm-email-from-name" value="<?php echo esc_attr( $fromname ); ?>"/>
 						</td>
 					</tr>
 					<tr>

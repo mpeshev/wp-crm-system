@@ -364,7 +364,7 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 					<?php if( !isset( $deletion ) ){ ?>
 					<form id="wpcrm_system_gdpr_remove_data" name="wpcrm_system_gdpr_remove_data" method="post" action="">
 						<input type="hidden" name="wpcrm_system_gdpr_delete_contact_nonce" value="<?php echo wp_create_nonce( 'wpcrm-system-gdpr-delete-contact-nonce' ); ?>" />
-						<input type="hidden" name="wpcrm_system_gdpr_contact_id" value="<?php echo $id; ?>" />
+						<input type="hidden" name="wpcrm_system_gdpr_contact_id" value="<?php echo esc_attr( $id ); ?>" />
 						<input type="submit" name="wpcrm_system_gdpr_delete_contact" value="<?php _e( 'Delete My Data', 'wp-crm-system-import-contacts' ); ?>" />
 					</form>
 					<?php } else {

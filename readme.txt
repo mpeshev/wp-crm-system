@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
 Tested up to: 4.9.8
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.5.2 =
+* Fix: Some data still not properly escaped for security purposes.
 = 2.5.1 =
 * Fix: Security vulnerabilities were discovered and corrected. Specifically, certain user input data from $_GET and $_POST variables were not properly sanitized.
 = 2.5.0 =
@@ -314,5 +316,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.5.1 =
-* Fix: Security vulnerabilities were discovered and corrected. Specifically, certain user input data from $_GET and $_POST variables were not properly sanitized.
+= 2.5.2 =
+* Fix: Some data still not properly escaped for security purposes.

@@ -496,7 +496,7 @@ function wpcrmOpportunityOptions() {
 	$projectFromOpportunity = "//" . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] ) . '&wpcrm-system-action=new-project-from-opportunity';
 	echo WPCRM_SAVE_CHANGES;
 	echo '<ul>';
-	echo '<li><a class="button" href="' . $projectFromOpportunity . '">' . __( 'Create Project From Opportunity', 'wp-crm-system' ) . '</a></li>';
+	echo '<li><a class="button" href="' . esc_url( $projectFromOpportunity ) . '">' . __( 'Create Project From Opportunity', 'wp-crm-system' ) . '</a></li>';
 	echo '</ul>';
 
 	if ( isset( $_GET['wpcrm-system-action'] ) ) {

@@ -121,9 +121,9 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 
 		/* table headings */
 		$calendar .= '<tr class="calendar-row">
-			<td class="calendar-day-head"><a href="?page=wpcrm-settings&wpcrm-cal-month=' . $prev_month . '&wpcrm-cal-year=' . $prev_year . '">' . __( '<< Previous Month', 'wp-crm-system' ) . '</td>
-			<td class="calendar-day-head" colspan="5">' . date( "F Y", mktime( 0,0,0,$month,1,$year ) ) . '</td>
-			<td class="calendar-day-head"><a href="?page=wpcrm-settings&wpcrm-cal-month=' . $next_month . '&wpcrm-cal-year=' . $next_year . '">' . __( 'Next Month >>', 'wp-crm-system' ) . '</td>
+			<td class="calendar-day-head"><a href="?page=wpcrm-settings&wpcrm-cal-month=' . absint( $prev_month ) . '&wpcrm-cal-year=' . $prev_year . '">' . __( '<< Previous Month', 'wp-crm-system' ) . '</td>
+			<td class="calendar-day-head" colspan="5">' . date( "F Y", mktime( 0, 0, 0, absint( $month ), 1, absint( $year ) ) ) . '</td>
+			<td class="calendar-day-head"><a href="?page=wpcrm-settings&wpcrm-cal-month=' . absint( $next_month ) . '&wpcrm-cal-year=' . absint( $next_year ) . '">' . __( 'Next Month >>', 'wp-crm-system' ) . '</td>
 		</tr>';
 		$headings = array( __( 'Sunday', 'wp-crm-system' ),__( 'Monday', 'wp-crm-system' ),__( 'Tuesday', 'wp-crm-system' ),__( 'Wednesday', 'wp-crm-system' ),__( 'Thursday', 'wp-crm-system' ),__( 'Friday', 'wp-crm-system' ),__( 'Saturday', 'wp-crm-system' ) );
 		$calendar .= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
