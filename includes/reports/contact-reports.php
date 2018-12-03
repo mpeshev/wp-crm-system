@@ -1,138 +1,171 @@
 <?php
+/**
+ * Displays options for reporting on contacts.
+ *
+ * Lets users generate dynamic reports based on input.
+ *
+ * @since 1.0.0
+ * @package wp-crm-system
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
-	global $wpdb;
-	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
-	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : '';
 
-	switch ($active_report) {
-		case 'organization_contacts':
-			$meta_key1 = $prefix . 'contact-attach-to-organization';
-			$contact_report = '';
-			$contacts = '';
-			$report_title = __('Contacts by Organization', 'wp-crm-system');
-			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-organization');
-			$loop = new WP_Query( $args );
-			while ( $loop->have_posts() ) : $loop->the_post();
-				$meta_key1_value = get_the_ID();
-				$meta_key1_display = get_the_title();
-				$args = array(
-					'post_type'		=>	'wpcrm-contact',
-					'meta_query'	=> array(
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					foreach($posts as $post) {
-						$contacts .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-					}
-				} else {
-					$contacts = '';
-				}
-				if ($contacts == '') {
-					$contact_report .= '';
-				} else {
-					$contact_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $contacts . '</td></tr>';
-				}
-				$contacts = '';//reset contacts for next organization
-			endwhile;
-			if ($contact_report == '') {
-				$contact_report = '<tr><td>' . __('No contacts are linked to organizations. Please add or edit a contact and link it to an organization for this report to show.', 'wp-crm-system');
-			}
-			break;
+global $wpdb;
+require WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php';
 
-		case 'type_contacts':
-			$contact_report = '';
-			$report_title = __('Contacts by Type', 'wp-crm-system');
-
-			$taxonomies = array('contact-type');
-			$args = array('hide_empty'=>0);
-			$terms = get_terms($taxonomies, $args);
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-				foreach ( $terms as $term ) {
-					$args = array(
-						'post_type'			=>	'wpcrm-contact',
-						'posts_per_page'	=> -1,
-						'contact-type'			=> $term->slug,
-					);
-					$posts = get_posts( $args );
-					if ($posts) {
-						$contact_report .= '<tr><td><strong>' . $term->name . '</strong></td><td>';
-						foreach($posts as $post) {
-							$contact_report .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-						}
-						$contact_report .= '</td></tr>';
-					} else {
-						$contact_report .= '<tr><td>' . __('No contacts to report.', 'wp-crm-system') . '</td></tr>';
-					}
-				 }
-			}
-			if ($contact_report == '') {
-				$contact_report = '<tr><td>' . __('No contacts to report.', 'wp-crm-system') . '</td></tr>';
-			}
-			break;
-		case 'task_contacts':
-			$meta_key1 = $prefix . 'task-attach-to-contact';
-			$contact_report = '';
-			$tasks = '';
-			$report_title = __('Contacts Associated With Tasks', 'wp-crm-system');
-			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-contact');
-			$loop = new WP_Query( $args );
-			while ( $loop->have_posts() ) : $loop->the_post();
-				$meta_key1_value = get_the_ID();
-				$meta_key1_display = get_the_title();
-				$args = array(
-					'post_type'		=>	'wpcrm-task',
-					'meta_query'	=> array(
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					foreach($posts as $post) {
-						$contacts .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-					}
-				} else {
-					$contacts = '';
-				}
-				if ($contacts == '') {
-					$contact_report .= '';
-				} else {
-					$contact_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $contacts . '</td></tr>';
-				}
-				$contacts = '';//reset tasks for next contact
-			endwhile;
-			if ($contact_report == '') {
-				$contact_report = '<tr><td>' . __('No tasks are linked to contacts. Please add or edit a task and link it to a contact for this report to show.', 'wp-crm-system');
-			}
-			break;
-		default:
-			$reports = array('organization_contacts'=>'Contacts by Organization','task_contacts'=>'Contacts Associated With Tasks','type_contacts'=>'Contacts by Type');
-			$contact_report = '';
-			$report_title = 'Contact Reports';
-			foreach ($reports as $key => $value) {
-				$contact_report .= '<tr><td><a href="?page=wpcrm-reports&tab=contact&report=' . $key . '">' . $value . '</a></td></tr>';
-			}
-	}
 ?>
-	<div class="wrap">
-		<div>
-			<h2><?php echo $report_title; ?></h2>
-			<?php if ($active_report == ('' || 'overview')) { ?><a href="?page=wpcrm-reports&tab=contact"><?php _e('Back to Contact Reports', 'wp-crm-system'); ?></a><?php } ?>
-			<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
-				<tbody>
-					<?php echo $contact_report; ?>
-				</tbody>
-			</table>
-		</div>
+<div class="wrap">
+	<div>
+		<h2><?php esc_attr_e( 'Contact Reports', 'wp-crm-system' ); ?></h2>
+		<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
+			<tbody>
+				<?php wp_crm_system_show_contact_form(); ?>
+				<?php
+				if ( ! empty( $_POST ) && check_admin_referer( 'check_contact_report_nonce', 'contact_report_nonce' ) ) {
+					wp_crm_system_process_contact_form();
+				}
+				?>
+			</tbody>
+		</table>
 	</div>
+</div>
+
+<?php
+/**
+ * Shows the contact reporting form.
+ *
+ * Lets the user select various options to report on contacts dynamically.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_show_contact_form() {
+	?>
+	<form method="post">
+		<?php wp_nonce_field( 'check_contact_report_nonce', 'contact_report_nonce' ); ?>
+		<div class="wp-crm-first wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/organization.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/city.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/state.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/country.php'; ?></div>
+		<div class="wp-crm-first wp-crm-one-half"><br /><input type="submit" name="submit" value="Submit" class="button button-primary"><br /><br /></div>
+	</form>
+	<?php
+}
+
+/**
+ * Processes the contact reporting form.
+ *
+ * Handles the processing of the contact reporting form and shows output.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_process_contact_form() {
+
+	$prefix = '_wpcrm_';
+
+	if ( isset( $_POST['submit'], $_POST['contact_report_nonce'] )
+	&& wp_verify_nonce( sanitize_key( $_POST['contact_report_nonce'] ), 'check_contact_report_nonce' ) ) {
+
+		foreach ( $_POST as $param_name => $param_val ) {
+			if ( 'wp-crm-system-organization' === $param_name ) {
+				$organization = esc_html( $param_val );
+				$org_arr      = '';
+				if ( 'all' !== $organization ) {
+					$org_arr = array(
+						'key'     => $prefix . 'contact-attach-to-organization',
+						'value'   => $organization,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-city' === $param_name ) {
+				$city    = esc_html( $param_val );
+				$cit_arr = '';
+				if ( 'all' !== $city ) {
+					$cit_arr = array(
+						'key'     => $prefix . 'contact-city',
+						'value'   => $city,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-state' === $param_name ) {
+				$state   = esc_html( $param_val );
+				$sta_arr = '';
+				if ( 'all' !== $state ) {
+					$sta_arr = array(
+						'key'     => $prefix . 'contact-state',
+						'value'   => $state,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-country' === $param_name ) {
+				$country = esc_html( $param_val );
+				$cou_arr = '';
+				if ( 'all' !== $country ) {
+					$cou_arr = array(
+						'key'     => $prefix . 'contact-country',
+						'value'   => $country,
+						'compare' => '=',
+					);
+				}
+			}
+		}
+
+		$contact_report = '';
+
+		$args = array(
+			'post_type'      => 'wpcrm-contact',
+			'posts_per_page' => -1,
+			'meta_query'     => array(
+				'relation' => 'AND',
+				$org_arr,
+				$cit_arr,
+				$sta_arr,
+				$cou_arr,
+			),
+		);
+
+		$wpcposts = get_posts( $args );
+
+		if ( $wpcposts ) {
+			$contact_report .= '<tr><th><strong>' . esc_attr_x( 'Contact', 'wp-crm-system' ) . '</strong></th>';
+			$contact_report .= '<th><strong>' . esc_attr_x( 'Organization', 'wp-crm-system' ) . '</strong></th>';
+			$contact_report .= '<th><strong>' . esc_attr_x( 'City', 'wp-crm-system' ) . '</strong></th>';
+			$contact_report .= '<th><strong>' . esc_attr_x( 'State', 'wp-crm-system' ) . '</strong></th>';
+			$contact_report .= '<th><strong>' . esc_attr_x( 'Country', 'wp-crm-system' ) . '</strong></th>';
+			foreach ( $wpcposts as $wpcpost ) {
+
+				$contact_report .= '<tr><td>';
+
+				$contact_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+
+				$org                 = '';
+				$organization_output = '';
+				$org                 = get_post_meta( $wpcpost->ID, $prefix . 'contact-attach-to-organization', true );
+				if ( '' === $org ) {
+					$organization_output = '';
+				} else {
+					$organization_output .= '<a href="' . get_edit_post_link( $org ) . '">' . get_the_title( $org ) . '</a>';
+				}
+				$contact_report .= '</td><td>' . $organization_output;
+
+				$city_output     = get_post_meta( $wpcpost->ID, $prefix . 'contact-city', true );
+				$contact_report .= '</td><td>' . $city_output;
+
+				$state_output    = get_post_meta( $wpcpost->ID, $prefix . 'contact-state', true );
+				$contact_report .= '</td><td>' . $state_output;
+
+				$country_output  = get_post_meta( $wpcpost->ID, $prefix . 'contact-country', true );
+				$contact_report .= '</td><td>' . $country_output;
+
+				$contact_report .= '</td></tr>';
+			}
+		} else {
+			$contact_report .= '<tr><th><strong>Contact</strong></th><tr><td>' . esc_attr_x( 'No contacts to report.', 'wp-crm-system' ) . '</td></tr>';
+		}
+
+		print $contact_report;
+	}
+}

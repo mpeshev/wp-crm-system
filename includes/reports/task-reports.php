@@ -1,4 +1,13 @@
 <?php
+/**
+ * Displays options for reporting on tasks.
+ *
+ * Lets users generate dynamic reports based on input.
+ *
+ * @since 1.0.0
+ * @package wp-crm-system
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -12,17 +21,30 @@ require WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php';
 		<h2><?php esc_attr_e( 'Task Reports', 'wp-crm-system' ); ?></h2>
 		<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
 			<tbody>
-				<?php wp_crm_system_show_form(); ?>
-				<?php wp_crm_system_process_form(); ?>
+				<?php wp_crm_system_show_task_form(); ?>
+				<?php
+				if ( ! empty( $_POST ) && check_admin_referer( 'check_task_report_nonce', 'task_report_nonce' ) ) {
+					wp_crm_system_process_task_form();
+				}
+				?>
 			</tbody>
 		</table>
 	</div>
 </div>
 
 <?php
-function wp_crm_system_show_form() {
+/**
+ * Shows the task reporting form.
+ *
+ * Lets the user select various options to report on tasks dynamically.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_show_task_form() {
 	?>
 	<form method="post">
+		<?php wp_nonce_field( 'check_task_report_nonce', 'task_report_nonce' ); ?>
 		<div class="wp-crm-first wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/due.php'; ?></div>
 		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/progress.php'; ?></div>
 		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/priority.php'; ?></div>
@@ -31,20 +53,29 @@ function wp_crm_system_show_form() {
 		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/contact.php'; ?></div>
 		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/project.php'; ?></div>
 		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/assigned.php'; ?></div>
-		<div class="wp-crm-first wp-crm-one-half"><br /><input type="submit" name="submit" value="Submit"><br /><br /></div>
+		<div class="wp-crm-first wp-crm-one-half"><br /><input type="submit" name="submit" value="Submit" class="button button-primary"><br /><br /></div>
 	</form>
 	<?php
 }
 
-function wp_crm_system_process_form() {
+/**
+ * Processes the task reporting form.
+ *
+ * Handles the processing of the task reporting form and shows output.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_process_task_form() {
 
 	$prefix = '_wpcrm_';
 
-	if ( isset( $_POST['submit'] ) ) {
+	if ( isset( $_POST['submit'], $_POST['task_report_nonce'] )
+	&& wp_verify_nonce( sanitize_key( $_POST['task_report_nonce'] ), 'check_task_report_nonce' ) ) {
 
 		foreach ( $_POST as $param_name => $param_val ) {
 			if ( 'wp-crm-system-due' === $param_name ) {
-				$due     = $param_val;
+				$due     = esc_html( $param_val );
 				$due_arr = '';
 				$now     = strtotime( 'now' );
 				if ( 'upcoming' === $due ) {
@@ -61,13 +92,13 @@ function wp_crm_system_process_form() {
 					);
 				}
 			} elseif ( 'wp-crm-system-progress' === $param_name ) {
-				$progress      = $param_val;
+				$progress      = esc_html( $param_val );
 				$progress_sign = '=';
 				if ( 'all' === $progress ) {
 					$progress_sign = '!=';
 				}
 			} elseif ( 'wp-crm-system-priority' === $param_name ) {
-				$priority     = $param_val;
+				$priority     = esc_html( $param_val );
 				$priority_arr = '';
 				if ( 'all' === $priority ) {
 
@@ -85,13 +116,13 @@ function wp_crm_system_process_form() {
 					);
 				}
 			} elseif ( 'wp-crm-system-status' === $param_name ) {
-				$status      = $param_val;
+				$status      = esc_html( $param_val );
 				$status_sign = '=';
 				if ( 'all' === $status ) {
 					$status_sign = '!=';
 				}
 			} elseif ( 'wp-crm-system-organization' === $param_name ) {
-				$organization = $param_val;
+				$organization = esc_html( $param_val );
 				$org_arr      = '';
 				if ( 'all' !== $organization ) {
 					$org_arr = array(
@@ -101,7 +132,7 @@ function wp_crm_system_process_form() {
 					);
 				}
 			} elseif ( 'wp-crm-system-contact' === $param_name ) {
-				$contact = $param_val;
+				$contact = esc_html( $param_val );
 				$con_arr = '';
 				if ( 'all' !== $contact ) {
 					$con_arr = array(
@@ -111,7 +142,7 @@ function wp_crm_system_process_form() {
 					);
 				}
 			} elseif ( 'wp-crm-system-project' === $param_name ) {
-				$project = $param_val;
+				$project = esc_html( $param_val );
 				$pro_arr = '';
 				if ( 'all' !== $project ) {
 					$pro_arr = array(
@@ -121,7 +152,7 @@ function wp_crm_system_process_form() {
 					);
 				}
 			} elseif ( 'wp-crm-system-assigned' === $param_name ) {
-				$assigned = $param_val;
+				$assigned = esc_html( $param_val );
 				$asg_arr  = '';
 				if ( 'all' !== $assigned ) {
 					$asg_arr = array(
@@ -162,7 +193,15 @@ function wp_crm_system_process_form() {
 		$wpcposts = get_posts( $args );
 
 		if ( $wpcposts ) {
-			$task_report .= '<tr><th><strong>Task</strong></th><th><strong>Due</strong></th><th><strong>Progress</strong></th><th><strong>Priority</strong></th><th><strong>Status</strong></th><th><strong>Organization</strong></th><th><strong>Contact</strong></th><th><strong>Project</strong></th><th><strong>Assigned</strong></th></tr>';
+			$task_report .= '<tr><th><strong>' . esc_attr_x( 'Task', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Due', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Progress', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Priority', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Status', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Organization', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Contact', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Project', 'wp-crm-system' ) . '</strong></th>';
+			$task_report .= '<th><strong>' . esc_attr_x( 'Assigned', 'wp-crm-system' ) . '</strong></th></tr>';
 			foreach ( $wpcposts as $wpcpost ) {
 
 				$task_report .= '<tr><td>';
@@ -249,13 +288,9 @@ function wp_crm_system_process_form() {
 				$task_report .= '</td></tr>';
 			}
 		} else {
-			$task_report .= '';
+			$task_report .= '<tr><th><strong>Task</strong></th><tr><td>' . esc_attr_x( 'No tasks to report.', 'wp-crm-system' ) . '</td></tr>';
 		}
 
-		if ( '' === $task_report ) {
-			$task_report = '<tr><td>' . esc_attr_e( 'No tasks to report.', 'wp-crm-system' ) . '</td></tr>';
-		}
-
-		print esc_html( $task_report );
+		print $task_report;
 	}
 }
