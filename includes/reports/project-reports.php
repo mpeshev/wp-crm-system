@@ -1,346 +1,294 @@
 <?php
+/**
+ * Displays options for reporting on projects.
+ *
+ * Lets users generate dynamic reports based on input.
+ *
+ * @since 1.0.0
+ * @package wp-crm-system
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
-	global $wpdb;
-	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
-	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : '';
 
-	switch ($active_report) {
-		case 'user_projects':
-			$meta_key1 = $prefix . 'project-assigned';
-			$project_report = '';
-			$projects = '';
-			$report_title = __('Projects by User', 'wp-crm-system');
-			$users = get_users();
-			$wp_crm_users = array();
-			foreach( $users as $user ){
-				if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
-					$wp_crm_users[] = $user;
-				}
-			}
-			foreach( $wp_crm_users as $user) {
-				$meta_key1_value = $user->data->user_login;
-				$meta_key1_display = $user->data->display_name;
-				global $post;
+global $wpdb;
+require WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php';
 
-				$args = array(
-					'post_type'		=>	'wpcrm-project',
-					'meta_query'	=> array(
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					foreach($posts as $post) {
-						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-					}
-				} else {
-					$projects = '';
-				}
-				if ($projects == '') {
-					$project_report .= '';
-				} else {
-					$project_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $projects . '</td></tr>';
-				}
-				$projects = '';//reset projects for next user
-			}
-			if ($project_report == '') {
-				$project_report = '<tr><td>' . __('No projects are linked to users. Please add or edit a project and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
-			}
-			break;
-		case 'organization_projects':
-			$meta_key1 = $prefix . 'project-attach-to-organization';
-			$project_report = '';
-			$projects = '';
-			$report_title = __('Projects by Organization', 'wp-crm-system');
-			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-organization');
-			$loop = new WP_Query( $args );
-			while ( $loop->have_posts() ) : $loop->the_post();
-				$meta_key1_value = get_the_ID();
-				$meta_key1_display = get_the_title();
-				$args = array(
-					'post_type'		=>	'wpcrm-project',
-					'meta_query'	=> array(
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					foreach($posts as $post) {
-						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-					}
-				} else {
-					$projects = '';
-				}
-				if ($projects == '') {
-					$project_report .= '';
-				} else {
-					$project_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $projects . '</td></tr>';
-				}
-				$projects = '';//reset projects for next organization
-			endwhile;
-			if ($project_report == '') {
-				$project_report = '<tr><td>' . __('No projects are linked to organizations. Please add or edit a project and link it to an organization for this report to show.', 'wp-crm-system');
-			}
-			break;
-		case 'contact_projects':
-			$meta_key1 = $prefix . 'project-attach-to-contact';
-			$project_report = '';
-			$projects = '';
-			$report_title = __('Projects by Contact', 'wp-crm-system');
-			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-contact');
-			$loop = new WP_Query( $args );
-			while ( $loop->have_posts() ) : $loop->the_post();
-				$meta_key1_value = get_the_ID();
-				$meta_key1_display = get_the_title();
-				$args = array(
-					'post_type'		=>	'wpcrm-project',
-					'meta_query'	=> array(
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					foreach($posts as $post) {
-						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-					}
-				} else {
-					$projects = '';
-				}
-				if ($projects == '') {
-					$project_report .= '';
-				} else {
-					$project_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $projects . '</td></tr>';
-				}
-				$projects = '';//reset projects for next contact
-			endwhile;
-			if ($project_report == '') {
-				$project_report = '<tr><td>' . __('No projects are linked to contacts. Please add or edit a project and link it to a contact for this report to show.', 'wp-crm-system');
-			}
-			break;
-		case 'overdue_projects':
-		case 'upcoming_projects': {
-			$project_report = '';
-			if ($active_report == 'overdue_projects') {
-				$report_title = __('Overdue Projects', 'wp-crm-system');
-				$meta_compare = '<';
-				$no_projects = __('No projects are overdue!', 'wp-crm-system');
-			}
-			if ($active_report == 'upcoming_projects') {
-				$report_title = __('Upcoming Projects', 'wp-crm-system');
-				$meta_compare = '>';
-				$no_projects = __('No upcoming projects.', 'wp-crm-system');
-			}
-
-			$meta_key1 = $prefix . 'project-status';
-			$meta_key1_value = 'complete';
-			$meta_key2 = $prefix . 'project-closedate';
-			global $post;
-			$args = array(
-				'post_type'		=>	'wpcrm-project',
-				'meta_query'	=> array(
-					'relation'		=>	'AND',
-					array(
-						'key'		=>	$meta_key1,
-						'value'		=>	$meta_key1_value,
-						'compare'	=>	'!=',
-					),
-					array(
-						'key'		=>	$meta_key2,
-						'value'		=>	strtotime('now'),
-						'compare'	=>	$meta_compare,
-					),
-				),
-			);
-			$posts = get_posts($args);
-			if ($posts) {
-				foreach($posts as $post) {
-					$project_report = '<tr><td><a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a> - Projected close date ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$meta_key2,true)) . '</td></tr>';
-				}
-			} else {
-				$project_report = '<tr><td>' . $no_projects . '</td></tr>';
-			}
-			break;
-		}
-		case 'pct_complete_projects':
-			$progresses = array(95,90,85,80,75,70,65,60,55,50,45,40,35,30,25,20,15,10,5,0);
-			$report_title = __('Projects by Percentage Complete', 'wp-crm-system');
-			$project_report = '';
-			$meta_key1 = $prefix . 'project-status';
-			$meta_key1_value = 'complete';
-			$meta_key2 = $prefix . 'project-progress';
-			global $post;
-			foreach($progresses as $progress) {
-				$args = array(
-					'post_type'		=>	'wpcrm-project',
-					'meta_query'	=> array(
-						'relation'		=>	'AND',
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'!=',
-						),
-						array(
-							'key'		=>	$meta_key2,
-							'value'		=>	$progress,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					$project_report .= '<tr><td><strong>' . $progress . '%</strong></td><td>';
-					foreach($posts as $post) {
-						$project_report .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a> - Projected close date ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'project-closedate',true)) . '<br />';
-					}
-					$project_report .= '</td></tr>';
-				} else {
-					$project_report .= '';
-				}
-			}
-			if ($project_report == '') {
-				$project_report = '<tr><td>' . __('No projects to report.', 'wp-crm-system') . '</td></tr>';
-			}
-			break;
-		case 'status_projects':
-			$statuses = array('not-started'=>_x('Not Started','Work has not yet begun.','wp-crm-system'),'in-progress'=>_x('In Progress','Work has begun but is not complete.','wp-crm-system'),'on-hold'=>_x('On Hold','Work may be in various stages of completion, but has been stopped for one reason or another.','wp-crm-system'));
-			$report_title = __('Projects by Status', 'wp-crm-system');
-			$project_report = '';
-			$meta_key1 = $prefix . 'project-status';
-			$meta_key1_value = 'complete';
-			$meta_key2 = $prefix . 'project-status';
-			global $post;
-			foreach($statuses as $key => $value) {
-				$args = array(
-					'post_type'		=>	'wpcrm-project',
-					'meta_query'	=> array(
-						'relation'		=>	'AND',
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'!=',
-						),
-						array(
-							'key'		=>	$meta_key2,
-							'value'		=>	$key,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					$project_report .= '<tr><td><strong>' . $value . '</strong></td><td>';
-					foreach($posts as $post) {
-						$project_report .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a> - Projected close date ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'project-closedate',true)) . '<br />';
-					}
-					$project_report .= '</td></tr>';
-				} else {
-					$project_report .= '';
-				}
-			}
-			if ($project_report == '') {
-				$project_report = '<tr><td>' . __('No projects to report.', 'wp-crm-system') . '</td></tr>';
-			}
-			break;
-		case 'type_project':
-			$project_report = '';
-			$report_title = __('Projects by Type', 'wp-crm-system');
-
-			$taxonomies = array('project-type');
-			$args = array('hide_empty'=>0);
-			$terms = get_terms($taxonomies, $args);
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-				foreach ( $terms as $term ) {
-					$args = array(
-						'post_type'			=>	'wpcrm-project',
-						'posts_per_page'	=> -1,
-						'project-type'			=> $term->slug,
-					);
-					$posts = get_posts( $args );
-					if ($posts) {
-						$project_report .= '<tr><td><strong>' . $term->name . '</strong></td><td>';
-						foreach($posts as $post) {
-							$project_report .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a> - Projected close date ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'project-closedate',true)) . '<br />';
-						}
-						$project_report .= '</td></tr>';
-					} else {
-						$project_report .= '<tr><td>' . __('No projects to report.', 'wp-crm-system') . '</td></tr>';
-					}
-				 }
-			}
-			if ($project_report == '') {
-				$project_report = '<tr><td>' . __('No projects to report.', 'wp-crm-system') . '</td></tr>';
-			}
-			break;
-		case 'listtasks':
-			$meta_key1 = $prefix . 'task-attach-to-project';
-			$project_report = '';
-			$projects = '';
-			$report_title = __('Tasks assigned to Projects', 'wp-crm-system');
-			$args = array( 'posts_per_page'=>-1,'post_type' => 'wpcrm-project');
-			$loop = new WP_Query( $args );
-			while ( $loop->have_posts() ) : $loop->the_post();
-				$meta_key1_value = get_the_ID();
-				$meta_key1_display = get_the_title();
-				$args = array(
-					'post_type'		=>	'wpcrm-task',
-					'meta_query'	=> array(
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					foreach($posts as $post) {
-						$projects .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-					}
-				} else {
-					$projects = '';
-				}
-				if ($projects == '') {
-					$project_report .= '';
-				} else {
-					$project_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $projects . '</td></tr>';
-				}
-				$projects = '';//reset projects for next contact
-			endwhile;
-			if ($project_report == '') {
-				$project_report = '<tr><td>' . __('No tasks are linked to projects. Please add or edit a task and link it to a project for this report to show.', 'wp-crm-system');
-			}
-			break;
-		default:
-			$reports = array('user_projects'=>'Projects by User','organization_projects'=>'Projects by Organization','contact_projects'=>'Projects by Contact','overdue_projects'=>'Overdue Projects','upcoming_projects'=>'Upcoming Projects','pct_complete_projects'=>'Projects by Percentage Completion','status_projects'=>'Projects by Status','type_project'=>'Projects by Type','listtasks'=>'Tasks per Project');
-			$project_report = '';
-			$report_title = 'Project Reports';
-			foreach ($reports as $key => $value) {
-				$project_report .= '<tr><td><a href="?page=wpcrm-reports&tab=project&report=' . $key . '">' . $value . '</a></td></tr>';
-			}
-	}
 ?>
-	<div class="wrap">
-		<div>
-			<h2><?php echo $report_title; ?></h2>
-			<?php if ($active_report == ('' || 'overview')) { ?><a href="?page=wpcrm-reports&tab=project"><?php _e('Back to Project Reports', 'wp-crm-system'); ?></a><?php } ?>
-			<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
-				<tbody>
-					<?php echo $project_report; ?>
-				</tbody>
-			</table>
-		</div>
+<div class="wrap">
+	<div>
+		<h2><?php esc_attr_e( 'Project Reports', 'wp-crm-system' ); ?></h2>
+		<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
+			<tbody>
+				<?php wp_crm_system_show_project_form(); ?>
+				<?php
+				if ( ! empty( $_POST ) && check_admin_referer( 'check_project_report_nonce', 'project_report_nonce' ) ) {
+					wp_crm_system_process_project_form();
+				}
+				?>
+			</tbody>
+		</table>
 	</div>
+</div>
+
+<?php
+/**
+ * Shows the project reporting form.
+ *
+ * Lets the user select various options to report on projects dynamically.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_show_project_form() {
+	?>
+	<form method="post">
+		<?php wp_nonce_field( 'check_project_report_nonce', 'project_report_nonce' ); ?>
+		<div class="wp-crm-first wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/close.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/progress.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/status.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/value.php'; ?></div>
+		<div class="wp-crm-first wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/organization.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/contact.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/assigned.php'; ?></div>
+		<div class="wp-crm-first wp-crm-one-half"><br /><input type="submit" name="submit" value="Submit" class="button button-primary"><br /><br /></div>
+	</form>
+	<?php
+}
+
+/**
+ * Processes the project reporting form.
+ *
+ * Handles the processing of the project reporting form and shows output.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_process_project_form() {
+
+	$prefix = '_wpcrm_';
+
+	if ( isset( $_POST['submit'], $_POST['project_report_nonce'] )
+	&& wp_verify_nonce( sanitize_key( $_POST['project_report_nonce'] ), 'check_project_report_nonce' ) ) {
+
+		foreach ( $_POST as $param_name => $param_val ) {
+			if ( 'wp-crm-system-close' === $param_name ) {
+				$close   = esc_html( $param_val );
+				$clo_arr = '';
+				$now     = strtotime( 'now' );
+				if ( 'upcoming' === $close ) {
+					$clo_arr = array(
+						'key'     => $prefix . 'project-closedate',
+						'value'   => $now,
+						'compare' => '>',
+					);
+				} elseif ( 'overdue' === $close ) {
+					$clo_arr = array(
+						'key'     => $prefix . 'project-closedate',
+						'value'   => $now,
+						'compare' => '<',
+					);
+				}
+			} elseif ( 'wp-crm-system-progress' === $param_name ) {
+				$progress = esc_html( $param_val );
+				$pro_arr  = '';
+				if ( 'zero' === $progress ) {
+					$pro_arr = array(
+						'key'     => $prefix . 'project-progress',
+						'compare' => 'NOT EXISTS',
+					);
+				} elseif ( 'all' !== $progress ) {
+					$pro_arr = array(
+						'key'     => $prefix . 'project-progress',
+						'value'   => $progress,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-status' === $param_name ) {
+				$status      = esc_html( $param_val );
+				$status_sign = '=';
+				if ( 'all' === $status ) {
+					$status_sign = '!=';
+				}
+			} elseif ( 'wp-crm-system-value' === $param_name ) {
+				$value   = esc_html( $param_val );
+				$val_arr = '';
+				if ( '1000' === $value ) {
+					$val_arr = array(
+						'key'     => $prefix . 'project-value',
+						'value'   => $value,
+						'type'    => 'numeric',
+						'compare' => '<',
+					);
+				} elseif ( '5000' === $value ) {
+					$val_arr = array(
+						'key'     => $prefix . 'project-value',
+						'value'   => array( '1000', $value ),
+						'type'    => 'numeric',
+						'compare' => 'BETWEEN',
+					);
+				} elseif ( '10000' === $value ) {
+					$val_arr = array(
+						'key'     => $prefix . 'project-value',
+						'value'   => array( '5000', $value ),
+						'type'    => 'numeric',
+						'compare' => 'BETWEEN',
+					);
+				} elseif ( '10001' === $value ) {
+					$val_arr = array(
+						'key'     => $prefix . 'project-value',
+						'value'   => $value,
+						'type'    => 'numeric',
+						'compare' => '>',
+					);
+				}
+			} elseif ( 'wp-crm-system-organization' === $param_name ) {
+				$organization = esc_html( $param_val );
+				$org_arr      = '';
+				if ( 'all' !== $organization ) {
+					$org_arr = array(
+						'key'     => $prefix . 'project-attach-to-organization',
+						'value'   => $organization,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-contact' === $param_name ) {
+				$contact = esc_html( $param_val );
+				$con_arr = '';
+				if ( 'all' !== $contact ) {
+					$con_arr = array(
+						'key'     => $prefix . 'project-attach-to-contact',
+						'value'   => $contact,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-assigned' === $param_name ) {
+				$assigned = esc_html( $param_val );
+				$asg_arr  = '';
+				if ( 'all' !== $assigned ) {
+					$asg_arr = array(
+						'key'     => $prefix . 'project-assigned',
+						'value'   => $assigned,
+						'compare' => '=',
+					);
+				}
+			}
+		}
+
+		$project_report = '';
+
+		$args = array(
+			'post_type'      => 'wpcrm-project',
+			'posts_per_page' => -1,
+			'meta_query'     => array(
+				'relation' => 'AND',
+				$clo_arr,
+				$pro_arr,
+				array(
+					'key'     => $prefix . 'project-status',
+					'value'   => $status,
+					'compare' => $status_sign,
+				),
+				$val_arr,
+				$org_arr,
+				$con_arr,
+				$asg_arr,
+			),
+		);
+
+		$wpcposts = get_posts( $args );
+
+		if ( $wpcposts ) {
+			$project_report .= '<tr><th><strong>' . esc_attr_x( 'Project', 'wp-crm-system' ) . '</strong></th>';
+			$project_report .= '<th><strong>' . esc_attr_x( 'Close', 'wp-crm-system' ) . '</strong></th>';
+			$project_report .= '<th><strong>' . esc_attr_x( 'Progress', 'wp-crm-system' ) . '</strong></th>';
+			$project_report .= '<th><strong>' . esc_attr_x( 'Status', 'wp-crm-system' ) . '</strong></th>';
+			$project_report .= '<th><strong>' . esc_attr_x( 'Value', 'wp-crm-system' ) . '</strong></th>';
+			$project_report .= '<th><strong>' . esc_attr_x( 'Organization', 'wp-crm-system' ) . '</strong></th>';
+			$project_report .= '<th><strong>' . esc_attr_x( 'Contact', 'wp-crm-system' ) . '</strong></th>';
+			$project_report .= '<th><strong>' . esc_attr_x( 'Assigned', 'wp-crm-system' ) . '</strong></th></tr>';
+			foreach ( $wpcposts as $wpcpost ) {
+
+				$project_report .= '<tr><td>';
+
+				$project_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+
+				$close_output = get_post_meta( $wpcpost->ID, $prefix . 'project-closedate', true );
+				if ( '' !== $close_output ) {
+					$close_output = date( get_option( 'wpcrm_system_php_date_format' ), $close_output );
+				} else {
+					$close_output = 'Not set';
+				}
+				$project_report .= '</td><td>' . $close_output;
+
+				$progress_output = get_post_meta( $wpcpost->ID, $prefix . 'project-progress', true );
+				if ( '' === $progress_output ) {
+					$progress_output = '0';
+				}
+				$project_report .= '</td><td>' . $progress_output . '%';
+
+				$status_output = get_post_meta( $wpcpost->ID, $prefix . 'project-status', true );
+				switch ( $status_output ) {
+					case 'not-started':
+						$status_output = 'Not Started';
+						break;
+					case 'in-progress':
+						$status_output = 'In Progress';
+						break;
+					case 'complete':
+						$status_output = 'Complete';
+						break;
+					case 'on-hold':
+						$status_output = 'On Hold';
+						break;
+				}
+				$project_report .= '</td><td>' . $status_output;
+
+				$value_output = get_post_meta( $wpcpost->ID, $prefix . 'project-value', true );
+				if ( '' === $value_output ) {
+					$value_output = 'Not Set';
+				} else {
+					$value_output = strtoupper( get_option( 'wpcrm_system_default_currency' ) ) . ' ' . number_format( $value_output, get_option( 'wpcrm_system_report_currency_decimals' ), get_option( 'wpcrm_system_report_currency_decimal_point' ), get_option( 'wpcrm_system_report_currency_thousand_separator' ) );
+				}
+				$project_report .= '</td><td>' . $value_output;
+
+				$org                 = '';
+				$organization_output = '';
+				$org                 = get_post_meta( $wpcpost->ID, $prefix . 'project-attach-to-organization', true );
+				if ( '' === $org ) {
+					$organization_output = '';
+				} else {
+					$organization_output .= '<a href="' . get_edit_post_link( $org ) . '">' . get_the_title( $org ) . '</a>';
+				}
+				$project_report .= '</td><td>' . $organization_output;
+
+				$con            = '';
+				$contact_output = '';
+				$con            = get_post_meta( $wpcpost->ID, $prefix . 'project-attach-to-contact', true );
+				if ( '' === $con ) {
+					$contact_output = '';
+				} else {
+					$contact_output .= '<a href="' . get_edit_post_link( $con ) . '">' . get_the_title( $con ) . '</a>';
+				}
+				$project_report .= '</td><td>' . $contact_output;
+
+				$asg               = '';
+				$assignment_output = '';
+				$asg               = get_post_meta( $wpcpost->ID, $prefix . 'project-assigned', true );
+				if ( '' === $asg ) {
+					$assignment_output = '';
+				} else {
+					$assignment_output .= $asg;
+				}
+				$project_report .= '</td><td>' . $assignment_output;
+
+				$project_report .= '</td></tr>';
+			}
+		} else {
+			$project_report .= '<tr><th><strong>Project</strong></th><tr><td>' . esc_attr_x( 'No projects to report.', 'wp-crm-system' ) . '</td></tr>';
+		}
+
+		print $project_report;
+	}
+}

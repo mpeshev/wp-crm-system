@@ -1,198 +1,256 @@
 <?php
+/**
+ * Displays options for reporting on campaigns.
+ *
+ * Lets users generate dynamic reports based on input.
+ *
+ * @since 1.0.0
+ * @package wp-crm-system
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
-	global $wpdb;
-	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
-	$active_report = isset( $_GET[ 'report' ] ) ? $_GET[ 'report' ] : '';
-	$active_campaign = isset( $_GET['campaign'] ) ? $_GET['campaign'] : '';
 
-	switch ($active_report) {
-		case 'all_campaigns':
-			$campaign_report = '';
-			$report_title = '';
-			$no_campaigns = __('No campaigns to display.', 'wp-crm-system');
+global $wpdb;
+require WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php';
 
-			$meta_key1 = $prefix . 'campaign-status';
-			$meta_key1_values = array('not-started'=>__('Not Started','wp-crm-system'),'in-progress'=>__('In Progress','wp-crm-system'),'complete'=>__('Complete','wp-crm-system'),'on-hold'=>__('On Hold','wp-crm-system'));
-			$assigned = $prefix . 'campaign-assigned';
-			$active = $prefix . 'campaign-active';
-			$status = $prefix . 'campaign-status';
-			$start = $prefix . 'campaign-startdate';
-			$end = $prefix . 'campaign-enddate';
-			$responses = $prefix . 'campaign-responses';
-			$reach = $prefix . 'campaign-projectedreach';
-			$budgetcost = $prefix . 'campaign-budgetcost';
-			$actualcost = $prefix . 'campaign-actualcost';
-			global $post;
-			if ($active_campaign == '') {
-				$report_title = __('Campaigns by Status', 'wp-crm-system');
-				$campaign_report .= '<tr><td><strong>' . WPCRM_STATUS . '</strong></td><td><strong>' . __('Campaign','wp-crm-system') . ' - ' . WPCRM_END . '</strong></td></tr>';
-				foreach($meta_key1_values as $key=>$value) {
-					$args = array(
-						'post_type'		=>	'wpcrm-campaign',
-						'meta_query'	=> array(
-							array(
-								'key'		=>	$meta_key1,
-								'value'		=>	$key,
-								'compare'	=>	'=',
-							),
-						),
-					);
-					$posts = get_posts($args);
-					if ($posts) {
-						$campaign_report .= '<tr><td><strong>' . $value . '</strong></td><td>';
-						foreach($posts as $post) {
-							$campaign_report .= '<a href="?page=wpcrm-reports&tab=campaign&report=all_campaigns&campaign='.$post->ID.'">' . get_the_title($post->ID) . '</a> - ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$end,true)) . '<br />';
-						}
-						$campaign_report .= '</td></tr>';
-					} else {
-						$campaign_report .= '<tr><td><strong>' . $value . '</strong></td><td>' . $no_campaigns . '</td></tr>';
-					}
-				}
-			} else {
-				$report_title .= get_the_title($active_campaign).' <a href="'.get_edit_post_link($active_campaign).'">'.__('Edit this campaign','wp-crm-system').'</a>';
-				if (get_post_meta($active_campaign,$active,true) == 'yes') {
-					$is_active = WPCRM_ACTIVE;
-				} else {
-					$is_active = WPCRM_INACTIVE;
-				}
-				$campaign_status = get_post_meta($active_campaign,$status,true);
-				$statuses = array(__('Not Started','wp-crm-system')=>'not-started',__('In Progress','wp-crm-system')=>'in-progress',__('Complete','wp-crm-system')=>'complete',__('On Hold','wp-crm-system')=>'on-hold');
-				$display_status = array_search($campaign_status,$statuses);
-				if (get_post_meta($active_campaign,$assigned,true) && get_post_meta($active_campaign,$assigned,true) != '') {
-					$user = get_user_by('login',get_post_meta($active_campaign,$assigned,true));
-					$is_assigned = $user->display_name;
-				} else {
-					$is_assigned = __('Not Assigned','wp-crm-system');
-				}
-				$attach_campaign = $prefix . 'opportunity-attach-to-campaign';
-				$search_opportunities = "SELECT count(DISTINCT pm.post_id)
-					FROM $wpdb->postmeta pm
-					JOIN $wpdb->posts p ON (p.ID = pm.post_id)
-					WHERE pm.meta_key = '$attach_campaign'
-					AND pm.meta_value = '$active_campaign'
-					AND p.post_type = 'wpcrm-opportunity'
-					AND p.post_status = 'publish'
-					";
-				$count_opportunities = $wpdb->get_var($search_opportunities);
-				$opp_val = $prefix . 'opportunity-value';
-				$search_opp_values = $wpdb->get_col($wpdb->prepare("SELECT a.meta_value FROM $wpdb->postmeta a INNER JOIN $wpdb->postmeta b ON a.post_id = b.post_id AND b.meta_key = %s AND b.meta_value = %s WHERE a.meta_key = %s", $attach_campaign,$active_campaign,$opp_val));
-				$value_opportunities = strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(array_sum( $search_opp_values ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
-				$wpdb->flush();
-				$won = 'won';
-				$won_key = $prefix . 'opportunity-wonlost';
-				$search_won_opps = $wpdb->get_col($wpdb->prepare("SELECT a.meta_value
-				FROM $wpdb->postmeta a
-				INNER JOIN $wpdb->postmeta b
-					ON a.post_id = b.post_id
-					AND b.meta_key = %s
-					AND b.meta_value = %s
-				INNER JOIN $wpdb->postmeta c
-					ON a.post_id = c.post_id
-					AND c.meta_key = %s
-					AND c.meta_value = %s
-				WHERE a.meta_key = %s", $attach_campaign,$active_campaign,$won_key,$won,$opp_val));
-				$value_won_opps = strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(array_sum( $search_won_opps ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
-				$roi = number_format(((array_sum( $search_won_opps )-get_post_meta($active_campaign,$actualcost,true))/get_post_meta($active_campaign,$actualcost,true)*100),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
-
-				$campaign_report .= '<tr><th>'.WPCRM_ASSIGNED.'</th><th>'.WPCRM_ACTIVE.'</th><th>'.WPCRM_STATUS.'</th><th>'.WPCRM_START.'</th><th>'.WPCRM_END.'</th><th>'.WPCRM_REACH.'</th><th>'.WPCRM_RESPONSES.'</th><th>'.WPCRM_OPPORTUNITIES.'</th><th>'.WPCRM_VALUE_OPPS.'</th><th>'.WPCRM_VALUE_WON_OPPS.'</th><th>'.WPCRM_ROI.'</th><th>'.WPCRM_BUDGETED_COST.'</th><th>'.WPCRM_ACTUAL_COST.'</th></tr>';
-				$campaign_report .= '<tr><td>'.$is_assigned.'</td><td>'.$is_active.'</td><td>'.$display_status.'</td><td>'.date(get_option('wpcrm_system_php_date_format'),get_post_meta($active_campaign,$start,true)).'</td><td>'.date(get_option('wpcrm_system_php_date_format'),get_post_meta($active_campaign,$end,true)).'</td><td>'.number_format(get_post_meta($active_campaign,$reach,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td><td>'.number_format(get_post_meta($active_campaign,$responses,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td><td>'.$count_opportunities.'</td><td>'.$value_opportunities.'</td><td>'.$value_won_opps.'</td><td>'.$roi.'%</td><td>'.strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(get_post_meta($active_campaign,$budgetcost,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td><td>'.strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(get_post_meta($active_campaign,$actualcost,true),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator')).'</td></tr>';
-			}
-		break;
-		case 'user_campaigns':
-			$meta_key1 = $prefix . 'campaign-assigned';
-			$campaign_report = '';
-			$campaigns = '';
-			$report_title = __('Campaigns by User', 'wp-crm-system');
-			$users = get_users();
-			$wp_crm_users = array();
-			foreach( $users as $user ){
-				if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
-					$wp_crm_users[] = $user;
-				}
-			}
-			foreach( $wp_crm_users as $user) {
-				$meta_key1_value = $user->data->user_login;
-				$meta_key1_display = $user->data->display_name;
-				global $post;
-
-				$args = array(
-					'post_type'		=>	'wpcrm-campaign',
-					'meta_query'	=> array(
-						array(
-							'key'		=>	$meta_key1,
-							'value'		=>	$meta_key1_value,
-							'compare'	=>	'=',
-						),
-					),
-				);
-				$posts = get_posts($args);
-				if ($posts) {
-					foreach($posts as $post) {
-						$campaigns .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a><br />';
-					}
-				} else {
-					$campaigns = '';
-				}
-				if ($campaigns == '') {
-					$campaign_report .= '';
-				} else {
-					$campaign_report .= '<tr><td><strong>' . $meta_key1_display . '</strong></td><td>' . $campaigns . '</td></tr>';
-				}
-				$campaigns = '';//reset campaigns for next user
-			}
-		if ($campaign_report == '') {
-			$campaign_report = '<tr><td>' . __('No campaigns are linked to users. Please add or edit a campaign and link it to a user for this report to show.', 'wp-crm-system') . '</td></tr>';
-		}
-			break;
-		case 'type_campaign':
-			$campaign_report = '';
-			$report_title = __('Campaigns by Type', 'wp-crm-system');
-
-			$taxonomies = array('campaign-type');
-			$args = array('hide_empty'=>0);
-			$terms = get_terms($taxonomies, $args);
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-				foreach ( $terms as $term ) {
-					$args = array(
-						'post_type'			=>	'wpcrm-campaign',
-						'posts_per_page'	=> -1,
-						'opportunity-type'	=> $term->slug,
-					);
-					$posts = get_posts( $args );
-					if ($posts) {
-						$campaign_report .= '<tr><td><strong>' . $term->name . '</strong></td><td>';
-						foreach($posts as $post) {
-							$campaign_report .= '<a href="' . get_edit_post_link($post->ID) . '">' . get_the_title($post->ID) . '</a> - Forecasted Close Date  ' . date(get_option('wpcrm_system_php_date_format'),get_post_meta($post->ID,$prefix . 'opportunity-closedate',true)) . '<br />';
-						}
-						$campaign_report .= '</td></tr>';
-					} else {
-						$campaign_report .= '<tr><td>' . __('No campaigns to report.', 'wp-crm-system') . '</td></tr>';
-					}
-				 }
-			}
-			if ($campaign_report == '') {
-				$campaign_report = '<tr><td>' . __('No campaigns to report.', 'wp-crm-system') . '</td></tr>';
-			}
-			break;
-		default:
-			$reports = array('all_campaigns'=>'All Campaigns','user_campaigns'=>'Campaigns by User','type_campaign'=>'Campaigns by Type');
-			$campaign_report = '';
-			$report_title = 'Campaign Reports';
-			foreach ($reports as $key => $value) {
-				$campaign_report .= '<tr><td><a href="?page=wpcrm-reports&tab=campaign&report=' . $key . '">' . $value . '</a></td></tr>';
-			}
-	}
 ?>
-	<div class="wrap">
-		<div>
-			<h2><?php echo $report_title; ?></h2>
-			<?php if ($active_report == ('' || 'overview')) { ?><a href="?page=wpcrm-reports&tab=campaign"><?php _e('Back to Campaign Reports', 'wp-crm-system'); ?></a><?php } ?>
-			<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
-				<tbody>
-					<?php echo $campaign_report; ?>
-				</tbody>
-			</table>
-		</div>
+<div class="wrap">
+	<div>
+		<h2><?php esc_attr_e( 'Campaign Reports', 'wp-crm-system' ); ?></h2>
+		<table class="wp-list-table widefat fixed posts" style="border-collapse: collapse;">
+			<tbody>
+				<?php wp_crm_system_show_campaign_form(); ?>
+				<?php
+				if ( ! empty( $_POST ) && check_admin_referer( 'check_campaign_report_nonce', 'campaign_report_nonce' ) ) {
+					wp_crm_system_process_campaign_form();
+				}
+				?>
+			</tbody>
+		</table>
 	</div>
+</div>
+
+<?php
+/**
+ * Shows the campaign reporting form.
+ *
+ * Lets the user select various options to report on campaigns dynamically.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_show_campaign_form() {
+	?>
+	<form method="post">
+		<?php wp_nonce_field( 'check_campaign_report_nonce', 'campaign_report_nonce' ); ?>
+		<div class="wp-crm-first wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/due.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/status.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/active.php'; ?></div>
+		<div class="wp-crm-first wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/organization.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/contact.php'; ?></div>
+		<div class="wp-crm-one-fourth"><?php require plugin_dir_path( __FILE__ ) . '/options/assigned.php'; ?></div>
+		<div class="wp-crm-first wp-crm-one-half"><br /><input type="submit" name="submit" value="Submit" class="button button-primary"><br /><br /></div>
+	</form>
+	<?php
+}
+
+/**
+ * Processes the campaign reporting form.
+ *
+ * Handles the processing of the campaign reporting form and shows output.
+ *
+ * @since 2.5.4
+ * @package wp-crm-system
+ */
+function wp_crm_system_process_campaign_form() {
+
+	$prefix = '_wpcrm_';
+
+	if ( isset( $_POST['submit'], $_POST['campaign_report_nonce'] )
+	&& wp_verify_nonce( sanitize_key( $_POST['campaign_report_nonce'] ), 'check_campaign_report_nonce' ) ) {
+
+		foreach ( $_POST as $param_name => $param_val ) {
+			if ( 'wp-crm-system-due' === $param_name ) {
+				$due     = esc_html( $param_val );
+				$due_arr = '';
+				$now     = strtotime( 'now' );
+				if ( 'upcoming' === $due ) {
+					$due_arr = array(
+						'key'     => $prefix . 'campaign-enddate',
+						'value'   => $now,
+						'compare' => '>',
+					);
+				} elseif ( 'overdue' === $due ) {
+					$due_arr = array(
+						'key'     => $prefix . 'campaign-enddate',
+						'value'   => $now,
+						'compare' => '<',
+					);
+				}
+			} elseif ( 'wp-crm-system-status' === $param_name ) {
+				$status      = esc_html( $param_val );
+				$status_sign = '=';
+				if ( 'all' === $status ) {
+					$status_sign = '!=';
+				}
+			} elseif ( 'wp-crm-system-active' === $param_name ) {
+				$active  = esc_html( $param_val );
+				$act_arr = '';
+				if ( 'all' === $active ) {
+
+				} elseif ( '' === $active ) {
+					$act_arr = array(
+						'key'     => $prefix . 'campaign-active',
+						'value'   => '',
+						'compare' => 'NOT EXISTS',
+					);
+				} else {
+					$act_arr = array(
+						'key'     => $prefix . 'campaign-active',
+						'value'   => $active,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-organization' === $param_name ) {
+				$organization = esc_html( $param_val );
+				$org_arr      = '';
+				if ( 'all' !== $organization ) {
+					$org_arr = array(
+						'key'     => $prefix . 'campaign-attach-to-organization',
+						'value'   => $organization,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-contact' === $param_name ) {
+				$contact = esc_html( $param_val );
+				$con_arr = '';
+				if ( 'all' !== $contact ) {
+					$con_arr = array(
+						'key'     => $prefix . 'campaign-attach-to-contact',
+						'value'   => $contact,
+						'compare' => '=',
+					);
+				}
+			} elseif ( 'wp-crm-system-assigned' === $param_name ) {
+				$assigned = esc_html( $param_val );
+				$asg_arr  = '';
+				if ( 'all' !== $assigned ) {
+					$asg_arr = array(
+						'key'     => $prefix . 'campaign-assigned',
+						'value'   => $assigned,
+						'compare' => '=',
+					);
+				}
+			}
+		}
+
+		$campaign_report = '';
+
+		$args = array(
+			'post_type'      => 'wpcrm-campaign',
+			'posts_per_page' => -1,
+			'meta_query'     => array(
+				'relation' => 'AND',
+				$due_arr,
+				array(
+					'key'     => $prefix . 'campaign-status',
+					'value'   => $status,
+					'compare' => $status_sign,
+				),
+				$act_arr,
+				$org_arr,
+				$con_arr,
+				$asg_arr,
+			),
+		);
+
+		$wpcposts = get_posts( $args );
+
+		if ( $wpcposts ) {
+			$campaign_report .= '<tr><th><strong>' . esc_attr_x( 'Campaign', 'wp-crm-system' ) . '</strong></th>';
+			$campaign_report .= '<th><strong>' . esc_attr_x( 'Due', 'wp-crm-system' ) . '</strong></th>';
+			$campaign_report .= '<th><strong>' . esc_attr_x( 'Status', 'wp-crm-system' ) . '</strong></th>';
+			$campaign_report .= '<th><strong>' . esc_attr_x( 'Active', 'wp-crm-system' ) . '</strong></th>';
+			$campaign_report .= '<th><strong>' . esc_attr_x( 'Organization', 'wp-crm-system' ) . '</strong></th>';
+			$campaign_report .= '<th><strong>' . esc_attr_x( 'Contact', 'wp-crm-system' ) . '</strong></th>';
+			$campaign_report .= '<th><strong>' . esc_attr_x( 'Assigned', 'wp-crm-system' ) . '</strong></th></tr>';
+			foreach ( $wpcposts as $wpcpost ) {
+
+				$campaign_report .= '<tr><td>';
+
+				$campaign_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+
+				$due_output = get_post_meta( $wpcpost->ID, $prefix . 'campaign-enddate', true );
+				if ( '' !== $due_output ) {
+					$due_output = date( get_option( 'wpcrm_system_php_date_format' ), $due_output );
+				} else {
+					$due_output = 'Not set';
+				}
+				$campaign_report .= '</td><td>' . $due_output;
+
+				$status_output = get_post_meta( $wpcpost->ID, $prefix . 'campaign-status', true );
+				switch ( $status_output ) {
+					case 'not-started':
+						$status_output = 'Not Started';
+						break;
+					case 'in-progress':
+						$status_output = 'In Progress';
+						break;
+					case 'complete':
+						$status_output = 'Complete';
+						break;
+					case 'on-hold':
+						$status_output = 'On Hold';
+						break;
+				}
+				$campaign_report .= '</td><td>' . $status_output;
+
+				$active_output = get_post_meta( $wpcpost->ID, $prefix . 'campaign-active', true );
+				if ( '' === $active_output ) {
+					$active_output = 'No';
+				} else {
+					$active_output = ucfirst( $active_output );
+				}
+				$campaign_report .= '</td><td>' . $active_output;
+
+				$org                 = '';
+				$organization_output = '';
+				$org                 = get_post_meta( $wpcpost->ID, $prefix . 'campaign-attach-to-organization', true );
+				if ( '' === $org ) {
+					$organization_output = '';
+				} else {
+					$organization_output .= '<a href="' . get_edit_post_link( $org ) . '">' . get_the_title( $org ) . '</a>';
+				}
+				$campaign_report .= '</td><td>' . $organization_output;
+
+				$con            = '';
+				$contact_output = '';
+				$con            = get_post_meta( $wpcpost->ID, $prefix . 'campaign-attach-to-contact', true );
+				if ( '' === $con ) {
+					$contact_output = '';
+				} else {
+					$contact_output .= '<a href="' . get_edit_post_link( $con ) . '">' . get_the_title( $con ) . '</a>';
+				}
+				$campaign_report .= '</td><td>' . $contact_output;
+
+				$asg               = '';
+				$assignment_output = '';
+				$asg               = get_post_meta( $wpcpost->ID, $prefix . 'campaign-assigned', true );
+				if ( '' === $asg ) {
+					$assignment_output = '';
+				} else {
+					$assignment_output .= $asg;
+				}
+				$campaign_report .= '</td><td>' . $assignment_output;
+
+				$campaign_report .= '</td></tr>';
+			}
+		} else {
+			$campaign_report .= '<tr><th><strong>Campaign</strong></th><tr><td>' . esc_attr_x( 'No campaigns to report.', 'wp-crm-system' ) . '</td></tr>';
+		}
+
+		print $campaign_report;
+	}
+}

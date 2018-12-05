@@ -73,8 +73,6 @@ function wpcrm_system_overdue_tasks_overview_report() {
         }
         $overdue_report = 'admin.php?page=wpcrm-reports&tab=task&report=overdue_tasks';
         printf( _n('There is %d overdue task. ', 'There are %d overdue tasks. ', $i, 'wp-crm-system'), $i);
-        $link = sprintf( wp_kses(__('<a href="%s">View the overdue task report.</a>', 'wp-crm-system'), array(  'a' => array( 'href' => array() ) ) ), esc_url( $overdue_report ) );
-        echo $link;
       } else {
         _e('No tasks are overdue!', 'wp-crm-system');
       }
