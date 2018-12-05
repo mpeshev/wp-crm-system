@@ -19,7 +19,7 @@ $user = wp_get_current_user();
 if ( $user->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
 
 	global $wpdb;
-	$results = $wpdb->get_results( "SELECT DISTINCT meta_value FROM {$wpdb->prefix}postmeta WHERE meta_key LIKE '%state%' ORDER BY meta_value", OBJECT );
+	$results = $wpdb->get_results( "SELECT DISTINCT pm.meta_value FROM {$wpdb->prefix}postmeta pm INNER JOIN {$wpdb->prefix}posts p ON p.ID = pm.post_id WHERE pm.meta_key LIKE '%state%' AND p.post_status = 'publish' ORDER BY meta_value", OBJECT );
 
 	if ( $results ) {
 		?>
@@ -39,6 +39,21 @@ if ( $user->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
 			}
 			?>
 			><?php esc_attr_e( 'All', 'wp-crm-system' ); ?></option>
+			<option value=""
+			<?php
+			if (
+				( isset( $_POST['wp-crm-system-state'], $_POST['organization_report_nonce'] )
+				&& wp_verify_nonce( sanitize_key( $_POST['organization_report_nonce'] ), 'check_organization_report_nonce' ) ) ||
+				( isset( $_POST['wp-crm-system-state'], $_POST['contact_report_nonce'] )
+				&& wp_verify_nonce( sanitize_key( $_POST['contact_report_nonce'] ), 'check_contact_report_nonce' ) )
+			) {
+				$val = sanitize_text_field( wp_unslash( $_POST['wp-crm-system-state'] ) );
+				if ( '' === $val ) {
+					echo 'selected="selected"';
+				}
+			}
+			?>
+			><?php esc_attr_e( 'Not set', 'wp-crm-system' ); ?></option>
 			<?php
 			foreach ( $results as $result ) {
 				$opt_out = '';

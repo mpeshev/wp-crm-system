@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 	}
 	?>
-	><?php esc_attr_e( 'Less than 1,000', 'wp-crm-system' ); ?></option>
+	><?php esc_attr_e( 'Less than 1000', 'wp-crm-system' ); ?></option>
 	<option value="5000"
 	<?php
 	if (
@@ -59,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 	}
 	?>
-	><?php esc_attr_e( '1,000 - 5,000', 'wp-crm-system' ); ?></option>
+	><?php esc_attr_e( '1000 - 5000', 'wp-crm-system' ); ?></option>
 	<option value="10000"
 	<?php
 	if (
@@ -74,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 	}
 	?>
-	><?php esc_attr_e( '5,000 - 10,000', 'wp-crm-system' ); ?></option>
+	><?php esc_attr_e( '5000 - 10000', 'wp-crm-system' ); ?></option>
 	<option value="10001"
 	<?php
 	if (
@@ -89,5 +89,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 	}
 	?>
-	><?php esc_attr_e( 'More than 10,000', 'wp-crm-system' ); ?></option>
+	><?php esc_attr_e( 'More than 10000', 'wp-crm-system' ); ?></option>
 </select>

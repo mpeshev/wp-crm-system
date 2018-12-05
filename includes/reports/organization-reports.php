@@ -72,7 +72,15 @@ function wp_crm_system_process_organization_form() {
 			if ( 'wp-crm-system-city' === $param_name ) {
 				$city    = esc_html( $param_val );
 				$cit_arr = '';
-				if ( 'all' !== $city ) {
+				if ( 'all' === $city ) {
+
+				} elseif ( '' === $city ) {
+					$cit_arr = array(
+						'key'     => $prefix . 'organization-city',
+						'value'   => '',
+						'compare' => 'NOT EXISTS',
+					);
+				} else {
 					$cit_arr = array(
 						'key'     => $prefix . 'organization-city',
 						'value'   => $city,
@@ -82,7 +90,15 @@ function wp_crm_system_process_organization_form() {
 			} elseif ( 'wp-crm-system-state' === $param_name ) {
 				$state   = esc_html( $param_val );
 				$sta_arr = '';
-				if ( 'all' !== $state ) {
+				if ( 'all' === $state ) {
+
+				} elseif ( '' === $state ) {
+					$sta_arr = array(
+						'key'     => $prefix . 'organization-state',
+						'value'   => '',
+						'compare' => 'NOT EXISTS',
+					);
+				} else {
 					$sta_arr = array(
 						'key'     => $prefix . 'organization-state',
 						'value'   => $state,
@@ -92,7 +108,15 @@ function wp_crm_system_process_organization_form() {
 			} elseif ( 'wp-crm-system-country' === $param_name ) {
 				$country = esc_html( $param_val );
 				$cou_arr = '';
-				if ( 'all' !== $country ) {
+				if ( 'all' === $country ) {
+
+				} elseif ( '' === $country ) {
+					$cou_arr = array(
+						'key'     => $prefix . 'organization-country',
+						'value'   => '',
+						'compare' => 'NOT EXISTS',
+					);
+				} else {
 					$cou_arr = array(
 						'key'     => $prefix . 'organization-country',
 						'value'   => $country,

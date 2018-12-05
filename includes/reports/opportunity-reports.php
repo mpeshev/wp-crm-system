@@ -233,7 +233,12 @@ function wp_crm_system_process_opportunity_form() {
 				}
 				$opportunity_report .= '</td><td>' . $close_output;
 
-				$value_output        = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-value', true );
+				$value_output = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-value', true );
+				if ( '' === $value_output ) {
+					$value_output = 'Not Set';
+				} else {
+					$value_output = strtoupper( get_option( 'wpcrm_system_default_currency' ) ) . ' ' . number_format( $value_output, get_option( 'wpcrm_system_report_currency_decimals' ), get_option( 'wpcrm_system_report_currency_decimal_point' ), get_option( 'wpcrm_system_report_currency_thousand_separator' ) );
+				}
 				$opportunity_report .= '</td><td>' . $value_output;
 
 				$wonlost_output = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-wonlost', true );
