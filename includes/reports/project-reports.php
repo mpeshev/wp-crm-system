@@ -249,7 +249,7 @@ function wp_crm_system_process_project_form() {
 				if ( '' === $value_output ) {
 					$value_output = 'Not Set';
 				} else {
-					$value_output = strtoupper( get_option( 'wpcrm_system_default_currency' ) ) . ' ' . number_format( $value_output, get_option( 'wpcrm_system_report_currency_decimals' ), get_option( 'wpcrm_system_report_currency_decimal_point' ), get_option( 'wpcrm_system_report_currency_thousand_separator' ) );
+					$value_output = wpcrm_system_display_currency_symbol( get_option( 'wpcrm_system_default_currency' ) ) . ' ' . number_format( $value_output, get_option( 'wpcrm_system_report_currency_decimals' ), get_option( 'wpcrm_system_report_currency_decimal_point' ), get_option( 'wpcrm_system_report_currency_thousand_separator' ) );
 				}
 				$project_report .= '</td><td>' . $value_output;
 

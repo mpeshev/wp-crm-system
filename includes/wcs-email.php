@@ -10,8 +10,13 @@ $filter_cats	= '';
 $check			= '';
 $fromemail		= $current_user->user_email;
 $fromname		= $current_user->display_name;
-if(isset($_POST['wpcrm_email_send'])) {
-	if ('' == $_POST['wpcrm-email-recipients'] || '' == $_POST['wpcrm-email-subject'] || '' == $_POST['wpcrm-email-message'] || '' == $_POST['wpcrm-email-from-name'] || '' == $_POST['wpcrm-email-from-address']) {
+if( isset($_POST['wpcrm_email_send'] ) ) {
+	if (
+		( isset( $_POST['wpcrm-email-recipients'] )		&& '' != $_POST['wpcrm-email-recipients'] )	||
+		( isset( $_POST['wpcrm-email-subject'] )		&& '' != $_POST['wpcrm-email-subject'] )	||
+		( isset( $_POST['wpcrm-email-message'] )		&& '' != $_POST['wpcrm-email-message'] )	||
+		( isset( $_POST['wpcrm-email-from-name'] )		&& '' != $_POST['wpcrm-email-from-name'] )	||
+		( isset( $_POST['wpcrm-email-from-address'] )	&& '' != $_POST['wpcrm-email-from-address'] ) ) {
 		$recipients = $_POST['wpcrm-email-recipients'];
 		foreach ( $recipients as $recipient ) {
 			$to[] = sanitize_email( $recipient );
@@ -237,9 +242,9 @@ if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 </div>
 <?php
 function wpcrm_send_email() {
-	if (isset($_POST['wpcrm_email_send'])) {
+	if ( isset($_POST['wpcrm_email_send'] ) ) {
 		//All fields are required
-		if ('' == $_POST['wpcrm-email-recipients'] || '' == $_POST['wpcrm-email-subject'] || '' == $_POST['wpcrm-email-message'] || '' == $_POST['wpcrm-email-from-name'] || '' == $_POST['wpcrm-email-from-address']) { ?>
+		if ( !isset( $_POST['wpcrm-email-recipients'] ) || !isset( $_POST['wpcrm-email-subject'] ) || !isset( $_POST['wpcrm-email-message'] ) || !isset( $_POST['wpcrm-email-from-name'] ) || !isset( $_POST['wpcrm-email-from-address'] ) ) { ?>
 			<div class="error"><p><?php _e('All fields are required. Please try again.','wp-crm-system'); ?></p></div><?php
 		} else {
 			//Specific data to send in email.
@@ -256,7 +261,7 @@ function wpcrm_send_email() {
 			}
 
 			// Setup wp_mail
-			wp_mail( $to, $subject, $message, $headers );
+			wp_mail( $to, stripslashes( $subject ), stripslashes( $message ), $headers );
 			wpcrm_save_email_to_contact( $to, $fromName, $fromEmail, $sent, $subject, $message );
 			// Success message ?>
 			<div class="updated"><p><?php _e('Email sent successfully.','wp-crm-system'); ?></p></div>

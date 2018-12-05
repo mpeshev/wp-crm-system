@@ -11,7 +11,7 @@ function wpcrm_system_opportunity_value_overview_report() {
       <?php
       $opp_val = $prefix . 'opportunity-value';
       $organization_value = $wpdb->get_col($wpdb->prepare("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = %s", $opp_val));
-      echo strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(array_sum( $organization_value ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
+      echo wpcrm_system_display_currency_symbol(get_option('wpcrm_system_default_currency')) . ' ' . number_format(array_sum( $organization_value ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
       $wpdb->flush(); ?>
     </td>
   </tr>
@@ -29,7 +29,7 @@ function wpcrm_system_projects_value_overview_report() {
       <?php
       $project_val = $prefix . 'project-value';
       $proj_value = $wpdb->get_col($wpdb->prepare("SELECT meta_value FROM $wpdb->postmeta WHERE meta_key = %s", $project_val));
-      echo strtoupper(get_option('wpcrm_system_default_currency')) . ' ' . number_format(array_sum( $proj_value ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
+      echo wpcrm_system_display_currency_symbol(get_option('wpcrm_system_default_currency')) . ' ' . number_format(array_sum( $proj_value ),get_option('wpcrm_system_report_currency_decimals'),get_option('wpcrm_system_report_currency_decimal_point'),get_option('wpcrm_system_report_currency_thousand_separator'));
       $wpdb->flush(); ?>
     </td>
   </tr>
