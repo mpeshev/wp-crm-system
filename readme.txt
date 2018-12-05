@@ -96,6 +96,7 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Enhanced: Reports are now filterable. Prior reporting was very static in that you could view a page with ALL projects assigned to ALL organizations. Now you can pick and choose what criteria you want to use in order to view the records that are most relevant to you.
 * Fix: Email messages contained slashes in some cases.
 * Fix: Errors were shown when attempting to send emails when required fields were empty.
+* Update: Minimum recommended PHP version is 7.2, which follows WordPress standards. WP-CRM System will still work on PHP 5.6+, but it is recommended to users that they update to 7.2 if possible.
 = 2.5.3 =
 * Enhancement: Allows for searching on record fields instead of just record name. For example, a contact can be searched for by email, phone number, address, etc.
 = 2.5.2 =
@@ -326,3 +327,4 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Enhanced: Reports are now filterable. Prior reporting was very static in that you could view a page with ALL projects assigned to ALL organizations. Now you can pick and choose what criteria you want to use in order to view the records that are most relevant to you.
 * Fix: Email messages contained slashes in some cases.
 * Fix: Errors were shown when attempting to send emails when required fields were empty.
+* Update: Minimum recommended PHP version is 7.2, which follows WordPress standards. WP-CRM System will still work on PHP 5.6+, but it is recommended to users that they update to 7.2 if possible.

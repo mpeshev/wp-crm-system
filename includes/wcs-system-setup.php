@@ -261,7 +261,7 @@ Registered Post Stati:    <?php echo implode( ', ', get_post_stati() ) . "\n\n";
 
 <?php echo $browser; ?>
 
-PHP Version:              <?php echo '5.6' > PHP_VERSION ? PHP_VERSION . " Upgrade PHP to at least 5.6 Recommended!" : PHP_VERSION; ?> <?php echo "\n"; ?>
+PHP Version:              <?php echo '7.2' > PHP_VERSION ? PHP_VERSION . " Upgrade PHP to at least 7.2 Recommended!" : PHP_VERSION; ?> <?php echo "\n"; ?>
 MySQL Version:            <?php $link = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD ); echo mysqli_get_server_info( $link ) . "\n"; ?>
 Web Server Info:          <?php echo $_SERVER['SERVER_SOFTWARE'] . "\n"; ?>
 
