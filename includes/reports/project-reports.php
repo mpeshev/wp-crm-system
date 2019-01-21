@@ -212,23 +212,23 @@ function wp_crm_system_process_project_form() {
 
 				$project_report .= '<tr><td>';
 
-				$project_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+				$project_report .= '<a href="' . esc_url( get_edit_post_link( $wpcpost->ID ) ) . '">' . esc_html( get_the_title( $wpcpost->ID ) ) . '</a>';
 
-				$close_output = get_post_meta( $wpcpost->ID, $prefix . 'project-closedate', true );
+				$close_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'project-closedate', true ) );
 				if ( '' !== $close_output ) {
-					$close_output = date( get_option( 'wpcrm_system_php_date_format' ), $close_output );
+					$close_output = date( esc_html( get_option( 'wpcrm_system_php_date_format' ) ), $close_output );
 				} else {
 					$close_output = 'Not set';
 				}
 				$project_report .= '</td><td>' . $close_output;
 
-				$progress_output = get_post_meta( $wpcpost->ID, $prefix . 'project-progress', true );
+				$progress_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'project-progress', true ) );
 				if ( '' === $progress_output ) {
 					$progress_output = '0';
 				}
 				$project_report .= '</td><td>' . $progress_output . '%';
 
-				$status_output = get_post_meta( $wpcpost->ID, $prefix . 'project-status', true );
+				$status_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'project-status', true ) );
 				switch ( $status_output ) {
 					case 'not-started':
 						$status_output = 'Not Started';
@@ -245,7 +245,7 @@ function wp_crm_system_process_project_form() {
 				}
 				$project_report .= '</td><td>' . $status_output;
 
-				$value_output = get_post_meta( $wpcpost->ID, $prefix . 'project-value', true );
+				$value_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'project-value', true ) );
 				if ( '' === $value_output ) {
 					$value_output = 'Not Set';
 				} else {
@@ -255,27 +255,27 @@ function wp_crm_system_process_project_form() {
 
 				$org                 = '';
 				$organization_output = '';
-				$org                 = get_post_meta( $wpcpost->ID, $prefix . 'project-attach-to-organization', true );
+				$org                 = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'project-attach-to-organization', true ) );
 				if ( '' === $org ) {
 					$organization_output = '';
 				} else {
-					$organization_output .= '<a href="' . get_edit_post_link( $org ) . '">' . get_the_title( $org ) . '</a>';
+					$organization_output .= '<a href="' . esc_url( get_edit_post_link( $org ) ) . '">' . esc_html( get_the_title( $org ) ) . '</a>';
 				}
 				$project_report .= '</td><td>' . $organization_output;
 
 				$con            = '';
 				$contact_output = '';
-				$con            = get_post_meta( $wpcpost->ID, $prefix . 'project-attach-to-contact', true );
+				$con            = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'project-attach-to-contact', true ) );
 				if ( '' === $con ) {
 					$contact_output = '';
 				} else {
-					$contact_output .= '<a href="' . get_edit_post_link( $con ) . '">' . get_the_title( $con ) . '</a>';
+					$contact_output .= '<a href="' . esc_url( get_edit_post_link( $con ) ) . '">' . esc_html( get_the_title( $con ) ) . '</a>';
 				}
 				$project_report .= '</td><td>' . $contact_output;
 
 				$asg               = '';
 				$assignment_output = '';
-				$asg               = get_post_meta( $wpcpost->ID, $prefix . 'project-assigned', true );
+				$asg               = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'project-assigned', true ) );
 				if ( '' === $asg ) {
 					$assignment_output = '';
 				} else {

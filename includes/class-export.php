@@ -144,7 +144,7 @@ class WPCRM_System_Export{
 			foreach ( $row as $col_id => $column ) {
 				// Make sure the column is valid
 				if ( array_key_exists( $col_id, $cols ) ) {
-					echo '"' . addslashes( $column ) . '"';
+					echo '"' . esc_html( addslashes( $column ) ) . '"';
 					echo $i == count( $cols ) ? '' : ',';
 					$i++;
 				}

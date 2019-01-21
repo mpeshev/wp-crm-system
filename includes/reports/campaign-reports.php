@@ -180,17 +180,17 @@ function wp_crm_system_process_campaign_form() {
 
 				$campaign_report .= '<tr><td>';
 
-				$campaign_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+				$campaign_report .= '<a href="' . esc_url( get_edit_post_link( $wpcpost->ID ) ) . '">' . esc_html( get_the_title( $wpcpost->ID ) ) . '</a>';
 
-				$due_output = get_post_meta( $wpcpost->ID, $prefix . 'campaign-enddate', true );
+				$due_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'campaign-enddate', true ) );
 				if ( '' !== $due_output ) {
-					$due_output = date( get_option( 'wpcrm_system_php_date_format' ), $due_output );
+					$due_output = date( esc_html( get_option( 'wpcrm_system_php_date_format' ) ), $due_output );
 				} else {
 					$due_output = 'Not set';
 				}
 				$campaign_report .= '</td><td>' . $due_output;
 
-				$status_output = get_post_meta( $wpcpost->ID, $prefix . 'campaign-status', true );
+				$status_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'campaign-status', true ) );
 				switch ( $status_output ) {
 					case 'not-started':
 						$status_output = 'Not Started';
@@ -207,7 +207,7 @@ function wp_crm_system_process_campaign_form() {
 				}
 				$campaign_report .= '</td><td>' . $status_output;
 
-				$active_output = get_post_meta( $wpcpost->ID, $prefix . 'campaign-active', true );
+				$active_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'campaign-active', true ) );
 				if ( '' === $active_output ) {
 					$active_output = 'No';
 				} else {
@@ -217,27 +217,27 @@ function wp_crm_system_process_campaign_form() {
 
 				$org                 = '';
 				$organization_output = '';
-				$org                 = get_post_meta( $wpcpost->ID, $prefix . 'campaign-attach-to-organization', true );
+				$org                 = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'campaign-attach-to-organization', true ) );
 				if ( '' === $org ) {
 					$organization_output = '';
 				} else {
-					$organization_output .= '<a href="' . get_edit_post_link( $org ) . '">' . get_the_title( $org ) . '</a>';
+					$organization_output .= '<a href="' . esc_url( get_edit_post_link( $org ) ) . '">' . esc_html( get_the_title( $org ) ) . '</a>';
 				}
 				$campaign_report .= '</td><td>' . $organization_output;
 
 				$con            = '';
 				$contact_output = '';
-				$con            = get_post_meta( $wpcpost->ID, $prefix . 'campaign-attach-to-contact', true );
+				$con            = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'campaign-attach-to-contact', true ) );
 				if ( '' === $con ) {
 					$contact_output = '';
 				} else {
-					$contact_output .= '<a href="' . get_edit_post_link( $con ) . '">' . get_the_title( $con ) . '</a>';
+					$contact_output .= '<a href="' . esc_url( get_edit_post_link( $con ) ) . '">' . esc_html( get_the_title( $con ) ) . '</a>';
 				}
 				$campaign_report .= '</td><td>' . $contact_output;
 
 				$asg               = '';
 				$assignment_output = '';
-				$asg               = get_post_meta( $wpcpost->ID, $prefix . 'campaign-assigned', true );
+				$asg               = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'campaign-assigned', true ) );
 				if ( '' === $asg ) {
 					$assignment_output = '';
 				} else {

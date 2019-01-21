@@ -46,30 +46,30 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 			break;
 
 		default:
-			$organization = get_the_title( $org_id );
+			$organization = esc_html( get_the_title( $org_id ) );
 			break;
 	}
 
 	$data = array(
-		'prefix' 			=> get_post_meta( $id, '_wpcrm_contact-name-prefix', true ),
-		'first_name'		=> get_post_meta( $id, '_wpcrm_contact-first-name', true ),
-		'last_name'			=> get_post_meta( $id, '_wpcrm_contact-last-name', true ),
+		'prefix' 			=> esc_html( get_post_meta( $id, '_wpcrm_contact-name-prefix', true ) ),
+		'first_name'		=> esc_html( get_post_meta( $id, '_wpcrm_contact-first-name', true ) ),
+		'last_name'			=> esc_html( get_post_meta( $id, '_wpcrm_contact-last-name', true ) ),
 		'organization'		=> $organization,
-		'role'				=> get_post_meta( $id, '_wpcrm_contact-role', true ),
-		'street_1'			=> get_post_meta( $id, '_wpcrm_contact-address1', true ),
-		'street_2'			=> get_post_meta( $id, '_wpcrm_contact-address2', true ),
-		'city'				=> get_post_meta( $id, '_wpcrm_contact-city', true ),
-		'state'				=> get_post_meta( $id, '_wpcrm_contact-state', true ),
-		'postal_code'		=> get_post_meta( $id, '_wpcrm_contact-postal', true ),
-		'country'			=> get_post_meta( $id, '_wpcrm_contact-country', true ),
-		'phone'				=> get_post_meta( $id, '_wpcrm_contact-phone', true ),
-		'fax'				=> get_post_meta( $id, '_wpcrm_contact-fax', true ),
-		'mobile'			=> get_post_meta( $id, '_wpcrm_contact-mobile-phone', true ),
-		'email'				=> get_post_meta( $id, '_wpcrm_contact-email', true ),
-		'url'				=> get_post_meta( $id, '_wpcrm_contact-website', true ),
-		'information'		=> get_post_meta( $id, '_wpcrm_contact-additional', true ),
-		'categories'		=> get_the_terms( $id, 'contact-type' ),
-		'comments'			=> get_comments( array( 'post_id' => $id ) )
+		'role'				=> esc_html( get_post_meta( $id, '_wpcrm_contact-role', true ) ),
+		'street_1'			=> esc_html( get_post_meta( $id, '_wpcrm_contact-address1', true ) ),
+		'street_2'			=> esc_html( get_post_meta( $id, '_wpcrm_contact-address2', true ) ),
+		'city'				=> esc_html( get_post_meta( $id, '_wpcrm_contact-city', true ) ),
+		'state'				=> esc_html( get_post_meta( $id, '_wpcrm_contact-state', true ) ),
+		'postal_code'		=> esc_html( get_post_meta( $id, '_wpcrm_contact-postal', true ) ),
+		'country'			=> esc_html( get_post_meta( $id, '_wpcrm_contact-country', true ) ),
+		'phone'				=> esc_html( get_post_meta( $id, '_wpcrm_contact-phone', true ) ),
+		'fax'				=> esc_html( get_post_meta( $id, '_wpcrm_contact-fax', true ) ),
+		'mobile'			=> esc_html( get_post_meta( $id, '_wpcrm_contact-mobile-phone', true ) ),
+		'email'				=> esc_html( get_post_meta( $id, '_wpcrm_contact-email', true ) ),
+		'url'				=> esc_url( get_post_meta( $id, '_wpcrm_contact-website', true ) ),
+		'information'		=> esc_html( get_post_meta( $id, '_wpcrm_contact-additional', true ) ),
+		'categories'		=> esc_html( get_the_terms( $id, 'contact-type' ) ),
+		'comments'			=> esc_textarea( get_comments( array( 'post_id' => $id ) ) )
 	);
 
 	$data = apply_filters( 'wpcrm_system_gdpr_contact_fields', $data );
@@ -284,7 +284,7 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 				</th>
 				<td class="wpcrm_system_gdpr_data">
 					<?php
-					if ( array_key_exists( 'information', $data) ){
+					if ( array_key_exists( 'information', $data ) ){
 						echo '<div id="wpcrm_system_gdpr_table_information">' . $data['information'] . '</div>';
 					}
 					?>
@@ -322,10 +322,10 @@ function wpcrm_system_gdpr_data( $id, $allow_export, $allow_delete ){
 						<td class="wpcrm_system_gdpr_data">
 							<?php if ( is_array( $value ) ){
 								foreach ( $value as $v ){
-									echo '<div class="wpcrm_system_gdpr_table_' . $field_id . '">' . $v . '</div>';
+									echo '<div class="wpcrm_system_gdpr_table_' . $field_id . '">' . esc_html( $v ) . '</div>';
 								}
 							} else {
-								echo '<div class="wpcrm_system_gdpr_table_' . $field_id . '">' . $value . '</div>';
+								echo '<div class="wpcrm_system_gdpr_table_' . $field_id . '">' . esc_html( $value ) . '</div>';
 							} ?>
 						</td>
 					</tr>

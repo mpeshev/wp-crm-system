@@ -163,25 +163,25 @@ function wp_crm_system_process_contact_form() {
 
 				$contact_report .= '<tr><td>';
 
-				$contact_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+				$contact_report .= '<a href="' . esc_url( get_edit_post_link( $wpcpost->ID ) ) . '">' . esc_html( get_the_title( $wpcpost->ID ) ) . '</a>';
 
 				$org                 = '';
 				$organization_output = '';
-				$org                 = get_post_meta( $wpcpost->ID, $prefix . 'contact-attach-to-organization', true );
+				$org                 = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'contact-attach-to-organization', true ) );
 				if ( '' === $org ) {
 					$organization_output = '';
 				} else {
-					$organization_output .= '<a href="' . get_edit_post_link( $org ) . '">' . get_the_title( $org ) . '</a>';
+					$organization_output .= '<a href="' . esc_url( get_edit_post_link( $org ) ) . '">' . esc_html( get_the_title( $org ) ) . '</a>';
 				}
 				$contact_report .= '</td><td>' . $organization_output;
 
-				$city_output     = get_post_meta( $wpcpost->ID, $prefix . 'contact-city', true );
+				$city_output     = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'contact-city', true ) );
 				$contact_report .= '</td><td>' . $city_output;
 
-				$state_output    = get_post_meta( $wpcpost->ID, $prefix . 'contact-state', true );
+				$state_output    = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'contact-state', true ) );
 				$contact_report .= '</td><td>' . $state_output;
 
-				$country_output  = get_post_meta( $wpcpost->ID, $prefix . 'contact-country', true );
+				$country_output  = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'contact-country', true ) );
 				$contact_report .= '</td><td>' . $country_output;
 
 				$contact_report .= '</td></tr>';

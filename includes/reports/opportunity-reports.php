@@ -223,17 +223,17 @@ function wp_crm_system_process_opportunity_form() {
 
 				$opportunity_report .= '<tr><td>';
 
-				$opportunity_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+				$opportunity_report .= '<a href="' . esc_url( get_edit_post_link( $wpcpost->ID ) ) . '">' . esc_html( get_the_title( $wpcpost->ID ) ) . '</a>';
 
-				$close_output = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-closedate', true );
+				$close_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'opportunity-closedate', true ) );
 				if ( '' !== $close_output ) {
-					$close_output = date( get_option( 'wpcrm_system_php_date_format' ), $close_output );
+					$close_output = date( esc_html( get_option( 'wpcrm_system_php_date_format' ) ), $close_output );
 				} else {
 					$close_output = 'Not set';
 				}
 				$opportunity_report .= '</td><td>' . $close_output;
 
-				$value_output = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-value', true );
+				$value_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'opportunity-value', true ) );
 				if ( '' === $value_output ) {
 					$value_output = 'Not Set';
 				} else {
@@ -241,13 +241,13 @@ function wp_crm_system_process_opportunity_form() {
 				}
 				$opportunity_report .= '</td><td>' . $value_output;
 
-				$wonlost_output = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-wonlost', true );
+				$wonlost_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'opportunity-wonlost', true ) );
 				if ( '' === $wonlost_output ) {
-					$wonlost_output = 'Not set';
+					$wonlost_output = __( 'Not set', 'wp-crm-system' );
 				}
 				$opportunity_report .= '</td><td>' . ucfirst( $wonlost_output );
 
-				$probability_output = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-probability', true );
+				$probability_output = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'opportunity-probability', true ) );
 				if ( 'zero' === $probability_output ) {
 					$probability_output = '0';
 				}
@@ -255,27 +255,27 @@ function wp_crm_system_process_opportunity_form() {
 
 				$org                 = '';
 				$organization_output = '';
-				$org                 = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-attach-to-organization', true );
+				$org                 = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'opportunity-attach-to-organization', true ) );
 				if ( '' === $org ) {
 					$organization_output = '';
 				} else {
-					$organization_output .= '<a href="' . get_edit_post_link( $org ) . '">' . get_the_title( $org ) . '</a>';
+					$organization_output .= '<a href="' . esc_url( get_edit_post_link( $org ) ) . '">' . esc_html( get_the_title( $org ) ) . '</a>';
 				}
 				$opportunity_report .= '</td><td>' . $organization_output;
 
 				$con            = '';
 				$contact_output = '';
-				$con            = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-attach-to-contact', true );
+				$con            = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'opportunity-attach-to-contact', true ) );
 				if ( '' === $con ) {
 					$contact_output = '';
 				} else {
-					$contact_output .= '<a href="' . get_edit_post_link( $con ) . '">' . get_the_title( $con ) . '</a>';
+					$contact_output .= '<a href="' . esc_url( get_edit_post_link( $con ) ) . '">' . esc_html( get_the_title( $con ) ) . '</a>';
 				}
 				$opportunity_report .= '</td><td>' . $contact_output;
 
 				$asg               = '';
 				$assignment_output = '';
-				$asg               = get_post_meta( $wpcpost->ID, $prefix . 'opportunity-assigned', true );
+				$asg               = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'opportunity-assigned', true ) );
 				if ( '' === $asg ) {
 					$assignment_output = '';
 				} else {
