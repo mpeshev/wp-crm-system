@@ -115,7 +115,7 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 		case 'email' :
 
 			/* Get the post meta. */
-			$email = get_post_meta( $post_id, '_wpcrm_contact-email', true );
+			$email = esc_html( get_post_meta( $post_id, '_wpcrm_contact-email', true ) );
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $email ) )
@@ -123,7 +123,6 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If there is a email, display it. */
 			else
-				$email = esc_html( $email );
 				echo '<a href="mailto:' . $email . '">' . $email . '</a>';
 
 			break;
@@ -131,17 +130,17 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 		case 'address' :
 
 			/* Get the post meta. */
-			$address1 = get_post_meta( $post_id, '_wpcrm_contact-address1', true );
-			$address2 = get_post_meta( $post_id, '_wpcrm_contact-address2', true );
-			$city = get_post_meta( $post_id, '_wpcrm_contact-city', true );
-			$state = get_post_meta( $post_id, '_wpcrm_contact-state', true );
-			$postal = get_post_meta( $post_id, '_wpcrm_contact-postal', true );
+			$address1	= esc_html( get_post_meta( $post_id, '_wpcrm_contact-address1', true ) );
+			$address2	= esc_html( get_post_meta( $post_id, '_wpcrm_contact-address2', true ) );
+			$city		= esc_html( get_post_meta( $post_id, '_wpcrm_contact-city', true ) );
+			$state		= esc_html( get_post_meta( $post_id, '_wpcrm_contact-state', true ) );
+			$postal		= esc_html( get_post_meta( $post_id, '_wpcrm_contact-postal', true ) );
 
-			$address1 = !empty( $address1 ) ? $address1 : '';
-			$address2 = !empty( $address2 ) ? ' ' . $address2 : '';
-			$city = !empty( $city ) ? $city . ', ' : '';
-			$state = !empty( $state ) ? $state . ' ' : '';
-			$postal = !empty( $postal ) ? $postal : '';
+			$address1	= !empty( $address1 ) ? $address1 : '';
+			$address2	= !empty( $address2 ) ? ' ' . $address2 : '';
+			$city		= !empty( $city ) ? $city . ', ' : '';
+			$state		= !empty( $state ) ? $state . ' ' : '';
+			$postal		= !empty( $postal ) ? $postal : '';
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $address1 ) && empty( $address2 ) && empty( $city ) && empty( $state ) && empty( $postal ) )
