@@ -22,5 +22,4 @@ jobs:
       - checkout
 
       # run tests!
-      - run: phpunit
       - run: rips-cli -vvv rips:scan:start -a $RIPS_APP_ID -p ~/repo/ -t 1
