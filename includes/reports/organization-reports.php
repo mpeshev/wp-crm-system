@@ -150,15 +150,15 @@ function wp_crm_system_process_organization_form() {
 
 				$organization_report .= '<tr><td>';
 
-				$organization_report .= '<a href="' . get_edit_post_link( $wpcpost->ID ) . '">' . get_the_title( $wpcpost->ID ) . '</a>';
+				$organization_report .= '<a href="' . esc_url( get_edit_post_link( $wpcpost->ID ) ) . '">' . esc_html( get_the_title( $wpcpost->ID ) ) . '</a>';
 
-				$city_output          = get_post_meta( $wpcpost->ID, $prefix . 'organization-city', true );
+				$city_output          = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'organization-city', true ) );
 				$organization_report .= '</td><td>' . $city_output;
 
-				$state_output         = get_post_meta( $wpcpost->ID, $prefix . 'organization-state', true );
+				$state_output         = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'organization-state', true ) );
 				$organization_report .= '</td><td>' . $state_output;
 
-				$country_output       = get_post_meta( $wpcpost->ID, $prefix . 'organization-country', true );
+				$country_output       = esc_html( get_post_meta( $wpcpost->ID, $prefix . 'organization-country', true ) );
 				$organization_report .= '</td><td>' . $country_output;
 
 				$organization_report .= '</td></tr>';

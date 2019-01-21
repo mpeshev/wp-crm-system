@@ -32,7 +32,7 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 		case 'phone' :
 
 			/* Get the post meta. */
-			$number = get_post_meta( $post_id, '_wpcrm_organization-phone', true );
+			$number = esc_html( get_post_meta( $post_id, '_wpcrm_organization-phone', true ) );
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $number ) )
@@ -40,7 +40,6 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 
 			/* If there is a phone number, display it with clickable link. */
 			else
-				$number = esc_html( $number );
 				echo '<a href="tel:' . $number . '">' . $number . '</a>';
 
 			break;
@@ -75,7 +74,7 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 			$city = !empty( $city ) ? $city . ', ' : '';
 			$state = !empty( $state ) ? $state . ' ' : '';
 			$postal = !empty( $postal ) ? $postal : '';
-			
+
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $address1 ) && empty( $address2 ) && empty( $city ) && empty( $state ) && empty( $postal ) )

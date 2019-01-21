@@ -996,13 +996,13 @@ $defaultFields = wpcrm_system_fields();
 								echo '<select id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" class="wp-crm-system-searchable" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '">';
 								echo '<option value="" ' . selected( $selection, '' ) . '>Not Assigned</option>';
 								echo '<option value="do not show" ' . selected( $selection, 'do not show' ) . '>Not Applicable</option>';
-								foreach($orgs as $org) {
-									$orgaddress = ( true == get_option( 'wpcrm_system_show_org_address' ) && '' != get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) ) ? ' [' . get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) . ']' : '';
-									echo '<option value="' . $org->ID . '"' . selected( $selection, $org->ID ) . '>' . get_the_title($org->ID) . $orgaddress . '</option>';
+								foreach( $orgs as $org ) {
+									$orgaddress = ( true == get_option( 'wpcrm_system_show_org_address' ) && '' != get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) ) ? ' [' . esc_html( get_post_meta( $org->ID, '_wpcrm_organization-address1', true ) ) . ']' : '';
+									echo '<option value="' . $org->ID . '"' . selected( $selection, $org->ID ) . '>' . esc_html( get_the_title( $org->ID ) ) . $orgaddress . '</option>';
 								}
 								echo '</select>';
 							} else {
-							echo '<a href="' . admin_url('edit.php?post_type=wpcrm-organization') . '">';
+							echo '<a href="' . admin_url( 'edit.php?post_type=wpcrm-organization' ) . '">';
 							_e('Please create an organization first.','wp-crm-system');
 							echo '</a>';
 						}

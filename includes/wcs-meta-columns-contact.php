@@ -100,7 +100,7 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 		case 'mobile' :
 
 			/* Get the post meta. */
-			$number = get_post_meta( $post_id, '_wpcrm_contact-mobile-phone', true );
+			$number = esc_html( get_post_meta( $post_id, '_wpcrm_contact-mobile-phone', true ) );
 
 			/* If no duration is found, output a default message. */
 			if ( empty( $number ) )
@@ -108,7 +108,6 @@ function wprcm_system_contact_columns_content( $column, $post_id ) {
 
 			/* If there is a mobile phone number, display it with clickable link. */
 			else
-				$number = esc_html( $number );
 				echo '<a href="tel:' . $number . '">' . $number . '</a>';
 
 			break;
