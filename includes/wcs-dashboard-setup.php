@@ -53,6 +53,7 @@ function wpcrm_dashboard_settings_content() {
 				'task-type'			=> __( 'Task Categories','wp-crm-system' ),
 				'campaign-type'		=> __( 'Campaign Categories','wp-crm-system' )
 			);
+			$categories = apply_filters( 'wpcrm_system_dashboard_categories_menu', $categories );
 			foreach ($categories as $key => $value) {
 				$post_type = 'wpcrm-' . str_replace('-type', '', $key);
 				?>

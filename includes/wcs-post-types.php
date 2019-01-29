@@ -104,6 +104,7 @@ function wpcrm_contacts_init() {
 		'not_found'          => __( 'No contacts found.', 'wp-crm-system' ),
 		'not_found_in_trash' => __( 'No contacts found in Trash.', 'wp-crm-system' )
 	);
+	$labels = apply_filters( 'wpcrm_system_post_type_labels_' . $post_type, $labels );
 	$args = array(
 		'labels'             => $labels,
 		'description'        => __( 'Contacts', 'wp-crm-system' ),
@@ -134,13 +135,14 @@ function wpcrm_contacts_init() {
 		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => null,
-		'taxonomies'		 => array('contact-type'),
+		'taxonomies'		 => array( 'contact-type' ),
 		'supports'           => array( 'author', 'thumbnail', 'custom-fields', 'comments' )
 	);
-
+	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
 }
 function wpcrm_contact_taxonomy() {
+	$post_type = 'wpcrm-contact';
 	$labels = array(
 		'name'              => __( 'Contact Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Contact Type', 'wp-crm-system' ),
@@ -150,6 +152,7 @@ function wpcrm_contact_taxonomy() {
 		'new_item_name'     => __( 'New Contact Type', 'wp-crm-system' ),
 		'menu_name'         => __( 'Contact Types', 'wp-crm-system' ),
 	);
+	$labels = apply_filters( 'wpcrm_system_taxonomy_labels_' . $post_type, $labels );
 	$args = array(
 		'hierarchical'          => true,
 		'labels'                => $labels,
@@ -159,7 +162,8 @@ function wpcrm_contact_taxonomy() {
 		'query_var'             => true,
 		'rewrite'               => false,
 	);
-	register_taxonomy( 'contact-type', 'wpcrm-contact', $args );
+	$args = apply_filters( 'wpcrm_system_taxonomy_args_' . $post_type, $args );
+	register_taxonomy( 'contact-type', $post_type, $args );
 }
 /* Tasks post type. */
 function wpcrm_tasks_init() {
@@ -180,7 +184,7 @@ function wpcrm_tasks_init() {
 		'not_found'          => __( 'No tasks found.', 'wp-crm-system' ),
 		'not_found_in_trash' => __( 'No tasks found in Trash.', 'wp-crm-system' )
 	);
-
+	$labels = apply_filters( 'wpcrm_system_post_type_labels_' . $post_type, $labels );
 	$args = array(
 		'labels'             => $labels,
 		'description'        => __( 'Tasks', 'wp-crm-system' ),
@@ -214,10 +218,11 @@ function wpcrm_tasks_init() {
 		'taxonomies'		 => array('task-type'),
 		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
 	);
-
+	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
 }
 function wpcrm_task_taxonomy() {
+	$post_type = 'wpcrm-task';
 	$labels = array(
 		'name'              => __( 'Task Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Task Type', 'wp-crm-system' ),
@@ -227,6 +232,7 @@ function wpcrm_task_taxonomy() {
 		'new_item_name'     => __( 'New Task Type', 'wp-crm-system' ),
 		'menu_name'         => __( 'Task Types', 'wp-crm-system' ),
 	);
+	$labels = apply_filters( 'wpcrm_system_taxonomy_labels_' . $post_type, $labels );
 	$args = array(
 		'hierarchical'          => true,
 		'labels'                => $labels,
@@ -236,7 +242,8 @@ function wpcrm_task_taxonomy() {
 		'query_var'             => true,
 		'rewrite'               => false,
 	);
-	register_taxonomy( 'task-type', 'wpcrm-task', $args );
+	$args = apply_filters( 'wpcrm_system_taxonomy_args_' . $post_type, $args );
+	register_taxonomy( 'task-type', $post_type, $args );
 }
 /* Organizations post type. */
 function wpcrm_organizations_init() {
@@ -257,7 +264,7 @@ function wpcrm_organizations_init() {
 		'not_found'          => __( 'No organizations found.', 'wp-crm-system' ),
 		'not_found_in_trash' => __( 'No organizations found in Trash.', 'wp-crm-system' )
 	);
-
+	$labels = apply_filters( 'wpcrm_system_post_type_labels_' . $post_type, $labels );
 	$args = array(
 		'labels'             => $labels,
 		'description'        => __( 'Organizations', 'wp-crm-system' ),
@@ -291,10 +298,11 @@ function wpcrm_organizations_init() {
 		'taxonomies'		 => array('organization-type'),
 		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
 	);
-
+	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
 }
 function wpcrm_organization_taxonomy() {
+	$post_type = 'wpcrm-organization';
 	$labels = array(
 		'name'              => __( 'Organization Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Organization Type', 'wp-crm-system' ),
@@ -304,6 +312,7 @@ function wpcrm_organization_taxonomy() {
 		'new_item_name'     => __( 'New Organization Type', 'wp-crm-system' ),
 		'menu_name'         => __( 'Organization Types', 'wp-crm-system' ),
 	);
+	$labels = apply_filters( 'wpcrm_system_taxonomy_labels_' . $post_type, $labels );
 	$args = array(
 		'hierarchical'          => true,
 		'labels'                => $labels,
@@ -313,7 +322,8 @@ function wpcrm_organization_taxonomy() {
 		'query_var'             => true,
 		'rewrite'               => false,
 	);
-	register_taxonomy( 'organization-type', 'wpcrm-organization', $args );
+	$args = apply_filters( 'wpcrm_system_taxonomy_args_' . $post_type, $args );
+	register_taxonomy( 'organization-type', $post_type, $args );
 }
 /* Opportunities post type. */
 function wpcrm_opportunities_init() {
@@ -334,7 +344,7 @@ function wpcrm_opportunities_init() {
 		'not_found'          => __( 'No opportunities found.', 'wp-crm-system' ),
 		'not_found_in_trash' => __( 'No opportunities found in Trash.', 'wp-crm-system' )
 	);
-
+	$labels = apply_filters( 'wpcrm_system_post_type_labels_' . $post_type, $labels );
 	$args = array(
 		'labels'             => $labels,
 		'description'        => __( 'Opportunities', 'wp-crm-system' ),
@@ -368,10 +378,11 @@ function wpcrm_opportunities_init() {
 		'taxonomies'		 => array('opportunity-type'),
 		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
 	);
-
+	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
 }
 function wpcrm_opportunity_taxonomy() {
+	$post_type = 'wpcrm-opportunity';
 	$labels = array(
 		'name'              => __( 'Opportunity Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Opportunity Type', 'wp-crm-system' ),
@@ -381,6 +392,7 @@ function wpcrm_opportunity_taxonomy() {
 		'new_item_name'     => __( 'New Opportunity Type', 'wp-crm-system' ),
 		'menu_name'         => __( 'Opportunity Types', 'wp-crm-system' ),
 	);
+	$labels = apply_filters( 'wpcrm_system_taxonomy_labels_' . $post_type, $labels );
 	$args = array(
 		'hierarchical'          => true,
 		'labels'                => $labels,
@@ -390,7 +402,8 @@ function wpcrm_opportunity_taxonomy() {
 		'query_var'             => true,
 		'rewrite'               => false,
 	);
-	register_taxonomy( 'opportunity-type', 'wpcrm-opportunity', $args );
+	$args = apply_filters( 'wpcrm_system_taxonomy_args_' . $post_type, $args );
+	register_taxonomy( 'opportunity-type', $post_type, $args );
 }
 /* Projects post type. */
 function wpcrm_projects_init() {
@@ -411,7 +424,7 @@ function wpcrm_projects_init() {
 		'not_found'          => __( 'No projects found.', 'wp-crm-system' ),
 		'not_found_in_trash' => __( 'No projects found in Trash.', 'wp-crm-system' )
 	);
-
+	$labels = apply_filters( 'wpcrm_system_post_type_labels_' . $post_type, $labels );
 	$args = array(
 		'labels'             => $labels,
 		'description'        => __( 'Projects', 'wp-crm-system' ),
@@ -445,10 +458,11 @@ function wpcrm_projects_init() {
 		'taxonomies'		 => array('project-type'),
 		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
 	);
-
+	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
 }
 function wpcrm_project_taxonomy() {
+	$post_type = 'wpcrm-project';
 	$labels = array(
 		'name'              => __( 'Project Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Project Type', 'wp-crm-system' ),
@@ -458,6 +472,7 @@ function wpcrm_project_taxonomy() {
 		'new_item_name'     => __( 'New Project Type', 'wp-crm-system' ),
 		'menu_name'         => __( 'Project Types', 'wp-crm-system' ),
 	);
+	$labels = apply_filters( 'wpcrm_system_taxonomy_labels_' . $post_type, $labels );
 	$args = array(
 		'hierarchical'          => true,
 		'labels'                => $labels,
@@ -467,7 +482,8 @@ function wpcrm_project_taxonomy() {
 		'query_var'             => true,
 		'rewrite'               => false,
 	);
-	register_taxonomy( 'project-type', 'wpcrm-project', $args );
+	$args = apply_filters( 'wpcrm_system_taxonomy_args_' . $post_type, $args );
+	register_taxonomy( 'project-type', $post_type, $args );
 }
 /* Campaign post type. */
 function wpcrm_campaign_init() {
@@ -488,7 +504,7 @@ function wpcrm_campaign_init() {
 		'not_found'          => __( 'No campaigns found.', 'wp-crm-system' ),
 		'not_found_in_trash' => __( 'No campaigns found in Trash.', 'wp-crm-system' )
 	);
-
+	$labels = apply_filters( 'wpcrm_system_post_type_labels_' . $post_type, $labels );
 	$args = array(
 		'labels'             => $labels,
 		'description'        => __( 'Campaigns', 'wp-crm-system' ),
@@ -522,10 +538,11 @@ function wpcrm_campaign_init() {
 		'taxonomies'		 => array('campaign-type'),
 		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
 	);
-
+	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
 }
 function wpcrm_campaign_taxonomy() {
+	$post_type = 'wpcrm-campaign';
 	$labels = array(
 		'name'              => __( 'Campaign Types', 'wp-crm-system' ),
 		'singular_name'		=> __( 'Campaign Type', 'wp-crm-system' ),
@@ -535,6 +552,7 @@ function wpcrm_campaign_taxonomy() {
 		'new_item_name'     => __( 'New Campaign Type', 'wp-crm-system' ),
 		'menu_name'         => __( 'Campaign Types', 'wp-crm-system' ),
 	);
+	$labels = apply_filters( 'wpcrm_system_taxonomy_labels_' . $post_type, $labels );
 	$args = array(
 		'hierarchical'          => true,
 		'labels'                => $labels,
@@ -544,5 +562,6 @@ function wpcrm_campaign_taxonomy() {
 		'query_var'             => true,
 		'rewrite'               => false,
 	);
-	register_taxonomy( 'campaign-type', 'wpcrm-campaign', $args );
+	$args = apply_filters( 'wpcrm_system_taxonomy_args_' . $post_type, $args );
+	register_taxonomy( 'campaign-type', $post_type, $args );
 }
