@@ -410,6 +410,7 @@ class WPCRM_System_Create{
 					$separator = apply_filters( 'wpcrm_system_custom_field_separator', '|' );
 					switch ( $type ) {
 						case 'repeater-text':
+						case 'repeater-file':
 							$existing	= get_post_meta( $post_id, '_wpcrm_custom_field_id_' . $value );
 							$incoming	= explode( $separator, $input );
 							$new		= array();
