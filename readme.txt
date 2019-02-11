@@ -93,7 +93,7 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 
 == Changelog ==
 = 2.6.5 =
-* Updated WPCRM_System_Create class to include custom file fields, which have been introduced in the Custom Fields add-on.
+* Updated the WPCRM_System_Create class to include custom file fields, which have been introduced in the Custom Fields add-on.
 = 2.6.4 =
 * Introduced 25 new filters. Filters will allow editing the custom post type labels and arguments, the taxonomy labels and arguments, as well as the category select menu in WP-CRM System dashboard.
 = 2.6.3 =
@@ -334,4 +334,4 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 
 == Upgrade Notice ==
 = 2.6.5 =
-* Updated WPCRM_System_Create class to include custom file fields, which have been introduced in the Custom Fields add-on.
+* Updated the WPCRM_System_Create class to include custom file fields, which have been introduced in the Custom Fields add-on.
