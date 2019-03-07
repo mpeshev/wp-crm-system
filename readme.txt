@@ -27,10 +27,6 @@ Available features include a way for your contacts to view the data that is stor
 
 Not sure what GDPR is or if it applies to your business? [Read our blog post on GDPR](https://www.wp-crm.com/will-your-crm-be-gdpr-compliant/).
 
-**Try the Demo!**
-
-Not sure if WP-CRM System is the right WordPress CRM for you? [Try out the demo](http://demo.wp-crm.com) to see how it works.
-
 **Premium Extensions Available**
 
 There are a number of inexpensive WordPress CRM extensions that will allow you to do more with WP-CRM System.
