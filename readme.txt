@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
-Tested up to: 5.0.3
-Stable tag: 2.6.6
+Tested up to: 5.1.0
+Stable tag: 2.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 2.6.7 =
+* Updated datepicker fields to include the `autocomplete="off"` HTML attribute. This prevents browsers from displaying an autocomplete window on top of the datepicker calendar view.
 = 2.6.6 =
 * Added the ability to customize the datepicker via developer filters. See documentation for more details on how to modify the datepicker.
 = 2.6.5 =
@@ -335,5 +337,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.6.6 =
-* Added the ability to customize the datepicker via developer filters. See documentation for more details on how to modify the datepicker.
+= 2.6.7 =
+* Updated datepicker fields to include the `autocomplete="off"` HTML attribute. This prevents browsers from displaying an autocomplete window on top of the datepicker calendar view.

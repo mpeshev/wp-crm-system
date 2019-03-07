@@ -1174,8 +1174,8 @@ $defaultFields = wpcrm_system_fields();
 							} else {
 								$date = '';
 							}
-							$before = $defaultField[ 'before' ];
-							$after = $defaultField[ 'after' ];
+							$before	= $defaultField[ 'before' ];
+							$after	= $defaultField[ 'after' ];
 							//Datepicker
 							?>
 								<script type="text/javascript">
@@ -1198,11 +1198,11 @@ $defaultFields = wpcrm_system_fields();
 									echo '<div class="' .  $defaultField[ 'icon' ] . '" class="wp-crm-inline"></div>';
 								}
 								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-text" style="display:inline">' . $date . '</span>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-input" style="display:none;" autocomplete="off" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
 								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit" style="display:none;" class="dashicons dashicons-edit wpcrm-dashicons" onclick=editField("' . '_wpcrm_' . $defaultField[ 'name' ] . '")></span>';
 							} else {
 								echo '<label for="' . '_wpcrm_' . $defaultField[ 'name' ] .'"><strong>' . __($defaultField[ 'title' ],'wp-crm-system') . '</strong></label>';
-								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
+								echo '<input type="text" name="' . '_wpcrm_' . $defaultField[ 'name' ] . '" id="' . '_wpcrm_' . $defaultField[ 'name' ] . '" autocomplete="off" class="datepicker" value="' . $date . '" placeholder="' . __($defaultField['placeholder'],'wp-crm-system') . '" />';
 								echo '<span id="' . '_wpcrm_' . $defaultField[ 'name' ] . '-edit"></span>';
 							}
 							echo '</div>';
