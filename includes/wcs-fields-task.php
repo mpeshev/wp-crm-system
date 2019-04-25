@@ -8,7 +8,7 @@ function wpcrm_system_task_fields( $fields ) {
   $taskFields = array(
     array(
       'name'          => 'task-attach-to-organization',
-      'title'         => WPCRM_ATTACH_ORG,
+      'title'         => __( 'Attach to Organization', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectorganization',
@@ -21,7 +21,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-attach-to-organization-new',
-      'title'         => WPCRM_CREATE_ORGANIZATION,
+      'title'         => __( 'Create New Organization', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'addorganization',
@@ -34,7 +34,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-attach-to-contact',
-      'title'         => WPCRM_ATTACH_CONTACT,
+      'title'         => __( 'Attach to Contact', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectcontact',
@@ -47,7 +47,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-attach-to-contact-new',
-      'title'         => WPCRM_CREATE_CONTACT,
+      'title'         => __( 'Create New Contact', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'addcontact',
@@ -60,7 +60,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-attach-to-project',
-      'title'         => WPCRM_ATTACH_PROJECT,
+      'title'         => __( 'Attach to Project', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectproject',
@@ -73,7 +73,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-attach-to-project-new',
-      'title'         => WPCRM_CREATE_PROJECT,
+      'title'         => __( 'Create New Project', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'addproject',
@@ -86,7 +86,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-assignment',
-      'title'         => WPCRM_ASSIGNED,
+      'title'         => __( 'Assigned To', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectuser',
@@ -99,7 +99,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-start-date',
-      'title'         => WPCRM_START,
+      'title'         => __( 'Start Date', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'datepicker',
@@ -112,7 +112,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-due-date',
-      'title'         => WPCRM_DUE,
+      'title'         => __( 'Due Date', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'datepicker',
@@ -125,7 +125,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-progress',
-      'title'         => WPCRM_PROGRESS,
+      'title'         => __( 'Progress', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectprogress',
@@ -138,7 +138,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-priority',
-      'title'         => WPCRM_PRIORITY,
+      'title'         => __( 'Priority', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectpriority',
@@ -151,7 +151,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-status',
-      'title'         => WPCRM_STATUS,
+      'title'         => __( 'Status', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectstatus',
@@ -164,7 +164,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-description',
-      'title'         => WPCRM_DESCRIPTION,
+      'title'         => __( 'Description', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'wysiwyg',
@@ -177,7 +177,7 @@ function wpcrm_system_task_fields( $fields ) {
     ),
     array(
       'name'          => 'task-dropbox',
-      'title'         => WPCRM_DROPBOX,
+      'title'         => __( 'Link Files From Dropbox', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'dropbox',

@@ -7,12 +7,10 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-dashboard-project-list.php' )
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-dashboard-task-list.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-dashboard-opportunity-list.php' );
 // Add Default Settings
-if(!function_exists('wpcrm_system_default_setting_tab')){
-	function wpcrm_system_default_setting_tab() {
-		global $wpcrm_active_tab; ?>
-		<a class="nav-tab <?php echo $wpcrm_active_tab == 'dashboard' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=dashboard"><?php _e('Dashboard', 'wp-crm-system') ?></a>
-	<?php }
-}
+function wpcrm_system_default_setting_tab() {
+	global $wpcrm_active_tab; ?>
+	<a class="nav-tab <?php echo $wpcrm_active_tab == 'dashboard' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=dashboard"><?php _e('Dashboard', 'wp-crm-system') ?></a>
+<?php }
 add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_default_setting_tab', 1 );
 
 
@@ -20,6 +18,7 @@ add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_default_setting_tab', 1 )
 function wpcrm_dashboard_settings_content() {
 	global $wpcrm_active_tab;
 	if ($wpcrm_active_tab == 'dashboard') { ?>
+		<h2><?php _e( 'WP-CRM System Dashboard', 'wp-crm-system' ); ?></h2>
 		<!-- Add New... Box -->
 		<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
 		<?php

@@ -26,13 +26,6 @@ $wpcrm_active_subtab = isset( $_GET[ 'subtab' ] ) ? $_GET[ 'subtab' ] : '';
 <?php
 do_action( 'wpcrm_system_settings_content' );
 
-if ($wpcrm_active_tab == 'import') {
-	wpcrm_import_settings_content();
-}
-
-// Load paid plugin settings if plugins are installed and active.
-function wpcrm_import_settings_content() {
-	include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/return_bytes.php');
+if ( $wpcrm_active_tab == 'import' ) {
 	do_action( 'wpcrm_system_import_field' );
 }
-

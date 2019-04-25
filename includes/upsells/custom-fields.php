@@ -10,20 +10,21 @@ if ( !defined( 'ABSPATH' ) ) {
 	<p><?php _e( 'About the Custom Fields add-on:', 'wp-crm-system' ); ?></p>
 	<ul class="upsell-features">
 		<li><?php _e( 'Create fields that are specific to your business needs.', 'wp-crm-system' ); ?></li>
-		<li><?php _e( '13 types of fields including: textbox, text area, WYSIWYG text editor, checkboxes, multiselect field, email, url, number, datepicker, select/dropdown menu, as well as repeatable textbox, textarea, and datepicker fields.', 'wp-crm-system' ); ?></li>
+		<li><?php _e( '13 types of fields including: textbox, text area, file uploader, WYSIWYG text editor, checkboxes, multiselect field, email, url, number, datepicker, select/dropdown menu, as well as repeatable textbox, textarea, file uploader, and datepicker fields.', 'wp-crm-system' ); ?></li>
 		<li><?php _e( 'Custom fields can be imported while using one of our Import, Zapier Connect, Ninja Forms Connect, or Gravity Forms Connect add-ons.', 'wp-crm-system' ); ?></li>
 	</ul>
+	<p><?php _e( 'Store nearly any type of information with Custom Fields. Here are a few examples of what you can do with Custom Fields:', 'wp-crm-system' ); ?></p>
+	<ul class="upsell-features">
+		<li><?php _e( 'Upload project files so that they are easily accessible right from the project edit screen. All uploads are stored in a secure location on your server so only the people who should access the files can access them.', 'wp-crm-system' ); ?></li>
+		<li><?php _e( 'Store links to social media profiles, to easily see what your contacts are posting about online.', 'wp-crm-system' ); ?></li>
+		<li><?php _e( 'Record notes from each call with a client. Everything is in one place and is easily accessible in the future.', 'wp-crm-system' ); ?></li>
+		<li><?php _e( 'Save important dates and never forget to send a birthday or anniversary card again!', 'wp-crm-system' ); ?></li>
+	</ul>
 	<p>
-		<a href="https://www.wp-crm.com/checkout/?edd_action=add_to_cart&download_id=1304&edd_options[price_id]=1&utm_campaign=upgrade-personal-button&utm_source=upgrade-custom-fields-tab" class="button-primary">
-			<?php _e( 'Upgrade to Personal with Custom Fields today!', 'wp-crm-system' ); ?>
+		<a href="https://www.wp-crm.com/downloads/custom-fields/?utm_campaign=upgrade-wp-crm-system&utm_source=upgrade-custom-fields-tab" class="button-primary">
+			<?php _e( 'Upgrade WP-CRM System with Custom Fields today!', 'wp-crm-system' ); ?>
 		</a>
 		<span class="dashicons dashicons-external wpcrm-dashicons"></span>
-	</p>
-	<p>
-		<?php _e( 'Custom Fields plus import/export extensions for <strong>one site</strong>', 'wp-crm-system' ); ?>
-	</p>
-	<p>
-		<em><?php _e( '($49 billed annually - cancel any time)', 'wp-crm-system' ); ?></em>
 	</p>
 </div>
 <div class="wp-crm-two-thirds">

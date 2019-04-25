@@ -3,7 +3,7 @@
 Plugin Name: WP-CRM System
 Plugin URI: https://www.wp-crm.com
 Description: A complete CRM for WordPress
-Version: 2.6.7
+Version: 3.0.0
 Author: Scott DeLuzio
 Author URI: https://www.wp-crm.com
 Text Domain: wp-crm-system
@@ -34,7 +34,7 @@ if ( ! defined( 'WP_CRM_SYSTEM' ) ) {
   define( 'WP_CRM_SYSTEM', __FILE__ );
 }
 if ( ! defined( 'WP_CRM_SYSTEM_VERSION' ) ) {
-  define( 'WP_CRM_SYSTEM_VERSION', '2.6.7' );
+  define( 'WP_CRM_SYSTEM_VERSION', '3.0.0' );
 }
 if( ! defined( 'WP_CRM_SYSTEM_URL' ) ) {
 	define( 'WP_CRM_SYSTEM_URL', plugins_url( '', __FILE__ ) );
@@ -48,6 +48,8 @@ if( ! defined( 'WP_CRM_SYSTEM_PLUGIN_DIR_PATH' ) ) {
 if( ! defined( 'WP_CRM_SYSTEM_PLUGIN_URL' ) ) {
 	define( 'WP_CRM_SYSTEM_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 }
+/* Run Updates if Needed */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-updates.php' );
 /* Include system variables */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-vars.php' );
 /* Welcome screen */
@@ -79,8 +81,6 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-post-types.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-search-filters.php' );
 /* Setup Dashboard Content */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-dashboard-setup.php' );
-/* Run Updates if Needed */
-include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-updates.php' );
 /* Show Upsells */
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/wcs-upsell-tabs.php' );
 /* Display System Setup */
@@ -108,8 +108,33 @@ include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-opportunity.php'
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-organization.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-project.php' );
 include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-meta-columns-task.php' );
-register_activation_hook(__FILE__, 'activate_wpcrm_system_settings');
-register_uninstall_hook(__FILE__, 'deactivate_wpcrm_system_settings');
+/* Include Create Contact From User */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/contact-from-user.php' );
+/* Include Email Notifications */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/email-notifications/admin-settings.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/email-notifications/opportunity-notifications.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/email-notifications/project-notifications.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/email-notifications/task-notifications.php' );
+/* Include Import / Export */
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/settings-page.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/class-export.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/export-campaigns.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/import-campaigns.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/export-contacts.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/import-contacts.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/export-opportunities.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/import-opportunities.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/export-organizations.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/import-organizations.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/export-projects.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/import-projects.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/export-tasks.php' );
+include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/import-export/import-tasks.php' );
+
+
+
+register_activation_hook( __FILE__, 'wp_crm_system_activate_settings' );
+register_uninstall_hook( __FILE__, 'wp_crm_system_deactivate_settings' );
 
 //* Add TinyMCE Editor and Media Upload to WP-CRM System Comments - To Do
 /*add_filter( 'wp_editor_settings', 'comment_editor_visual', 10, 2 );

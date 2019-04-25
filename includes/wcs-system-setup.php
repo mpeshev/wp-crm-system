@@ -20,10 +20,6 @@ function wpcrm_system_system_info_subtab() {
 			|
 			<a class="<?php echo $wpcrm_active_subtab == 'system-info' ? 'current' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=settings&subtab=system-info' ); ?>"><?php _e( 'System Info', 'wp-crm-system' ); ?> </a>
 		</li>
-		<li>
-			|
-			<a class="<?php echo $wpcrm_active_subtab == 'recurring-entries' ? 'current' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries' ); ?>"><?php _e( 'Recurring Entries', 'wp-crm-system' ); ?> </a>
-		</li>
 		<?php if ( has_action( 'wpcrm_system_license_key_field' ) ) { ?>
 		<li>
 			|

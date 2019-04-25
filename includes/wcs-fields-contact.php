@@ -8,7 +8,7 @@ function wpcrm_system_contact_fields( $fields ) {
 	$contactFields = array(
 		array(
 			'name'			=> 'contact-name-prefix',
-			'title'			=> WPCRM_NAME_PREFIX,
+			'title'			=> __( 'Name Prefix', 'wp-crm-system' ),
 			'description'	=> '',
 			'type'			=> 'selectnameprefix',
 			'scope'			=> array( 'wpcrm-contact' ),
@@ -20,7 +20,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-first-name',
-			'title'			=> WPCRM_FIRST_NAME,
+			'title'			=> __( 'First Name', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -33,7 +33,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-last-name',
-			'title'			=> WPCRM_LAST_NAME,
+			'title'			=> __( 'Last Name', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -46,7 +46,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-attach-to-organization',
-			'title'			=> WPCRM_ORGANIZATION,
+			'title'			=> __( 'Organization', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'selectorganization',
@@ -59,7 +59,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-role',
-			'title'			=> WPCRM_ROLE,
+			'title'			=> __( 'Role', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -72,7 +72,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-attach-to-organization-new',
-			'title'			=> WPCRM_CREATE_ORGANIZATION,
+			'title'			=> __( 'Create New Organization', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'addorganization',
@@ -85,7 +85,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-website',
-			'title'			=> WPCRM_WEBSITE,
+			'title'			=> __( 'Website', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> 'http://',
 			'type'			=> 'url',
@@ -98,7 +98,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-phone',
-			'title'			=> WPCRM_PHONE,
+			'title'			=> __( 'Phone', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'phone',
@@ -111,7 +111,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-mobile-phone',
-			'title'			=> WPCRM_MOBILE_PHONE,
+			'title'			=> __( 'Mobile Phone', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'phone',
@@ -124,7 +124,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-address1',
-			'title'			=> WPCRM_ADDRESS_1,
+			'title'			=> __( 'Address 1', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -137,7 +137,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-address2',
-			'title'			=> WPCRM_ADDRESS_2,
+			'title'			=> __( 'Address 2', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -150,7 +150,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-city',
-			'title'			=> WPCRM_CITY,
+			'title'			=> __( 'City', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -163,7 +163,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-state',
-			'title'			=> WPCRM_STATE,
+			'title'			=> __( 'State/Province', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -176,7 +176,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-postal',
-			'title'			=> WPCRM_POSTAL,
+			'title'			=> __( 'Postal Code', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -189,7 +189,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-country',
-			'title'			=> WPCRM_COUNTRY,
+			'title'			=> __( 'Country', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'default',
@@ -202,7 +202,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-email',
-			'title'			=> WPCRM_EMAIL,
+			'title'			=> __( 'Email', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'email',
@@ -215,7 +215,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-fax',
-			'title'			=> WPCRM_FAX,
+			'title'			=> __( 'Fax', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'phone',
@@ -228,7 +228,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-additional',
-			'title'			=> WPCRM_ADDITIONAL,
+			'title'			=> __( 'Additional Information', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'wysiwyg',
@@ -241,7 +241,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-dropbox',
-			'title'			=> WPCRM_DROPBOX,
+			'title'			=> __( 'Link Files From Dropbox', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'dropbox',
@@ -254,7 +254,7 @@ function wpcrm_system_contact_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'contact-zendesk',
-			'title'			=> WPCRM_ZENDESK_TICKETS,
+			'title'			=> __( 'Zendesk Tickets', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'zendesk',

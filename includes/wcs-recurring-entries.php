@@ -3,15 +3,20 @@
 if ( !defined( 'ABSPATH' ) ) {
 	die( "Sorry, you are not allowed to access this page directly." );
 }
+function wpcrm_system_system_recurring_tab() {
+	//Get current dashboard tab name
+	global $wpcrm_active_tab; ?>
+	<a class="nav-tab <?php echo $wpcrm_active_tab == 'recurring' ? 'current' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' ); ?>"><?php _e( 'Recurring', 'wp-crm-system' ); ?> </a>
+<?php }
+add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_system_recurring_tab', 3 );
+
 add_action( 'wpcrm_system_settings_content', 'wpcrm_system_recurring_entries' );
 function wpcrm_system_recurring_entries(){
-	global $wpdb, $wpcrm_active_tab, $wpcrm_active_subtab, $wpcrm_system_recurring_db_name;
+	global $wpdb, $wpcrm_active_tab, $wpcrm_system_recurring_db_name;
 
-	if ( 'settings' == $wpcrm_active_tab && 'recurring-entries' == $wpcrm_active_subtab && !isset( $_GET['action'] ) ) { ?>
+	if ( 'recurring' == $wpcrm_active_tab && !isset( $_GET['action'] ) ) { ?>
 		<div class="wrap">
-			<h2><?php _e( 'Recurring Entries', 'wp-crm-system' ); ?></h2>
-
-			<?php // include('admin-messages.php'); ?>
+			<h2><?php _e( 'Recurring Projects and Tasks', 'wp-crm-system' ); ?></h2>
 
 			<p>
 				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries&action=add_new"><?php _e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
@@ -115,13 +120,13 @@ function wpcrm_system_recurring_entries(){
 			</p>
 		</div><!--end wrap-->
 	<?php }
-	if ( 'settings' == $wpcrm_active_tab && 'recurring-entries' == $wpcrm_active_subtab && isset( $_GET['action'] ) && 'add_new' == $_GET['action'] ) {
+	if ( 'recurring' == $wpcrm_active_tab && isset( $_GET['action'] ) && 'add_new' == $_GET['action'] ) {
 		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-recurring-entries-add-new.php' );
 	}
-	if ( 'settings' == $wpcrm_active_tab && 'recurring-entries' == $wpcrm_active_subtab && isset( $_GET['action'] ) && 'edit' == $_GET['action'] ) {
+	if ( 'recurring' == $wpcrm_active_tab && isset( $_GET['action'] ) && 'edit' == $_GET['action'] ) {
 		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-recurring-entries-edit.php' );
 	}
-	if ( 'settings' == $wpcrm_active_tab && 'recurring-entries' == $wpcrm_active_subtab && isset( $_GET['action'] ) && 'delete' == $_GET['action'] ) {
+	if ( 'recurring' == $wpcrm_active_tab && isset( $_GET['action'] ) && 'delete' == $_GET['action'] ) {
 		include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/wcs-recurring-entries-delete.php' );
 	}
 }

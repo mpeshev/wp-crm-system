@@ -523,3 +523,19 @@ function wp_crm_system_process_datetime( $date ){
 	$output		= date( "Y-m-d H:i:s", $timestamp );
 	return $output;
 }
+
+function wp_crm_system_return_bytes( $val ) {
+	$val	= trim( $val );
+	$last	= strtolower( $val[strlen( $val )-1]);
+	$bytes	= preg_replace('/[^0-9]/', '', $val );
+	switch( $last ) {
+		case 'g':
+			$bytes *= 1024;
+		case 'm':
+			$bytes *= 1024;
+		case 'k':
+			$bytes *= 1024;
+	}
+
+	return $bytes;
+}

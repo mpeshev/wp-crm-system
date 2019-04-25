@@ -494,7 +494,7 @@ function wpcrmOpportunityOptions() {
 	$slug = preg_replace("/[^A-Za-z0-9]/",'',strtolower($title));
 
 	$projectFromOpportunity = "//" . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] ) . '&wpcrm-system-action=new-project-from-opportunity';
-	echo WPCRM_SAVE_CHANGES;
+	echo __( 'Save changes before clicking below.', 'wp-crm-system' );
 	echo '<ul>';
 	echo '<li><a class="button" href="' . esc_url( $projectFromOpportunity ) . '">' . __( 'Create Project From Opportunity', 'wp-crm-system' ) . '</a></li>';
 	echo '</ul>';

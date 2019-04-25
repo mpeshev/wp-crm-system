@@ -8,7 +8,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
   $opportunityFields = array(
     array(
       'name'          => 'opportunity-attach-to-organization',
-      'title'         => WPCRM_ATTACH_ORG,
+      'title'         => __( 'Attach to Organization', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectorganization',
@@ -21,7 +21,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-attach-to-contact',
-      'title'         => WPCRM_ATTACH_CONTACT,
+      'title'         => __( 'Attach to Contact', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectcontact',
@@ -34,7 +34,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-attach-to-campaign',
-      'title'         => WPCRM_ATTACH_CAMPAIGN,
+      'title'         => __( 'Attach to Campaign', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectcampaign',
@@ -47,7 +47,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-assigned',
-      'title'         => WPCRM_ASSIGNED,
+      'title'         => __( 'Assigned To', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectuser',
@@ -60,7 +60,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-attach-to-organization-new',
-      'title'         => WPCRM_CREATE_ORGANIZATION,
+      'title'         => __( 'Create New Organization', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'addorganization',
@@ -73,7 +73,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-attach-to-contact-new',
-      'title'         => WPCRM_CREATE_CONTACT,
+      'title'         => __( 'Create New Contact', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'addcontact',
@@ -86,7 +86,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-attach-to-campaign-new',
-      'title'         => WPCRM_CREATE_CAMPAIGN,
+      'title'         => __( 'Create New Campaign', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'addcampaign',
@@ -99,7 +99,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-probability',
-      'title'         => WPCRM_PROBABILITY,
+      'title'         => __( 'Probability of Winning', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectprogress',
@@ -112,7 +112,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-closedate',
-      'title'         => WPCRM_FORECASTED_CLOSE,
+      'title'         => __( 'Forecasted Close Date', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'datepicker',
@@ -125,7 +125,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-value',
-      'title'         => WPCRM_VALUE,
+      'title'         => __( 'Value', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'currency',
@@ -138,7 +138,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-wonlost',
-      'title'         => WPCRM_WON_LOST,
+      'title'         => __( 'Won/Lost', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'selectwonlost',
@@ -151,7 +151,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-description',
-      'title'         => WPCRM_DESCRIPTION,
+      'title'         => __( 'Description', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'wysiwyg',
@@ -164,7 +164,7 @@ function wpcrm_system_opportunity_fields( $fields ) {
     ),
     array(
       'name'          => 'opportunity-dropbox',
-      'title'         => WPCRM_DROPBOX,
+      'title'         => __( 'Link Files From Dropbox', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'dropbox',

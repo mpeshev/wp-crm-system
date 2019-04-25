@@ -8,7 +8,7 @@ function wpcrm_system_organization_fields( $fields ) {
   $organizationFields = array(
     array(
       'name'          => 'organization-phone',
-      'title'         => WPCRM_PHONE,
+      'title'         => __( 'Phone', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'phone',
@@ -21,7 +21,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-email',
-      'title'         => WPCRM_EMAIL,
+      'title'         => __( 'Email', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'email',
@@ -34,7 +34,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-website',
-      'title'         => WPCRM_WEBSITE,
+      'title'         => __( 'Website', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => 'http://',
       'type'          => 'url',
@@ -47,7 +47,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-address1',
-      'title'         => WPCRM_ADDRESS_1,
+      'title'         => __( 'Address 1', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'default',
@@ -60,7 +60,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-address2',
-      'title'         => WPCRM_ADDRESS_2,
+      'title'         => __( 'Address 2', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'default',
@@ -73,7 +73,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-city',
-      'title'         => WPCRM_CITY,
+      'title'         => __( 'City', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'default',
@@ -86,7 +86,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-state',
-      'title'         => WPCRM_STATE,
+      'title'         => __( 'State/Province', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'default',
@@ -99,7 +99,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-postal',
-      'title'         => WPCRM_POSTAL,
+      'title'         => __( 'Postal Code', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'default',
@@ -112,7 +112,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-country',
-      'title'         => WPCRM_COUNTRY,
+      'title'         => __( 'Country', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'default',
@@ -125,7 +125,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-information',
-      'title'         => WPCRM_ADDITIONAL,
+      'title'         => __( 'Additional Information', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'wysiwyg',
@@ -138,7 +138,7 @@ function wpcrm_system_organization_fields( $fields ) {
     ),
     array(
       'name'          => 'organization-dropbox',
-      'title'         => WPCRM_DROPBOX,
+      'title'         => __( 'Link Files From Dropbox', 'wp-crm-system' ),
       'description'   => '',
       'placeholder'   => '',
       'type'          => 'dropbox',

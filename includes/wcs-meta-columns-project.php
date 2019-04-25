@@ -1,7 +1,31 @@
 <?php
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
-    die( "Sorry, you are not allowed to access this page directly." );
+	die( "Sorry, you are not allowed to access this page directly." );
+}
+add_action( 'load-edit.php', 'wp_crm_system_recurring_project_notice' );
+function wp_crm_system_recurring_project_notice(){
+
+	$screen = get_current_screen();
+
+	if( 'edit-wpcrm-project' === $screen->id ){
+		add_action( 'all_admin_notices', function(){
+			$url	= admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' );
+			$link	= sprintf(
+				wp_kses(
+					__( 'Need a project to repeat after a period of time? Try the <a href="%s">Recurring Entries</a> setting.', 'wp-crm-system' ),
+					array(
+						'a' => array(
+							'href' => array()
+						)
+					)
+				),
+				esc_url( $url )
+			);
+			echo $link;
+		});
+
+	}
 }
 add_filter( 'manage_edit-wpcrm-project_columns', 'wpcrm_system_project_columns' ) ;
 

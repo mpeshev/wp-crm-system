@@ -7,7 +7,7 @@ if ( !defined( 'ABSPATH' ) ) {
 function wpcrm_system_initial_settings_notice__warning() {
 	if ( 'set' != get_option( 'wpcrm_system_settings_initial' ) ) {
 		$url = admin_url( 'admin.php?page=wpcrm-settings&tab=settings&subtab=settings' );
-		$link = sprintf( wp_kses( __( 'Please visit the <a href="%s">WP-CRM System Dashboard</a> page to set your options and complete set up.', 'wp-crm-system' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
+		$link = sprintf( wp_kses( __( 'Please visit the <a href="%s">WP-CRM System Dashboard Settings Tab</a> to set your options and complete set up.', 'wp-crm-system' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
 	?>
 		<div class="notice notice-warning">
 			<p><?php echo $link; ?></p>
@@ -30,22 +30,28 @@ function wpcrm_system_select_user_roles( $array ){
 
 //Register Settings
 
-function activate_wpcrm_system_settings() {
+function wp_crm_system_activate_settings() {
 	global $wpdb;
 	global $wpcrm_system_recurring_db_name;
 	global $wpcrm_system_db_version;
 
-	add_option('wpcrm_system_select_user_role', 'manage_options');
-	add_option('wpcrm_system_default_currency', 'USD');
-	add_option('wpcrm_system_report_currency_decimals', 0);
-	add_option('wpcrm_system_report_currency_decimal_point', '.');
-	add_option('wpcrm_system_report_currency_thousand_separator', ',');
-	add_option('wpcrm_hide_others_posts','no');
-	add_option('wpcrm_system_settings_initial','');
-	add_option('wpcrm_system_show_org_address','');
-	add_option('wpcrm_system_email_organization_filter', '');
-	add_option('wpcrm_system_gmap_api', '');
-	add_option('wpcrm_system_gdpr_page_id', '');
+	add_option( 'wpcrm_system_select_user_role', 'manage_options' );
+	add_option( 'wpcrm_system_default_currency', 'USD' );
+	add_option( 'wpcrm_system_report_currency_decimals', 0 );
+	add_option( 'wpcrm_system_report_currency_decimal_point', '.' );
+	add_option( 'wpcrm_system_report_currency_thousand_separator', ',' );
+	add_option( 'wpcrm_hide_others_posts','no' );
+	add_option( 'wpcrm_system_settings_initial','' );
+	add_option( 'wpcrm_system_show_org_address','' );
+	add_option( 'wpcrm_system_email_organization_filter', '' );
+	add_option( 'wpcrm_system_gmap_api', '' );
+	add_option( 'wpcrm_system_gdpr_page_id', '' );
+	add_option( '_wpcrm_enable_email_notification', '' );
+	add_option( '_wpcrm_enable_html_email', '' );
+	add_option( '_wpcrm_email_task_message', '' );
+	add_option( '_wpcrm_email_opportunity_message', '' );
+	add_option( '_wpcrm_email_project_message', '' );
+
 
 	$terms = get_terms('contact-type');
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
@@ -79,22 +85,27 @@ function activate_wpcrm_system_settings() {
 		wp_schedule_event( time(), 'hourly', 'wp_crm_system_recurring_entry_processor' );
 	}
 }
-function deactivate_wpcrm_system_settings() {
-	delete_option('wpcrm_system_select_user_role');
-	delete_option('wpcrm_system_default_currency');
-	delete_option('wpcrm_system_report_currency_decimals');
-	delete_option('wpcrm_system_report_currency_decimal_point');
-	delete_option('wpcrm_system_report_currency_thousand_separator');
-	delete_option('wpcrm_hide_others_posts');
-	delete_option('wpcrm_system_settings_initial');
-	delete_option('wpcrm_system_show_org_address');
-	delete_option('wpcrm_system_date_format');
-	delete_option('wpcrm_system_php_date_format');
-	delete_option('wpcrm_system_email_organization_filter');
-	delete_option('wpcrm_system_gmap_api');
-	delete_option('wpcrm_system_gdpr_page_id');
+function wp_crm_system_deactivate_settings() {
+	delete_option( 'wpcrm_system_select_user_role' );
+	delete_option( 'wpcrm_system_default_currency' );
+	delete_option( 'wpcrm_system_report_currency_decimals' );
+	delete_option( 'wpcrm_system_report_currency_decimal_point' );
+	delete_option( 'wpcrm_system_report_currency_thousand_separator' );
+	delete_option( 'wpcrm_hide_others_posts' );
+	delete_option( 'wpcrm_system_settings_initial' );
+	delete_option( 'wpcrm_system_show_org_address' );
+	delete_option( 'wpcrm_system_date_format' );
+	delete_option( 'wpcrm_system_php_date_format' );
+	delete_option( 'wpcrm_system_email_organization_filter' );
+	delete_option( 'wpcrm_system_gmap_api' );
+	delete_option( 'wpcrm_system_gdpr_page_id' );
+	delete_option( '_wpcrm_enable_email_notification' );
+	delete_option( '_wpcrm_enable_html_email' );
+	delete_option( '_wpcrm_email_task_message' );
+	delete_option( '_wpcrm_email_opportunity_message' );
+	delete_option( '_wpcrm_email_project_message' );
 
-	$terms = get_terms('contact-type');
+	$terms = get_terms( 'contact-type' );
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 		foreach ( $terms as $term ) {
 			delete_option($term->slug.'-email-filter');
@@ -118,18 +129,23 @@ function register_wpcrm_system_settings() {
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_gmap_api');
 	register_setting( 'wpcrm_system_settings_main_group', 'wpcrm_system_gdpr_page_id');
 	register_setting( 'wpcrm_system_email_group','wpcrm_system_email_organization_filter' );
+	register_setting( 'wpcrm-email-notifications', '_wpcrm_enable_email_notification' );
+	register_setting( 'wpcrm-email-notifications', '_wpcrm_enable_html_email' );
+	register_setting( 'wpcrm-email-notifications', '_wpcrm_email_task_message' );
+	register_setting( 'wpcrm-email-notifications', '_wpcrm_email_opportunity_message' );
+	register_setting( 'wpcrm-email-notifications', '_wpcrm_email_project_message' );
 
-	$terms = get_terms('contact-type');
+	$terms = get_terms( 'contact-type' );
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 		foreach ( $terms as $term ) {
-			register_setting('wpcrm_system_email_group',$term->slug.'-email-filter');
+			register_setting( 'wpcrm_system_email_group', $term->slug . '-email-filter' );
 		}
 	}
-	add_option( "wpcrm_system_version", "1.2" );
+	add_option( 'wpcrm_system_version', '1.2' );
 }
 
 /* Correct the date format if correct format is not being used */
-add_action('admin_init', 'update_date_formats');
+add_action( 'admin_init', 'update_date_formats' );
 function update_date_formats() {
 	// Use standard WordPress date format set in Settings > General. Convert PHP date format to jQuery format for date pickers.
 	$php_format = get_option( 'date_format' );
@@ -189,13 +205,13 @@ function update_date_formats() {
 		}
 	}
 
-	$js_acceptable = array('yy-M-d','M d, y','MM dd, yy','dd.mm.y','dd/mm/y','d MM yy','D d MM yy','DD, MM d, yy','MM d, yy','yy-mm-dd','dd/mm/yy','mm/dd/yy');
-	$php_acceptable = array('Y-M-j','M j, y','F d, Y','d.m.y','d/m/y','j F Y','D j F Y','l, F j, Y','F j, Y','Y-m-d','d/m/Y','m/d/Y');
-	if(!in_array($jqueryui_format,$js_acceptable) || !in_array($php_format,$php_acceptable)) {
-		update_option('wpcrm_system_date_format','MM d, yy');
-		update_option('wpcrm_system_php_date_format','F j, Y');
+	$js_acceptable = array( 'yy-M-d','M d, y','MM dd, yy','dd.mm.y','dd/mm/y','d MM yy','D d MM yy','DD, MM d, yy','MM d, yy','yy-mm-dd','dd/mm/yy','mm/dd/yy' );
+	$php_acceptable = array( 'Y-M-j','M j, y','F d, Y','d.m.y','d/m/y','j F Y','D j F Y','l, F j, Y','F j, Y','Y-m-d','d/m/Y','m/d/Y' );
+	if( !in_array( $jqueryui_format, $js_acceptable ) || !in_array( $php_format, $php_acceptable ) ) {
+		update_option('wpcrm_system_date_format', 'MM d, yy' );
+		update_option('wpcrm_system_php_date_format', 'F j, Y' );
 	} else {
-		update_option('wpcrm_system_date_format',$jqueryui_format);
-		update_option('wpcrm_system_php_date_format',$php_format);
+		update_option( 'wpcrm_system_date_format', $jqueryui_format );
+		update_option( 'wpcrm_system_php_date_format', $php_format );
 	}
 }

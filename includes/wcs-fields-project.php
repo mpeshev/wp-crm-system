@@ -8,7 +8,7 @@ function wpcrm_system_project_fields( $fields ) {
 	$projectFields = array(
 		array(
 			'name'			=> 'project-value',
-			'title'			=> WPCRM_VALUE,
+			'title'			=> __( 'Value', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'currency',
@@ -21,7 +21,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-closedate',
-			'title'			=> WPCRM_CLOSE_DATE,
+			'title'			=> __( 'Close Date', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'datepicker',
@@ -34,7 +34,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-status',
-			'title'			=> WPCRM_STATUS,
+			'title'			=> __( 'Status', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'selectstatus',
@@ -47,7 +47,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-progress',
-			'title'			=> WPCRM_PROGRESS,
+			'title'			=> __( 'Progress', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'selectprogress',
@@ -60,7 +60,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-attach-to-organization',
-			'title'			=> WPCRM_ATTACH_ORG,
+			'title'			=> __( 'Attach to Organization', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'selectorganization',
@@ -73,7 +73,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-attach-to-contact',
-			'title'			=> WPCRM_ATTACH_CONTACT,
+			'title'			=> __( 'Attach to Contact', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'selectcontact',
@@ -86,7 +86,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-assigned',
-			'title'			=> WPCRM_ASSIGNED,
+			'title'			=> __( 'Assigned To', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'selectuser',
@@ -99,7 +99,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-attach-to-organization-new',
-			'title'			=> WPCRM_CREATE_ORGANIZATION,
+			'title'			=> __( 'Create New Organization', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'addorganization',
@@ -112,7 +112,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-attach-to-contact-new',
-			'title'			=> WPCRM_CREATE_CONTACT,
+			'title'			=> __( 'Create New Contact', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'addcontact',
@@ -125,7 +125,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-description',
-			'title'			=> WPCRM_DESCRIPTION,
+			'title'			=> __( 'Description', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'wysiwyg',
@@ -138,7 +138,7 @@ function wpcrm_system_project_fields( $fields ) {
 		),
 		array(
 			'name'			=> 'project-dropbox',
-			'title'			=> WPCRM_DROPBOX,
+			'title'			=> __( 'Link Files From Dropbox', 'wp-crm-system' ),
 			'description'	=> '',
 			'placeholder'	=> '',
 			'type'			=> 'dropbox',

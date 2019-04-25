@@ -1,7 +1,31 @@
 <?php
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
-    die( "Sorry, you are not allowed to access this page directly." );
+	die( "Sorry, you are not allowed to access this page directly." );
+}
+add_action( 'load-edit.php', 'wp_crm_system_recurring_task_notice' );
+function wp_crm_system_recurring_task_notice(){
+
+	$screen = get_current_screen();
+
+	if( 'edit-wpcrm-task' === $screen->id ){
+		add_action( 'all_admin_notices', function(){
+			$url	= admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' );
+			$link	= sprintf(
+				wp_kses(
+					__( 'Need a task to repeat after a period of time? Try the <a href="%s">Recurring Entries</a> setting.', 'wp-crm-system' ),
+					array(
+						'a' => array(
+							'href' => array()
+						)
+					)
+				),
+				esc_url( $url )
+			);
+			echo $link;
+		});
+
+	}
 }
 add_filter( 'manage_edit-wpcrm-task_columns', 'wpcrm_system_task_columns' ) ;
 

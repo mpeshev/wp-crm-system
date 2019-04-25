@@ -17,13 +17,6 @@ function wpcrm_system_custom_fields_upsell_tab(){
 		<a class="nav-tab <?php echo $wpcrm_active_tab == 'custom-fields-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=custom-fields-upsell"><?php _e( 'Custom Fields', 'wp-crm-system' ); ?></a>
 	<?php }
 }
-add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_import_upsell_tab', 5 );
-function wpcrm_system_import_upsell_tab(){
-	global $wpcrm_active_tab;
-	if( !has_action( 'wpcrm_system_import_field' ) ){ ?>
-		<a class="nav-tab <?php echo $wpcrm_active_tab == 'importers-upsell' ? 'nav-tab-active' : ''; ?>" href="?page=wpcrm-settings&tab=importers-upsell"><?php _e( 'Import', 'wp-crm-system' ); ?></a>
-	<?php }
-}
 add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_invoicing_upsell_tab', 6 );
 function wpcrm_system_invoicing_upsell_tab(){
 	global $wpcrm_active_tab;
@@ -37,19 +30,15 @@ function wpcrm_system_upsell_content(){
 
 	switch ( $wpcrm_active_tab ) {
 		case 'client-area-upsell':
-			include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/client-area.php');
+			include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/client-area.php' );
 			break;
 
 		case 'custom-fields-upsell':
-			include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/custom-fields.php');
-			break;
-
-		case 'importers-upsell':
-			include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/importers.php');
+			include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/custom-fields.php' );
 			break;
 
 		case 'invoicing-upsell':
-			include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/invoicing.php');
+			include( WP_CRM_SYSTEM_PLUGIN_DIR . '/includes/upsells/invoicing.php' );
 			break;
 
 		default:

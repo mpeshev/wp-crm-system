@@ -57,3 +57,24 @@ function update_wpcrm_contact_names() {
 	die();
 }
 add_action('wp_ajax_wpcrm_update_contacts', 'update_wpcrm_contact_names');
+
+/**
+ * Version 3.0 of WP-CRM System included functionality that was previously
+ * only available in several premium plugins. These plugins are no longer
+ * necessary and may actually cause conflicts if they are loaded.
+ * Deactivating these plugins will prevent errors from occurring.
+ */
+function wp_crm_system_remove_merged_premium_addons(){
+	$plugins	= array(
+		'wp-crm-system-contact-user/wp-crm-system-contact-user.php',
+		'wp-crm-system-email-notifications/wp-crm-system-email-notifications.php',
+		'wp-crm-system-import-campaigns/wp-crm-system-import-campaigns.php',
+		'wp-crm-system-import-contacts/wp-crm-system-import-contacts.php',
+		'wp-crm-system-import-opportunities/wp-crm-system-import-opportunities.php',
+		'wp-crm-system-import-organizations/wp-crm-system-import-organizations.php',
+		'wp-crm-system-import-projects/wp-crm-system-import-projects.php',
+		'wp-crm-system-import-tasks/wp-crm-system-import-tasks.php',
+	);
+	deactivate_plugins( $plugins );
+}
+add_action( 'plugins_loaded', 'wp_crm_system_remove_merged_premium_addons', 1 );

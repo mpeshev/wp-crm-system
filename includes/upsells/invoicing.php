@@ -14,13 +14,10 @@ if ( !defined( 'ABSPATH' ) ) {
 		<li><?php _e( 'Send invoices by email to your clients so they know when an invoice is avaialble.', 'wp-crm-system' ); ?></li>
 	</ul>
 	<p>
-		<a href="https://www.wp-crm.com/checkout/?edd_action=add_to_cart&download_id=1306&edd_options[price_id]=1&utm_campaign=upgrade-professional-button&utm_source=upgrade-client-area-tab" class="button-primary">
-			<?php _e( 'Upgrade to Professional with Invoicing today!', 'wp-crm-system' ); ?>
+		<a href="https://www.wp-crm.com/downloads/invoicing/?utm_campaign=upgrade-wp-crm-system&utm_source=upgrade-invoicing-tab" class="button-primary">
+			<?php _e( 'Upgrade WP-CRM System with Invoicing today!', 'wp-crm-system' ); ?>
 		</a>
 		<span class="dashicons dashicons-external wpcrm-dashicons"></span>
-	</p>
-	<p>
-		<?php _e( 'Custom Fields, import/export extensions, invoice clients, and connect to 3rd party apps for <strong>unlimited sites</strong>', 'wp-crm-system' ); ?>	<em><?php _e( '($199 billed annually - cancel any time)', 'wp-crm-system' ); ?></em>
 	</p>
 </div>
 <div class="wp-crm-two-thirds">

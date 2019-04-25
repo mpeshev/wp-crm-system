@@ -25,7 +25,7 @@ function wpcrm_system_dashboard_calendar(){ ?>
 
 function wpcrm_system_dashboard_contacts_box(){ ?>
 	<div class="wpcrm-dashboard">
-		<h2><?php _e( 'Address Book', 'wp-crm-system' ); ?></h2>
+		<h3><?php _e( 'Address Book', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
@@ -56,7 +56,7 @@ function wpcrm_system_dashboard_contacts_box(){ ?>
 }
 function wpcrm_system_dashboard_projects_box() { ?>
 	<div class="wpcrm-dashboard">
-		<h2><?php _e( 'Projects', 'wp-crm-system' ); ?></h2>
+		<h3><?php _e( 'Projects', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
@@ -88,7 +88,7 @@ function wpcrm_system_dashboard_projects_box() { ?>
 
 function wpcrm_system_dashboard_tasks_box() { ?>
 	<div class="wpcrm-dashboard">
-		<h2><?php _e( 'Tasks', 'wp-crm-system' ); ?></h2>
+		<h3><?php _e( 'Tasks', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){
@@ -120,7 +120,7 @@ function wpcrm_system_dashboard_tasks_box() { ?>
 
 function wpcrm_system_dashboard_opportunities_box() { ?>
 	<div class="wpcrm-dashboard">
-		<h2><?php _e( 'Opportunities', 'wp-crm-system' ); ?></h2>
+		<h3><?php _e( 'Opportunities', 'wp-crm-system' ); ?></h3>
 		<?php
 		$user = wp_get_current_user();
 		if($user->has_cap(get_option('wpcrm_system_select_user_role'))){

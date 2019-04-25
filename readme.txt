@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
-Tested up to: 5.1.0
-Stable tag: 2.6.7
+Tested up to: 5.2.0
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,12 @@ Why spend hundreds or thousands of dollars on a CRM that charges based on the nu
 **More than a CRM**
 
 WP-CRM System allows your team to manage projects, assign individual tasks, track marketing campaigns, and helps convert your opportunities into successes!
+
+Easily import contacts and other records from your old CRM with our easy to use CSV uploader.
+
+Get email updates whenever a project or task you are assigned to is created or edited. Never miss a thing!
+
+Quickly create new contacts from existing users on your site with just one click. The plugin will take existing information (name, email address, etc.) from the user's account and add it to the new contact in WP-CRM System.
 
 **Assists with GDPR compliance**
 WP-CRM System has optional features, which can assist with GDPR compliance if that is something your business requires. Please note that this plugin does not guarantee GDPR compliance as no plugin can provide 100% compliance. Compliance requires actions on the part of your business that this plugin cannot provide.
@@ -41,11 +47,8 @@ There are a number of inexpensive WordPress CRM extensions that will allow you t
 * [Custom Fields](https://www.wp-crm.com/downloads/custom-fields/?utm_source=extensions&utm_medium=description_tab&utm_content=custom-fields&utm_campaign=readme) - Add extra fields to WP-CRM System. Keep track of an unlimited number of extra data for all of your records.
 * [Dropbox Connect](https://www.wp-crm.com/downloads/dropbox-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=dropbox&utm_campaign=readme) - Attach files from your Dropbox account to any record in WP-CRM System.
 * [Slack Notifications](https://www.wp-crm.com/downloads/slack-notifications/?utm_source=extensions&utm_medium=description_tab&utm_content=slack-notifications&utm_campaign=readme) - Alert your team through a Slack channel whenever a project, task, or opportunity is updated.
-* [Email Notifications](https://www.wp-crm.com/downloads/email-notifications/?utm_source=extensions&utm_medium=description_tab&utm_content=email-notifications&utm_campaign=readme) - Alert assigned users via email whenever a project, task, or opportunity is updated.
 * [Ninja Forms](https://www.wp-crm.com/downloads/ninja-form-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=ninja-form-connect&utm_campaign=readme) - Automatically create new contacts in WP-CRM System whenever a visitor fills out a contact form on your site (requires Ninja Forms).
 * [Gravity Forms](https://www.wp-crm.com/downloads/gravity-forms-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=gravity-forms-connect&utm_campaign=readme) - Automatically create new records in WP-CRM System whenever a visitor fills out a contact form on your site (requires Gravity Forms).
-* [Import Records](https://www.wp-crm.com/downloads/import-bundle/?utm_source=extensions&utm_medium=description_tab&utm_content=importers&utm_campaign=readme) - If you have records from another CRM or already in a spreadsheet, you can import them easily into WP-CRM System. This extension also allows you to export your records to a CSV file for use elsewhere.
-* [Create Contacts from Site Users](https://www.wp-crm.com/downloads/contact-from-user/?utm_source=extensions&utm_medium=description_tab&utm_content=contact-from-user&utm_campaign=readme) - If you have a large user base on your site already, you can quickly create new contacts in WP-CRM System from your existing users.
 * [Zendesk Connect](https://www.wp-crm.com/downloads/zendesk-connect/?utm_source=extensions&utm_medium=description_tab&utm_content=zendesk&utm_campaign=readme) - View tickets submitted to Zendesk by your WP-CRM System contacts. Quickly create a WP-CRM System task, project, or opportunity from the information provided in the ticket.
 
 **Have a suggestion for a new feature?**
@@ -88,6 +91,20 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 3.0.0 =
+* Merged several previously premium plugins into WP-CRM System core, including all Import / Export plugins (campaigns, contacts, opportunities, organizations, projects, tasks), Email Notifications, and Contact From User.
+* Forced deactivation of the premium plugins that were merged into WP-CRM System core.
+* Improved the coding of the display for field titles in individual records by removing 94 constants and replacing with translatable strings.
+* Minor CSS changes.
+* Fixed display of settings update notification on WP-CRM System dashboard page that showed up in the Address Book box. Clarified the language used to point the user to the correct location to update settings.
+* Updated featured images for recommended extensions.
+* Removed extra tabs on recommended extensions page.
+* Consolidated function required for importing into the wcs-functions.php file and removed return_bytes.php.
+* Added notification to the Project and Task list table screens to point users to the Recurring Entries settings page.
+* Moved recurring entries out from the WP-CRM System > Dashboard > Settings tab into it's own tab at WP-CRM System > Dashboard > Recurring.
+* Improvements to Welcome Page after activation to clarify the plugin's capabilities.
+* Improvements to the language used on Client Area, Custom Fields, and Invoicing upsell tabs. Also removed Import upsell tab.
+
 = 2.6.7 =
 * Updated datepicker fields to include the `autocomplete="off"` HTML attribute. This prevents browsers from displaying an autocomplete window on top of the datepicker calendar view.
 = 2.6.6 =
@@ -333,5 +350,17 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 2.6.7 =
-* Updated datepicker fields to include the `autocomplete="off"` HTML attribute. This prevents browsers from displaying an autocomplete window on top of the datepicker calendar view.
+== Changelog ==
+= 3.0.0 =
+* Merged several previously premium plugins into WP-CRM System core, including all Import / Export plugins (campaigns, contacts, opportunities, organizations, projects, tasks), Email Notifications, and Contact From User.
+* Forced deactivation of the premium plugins that were merged into WP-CRM System core.
+* Improved the coding of the display for field titles in individual records by removing 94 constants and replacing with translatable strings.
+* Minor CSS changes.
+* Fixed display of settings update notification on WP-CRM System dashboard page that showed up in the Address Book box. Clarified the language used to point the user to the correct location to update settings.
+* Updated featured images for recommended extensions.
+* Removed extra tabs on recommended extensions page.
+* Consolidated function required for importing into the wcs-functions.php file and removed return_bytes.php.
+* Added notification to the Project and Task list table screens to point users to the Recurring Entries settings page.
+* Moved recurring entries out from the WP-CRM System > Dashboard > Settings tab into it's own tab at WP-CRM System > Dashboard > Recurring.
+* Improvements to Welcome Page after activation to clarify the plugin's capabilities.
+* Improvements to the language used on Client Area, Custom Fields, and Invoicing upsell tabs. Also removed Import upsell tab.

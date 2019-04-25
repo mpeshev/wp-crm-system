@@ -6,7 +6,6 @@ if ( !defined( 'ABSPATH' ) ) {
 <h2><?php _e( 'Client Area', 'wp-crm-system' ); ?></h2>
 
 <div class="wp-crm-one-third wp-crm-first">
-	<p><strong><?php _e( 'The Client Area add-on is included in our Professional package.', 'wp-crm-system' ); ?></strong></p>
 	<p><?php _e( 'About the Client Area add-on:', 'wp-crm-system' ); ?></p>
 	<ul class="upsell-features">
 		<li><?php _e( 'Easily accept credit card payments from clients for maintenance plans, retainers, or one-off payments via Stripe', 'wp-crm-system' ); ?></li>
@@ -14,13 +13,10 @@ if ( !defined( 'ABSPATH' ) ) {
 		<li><?php _e( 'Password protected area that only your clients can view.', 'wp-crm-system' ); ?></li>
 	</ul>
 	<p>
-		<a href="https://www.wp-crm.com/checkout/?edd_action=add_to_cart&download_id=1306&edd_options[price_id]=1&utm_campaign=upgrade-professional-button&utm_source=upgrade-client-area-tab" class="button-primary">
-			<?php _e( 'Upgrade to Professional with Client Area today!', 'wp-crm-system' ); ?>
+		<a href="https://www.wp-crm.com/downloads/client-area/?utm_campaign=upgrade-wp-crm-system&utm_source=upgrade-client-area-tab" class="button-primary">
+			<?php _e( 'Upgrade to WP-CRM System with Client Area today!', 'wp-crm-system' ); ?>
 		</a>
 		<span class="dashicons dashicons-external wpcrm-dashicons"></span>
-	</p>
-	<p>
-		<?php _e( 'Custom Fields, import/export extensions, invoice clients, and connect to 3rd party apps for <strong>unlimited sites</strong>', 'wp-crm-system' ); ?>	<em><?php _e( '($199 billed annually - cancel any time)', 'wp-crm-system' ); ?></em>
 	</p>
 </div>
 <div class="wp-crm-two-thirds">
