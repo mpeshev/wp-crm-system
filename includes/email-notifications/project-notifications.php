@@ -4,9 +4,9 @@ if( ! defined( 'ABSPATH' ) ) {
 }
 
 // Send Email notifications for Projects
-add_action( 'publish_wpcrm-project', 'wp_crm_system_notify_email_projects', 10, 2 );
+add_action( 'publish_wpcrm-project', 'wp_crm_system_email_notifications_projects', 10, 2 );
 
-function wp_crm_system_notify_email_projects( $ID, $post ){
+function wp_crm_system_email_notifications_projects( $ID, $post ){
 	include ( WP_PLUGIN_DIR.'/wp-crm-system/includes/wp-crm-system-vars.php' );
 	$enable_email		= '';
 	$projectassigned	= '';

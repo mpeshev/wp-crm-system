@@ -3,7 +3,7 @@ Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
 Tested up to: 5.2.0
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 3.0.1 =
+* Fixed duplicate function name error when WP-CRM System and Email Notifications were active at the same time.
 = 3.0.0 =
 * Merged several previously premium plugins into WP-CRM System core, including all Import / Export plugins (campaigns, contacts, opportunities, organizations, projects, tasks), Email Notifications, and Contact From User.
 * Forced deactivation of the premium plugins that were merged into WP-CRM System core.
@@ -350,17 +352,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-== Changelog ==
-= 3.0.0 =
-* Merged several previously premium plugins into WP-CRM System core, including all Import / Export plugins (campaigns, contacts, opportunities, organizations, projects, tasks), Email Notifications, and Contact From User.
-* Forced deactivation of the premium plugins that were merged into WP-CRM System core.
-* Improved the coding of the display for field titles in individual records by removing 94 constants and replacing with translatable strings.
-* Minor CSS changes.
-* Fixed display of settings update notification on WP-CRM System dashboard page that showed up in the Address Book box. Clarified the language used to point the user to the correct location to update settings.
-* Updated featured images for recommended extensions.
-* Removed extra tabs on recommended extensions page.
-* Consolidated function required for importing into the wcs-functions.php file and removed return_bytes.php.
-* Added notification to the Project and Task list table screens to point users to the Recurring Entries settings page.
-* Moved recurring entries out from the WP-CRM System > Dashboard > Settings tab into it's own tab at WP-CRM System > Dashboard > Recurring.
-* Improvements to Welcome Page after activation to clarify the plugin's capabilities.
-* Improvements to the language used on Client Area, Custom Fields, and Invoicing upsell tabs. Also removed Import upsell tab.
+= 3.0.1 =
+* Fixed duplicate function name error when WP-CRM System and Email Notifications were active at the same time.
