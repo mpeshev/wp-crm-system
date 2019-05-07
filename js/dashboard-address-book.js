@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 	$('#dashboard-address-book').change(function() {
 		$('#address_book_loading').show();
-				
+
 		data = {
 			action: 'address_book_response',
 			address_book_nonce: address_book_vars.address_book_nonce,
@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
 				},
 			});
 		});
-		
+
 		return false;
 	});
 });

@@ -77,4 +77,4 @@ function wp_crm_system_remove_merged_premium_addons(){
 	);
 	deactivate_plugins( $plugins );
 }
-add_action( 'plugins_loaded', 'wp_crm_system_remove_merged_premium_addons', 1 );
+add_action( 'admin_init', 'wp_crm_system_remove_merged_premium_addons', 1 );
