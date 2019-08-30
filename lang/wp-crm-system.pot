@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: WP-CRM System\n"
-"POT-Creation-Date: 2019-04-25 15:50-0700\n"
-"PO-Revision-Date: 2019-04-25 15:50-0700\n"
+"POT-Creation-Date: 2019-08-30 11:32-0700\n"
+"PO-Revision-Date: 2019-08-30 11:32-0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -657,7 +657,9 @@ msgstr ""
 msgid "Export this data to a CSV file"
 msgstr ""
 
-#: includes/gdpr-shortcode.php:351 includes/legacy/gdpr-shortcode.php:344
+#: includes/gdpr-shortcode.php:351
+#: includes/import-export/export-plugin-settings.php:54
+#: includes/legacy/gdpr-shortcode.php:344
 msgid "Export"
 msgstr ""
 
@@ -890,6 +892,22 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
+#: includes/import-export/export-plugin-settings.php:46
+msgid "Export Settings"
+msgstr ""
+
+#: includes/import-export/export-plugin-settings.php:48
+msgid ""
+"Export the plugin settings for this site as a .json file. This allows you to "
+"easily import the configuration into another site."
+msgstr ""
+
+#: includes/import-export/export-plugin-settings.php:49
+msgid ""
+"Please note that this will include all settings. If applicable, this "
+"includes settings from add-on extension plugins including license keys, etc."
+msgstr ""
+
 #: includes/import-export/export-projects.php:35
 #: includes/privacy/gdpr-export-project.php:47
 #: includes/wcs-dashboard-project-list.php:44
@@ -996,6 +1014,33 @@ msgstr ""
 
 #: includes/import-export/import-organizations.php:161
 msgid "Organizations uploaded. "
+msgstr ""
+
+#: includes/import-export/import-plugin-settings.php:8
+msgid "Import Successful!"
+msgstr ""
+
+#: includes/import-export/import-plugin-settings.php:18
+msgid "Please upload a valid .json file"
+msgstr ""
+
+#: includes/import-export/import-plugin-settings.php:22
+msgid "Please upload a file to import"
+msgstr ""
+
+#: includes/import-export/import-plugin-settings.php:37
+msgid "Import Settings"
+msgstr ""
+
+#: includes/import-export/import-plugin-settings.php:39
+msgid ""
+"Import the plugin settings from a .json file. This file can be obtained by "
+"exporting the settings on another site using the form above."
+msgstr ""
+
+#: includes/import-export/import-plugin-settings.php:47
+#: includes/wcs-settings.php:18
+msgid "Import"
 msgstr ""
 
 #: includes/import-export/import-projects.php:192
@@ -3078,10 +3123,6 @@ msgstr ""
 
 #: includes/wcs-settings.php:4
 msgid "Settings saved."
-msgstr ""
-
-#: includes/wcs-settings.php:18
-msgid "Import"
 msgstr ""
 
 #: includes/wcs-system-setup.php:9 includes/wcs-system-setup.php:17
