@@ -5,7 +5,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="wrap">
-	<h2><?php _e( 'Delete Entry', 'wp-crm-system' ); ?> - <a href="admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries" class="button-secondary"><?php _e( 'Cancel - Go Back', 'wp-crm-system' ); ?></a></h2>
+	<h2><?php _e( 'Delete Entry', 'wp-crm-system' ); ?> - <a href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries" class="button-secondary"><?php _e( 'Cancel - Go Back', 'wp-crm-system' ); ?></a></h2>
 	<form method="post" action="" class="wp_crm_system_recurring_entries_form">
 		<?php $entry = $wpdb->get_row("SELECT * FROM " . $wpcrm_system_recurring_db_name . " WHERE id='" . $_GET['entry_id'] . "';"); ?>
 		<p><?php _e( 'Recurring entry deletion is permanent and cannot be undone. No further recurring entries will be created for this entry.', 'wp-crm-system' ); ?></p>

@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) {
 function wpcrm_system_system_recurring_tab() {
 	//Get current dashboard tab name
 	global $wpcrm_active_tab; ?>
-	<a class="nav-tab <?php echo $wpcrm_active_tab == 'recurring' ? 'current' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' ); ?>"><?php _e( 'Recurring', 'wp-crm-system' ); ?> </a>
+	<a class="nav-tab <?php echo $wpcrm_active_tab == 'recurring' ? 'nav-tab-active' : ''; ?>" href="<?php echo admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' ); ?>"><?php _e( 'Recurring', 'wp-crm-system' ); ?> </a>
 <?php }
 add_action( 'wpcrm_system_settings_tab', 'wpcrm_system_system_recurring_tab', 3 );
 
@@ -19,7 +19,7 @@ function wpcrm_system_recurring_entries(){
 			<h2><?php _e( 'Recurring Projects and Tasks', 'wp-crm-system' ); ?></h2>
 
 			<p>
-				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries&action=add_new"><?php _e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
+				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=add_new"><?php _e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
 			</p>
 
 			<table class="wp-list-table widefat fixed posts" id="wp_crm_system_recurring_entries_table">
@@ -102,8 +102,8 @@ function wpcrm_system_recurring_entries(){
 							<td><?php echo $end_date; ?></td>
 							<td><?php echo $entry->number_per_frequency . ' ' . $frequency[$entry->frequency]; ?></td>
 							<td>
-								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries&action=edit&entry_id=<?php echo $entry->id; ?>"><?php _e( 'Edit', 'wp-crm-system' ); ?></a>
-								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries&action=delete&entry_id=<?php echo $entry->id; ?>"><?php _e( 'Delete', 'wp-crm-system' ); ?></a>
+								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=edit&entry_id=<?php echo $entry->id; ?>"><?php _e( 'Edit', 'wp-crm-system' ); ?></a>
+								<a class="button-secondary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=delete&entry_id=<?php echo $entry->id; ?>"><?php _e( 'Delete', 'wp-crm-system' ); ?></a>
 							</td>
 						</tr>
 					<?php }
@@ -116,7 +116,7 @@ function wpcrm_system_recurring_entries(){
 			</table>
 
 			<p class="submit">
-				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries&action=add_new"><?php _e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
+				<a class="button-primary" href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries&action=add_new"><?php _e( 'Add New Recurring Entry', 'wp-crm-system' ); ?></a>
 			</p>
 		</div><!--end wrap-->
 	<?php }

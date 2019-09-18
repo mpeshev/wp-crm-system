@@ -16,7 +16,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	});
 </script>
 <div class="wrap">
-	<h2><?php _e( 'Edit Recurring Entry', 'wp-crm-system' ); ?> - <a href="admin.php?page=wpcrm-settings&tab=settings&subtab=recurring-entries" class="button-secondary"><?php _e( 'Cancel - Go Back', 'wp-crm-system' ); ?></a></h2>
+	<h2><?php _e( 'Edit Recurring Entry', 'wp-crm-system' ); ?> - <a href="admin.php?page=wpcrm-settings&tab=recurring&subtab=recurring-entries" class="button-secondary"><?php _e( 'Cancel - Go Back', 'wp-crm-system' ); ?></a></h2>
 
 	<form method="post" action="" class="wp_crm_system_recurring_entry_form">
 		<?php
