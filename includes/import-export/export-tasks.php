@@ -6,7 +6,7 @@ add_action( 'plugins_loaded', 'wp_crm_system_export_tasks_process' );
 function wp_crm_system_export_tasks_process(){
 	if ( isset( $_POST[ 'wpcrm_system_export_tasks_nonce' ] ) ) {
 		if( wp_verify_nonce( $_POST[ 'wpcrm_system_export_tasks_nonce' ], 'wpcrm-system-export-tasks-nonce' ) ) {
-			require_once WP_CRM_SYSTEM_PLUGIN_DIR_PATH . '/includes/class-export.php';
+			require_once WP_CRM_SYSTEM_PLUGIN_DIR_PATH . 'includes/import-export/class-export.php';
 
 			$export = new WPCRM_System_Export_Tasks();
 
@@ -84,8 +84,8 @@ class WPCRM_System_Export_Tasks extends WPCRM_System_Export{
 				'organization_id'	=> get_post_meta( $id, '_wpcrm_task-attach-to-organization', true ),
 				'contact'			=> get_the_title( get_post_meta( $id, '_wpcrm_task-contact', true ) ),
 				'contact_id'		=> get_post_meta( $id, '_wpcrm_task-contact', true ),
-				'due_date'			=> date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_task-due-date', true ) ),
-				'start_date'		=> date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_task-start-date', true ) ),
+				'due_date'			=> get_post_meta( $id, '_wpcrm_task-due-date', true ) ? date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_task-due-date', true ) ) : '',
+				'start_date'		=> get_post_meta( $id, '_wpcrm_task-start-date', true ) ? date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_task-start-date', true ) ) : '',
 				'progress'			=> get_post_meta( $id, '_wpcrm_task-progress', true ),
 				'priority'			=> get_post_meta( $id, '_wpcrm_task-priority', true ),
 				'status'			=> get_post_meta( $id, '_wpcrm_task-status', true ),

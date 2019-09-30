@@ -6,7 +6,7 @@ add_action( 'plugins_loaded', 'wp_crm_system_export_projects_process' );
 function wp_crm_system_export_projects_process(){
 	if ( isset( $_POST[ 'wpcrm_system_export_projects_nonce' ] ) ) {
 		if( wp_verify_nonce( $_POST[ 'wpcrm_system_export_projects_nonce' ], 'wpcrm-system-export-projects-nonce' ) ) {
-			require_once WP_CRM_SYSTEM_PLUGIN_DIR_PATH . '/includes/class-export.php';
+			require_once WP_CRM_SYSTEM_PLUGIN_DIR_PATH . 'includes/import-export/class-export.php';
 
 			$export = new WPCRM_System_Export_Projects();
 
@@ -79,7 +79,7 @@ class WPCRM_System_Export_Projects extends WPCRM_System_Export{
 			$data[$id] = array(
 				'project_name' 		=> get_the_title( $id ),
 				'description' 		=> esc_html( get_post_meta( $id, '_wpcrm_project-description', true ) ),
-				'close_date'		=> date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_project-closedate', true ) ),
+				'close_date'		=> get_post_meta( $id, '_wpcrm_project-closedate', true ) ? date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_project-closedate', true ) ) : '',
 				'progress'			=> get_post_meta( $id, '_wpcrm_project-progress', true ),
 				'status'			=> get_post_meta( $id, '_wpcrm_project-status', true ),
 				'value'				=> get_post_meta( $id, '_wpcrm_project-value', true ),

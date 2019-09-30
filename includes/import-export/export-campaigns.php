@@ -6,7 +6,7 @@ add_action( 'plugins_loaded', 'wp_crm_system_export_campaigns_process' );
 function wp_crm_system_export_campaigns_process(){
 	if ( isset( $_POST[ 'wpcrm_system_export_campaigns_nonce' ] ) ) {
 		if( wp_verify_nonce( $_POST[ 'wpcrm_system_export_campaigns_nonce' ], 'wpcrm-system-export-campaigns-nonce' ) ){
-			require_once WP_CRM_SYSTEM_PLUGIN_DIR_PATH . '/includes/class-export.php';
+			require_once WP_CRM_SYSTEM_PLUGIN_DIR_PATH . 'includes/import-export/class-export.php';
 
 			$export = new WPCRM_System_Export_Campaigns();
 
@@ -81,8 +81,8 @@ class WPCRM_System_Export_Campaigns extends WPCRM_System_Export{
 				'assigned' 			=> get_post_meta( $id, '_wpcrm_campaign-assigned', true ),
 				'active'			=> get_post_meta( $id, '_wpcrm_campaign-active', true ),
 				'status'			=> get_post_meta( $id, '_wpcrm_campaign-status', true ),
-				'start_date'		=> date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_campaign-startdate', true ) ),
-				'end_date'			=> date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_campaign-enddate', true ) ),
+				'start_date'		=> get_post_meta( $id, '_wpcrm_campaign-startdate', true ) ? date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_campaign-startdate', true ) ) : '',
+				'end_date'			=> get_post_meta( $id, '_wpcrm_campaign-enddate', true ) ? date( get_option( 'wpcrm_system_php_date_format' ), get_post_meta( $id, '_wpcrm_campaign-enddate', true ) ) : '',
 				'projected_reach'	=> get_post_meta( $id, '_wpcrm_campaign-projectedreach', true ),
 				'responses'			=> get_post_meta( $id, '_wpcrm_campaign-responses', true ),
 				'budget_cost'		=> get_post_meta( $id, '_wpcrm_campaign-budgetcost', true ),
