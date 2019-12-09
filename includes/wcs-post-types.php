@@ -35,7 +35,8 @@ function wpcrm_add_role_caps() {
 			'contributor',
 			'author',
 			'editor',
-			'administrator'
+			'administrator',
+
 		);
 
 		$wpcrm_system_roles = apply_filters( 'wpcrm_system_default_user_roles', $roles );
@@ -43,42 +44,44 @@ function wpcrm_add_role_caps() {
 			// Loop through each role and assign capabilities
 			foreach($wpcrm_system_roles as $the_role) {
 				$role = get_role($the_role);
-				// Need to check if the role has get_option('wpcrm_system_select_user_role'); capability then add_cap if it does.
-				if( $role->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
-					$role->add_cap( 'edit_'.$post_type );
-					$role->add_cap( 'read_'.$post_type );
-					$role->add_cap( 'delete_'.$post_type );
-					$role->add_cap( 'edit_'.$post_type.'s' );
-					$role->add_cap( 'edit_others_'.$post_type.'s' );
-					$role->add_cap( 'publish_'.$post_type.'s' );
-					$role->add_cap( 'read_private_'.$post_type.'s' );
-					$role->add_cap( 'read_'.$post_type );
-					$role->add_cap( 'delete_'.$post_type.'s' );
-					$role->add_cap( 'delete_private_'.$post_type.'s' );
-					$role->add_cap( 'delete_published_'.$post_type.'s' );
-					$role->add_cap( 'delete_others_'.$post_type.'s' );
-					$role->add_cap( 'edit_private_'.$post_type.'s' );
-					$role->add_cap( 'edit_published_'.$post_type.'s' );
-					$role->add_cap( 'create_'.$post_type.'s' );
-					$role->add_cap( 'manage_wp_crm' );
-				} else {
-					// Remove the capabilities if the role isn't supposed to edit the CPT. Allows for admin to change to a higher role if too much access was previously given.
-					$role->remove_cap( 'edit_'.$post_type );
-					$role->remove_cap( 'read_'.$post_type );
-					$role->remove_cap( 'delete_'.$post_type );
-					$role->remove_cap( 'edit_'.$post_type.'s' );
-					$role->remove_cap( 'edit_others_'.$post_type.'s' );
-					$role->remove_cap( 'publish_'.$post_type.'s' );
-					$role->remove_cap( 'read_private_'.$post_type.'s' );
-					$role->remove_cap( 'read_'.$post_type );
-					$role->remove_cap( 'delete_'.$post_type.'s' );
-					$role->remove_cap( 'delete_private_'.$post_type.'s' );
-					$role->remove_cap( 'delete_published_'.$post_type.'s' );
-					$role->remove_cap( 'delete_others_'.$post_type.'s' );
-					$role->remove_cap( 'edit_private_'.$post_type.'s' );
-					$role->remove_cap( 'edit_published_'.$post_type.'s' );
-					$role->remove_cap( 'create_'.$post_type.'s' );
-					$role->remove_cap( 'manage_wp_crm' );
+				if( !is_null( $role ) ){
+					// Need to check if the role has get_option('wpcrm_system_select_user_role'); capability then add_cap if it does.
+					if( $role->has_cap( get_option( 'wpcrm_system_select_user_role' ) ) ) {
+						$role->add_cap( 'edit_'.$post_type );
+						$role->add_cap( 'read_'.$post_type );
+						$role->add_cap( 'delete_'.$post_type );
+						$role->add_cap( 'edit_'.$post_type.'s' );
+						$role->add_cap( 'edit_others_'.$post_type.'s' );
+						$role->add_cap( 'publish_'.$post_type.'s' );
+						$role->add_cap( 'read_private_'.$post_type.'s' );
+						$role->add_cap( 'read_'.$post_type );
+						$role->add_cap( 'delete_'.$post_type.'s' );
+						$role->add_cap( 'delete_private_'.$post_type.'s' );
+						$role->add_cap( 'delete_published_'.$post_type.'s' );
+						$role->add_cap( 'delete_others_'.$post_type.'s' );
+						$role->add_cap( 'edit_private_'.$post_type.'s' );
+						$role->add_cap( 'edit_published_'.$post_type.'s' );
+						$role->add_cap( 'create_'.$post_type.'s' );
+						$role->add_cap( 'manage_wp_crm' );
+					} else {
+						// Remove the capabilities if the role isn't supposed to edit the CPT. Allows for admin to change to a higher role if too much access was previously given.
+						$role->remove_cap( 'edit_'.$post_type );
+						$role->remove_cap( 'read_'.$post_type );
+						$role->remove_cap( 'delete_'.$post_type );
+						$role->remove_cap( 'edit_'.$post_type.'s' );
+						$role->remove_cap( 'edit_others_'.$post_type.'s' );
+						$role->remove_cap( 'publish_'.$post_type.'s' );
+						$role->remove_cap( 'read_private_'.$post_type.'s' );
+						$role->remove_cap( 'read_'.$post_type );
+						$role->remove_cap( 'delete_'.$post_type.'s' );
+						$role->remove_cap( 'delete_private_'.$post_type.'s' );
+						$role->remove_cap( 'delete_published_'.$post_type.'s' );
+						$role->remove_cap( 'delete_others_'.$post_type.'s' );
+						$role->remove_cap( 'edit_private_'.$post_type.'s' );
+						$role->remove_cap( 'edit_published_'.$post_type.'s' );
+						$role->remove_cap( 'create_'.$post_type.'s' );
+						$role->remove_cap( 'manage_wp_crm' );
+					}
 				}
 			}
 		}
