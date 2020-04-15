@@ -2,8 +2,8 @@
 Contributors: scott.deluzio
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
-Tested up to: 5.3.0
-Stable tag: 3.1.3
+Tested up to: 5.4.0
+Stable tag: 3.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,8 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 3.1.4 =
+* Update: Included new filter `wpcrm_system_single_calendar_entry` to enable custom formatting of individual calendar entries.
 = 3.1.3 =
 * Fix: New site setup by a super administrator on a multisite subsite caused fatal error when saving initial settings.
 = 3.1.2 =
@@ -364,5 +366,5 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 3.1.3 =
-* Fix: New site setup by a super administrator on a multisite subsite caused fatal error when saving initial settings.
+= 3.1.4 =
+* Update: Included new filter `wpcrm_system_single_calendar_entry` to enable custom formatting of individual calendar entries.

@@ -182,7 +182,9 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 								$icon = '';
 								break;
 						}
-						$calendar .= '<li>' . $icon . '<a href="' . get_edit_post_link() . '">' . get_the_title() . '</a></li>';
+						$line_item = '<li>' . $icon . '<a href="' . get_edit_post_link() . '">' . get_the_title() . '</a></li>';
+						$filtered_line_item = apply_filters( 'wpcrm_system_single_calendar_entry', $line_item, get_the_ID(), $icon );
+						$calendar .= $filtered_line_item;
 					} // end while
 				} else {
 				// end if
