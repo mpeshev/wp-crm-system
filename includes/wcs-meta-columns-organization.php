@@ -25,7 +25,7 @@ add_action( 'manage_wpcrm-organization_posts_custom_column', 'wprcm_system_organ
 
 function wprcm_system_organization_columns_content( $column, $post_id ) {
 	global $post;
-
+	$display_links = apply_filters( 'wp_crm_system_display_links', true );
 	switch( $column ) {
 
 		/* If displaying the 'phone' column. */
@@ -35,12 +35,17 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 			$number = esc_html( get_post_meta( $post_id, '_wpcrm_organization-phone', true ) );
 
 			/* If no duration is found, output a default message. */
-			if ( empty( $number ) )
+			if ( empty( $number ) ) {
 				echo __( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a phone number, display it with clickable link. */
-			else
-				echo '<a href="tel:' . $number . '">' . $number . '</a>';
+			} else {
+				if ( $display_links ) {
+					echo '<a href="tel:' . $number . '">' . $number . '</a>';
+				} else {
+					echo $number;
+				}
+			}
 
 			break;
 		/* If displaying the 'email' column. */
@@ -50,14 +55,18 @@ function wprcm_system_organization_columns_content( $column, $post_id ) {
 			$email = get_post_meta( $post_id, '_wpcrm_organization-email', true );
 
 			/* If no duration is found, output a default message. */
-			if ( empty( $email ) )
+			if ( empty( $email ) ) {
 				echo __( 'Not Set', 'wp-crm-system' );
 
 			/* If there is a email, display it. */
-			else
+			} else {
 				$email = esc_html( $email );
-				echo '<a href="mailto:' . $email . '">' . $email . '</a>';
-
+				if ( $display_links ) {
+					echo '<a href="mailto:' . $email . '">' . $email . '</a>';
+				} else {
+					echo $email;
+				}
+			}
 			break;
 		/* If displaying the 'address' column. */
 		case 'address' :
