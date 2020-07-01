@@ -27,7 +27,7 @@ add_action( 'plugins_loaded', 'wpcrm_campaign_taxonomy');
 */
 add_action( 'admin_init', 'wpcrm_add_role_caps', 999 );
 function wpcrm_add_role_caps() {
-	if( isset( $_POST[ 'wpcrm_system_settings_update' ] ) ) {
+	// if( isset( $_POST[ 'wpcrm_system_settings_update' ] ) ) {
 		$post_types = array( 'wpcrm-contact','wpcrm-task','wpcrm-organization','wpcrm-opportunity','wpcrm-project','wpcrm-campaign' );
 
 		$roles = array(
@@ -36,9 +36,7 @@ function wpcrm_add_role_caps() {
 			'author',
 			'editor',
 			'administrator',
-
 		);
-
 		$wpcrm_system_roles = apply_filters( 'wpcrm_system_default_user_roles', $roles );
 		foreach($post_types as $post_type) {
 			// Loop through each role and assign capabilities
@@ -85,7 +83,7 @@ function wpcrm_add_role_caps() {
 				}
 			}
 		}
-	}
+	// }
 }
 
 /* Contacts post type. */

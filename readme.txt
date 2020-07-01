@@ -1,9 +1,9 @@
 === WordPress CRM Plugin - WP-CRM System ===
-Contributors: scott.deluzio
+Contributors: scott.deluzio, nofearinc
 Tags:  WordPress CRM, Free CRM for WordPress, CRM, Free WordPress CRM, CRM for WordPress, gdpr
 Requires at least: 3.3.0
-Tested up to: 5.4.1
-Stable tag: 3.1.5
+Tested up to: 5.4.2
+Stable tag: 3.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,8 +11,6 @@ WP-CRM System is a WordPress CRM that is designed to work exclusively with YOUR 
 
 == Description ==
 WP-CRM System is a fully featured WordPress CRM that allows you to use the WordPress interface you are already familiar with to manage your customers, projects, and tasks with ease.
-
-[youtube https://www.youtube.com/watch?v=re5MqqX94-I&rel=0&showinfo=0]
 
 Why spend hundreds or thousands of dollars on a CRM that charges based on the number of records you have in your database, or the number of users that you have accessing your database? WP-CRM System allows you to have an unlimited number of records and lets you give everyone in your organization access to the WordPress CRM data they need to drive business.
 
@@ -91,6 +89,9 @@ Absolutely. There are inexpensive extensions that allow you to import as little 
 Your data is only accessible through the WordPress CRM dashboard. None of it will be accessible through the public facing portion of your website unless you are using our GDPR features (see above). This allows you to provide access to as few or as many people as you need to.
 
 == Changelog ==
+= 3.1.6 =
+* Update readme.txt.
+* Update to fix save setting changes.
 = 3.1.5 =
 * Update: Included new filter `wp_crm_system_display_links` to allow for disabling phone number and email address links on the contact and organization tables.
 = 3.1.4 =
@@ -368,5 +369,6 @@ Your data is only accessible through the WordPress CRM dashboard. None of it wil
 * Initial Release
 
 == Upgrade Notice ==
-= 3.1.5 =
-* Update: Included new filter `wp_crm_system_display_links` to allow for disabling phone number and email address links on the contact and organization tables.
+= 3.1.6 =
+* Update readme.txt.
+* Update to fix save setting changes.
