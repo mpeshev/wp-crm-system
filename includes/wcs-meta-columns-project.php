@@ -9,7 +9,7 @@ function wp_crm_system_recurring_project_notice(){
 	$screen = get_current_screen();
 
 	if( 'edit-wpcrm-project' === $screen->id ){
-		add_action( 'all_admin_notices', function(){
+		add_action( 'admin_notices', function(){
 			$url	= admin_url( 'admin.php?page=wpcrm-settings&tab=recurring' );
 			$link	= sprintf(
 				wp_kses(
@@ -22,7 +22,7 @@ function wp_crm_system_recurring_project_notice(){
 				),
 				esc_url( $url )
 			);
-			echo $link;
+			echo '<div class="notice notice-success"><p>' . $link . '</p></div>';
 		});
 
 	}

@@ -22,7 +22,7 @@ function wp_crm_system_recurring_task_notice(){
 				),
 				esc_url( $url )
 			);
-			echo $link;
+			echo '<div class="notice notice-success"><p>' . $link . '</p></div>';
 		});
 
 	}
