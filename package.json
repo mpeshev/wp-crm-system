@@ -1,0 +1,53 @@
+{
+  "name": "wp-crm-system",
+  "version": "3.1.6",
+  "description": "Managing Clients Just Got Easier With WP-CRM System: The WordPress CRM Plugin Designed For Small Businesses",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo Hi",
+    "fix-styles": "prettier-stylelint --write 'assets/src/**/*.{css,scss}' "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mpeshev/wp-crm-system.git"
+  },
+  "keywords": [
+    "cms"
+  ],
+  "author": "DevriX",
+  "license": "ISC",
+  "homepage": "https://www.wp-crm.com/",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-preset-env": "^1.7.0",
+    "child_process": "^1.0.2",
+    "del": "^4.1.1",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-livereload": "^4.0.1",
+    "gulp-newer": "^1.4.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sass-lint": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "moment": "^2.24.0",
+    "replace-in-file": "^4.1.0",
+    "sass-lint": "^1.13.1",
+    "gulp-filter": "^5.1.0"
+  },
+  "prettier": {},
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}
