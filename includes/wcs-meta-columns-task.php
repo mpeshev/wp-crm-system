@@ -353,6 +353,33 @@ function wpcrm_system_task_filtering( $post_type ) {
 		$options .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $selected_status, $key, false ), $value );
 	}
 	printf( '<select name="task-status-filter">%s</select>', $options );
+
+	/**
+	 * For priority filter
+	 *
+	 * We don't have filtered priority(from WP Hooks) so the values are static
+	 */
+	$priorities = array(
+		'all'       => __( 'All priorities', 'wp-crm-system' ),
+		''       => __( 'Not Set', 'wp-crm-system' ),
+		'low'    => __( 'Low', 'wp-crm-system' ),
+		'medium' => __( 'Medium', 'wp-crm-system' ),
+		'high'   => __( 'High', 'wp-crm-system' ),
+	);
+
+	/**
+	 * Get the selected priority, if any
+	 *
+	 * Default will be "default"/ All priorities
+	 */
+	$selected_priority = isset( $_GET['task-priority-filter'] ) ? sanitize_text_field( $_GET['task-priority-filter'] ) : 'all';
+
+	// Print priority dropdown
+	$options = '';
+	foreach ( $priorities as $key => $value ) {
+		$options .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $selected_priority, $key, false ), $value );
+	}
+	printf( '<select name="task-priority-filter">%s</select>', $options );
 }
 
 /**
@@ -365,37 +392,48 @@ function wpcrm_system_task_filtering( $post_type ) {
 add_action( 'pre_get_posts', 'wpcrm_system_task_pre_get_posts' );
 function wpcrm_system_task_pre_get_posts( $query ) {
 
-	// We required post type and status to proceed
-	// Failure on both should stops the execution
-	if ( ! isset( $_GET['post_type'] ) && ! isset( $_GET['task-status-filter'] ) ) {
+	// We required post type to proceed
+	// Failure on that should stops the execution
+	if ( ! isset( $_GET['post_type'] ) ) {
 		return $query;
 	}
 
 	// Set defaults and make sure we sanitize 'em
 	$post_type  = sanitize_text_field( $_GET['post_type'] );
-	$status     = sanitize_text_field( $_GET['task-status-filter'] );
+	$status     = isset( $_GET['task-status-filter'] ) ? sanitize_text_field( $_GET['task-status-filter'] ) : '';
+	$priority   = isset( $_GET['task-priority-filter'] ) ? sanitize_text_field( $_GET['task-priority-filter'] ) : '';
 	$meta_query = array();
-
-	// If status = "default" / All statuses, nothing to do here
-	if ( 'default' === $status ) {
-		return $query;
-	}
 
 	// If this request is not from Task post type, nothing to do here
 	if ( 'wpcrm-task' !== $post_type ) {
 		return $query;
 	}
 
-	// If status is empty, illegal request! Nothing to do here
-	if ( empty( $status ) ) {
-		return $query;
+	// For status
+	if ( ! empty( $status ) ) {
+		if ( 'default' !== $status ) {
+			if ( $query->is_main_query() ) {
+				$meta_query[] = array(
+					'key'   => '_wpcrm_task-status',
+					'value' => $status,
+				);
+			}
+		}
 	}
 
-	if ( $query->is_main_query() ) {
-		$meta_query[] = array(
-			'key'   => '_wpcrm_task-status',
-			'value' => $status,
-		);
+	// For priorities
+	if ( ! empty( $priority ) ) {
+		if ( 'all' !== $priority ) {
+			if( 'not-started' === $priority ) {
+				$priority = '';
+			}
+			if ( $query->is_main_query() ) {
+				$meta_query[] = array(
+					'key'   => '_wpcrm_task-priority',
+					'value' => $priority,
+				);
+			}
+		}
 	}
 
 	if ( ! empty( $meta_query ) ) {
