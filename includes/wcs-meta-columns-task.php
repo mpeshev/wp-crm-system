@@ -313,3 +313,92 @@ function wpcrm_system_task_quick_complete() {
 		}
 	}
 }
+
+/**
+ * Add new filter option for task statuses
+ *
+ * This can be found on top of the Task's table list
+ *
+ * @since   1.3.7
+ */
+add_action( 'restrict_manage_posts', 'wpcrm_system_task_filtering' );
+function wpcrm_system_task_filtering( $post_type ) {
+	if ( 'wpcrm-task' !== $post_type ) {
+		return;
+	}
+
+	/**
+	 * For status filter
+	 *
+	 * We don't have filtered sttus(from WP Hooks) so the values are static
+	 */
+	$statuses = array(
+		'default'     => __( 'All statuses', 'wp-crm-system' ),
+		'not-started' => __( 'Not Started', 'wp-crm-system' ),
+		'in-progress' => __( 'In Progress', 'wp-crm-system' ),
+		'complete'    => __( 'Complete', 'wp-crm-system' ),
+		'on-hold'     => __( 'On Hold', 'wp-crm-system' ),
+	);
+
+	/**
+	 * Get the selected status, if any
+	 *
+	 * Default will be "default"/ All statuses
+	 */
+	$selected_status = isset( $_GET['task-status-filter'] ) ? sanitize_text_field( $_GET['task-status-filter'] ) : 'default';
+
+	// Print status dropdown
+	$options = '';
+	foreach ( $statuses as $key => $value ) {
+		$options .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $selected_status, $key, false ), $value );
+	}
+	printf( '<select name="task-status-filter">%s</select>', $options );
+}
+
+/**
+ * Hijack the pre get posts
+ *
+ * So that we can pull the posts based on given status
+ *
+ * @since   1.3.7
+ */
+add_action( 'pre_get_posts', 'wpcrm_system_task_pre_get_posts' );
+function wpcrm_system_task_pre_get_posts( $query ) {
+
+	// We required post type and status to proceed
+	// Failure on both should stops the execution
+	if ( ! isset( $_GET['post_type'] ) && ! isset( $_GET['task-status-filter'] ) ) {
+		return $query;
+	}
+
+	// Set defaults and make sure we sanitize 'em
+	$post_type  = sanitize_text_field( $_GET['post_type'] );
+	$status     = sanitize_text_field( $_GET['task-status-filter'] );
+	$meta_query = array();
+
+	// If status = "default" / All statuses, nothing to do here
+	if ( 'default' === $status ) {
+		return $query;
+	}
+
+	// If this request is not from Task post type, nothing to do here
+	if ( 'wpcrm-task' !== $post_type ) {
+		return $query;
+	}
+
+	// If status is empty, illegal request! Nothing to do here
+	if ( empty( $status ) ) {
+		return $query;
+	}
+
+	if ( $query->is_main_query() ) {
+		$meta_query[] = array(
+			'key'   => '_wpcrm_task-status',
+			'value' => $status,
+		);
+	}
+
+	if ( ! empty( $meta_query ) ) {
+		$query->set( 'meta_query', $meta_query );
+	}
+}
