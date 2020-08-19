@@ -360,11 +360,11 @@ function wpcrm_system_task_filtering( $post_type ) {
 	 * We don't have filtered priority(from WP Hooks) so the values are static
 	 */
 	$priorities = array(
-		'all'       => __( 'All priorities', 'wp-crm-system' ),
-		''       => __( 'Not Set', 'wp-crm-system' ),
-		'low'    => __( 'Low', 'wp-crm-system' ),
-		'medium' => __( 'Medium', 'wp-crm-system' ),
-		'high'   => __( 'High', 'wp-crm-system' ),
+		'all'     => __( 'All priorities', 'wp-crm-system' ),
+		'not-set' => __( 'Not Set', 'wp-crm-system' ),
+		'low'     => __( 'Low', 'wp-crm-system' ),
+		'medium'  => __( 'Medium', 'wp-crm-system' ),
+		'high'    => __( 'High', 'wp-crm-system' ),
 	);
 
 	/**
@@ -424,14 +424,19 @@ function wpcrm_system_task_pre_get_posts( $query ) {
 	// For priorities
 	if ( ! empty( $priority ) ) {
 		if ( 'all' !== $priority ) {
-			if( 'not-started' === $priority ) {
-				$priority = '';
-			}
 			if ( $query->is_main_query() ) {
-				$meta_query[] = array(
-					'key'   => '_wpcrm_task-priority',
-					'value' => $priority,
-				);
+				if ( 'not-set' === $priority ) {
+					$meta_query[] = array(
+						'key'     => '_wpcrm_task-priority',
+						'value'   => $priority,
+						'compare' => 'NOT EXISTS',
+					);
+				} else {
+					$meta_query[] = array(
+						'key'   => '_wpcrm_task-priority',
+						'value' => $priority,
+					);
+				}
 			}
 		}
 	}
