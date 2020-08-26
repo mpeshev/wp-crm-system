@@ -1,0 +1,1 @@
+jQuery(document).ready(function(){jQuery("#accordion").accordion({collapsible:!0,active:!1})});
