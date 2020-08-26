@@ -42,7 +42,7 @@ function wpcrm_system_main_settings() {
 		//Only show to administrators
 		if ( current_user_can( 'manage_options' ) )  { ?>
 			<div class="wrap">
-			<h2><?php _e('WP-CRM System Settings', 'wp-crm-system'); ?></h2>
+				<h2><?php _e('WP-CRM System Settings', 'wp-crm-system'); ?></h2>
 				<form id="wpcrm_settings" name="wpcrm_settings" method='post' action='options.php'>
 					<?php wp_nonce_field( 'update-options' ); ?>
 					<?php settings_fields( 'wpcrm_system_settings_main_group' ); ?>
@@ -81,14 +81,14 @@ function wpcrm_system_main_settings() {
 								<p class="description"><?php _e('Currency to be used when assigning values to projects or opportunities.', 'wp-crm-system'); ?></p>
 								</td>
 							</tr>
-							<tr>
-								<th scope="row">
-									<strong><?php _e('Currency Format', 'wp-crm-system'); ?></strong>
-									<p class="description"><?php _e( 'Set your preferred currency and numeral settings for reports.', 'wp-crm-system'); ?></p>
-								</th>
-								<td>
-								</td>
-							</tr>
+						</tbody>
+					</table>
+					
+					<h3><?php _e('Currency Format', 'wp-crm-system'); ?></h3>
+					<p class="description"><?php _e( 'Set your preferred currency and numeral settings for reports.', 'wp-crm-system'); ?></p>
+					
+					<table class="form-table" role="presentation">
+						<tbody>
 							<tr>
 								<th scope="row">
 									<strong><?php _e('Thousands separator', 'wp-crm-system'); ?></strong>

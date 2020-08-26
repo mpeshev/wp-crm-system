@@ -241,6 +241,17 @@ ul.upsell-features {
     margin-top: 2.564102564102564%;
     width: 100%; } }
 
+#system-info-textarea.wpcrm-system-help-tip {
+  background: #000;
+  color: #eee;
+  padding: 2em;
+  border: none;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  white-space: pre-wrap; }
+
 .wpcrm-dashboard-calendar {
   background: white;
   border: 1px solid #ddd; }
