@@ -1,0 +1,1 @@
+jQuery(window).on("load",function(){jQuery(".wpcrm-dashboard").each(function(){var r=jQuery(this).height();"315"<r&&jQuery(".wpcrm-dashboard").css("height",r+"px")})});

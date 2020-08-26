@@ -1,0 +1,1 @@
+jQuery(document).ready(function(){jQuery("#wp-crm-system-accordion").accordion({collapsible:!0,active:!1})});

@@ -16,7 +16,8 @@ let gulp = require("gulp"),
   newer = require("gulp-newer"),
   sourcemaps = require("gulp-sourcemaps"),
   babel = require("gulp-babel"),
-  plumber = require("gulp-plumber");
+  plumber = require("gulp-plumber"),
+  cp = require("child_process");
 
 /**
  * Unify all scripts to work with source and destination paths.
@@ -54,16 +55,21 @@ gulp.task("sass", function () {
     );
 });
 
-gulp.task("cssmin", function () {
+// cssmin
+gulp.task("cssmin", () => {
   return gulp
     .src(paths.destination.css + "*.css")
+    .pipe(newer(paths.destination.css))
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(cleanCSS({ compatibility: "ie8" }))
-    .pipe(rename({ suffix: ".min" }))
     .pipe(sourcemaps.write("./"))
     .pipe(gulp.dest(paths.destination.css))
     .pipe(
-      notify({ message: "Successfully minified files", onLast: true })
+      notify({
+        onLast: true,
+        title: "CSS minified successfully.",
+        message: getFormatDate(),
+      })
     );
 });
 
@@ -72,63 +78,40 @@ gulp.task("cssmin", function () {
 gulp.task("watch", function () {
   livereload.listen();
 
-  gulp.watch(paths.source.sass + "**/*.scss", gulp.series("sass", "cssmin"));
-  gulp.watch(paths.source.scripts + "**/*.js", gulp.series("minifyScripts"));
+  gulp.watch(paths.source.sass + "**/*.scss", gulp.series("sass"));
+  gulp.watch(paths.source.scripts + "**/*.js", gulp.series("compress"));
   gulp.watch(paths.source.images + "*", gulp.series("optimizeImages"));
 
   // Once the CSS file is build, minify it.
-//   gulp.watch(paths.destination.css + "master.css", gulp.series("cssmin"));
+  gulp.watch(paths.destination.css + "master.css", gulp.series("cssmin"));
 });
 
-gulp.task("minifyScripts", function () {
-  // Add separate folders if required.
-  return gulp
-    .src([
-      paths.source.scripts + "*.js"
-    ])
-    .pipe(
-      plumber({
-        handleError: function (error) {
-          console.log(error);
-          this.emit("end");
-        },
-      })
-    )
-    .pipe(
-      babel({
-        presets: ["@babel/preset-env"],
-      })
-    )
+gulp.task("compress", (done) => {
+  gulp
+    .src(paths.source.scripts + "*.js")
     .pipe(uglify())
     .pipe(gulp.dest(paths.destination.scripts));
+  done();
 });
 
-gulp.task("optimizeImages", function () {
-  // Add separate folders if required.
-  return gulp
+gulp.task("optimizeImages", (done) => {
+  gulp
     .src(paths.source.images + "*")
-    .pipe(newer(paths.destination.images))
     .pipe(imagemin())
     .pipe(gulp.dest(paths.destination.images));
+  done();
 });
 
 gulp.task("optimizeFonts", function () {
   gulp.src(paths.source.fonts + "*").pipe(gulp.dest(paths.destination.fonts));
 });
 
-// This will take care of rights permission errors if any
-gulp.task("cleanup", function () {
-  del(paths.destination.scripts + "bundle.min.js");
-  del(paths.destination.css + "*.css");
-});
-
-
 // What will be run with simply writing "$ gulp"
 gulp.task(
   "default",
   gulp.series(
     "sass",
-    gulp.parallel("minifyScripts", "cssmin", "optimizeImages"),
+    gulp.parallel("compress", "cssmin", "optimizeImages"),
     "watch"
   )
 );
