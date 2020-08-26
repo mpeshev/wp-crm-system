@@ -247,28 +247,37 @@ ul.upsell-features {
   .wpcrm-dashboard-calendar table {
     width: 100%; }
   .wpcrm-dashboard-calendar thead {
-    background: #fafafa; }
-    .wpcrm-dashboard-calendar thead .calendar-row:last-child td {
-      padding-bottom: 2em; }
-  .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(1) .calendar-day {
-    border-bottom: none;
-    border-left: 1px solid #ddd; }
-  .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(2) .calendar-day {
-    border-top: 1px solid #ddd; }
-  .wpcrm-dashboard-calendar tbody .calendar-row:last-child .calendar-day {
-    border-bottom: none; }
-  .wpcrm-dashboard-calendar tbody .calendar-day {
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd; }
-    .wpcrm-dashboard-calendar tbody .calendar-day:last-child {
-      border-right: none; }
-    .wpcrm-dashboard-calendar tbody .calendar-day:first-child {
-      border-left: none; }
-    .wpcrm-dashboard-calendar tbody .calendar-day:hover {
-      background: #fafafa; }
-      .wpcrm-dashboard-calendar tbody .calendar-day:hover .day-number {
-        background: red;
-        color: white; }
+    background: #fff; }
+    .wpcrm-dashboard-calendar thead .calendar-row:nth-child(2) .calendar-day-head {
+      text-align: center; }
+    .wpcrm-dashboard-calendar thead .calendar-day-head {
+      border-bottom: 1px solid #ddd;
+      font-weight: 500;
+      padding-top: 1em;
+      padding-bottom: 1em; }
+  .wpcrm-dashboard-calendar tbody {
+    background-color: #fafafa;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f0f0f0' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E"); }
+    .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(1) .calendar-day {
+      border-bottom: none;
+      border-left: 1px solid #ddd; }
+    .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(2) .calendar-day {
+      border-top: 1px solid #ddd; }
+    .wpcrm-dashboard-calendar tbody .calendar-row:last-child .calendar-day {
+      border-bottom: none; }
+    .wpcrm-dashboard-calendar tbody .calendar-day {
+      background: white;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd; }
+      .wpcrm-dashboard-calendar tbody .calendar-day:last-child {
+        border-right: none; }
+      .wpcrm-dashboard-calendar tbody .calendar-day:first-child {
+        border-left: none; }
+      .wpcrm-dashboard-calendar tbody .calendar-day:hover {
+        background: #fafafa; }
+        .wpcrm-dashboard-calendar tbody .calendar-day:hover .day-number {
+          background: red;
+          color: white; }
   .wpcrm-dashboard-calendar td {
     position: relative;
     padding: 0.5rem; }
@@ -276,13 +285,18 @@ ul.upsell-features {
     width: 130px; }
   .wpcrm-dashboard-calendar .calendar-day-head a {
     display: block;
-    background: #fff;
+    background: #fafafa;
     font-size: 12px;
     color: #333;
     border-radius: 3px;
-    padding: .25em .5em;
+    padding: 1em .5em;
     text-decoration: none;
-    border: 1px solid #ddd; }
+    border: 1px solid #ddd;
+    text-align: center; }
+    .wpcrm-dashboard-calendar .calendar-day-head a:hover {
+      color: white;
+      background: #253C55;
+      border-color: #253C55; }
   .wpcrm-dashboard-calendar .calendar-day-head h3 {
     text-align: center;
     margin: 0; }
