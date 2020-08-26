@@ -34,8 +34,10 @@ function wp_crm_system_import_settings_field(){
 	global $wpcrm_active_tab, $wpcrm_active_subtab;
 	if ( 'settings' == $wpcrm_active_tab && ( 'settings' == $wpcrm_active_subtab || '' == $wpcrm_active_subtab ) ) {?>
 	<div class="postbox">
-		<h3><span><?php _e( 'Import Settings' ); ?></span></h3>
 		<div class="inside">
+			<header>
+				<h3><span><?php _e( 'Import Settings' ); ?></span></h3>
+			</header>
 			<p><?php _e( 'Import the plugin settings from a .json file. This file can be obtained by exporting the settings on another site using the form above.', 'wp-crm-system' ); ?></p>
 			<form method="post" enctype="multipart/form-data">
 				<p>
