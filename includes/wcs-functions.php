@@ -120,13 +120,18 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 		$calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
 
 		/* table headings */
+		$calendar .= '<thead>';
 		$calendar .= '<tr class="calendar-row">
 			<td class="calendar-day-head"><a href="?page=wpcrm-settings&wpcrm-cal-month=' . absint( $prev_month ) . '&wpcrm-cal-year=' . $prev_year . '">' . __( '<< Previous Month', 'wp-crm-system' ) . '</td>
-			<td class="calendar-day-head" colspan="5">' . date( "F Y", mktime( 0, 0, 0, absint( $month ), 1, absint( $year ) ) ) . '</td>
+			<td class="calendar-day-head" colspan="5"><h3>' . date( "F Y", mktime( 0, 0, 0, absint( $month ), 1, absint( $year ) ) ) . '</h3></td>
 			<td class="calendar-day-head"><a href="?page=wpcrm-settings&wpcrm-cal-month=' . absint( $next_month ) . '&wpcrm-cal-year=' . absint( $next_year ) . '">' . __( 'Next Month >>', 'wp-crm-system' ) . '</td>
 		</tr>';
+		
+
 		$headings = array( __( 'Sunday', 'wp-crm-system' ),__( 'Monday', 'wp-crm-system' ),__( 'Tuesday', 'wp-crm-system' ),__( 'Wednesday', 'wp-crm-system' ),__( 'Thursday', 'wp-crm-system' ),__( 'Friday', 'wp-crm-system' ),__( 'Saturday', 'wp-crm-system' ) );
 		$calendar .= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
+		$calendar .= '</thead>';
+		$calendar .= '<tbody>';
 
 		/* days and weeks vars now ... */
 		$running_day = date('w',mktime(0,0,0,$month,1,$year));
@@ -196,16 +201,22 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 				}
 				wp_reset_postdata();
 
-			$calendar.= '</td>';
-			if($running_day == 6):
-				$calendar.= '</tr>';
-				if(($day_counter+1) != $days_in_month):
-					$calendar.= '<tr class="calendar-row">';
-				endif;
+			$calendar .= '</td>';
+
+			if ( $running_day == 6 ) {
+				$calendar .= '</tr>';
+
+				if ( ( $day_counter + 1 ) != $days_in_month ) {
+					$calendar .= '<tr class="calendar-row">';
+				}
+				
 				$running_day = -1;
 				$days_in_this_week = 0;
-			endif;
-			$days_in_this_week++; $running_day++; $day_counter++;
+			}
+
+			$days_in_this_week++; 
+			$running_day++; 
+			$day_counter++;
 		endfor;
 
 		/* finish the rest of the days in the week */
@@ -217,6 +228,8 @@ if ( !function_exists( 'wpcrm_system_display_calendar' ) ){
 
 		/* final row */
 		$calendar.= '</tr>';
+
+		$calendar .= '</tbody>';
 
 		/* end the table */
 		$calendar.= '</table>';

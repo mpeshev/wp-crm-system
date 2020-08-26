@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="wrap">
-	<div>
+	<div class="wpcrm-dashboard-wrapper">
 		<?php do_action( 'wpcrm_system_custom_dashboard_boxes' ); ?>
 	</div>
 </div>

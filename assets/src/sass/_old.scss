@@ -1,0 +1,269 @@
+/* Calendar */
+/* shared */
+/* Upsell page */
+td.calendar-day {
+	min-height: 80px;
+	vertical-align: top;
+
+	ul {
+		margin-top: auto;
+	}
+}
+* {
+	html {
+		div.calendar-day {
+			height: 80px;
+		}
+		div.calendar-day-np {
+			height: 80px;
+		}
+	}
+}
+td.calendar-day-np {
+	min-height: 80px;
+	vertical-align: top;
+}
+.wp-crm-welcome-content {
+	width: 100%;
+}
+#address_book_results {
+	margin-top: 10px;
+}
+#project_list_results {
+	margin-top: 10px;
+}
+#task_list_results {
+	margin-top: 10px;
+}
+#opportunity_list_results {
+	margin-top: 10px;
+}
+.wpcrm-circle {
+	border-radius: 50%;
+}
+#system-info-textarea {
+	background: none;
+	font-family: Menlo,Monaco,monospace;
+	display: block;
+	overflow: auto;
+	white-space: pre;
+	width: 800px;
+	height: 400px;
+}
+.dashicons.wpcrm-dashicons {
+	&:before {
+		width: 13px;
+		height: 13px;
+		display: inline-block;
+		font-size: 13px;
+		vertical-align: top;
+		margin-top: 3px;
+	}
+}
+.wpcrm-dashicons-fax {
+	background-image: url('../includes/images/fax.png');
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 13px;
+	margin-top: 3px;
+	display: inline-block;
+	padding-right: 3px;
+}
+.wp-crm-dashboard-boxes {
+	span.dashicons {
+		color: #0073aa;
+	}
+	float: left;
+	margin-left: 2.564102564102564%;
+	width: 21.076923076923077%;
+	background-color: #fff;
+	padding: 1%;
+	min-height: 210px;
+	margin-bottom: 2.564102564102564%;
+}
+.wp-crm-widget {
+	border-bottom: 1px solid #eee;
+	font-size: 13px;
+	padding: 8px 12px 10px;
+	&:last-child {
+		border-bottom: none;
+		padding-bottom: 8px;
+	}
+}
+.wpcrm-dashboard-calendar {
+	float: left;
+	margin-right: 15px;
+}
+.wpcrm-extension {
+	float: left;
+	background: #fff;
+	margin: 0 15px 15px 0;
+	border: 1px solid #ccc;
+	width: 300px;
+	padding: 14px;
+	min-height: 315px;
+	position: relative;
+}
+.wp-crm-email {
+	width: 75%;
+}
+.wp-crm-inline {
+	float: left;
+	padding-right: 3px;
+}
+.wp-crm-five-sixths {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 82.90598290598291%;
+}
+.wp-crm-four-sixths {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 65.81196581196582%;
+}
+.wp-crm-one-fourth {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 23.076923076923077%;
+}
+.wp-crm-one-half {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 48.717948717948715%;
+}
+.wp-crm-one-sixth {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 14.52991452991453%;
+}
+.wp-crm-one-third {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 31.623931623931625%;
+}
+.wp-crm-three-fourths {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 74.35897435897436%;
+}
+.wp-crm-three-sixths {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 48.717948717948715%;
+}
+.wp-crm-two-fourths {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 48.717948717948715%;
+}
+.wp-crm-two-sixths {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 31.623931623931625%;
+}
+.wp-crm-two-thirds {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 65.81196581196582%;
+}
+.wp-crm-one-fifth {
+	float: left;
+	margin-left: 2.564102564102564%;
+	line-height: 21px;
+	width: 17.948718%;
+}
+.wp-crm-first {
+	clear: both;
+	margin-left: 0;
+}
+.about-wrap {
+	.wp-crm-one-half {
+		margin: 1em 0 1em 0;
+	}
+}
+ul.upsell-features {
+	list-style: disc;
+	margin-left: 20px;
+}
+@media only screen and (min-width: 1603px) {
+	.wpcrm-dashboard {
+		margin: 0 15px 55px 0;
+	}
+}
+@media only screen and (max-width: 960px) {
+	.wp-crm-dashboard-boxes {
+		width: 90%;
+		margin-left: 0;
+	}
+	.wp-crm-five-sixths {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-four-sixths {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-one-fourth {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-one-half {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-one-sixth {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-one-third {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-three-fourths {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-three-sixths {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-two-fourths {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-two-sixths {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-two-thirds {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+	.wp-crm-one-fifth {
+		margin-left: 0;
+		margin-top: 2.564102564102564%;
+		width: 100%;
+	}
+}

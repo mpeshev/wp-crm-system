@@ -1,20 +1,9 @@
 /* Calendar */
 /* shared */
 /* Upsell page */
-table.calendar {
-  border-left: 1px solid #999; }
-
 td.calendar-day {
   min-height: 80px;
-  font-size: 11px;
-  position: relative;
-  width: 134.25px;
-  padding: 5px;
-  vertical-align: top;
-  border-bottom: 1px solid #999;
-  border-right: 1px solid #999; }
-  td.calendar-day:hover {
-    background: #eceff5; }
+  vertical-align: top; }
   td.calendar-day ul {
     margin-top: auto; }
 
@@ -25,33 +14,8 @@ td.calendar-day {
   height: 80px; }
 
 td.calendar-day-np {
-  background: #eee;
   min-height: 80px;
-  width: 134.25px;
-  padding: 5px;
-  vertical-align: top;
-  border-bottom: 1px solid #999;
-  border-right: 1px solid #999; }
-
-td.calendar-day-head {
-  background: #ccc;
-  font-weight: bold;
-  text-align: center;
-  width: 120px;
-  padding: 5px;
-  border-bottom: 1px solid #999;
-  border-top: 1px solid #999;
-  border-right: 1px solid #999; }
-
-div.day-number {
-  background: #999;
-  padding: 5px;
-  color: #fff;
-  font-weight: bold;
-  float: right;
-  margin: -5px -5px 0 0;
-  width: 20px;
-  text-align: center; }
+  vertical-align: top; }
 
 .wp-crm-welcome-content {
   width: 100%; }
@@ -121,16 +85,6 @@ div.day-number {
   margin-right: 15px; }
 
 .wpcrm-extension {
-  float: left;
-  background: #fff;
-  margin: 0 15px 15px 0;
-  border: 1px solid #ccc;
-  width: 300px;
-  padding: 14px;
-  min-height: 315px;
-  position: relative; }
-
-.wpcrm-dashboard {
   float: left;
   background: #fff;
   margin: 0 15px 15px 0;
@@ -286,5 +240,81 @@ ul.upsell-features {
     margin-left: 0;
     margin-top: 2.564102564102564%;
     width: 100%; } }
+
+.wpcrm-dashboard-calendar {
+  background: white;
+  border: 1px solid #ddd; }
+  .wpcrm-dashboard-calendar table {
+    width: 100%; }
+  .wpcrm-dashboard-calendar thead {
+    background: #fafafa; }
+    .wpcrm-dashboard-calendar thead .calendar-row:last-child td {
+      padding-bottom: 2em; }
+  .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(1) .calendar-day {
+    border-bottom: none;
+    border-left: 1px solid #ddd; }
+  .wpcrm-dashboard-calendar tbody .calendar-row:nth-child(2) .calendar-day {
+    border-top: 1px solid #ddd; }
+  .wpcrm-dashboard-calendar tbody .calendar-row:last-child .calendar-day {
+    border-bottom: none; }
+  .wpcrm-dashboard-calendar tbody .calendar-day {
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; }
+    .wpcrm-dashboard-calendar tbody .calendar-day:last-child {
+      border-right: none; }
+    .wpcrm-dashboard-calendar tbody .calendar-day:first-child {
+      border-left: none; }
+    .wpcrm-dashboard-calendar tbody .calendar-day:hover {
+      background: #fafafa; }
+      .wpcrm-dashboard-calendar tbody .calendar-day:hover .day-number {
+        background: red;
+        color: white; }
+  .wpcrm-dashboard-calendar td {
+    position: relative;
+    padding: 0.5rem; }
+  .wpcrm-dashboard-calendar .calendar-day-np {
+    width: 130px; }
+  .wpcrm-dashboard-calendar .calendar-day-head a {
+    display: block;
+    background: #fff;
+    font-size: 12px;
+    color: #333;
+    border-radius: 3px;
+    padding: .25em .5em;
+    text-decoration: none;
+    border: 1px solid #ddd; }
+  .wpcrm-dashboard-calendar .calendar-day-head h3 {
+    text-align: center;
+    margin: 0; }
+  .wpcrm-dashboard-calendar .day-number {
+    font-size: 12px;
+    height: 2em;
+    width: 2em;
+    line-height: 2;
+    background: #eee;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%; }
+
+.wpcrm-dashboard {
+  background: #fff;
+  position: relative;
+  padding: 1rem;
+  box-sizing: border-box; }
+  .wpcrm-dashboard h3 {
+    margin-top: 0; }
+
+.wpcrm-dashboard-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  .wpcrm-dashboard-wrapper .wpcrm-dashboard-calendar {
+    flex: 0 0 100%;
+    margin-bottom: 1em; }
+  .wpcrm-dashboard-wrapper .wpcrm-dashboard {
+    flex: 0 0 calc(25% - 1em);
+    margin-bottom: 1em;
+    border: 1px solid #ddd; }
 
 /*# sourceMappingURL=wp-crm.css.map */

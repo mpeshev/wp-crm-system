@@ -1,0 +1,97 @@
+$inner_spacing: .5rem;
+
+.wpcrm-dashboard-calendar {
+	background: white;
+	border: 1px solid #ddd;
+	
+	table {
+		width: 100%;
+	}
+	
+	thead {
+		background: #fafafa;
+		
+		.calendar-row:last-child td {
+			padding-bottom: 2em;
+		}
+	}
+
+    tbody {
+		.calendar-row:nth-child(1) .calendar-day {
+			border-bottom: none;
+			border-left: 1px solid #ddd;
+		}
+
+        .calendar-row:nth-child(2) .calendar-day {
+			border-top: 1px solid #ddd;
+		}
+
+		.calendar-row:last-child .calendar-day {
+			border-bottom: none;
+		}
+
+		.calendar-day {
+			border-right: 1px solid #ddd;
+			border-bottom: 1px solid #ddd;
+
+			&:last-child {
+				border-right: none;
+			}
+
+			&:first-child {
+				border-left: none;
+			}
+
+			&:hover {
+				background: #fafafa;
+
+				.day-number {
+					background: red;
+					color: white;
+				}
+			}
+		}
+    }
+	
+	td {
+		// We use this to position the day.
+		position: relative;
+		
+		padding: $inner_spacing;
+	}
+	
+	.calendar-day-np {
+		// Will equalize the grid
+		width: 130px;
+	}
+	
+	.calendar-day-head {
+		a {
+			display: block;
+			background: #fff;
+			font-size: 12px;
+			color: #333;
+			border-radius: 3px;
+			padding: .25em .5em;
+			text-decoration: none;
+			border: 1px solid #ddd;
+		}
+		
+		h3 {
+			text-align: center;
+			margin: 0;
+		}
+	}
+	
+	.day-number {
+		font-size: 12px;
+		height: 2em;
+		width: 2em;
+		line-height: 2;
+		background: #eee;
+		color: #333;
+		font-weight: bold;
+		text-align: center;
+		border-radius: 50%;
+	}
+}
