@@ -43,8 +43,10 @@ function wp_crm_system_export_settings_button(){
 	global $wpcrm_active_tab, $wpcrm_active_subtab;
 	if ( 'settings' == $wpcrm_active_tab && ( 'settings' == $wpcrm_active_subtab || '' == $wpcrm_active_subtab ) ) {?>
 	<div class="postbox">
-		<h3><span><?php _e( 'Export Settings' ); ?></span></h3>
 		<div class="inside">
+			<header>
+				<h3><span><?php _e( 'Export Settings' ); ?></span></h3>
+			</header>
 			<p><?php _e( 'Export the plugin settings for this site as a .json file. This allows you to easily import the configuration into another site.', 'wp-crm-system' ); ?></p>
 			<p><?php _e( 'Please note that this will include all settings. If applicable, this includes settings from add-on extension plugins including license keys, etc.', 'wp-crm-system' ); ?></p>
 			<form method="post">

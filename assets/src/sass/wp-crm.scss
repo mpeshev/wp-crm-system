@@ -1,0 +1,7 @@
+// The original CSS for the WP-CRM is here. In the future, this
+// will all be rewritten and removed. It's placed on top so that
+// it's easy to overwrite in the files below.
+@import 'old';
+
+// Global dashboard stylings. Most of the code will end up here.
+@import 'dashboard/dashboard';

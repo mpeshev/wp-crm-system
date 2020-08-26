@@ -42,16 +42,16 @@ function wpcrm_system_main_settings() {
 		//Only show to administrators
 		if ( current_user_can( 'manage_options' ) )  { ?>
 			<div class="wrap">
-			<h2><?php _e('WP-CRM System Settings', 'wp-crm-system'); ?></h2>
+				<h2><?php _e('WP-CRM System Settings', 'wp-crm-system'); ?></h2>
 				<form id="wpcrm_settings" name="wpcrm_settings" method='post' action='options.php'>
 					<?php wp_nonce_field( 'update-options' ); ?>
 					<?php settings_fields( 'wpcrm_system_settings_main_group' ); ?>
-					<table>
+					<table class="form-table" role="presentation">
 						<tbody>
 							<tr>
-								<td>
-									<strong><?php _e('Access Level', 'wp-crm-system'); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e('Roles are listed in order of seniority (Administrator is highest, Subscriber is lowest). All roles higher than, and including the role you select will have access to WP-CRM System.', 'wp-crm-system'); ?>"></span>
-								</td>
+								<th scope="row">
+									<strong><?php _e('Access Level', 'wp-crm-system'); ?></strong>
+								</th>
 								<td>
 									<?php
 										$wpcrm_system_settings_roles = apply_filters( 'wpcrm_system_user_role_options', array() );
@@ -62,12 +62,14 @@ function wpcrm_system_main_settings() {
 										<option value="<?php echo $role; ?>" <?php echo $selected; ?> ><?php echo $name; ?></option>
 										<?php } ?>
 									</select>
+
+									<p class="description"><?php _e('Roles are listed in order of seniority (Administrator is highest, Subscriber is lowest). All roles higher than, and including the role you select will have access to WP-CRM System.', 'wp-crm-system'); ?></p>
 								</td>
 							</tr>
 							<tr>
-								<td>
-									<strong><?php _e('Default Currency', 'wp-crm-system'); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e('Currency to be used when assigning values to projects or opportunities.', 'wp-crm-system'); ?>"></span>
-								</td>
+								<th scope="row">
+									<strong><?php _e('Default Currency', 'wp-crm-system'); ?></strong>
+								</th>
 								<td>
 								<select name="wpcrm_system_default_currency">
 								<?php $args = array('aed'=>'AED','afn'=>'AFN','all'=>'ALL','amd'=>'AMD','ang'=>'ANG','aoa'=>'AOA','ars'=>'ARS','aud'=>'AUD','awg'=>'AWG','azn'=>'AZN','bam'=>'BAM','bbd'=>'BBD','bdt'=>'BDT','bgn'=>'BGN','bhd'=>'BHD','bif'=>'BIF','bmd'=>'BMD','bnd'=>'BND','bob'=>'BOB','brl'=>'BRL','bsd'=>'BSD','btn'=>'BTN','bwp'=>'BWP','byr'=>'BYR','bzd'=>'BZD','cad'=>'CAD','cdf'=>'CDF','chf'=>'CHF','clp'=>'CLP','cny'=>'CNY','cop'=>'COP','crc'=>'CRC','cuc'=>'CUC','cup'=>'CUP','cve'=>'CVE','czk'=>'CZK','djf'=>'DJF','dkk'=>'DKK','dop'=>'DOP','dzd'=>'DZD','egp'=>'EGP','ern'=>'ERN','etb'=>'ETB','eur'=>'EUR','fjd'=>'FJD','fkp'=>'FKP','gbp'=>'GBP','gel'=>'GEL','ggp'=>'GGP','ghs'=>'GHS','gip'=>'GIP','gmd'=>'GMD','gnf'=>'GNF','gtq'=>'GTQ','gyd'=>'GYD','hkd'=>'HKD','hnl'=>'HNL','hrk'=>'HRK','htg'=>'HTG','huf'=>'HUF','idr'=>'IDR','ils'=>'ILS','imp'=>'IMP','inr'=>'INR','iqd'=>'IQD','irr'=>'IRR','isk'=>'ISK','jep'=>'JEP','jmd'=>'JMD','jod'=>'JOD','jpy'=>'JPY','kes'=>'KES','kgs'=>'KGS','khr'=>'KHR','kmf'=>'KMF','kpw'=>'KPW','krw'=>'KRW','kwd'=>'KWD','kyd'=>'KYD','kzt'=>'KZT','lak'=>'LAK','lbp'=>'LBP','lkr'=>'LKR','lrd'=>'LRD','lsl'=>'LSL','lyd'=>'LYD','mad'=>'MAD','mdl'=>'MDL','mga'=>'MGA','mkd'=>'MKD','mmk'=>'MMK','mnt'=>'MNT','mop'=>'MOP','mro'=>'MRO','mur'=>'MUR','mvr'=>'MVR','mwk'=>'MWK','mxn'=>'MXN','myr'=>'MYR','mzn'=>'MZN','nad'=>'NAD','ngn'=>'NGN','nio'=>'NIO','nok'=>'NOK','npr'=>'NPR','nzd'=>'NZD','omr'=>'OMR','pab'=>'PAB','pen'=>'PEN','pgk'=>'PGK','php'=>'PHP','pkr'=>'PKR','pln'=>'PLN','prb'=>'PRB','pyg'=>'PYG','qar'=>'QAR','ron'=>'RON','rsd'=>'RSD','rub'=>'RUB','rwf'=>'RWF','sar'=>'SAR','sbd'=>'SBD','scr'=>'SCR','sdg'=>'SDG','sek'=>'SEK','sgd'=>'SGD','shp'=>'SHP','sll'=>'SLL','sos'=>'SOS','srd'=>'SRD','ssp'=>'SSP','std'=>'STD','syp'=>'SYP','szl'=>'SZL','thb'=>'THB','tjs'=>'TJS','tmt'=>'TMT','tnd'=>'TND','top'=>'TOP','try'=>'TRY','ttd'=>'TTD','twd'=>'TWD','tzs'=>'TZS','uah'=>'UAH','ugx'=>'UGX','usd'=>'USD','uyu'=>'UYU','uzs'=>'UZS','vef'=>'VEF','vnd'=>'VND','vuv'=>'VUV','wst'=>'WST','xaf'=>'XAF','xcd'=>'XCD','xof'=>'XOF','xpf'=>'XPF','yer'=>'YER','zar'=>'ZAR','zmw'=>'ZMW');
@@ -75,80 +77,106 @@ function wpcrm_system_main_settings() {
 									<option value="<?php echo $key; ?>" <?php if (get_option('wpcrm_system_default_currency') == $key) { echo 'selected'; } ?> ><?php echo $value; ?></option>
 								<?php } ?>
 								</select>
+
+								<p class="description"><?php _e('Currency to be used when assigning values to projects or opportunities.', 'wp-crm-system'); ?></p>
 								</td>
 							</tr>
+						</tbody>
+					</table>
+					
+					<h3><?php _e('Currency Format', 'wp-crm-system'); ?></h3>
+					<p class="description"><?php _e( 'Set your preferred currency and numeral settings for reports.', 'wp-crm-system'); ?></p>
+					
+					<table class="form-table" role="presentation">
+						<tbody>
 							<tr>
-								<td>
-									<strong><?php _e('Currency Format', 'wp-crm-system'); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'Set your preferred currency and numeral settings for reports.', 'wp-crm-system'); ?>"></span>
-								</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>
+								<th scope="row">
 									<strong><?php _e('Thousands separator', 'wp-crm-system'); ?></strong>
-								</td>
+								</th>
 								<td>
 									<input type="text" name="wpcrm_system_report_currency_thousand_separator" size="5" value="<?php echo get_option('wpcrm_system_report_currency_thousand_separator'); ?>" />
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<th scope="row">
 									<strong><?php _e('Decimal point', 'wp-crm-system'); ?></strong>
-								</td>
+								</th>
 								<td>
 									<input type="text" name="wpcrm_system_report_currency_decimal_point" size="5" value="<?php echo get_option('wpcrm_system_report_currency_decimal_point'); ?>" />
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<th scope="row">
 									<strong><?php _e('Number of decimals', 'wp-crm-system'); ?></strong>
-								</td>
+								</th>
 								<td>
 									<input type="text" name="wpcrm_system_report_currency_decimals" size="5" value="<?php echo get_option('wpcrm_system_report_currency_decimals'); ?>" />
 								</td>
 							</tr>
 							<tr>
+								<th scope="row">
+									<strong><?php _e( 'Org. Address', 'wp-crm-system' ); ?></strong>
+								</th>
 								<td>
-									<strong><?php _e( 'Show Org. Address', 'wp-crm-system' ); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'If you have multiple organizations with the same name and possibly different locations, it would be difficult to distinguish which is which in the various dropdown menus. Check this box to add the Address 1 field for each organization to the dropdown menu.', 'wp-crm-system' ); ?>"></span>
-								</td>
-								<td>
-									<input type="checkbox" value="true" name="wpcrm_system_show_org_address" <?php checked( get_option( 'wpcrm_system_show_org_address' ), 'true' ); ?> />
+									<fieldset>
+										<legend class="screen-reader-text">
+											<span>Org. Address</span>
+										</legend>
+										
+										<label for="wpcrm_system_show_org_address">
+											<input type="checkbox" value="true" id="wpcrm_system_show_org_address" name="wpcrm_system_show_org_address" <?php checked( get_option( 'wpcrm_system_show_org_address' ), 'true' ); ?> />
+											Show Org. Address
+										</label>
+									</fieldset>
+									<p class="description"><?php _e( 'If you have multiple organizations with the same name and possibly different locations, it would be difficult to distinguish which is which in the various dropdown menus. Check this box to add the Address 1 field for each organization to the dropdown menu.', 'wp-crm-system' ); ?></p>
 								</td>
 							</tr>
 							<tr>
+								<th scope="row">
+									<strong><?php _e( 'Hide Other User Content', 'wp-crm-system' ); ?></strong>
+								</th>
 								<td>
-									<strong><?php _e( 'Hide Other User Content', 'wp-crm-system' ); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'This option will hide any entry in WP-CRM System that the current user did not create. Administrators will still have full access.', 'wp-crm-system' ); ?>"></span>
-								</td>
-								<td>
-									<input type="checkbox" value="yes" name="wpcrm_hide_others_posts" <?php if( 'yes' == get_option( 'wpcrm_hide_others_posts' ) ) echo 'checked'; ?> />
+									<fieldset>
+										<legend class="screen-reader-text">
+											<span>User Content</span>
+										</legend>
+										<label for="wpcrm_hide_others_posts">
+											<input type="checkbox" value="yes" id="wpcrm_hide_others_posts" name="wpcrm_hide_others_posts" <?php if( 'yes' == get_option( 'wpcrm_hide_others_posts' ) ) echo 'checked'; ?> />
+											Hide Other User Content
+										</label>	
+									</fieldset>
+									<p class="description"><?php _e( 'This option will hide any entry in WP-CRM System that the current user did not create. Administrators will still have full access.', 'wp-crm-system' ); ?></p>
 								</td>
 							</tr>
 							<tr>
+								<th scope="row">
+									<strong><?php _e( 'Google Maps API Key', 'wp-crm-system' ); ?></strong>
+								</th>
 								<td>
-									<strong><?php _e( 'Google Maps API Key', 'wp-crm-system' ); ?></strong><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'Enter a valid Google Maps API key in order to correctly display the map view in Contacts and Organizations.', 'wp-crm-system' ); ?>"></span>
-								</td>
-								<td>
-									<input type="text" value="<?php echo get_option( 'wpcrm_system_gmap_api' ); ?>" name="wpcrm_system_gmap_api" size="10" />
+									<input type="text" class="regular-text ltr" value="<?php echo get_option( 'wpcrm_system_gmap_api' ); ?>" name="wpcrm_system_gmap_api" size="10" />
+									<p class="description"><?php _e( 'Enter a valid Google Maps API key in order to correctly display the map view in Contacts and Organizations.', 'wp-crm-system' ); ?></p>
 								</td>
 							</tr>
 							<?php
 							$gdpr_page = get_option( 'wpcrm_system_gdpr_page_id' );
 							if ( $gdpr_page && is_numeric( $gdpr_page ) ){ ?>
 							<tr>
-								<td>
-									<strong><?php _e( 'GDPR Page', 'wp-crm-system' ); ?></strong> <?php _e( 'This setting will be depreciated. Use WordPress built in Privacy Tools.', 'wp-crm-system' ); ?><span class="wpcrm-system-help-tip dashicons dashicons-editor-help" title="<?php _e( 'Select the page that has the [wpcrm_system_gdpr] shortcode. If you do not have contacts who are located in the European Union, you do not need to select a page here.', 'wp-crm-system' ); ?>"></span>
-								</td>
+								<th scope="row">
+									<strong><?php _e( 'GDPR Page', 'wp-crm-system' ); ?></strong> <?php _e( 'This setting will be depreciated. Use WordPress built in Privacy Tools.', 'wp-crm-system' ); ?>
+								</th>
 								<td>
 									<?php wp_dropdown_pages( array(
 										'show_option_none'	=> __( 'Select a GDPR Page', 'wp-crm-system' ),
 										'name'				=> 'wpcrm_system_gdpr_page_id',
 										'selected'			=> get_option( 'wpcrm_system_gdpr_page_id' )
 										) ); ?>
+
+									<p class="description"><?php _e( 'Select the page that has the [wpcrm_system_gdpr] shortcode. If you do not have contacts who are located in the European Union, you do not need to select a page here.', 'wp-crm-system' ); ?></p>
 								</td>
 							</tr>
 							<?php } ?>
 							<tr>
-								<td><input type="hidden" name="wpcrm_system_settings_initial" value="set" /><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></td>
+								<th scope="row"><input type="hidden" name="wpcrm_system_settings_initial" value="set" /><input type="hidden" name="wpcrm_system_settings_update" value="update" /><?php submit_button(); ?></th>
 								<td></td>
 							</tr>
 						</tbody>

@@ -1,0 +1,30 @@
+@import 'system-help';
+@import 'calendar';
+
+.wpcrm-dashboard {
+	background: #fff;
+	position: relative;
+	padding: 1rem;
+	box-sizing: border-box;
+	
+	h3 {
+		margin-top: 0;
+	}
+}
+
+.wpcrm-dashboard-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	
+	.wpcrm-dashboard-calendar {
+		flex: 0 0 100%;
+		margin-bottom: 1em;
+	}
+	
+	.wpcrm-dashboard {
+		flex: 0 0 calc(25% - 1em);
+		margin-bottom: 1em;
+		border: 1px solid #ddd;
+	}
+}
