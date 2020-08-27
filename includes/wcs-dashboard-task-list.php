@@ -147,3 +147,19 @@ function wpcrm_system_dashboard_task_js($hook){
 	);
 }
 add_action('admin_enqueue_scripts', 'wpcrm_system_dashboard_task_js');
+
+function wp_crm_system_ajax_task_change_status() {
+	$post_id        = isset( $_POST['post_id'] ) ? $_POST['post_id'] : '';
+	$task_status = isset( $_POST['task_status'] ) ? $_POST['task_status'] : '';
+	$meta = 'status';
+
+	$update_status = update_post_meta( $post_id, '_wpcrm_task-' . $meta, $task_status ); 
+
+	if ( $update_status ) {
+		echo 'success';
+	} else {
+		echo 'fail';
+	}
+	exit;
+}
+add_action('wp_ajax_task_change_status', 'wp_crm_system_ajax_task_change_status');

@@ -32,4 +32,22 @@ jQuery(document).ready(function($) {
 		
 		return false;
 	});
+
+	$('.wp_crm_task_status').change(function() {
+		
+		var e =  $(this).val();
+		var res = e.split("_");
+
+		task_status = res[0];
+		post_id = res[1];
+
+		var data = {
+			action: 'task_change_status',
+			post_id: post_id,
+			task_status: task_status,
+		};
+	
+		$.post(ajaxurl, data, function(response) {
+		});
+	});
 });

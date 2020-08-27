@@ -129,7 +129,7 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 		/* If displaying the 'status' column. */
 		case 'status':
 			/* Get the post meta. */
-			$status = get_post_meta( $post_id, '_wpcrm_task-status', true );
+			$selected_status = get_post_meta( $post_id, '_wpcrm_task-status', true );
 
 			$statuses = array(
 				'not-started' => __( 'Not Started', 'wp-crm-system' ),
@@ -139,13 +139,23 @@ function wprcm_system_task_columns_content( $column, $post_id ) {
 			);
 
 			/* If no duration is found, output a default message. */
-			if ( empty( $status ) ) {
+			if ( empty( $selected_status ) ) {
 				echo __( 'Not Set', 'wp-crm-system' );
 			}
 
 			/* If there is a status, display it. */
-			elseif ( array_key_exists( $status, $statuses ) ) {
-				echo esc_html( $statuses[ $status ] );
+			elseif ( array_key_exists( $selected_status, $statuses ) ) {
+				$html = '<div class="input select rating-b">';
+				$html .= '<select name="task_status" class="wp_crm_task_status" id="tasks_status_' . $post_id . '">';
+
+				foreach ( $statuses as $key=>$status ) {
+					$selected = '';
+					if ( ! empty( $statuses ) && $key == $selected_status ) {
+						$selected   = 'Selected=Selected';
+					}
+					$html .= '<option value="' . $key . '_' . $post_id . '" ' . $selected . '>' . $status . '</option>';
+				}
+				echo $html;
 			}
 
 			break;
