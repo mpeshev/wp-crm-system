@@ -137,7 +137,7 @@ function wpcrm_contacts_init() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'taxonomies'		 => array( 'contact-type' ),
-		'supports'           => array( 'author', 'thumbnail', 'custom-fields', 'comments' )
+		'supports'           => array( 'author', 'thumbnail', 'custom-fields' )
 	);
 	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
@@ -217,7 +217,7 @@ function wpcrm_tasks_init() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'taxonomies'		 => array('task-type'),
-		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
+		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields' )
 	);
 	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
@@ -297,7 +297,7 @@ function wpcrm_organizations_init() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'taxonomies'		 => array('organization-type'),
-		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
+		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields' )
 	);
 	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
@@ -377,7 +377,7 @@ function wpcrm_opportunities_init() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'taxonomies'		 => array('opportunity-type'),
-		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
+		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields' )
 	);
 	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
@@ -457,7 +457,7 @@ function wpcrm_projects_init() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'taxonomies'		 => array('project-type'),
-		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
+		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields' )
 	);
 	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
@@ -537,7 +537,7 @@ function wpcrm_campaign_init() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'taxonomies'		 => array('campaign-type'),
-		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields', 'comments' )
+		'supports'           => array( 'title', 'author', 'thumbnail', 'custom-fields' )
 	);
 	$args = apply_filters( 'wpcrm_system_post_type_args_' . $post_type, $args );
 	register_post_type( $post_type, $args );
