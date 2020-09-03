@@ -33,13 +33,21 @@ function wp_crm_system_ajax_task_list() {
 	$project 	= '' != trim( $task_info['2'] ) ? '<a href="' . get_edit_post_link( $task_info['2'] ) . '">' . get_the_title( $task_info['2'] ) . '</a>' : '';
 	$user 		= get_user_by( 'login', $task_info['3'] );
 	$user_display = '';
-	if ( !empty( $user ) ){
+	$startdate = '';
+	$duedate = '';
+	if( ! empty( $user ) ){
 		$user_display = $user->display_name;
 	}
-	$startdate 	= date( get_option( 'wpcrm_system_php_date_format' ), $task_info['4'] );
-	$duedate 	= date( get_option( 'wpcrm_system_php_date_format' ), $task_info['5'] );
+	if( ! empty( $task_info['4'] ) ) {
+		$startdate 	= date( get_option( 'wpcrm_system_php_date_format' ), $task_info['4'] );
+	}
+	if( ! empty( $task_info['5'] ) ) {
+		$duedate 	= date( get_option( 'wpcrm_system_php_date_format' ), $task_info['5'] );
+	} 
+	
 	$priority	= wpcrm_system_display_priority( $task_info['7'] );
 	$status 	= wpcrm_system_display_status( $task_info['8'] );
+
 	?>
 	<table>
 	<?php

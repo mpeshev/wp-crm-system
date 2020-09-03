@@ -27,7 +27,10 @@ function wp_crm_system_ajax_project_list() {
 	} 
 	$title = get_the_title( $project_id );
 	$value = '' != $project_info['0'] ? wpcrm_system_display_currency_symbol( get_option( 'wpcrm_system_default_currency' ) ) . $project_info['0'] : '';
-	$date = date( get_option( 'wpcrm_system_php_date_format' ), $project_info['1'] );
+	$date = '';
+	if( !empty( $project_info['1'] ) ){
+		$date = date( get_option( 'wpcrm_system_php_date_format' ), $project_info['1'] );
+	} 
 	$company = '' != trim( $project_info['4'] ) ? '<a href="' . get_edit_post_link( $project_info['4'] ) . '">' . get_the_title( $project_info['4'] ) . '</a>' : '';
 	$contact = '' != trim( $project_info['5'] ) ? '<a href="' . get_edit_post_link( $project_info['5'] ) . '">' . get_the_title( $project_info['5'] ) . '</a>' : '';
 	$user = get_user_by( 'login', $project_info['6'] );

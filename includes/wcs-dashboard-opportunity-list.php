@@ -35,8 +35,11 @@ function wp_crm_system_ajax_opportunity_list() {
 	if ( !empty( $user ) ){
 		$user_display = $user->display_name;
 	}
-	$probability	= '' != trim( $opportunity_info['4'] ) ? wpcrm_system_display_progress( $opportunity_info['4'] ) : '';
-	$closedate 		= date( get_option( 'wpcrm_system_php_date_format' ), $opportunity_info['5'] );
+	$probability = '' != trim( $opportunity_info['4'] ) ? wpcrm_system_display_progress( $opportunity_info['4'] ) : '';
+	$closedate = '';
+	if( ! empty( $opportunity_info['5'] ) ) {
+		$closedate 		= date( get_option( 'wpcrm_system_php_date_format' ), $opportunity_info['5'] );
+	}
 	$value 			= '' != $opportunity_info['6'] ? wpcrm_system_display_currency_symbol( get_option( 'wpcrm_system_default_currency' ) ) . $opportunity_info['6'] : '';
 	$wonlost 		= '' != trim( $opportunity_info['7'] ) ? wpcrm_system_display_wonlost( $opportunity_info['7'] ) : '';
 	?>

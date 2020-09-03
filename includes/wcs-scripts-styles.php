@@ -12,7 +12,7 @@ function wpcrm_scripts_styles($hook) {
 	$wpcrm_active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'dashboard';
 
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'wp-crm-system-datepicker', WP_CRM_SYSTEM_PLUGIN_DIR . '/js/datepicker.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION );
+	wp_enqueue_script( 'wp-crm-system-datepicker', WP_CRM_SYSTEM_PLUGIN_URL . '/js/datepicker.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION );
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 	wp_localize_script( 'wp-crm-system-datepicker', 'wpcrm_system_datepicker_vars', array(
 		'append_text'				=> apply_filters( 'wpcrm_system_datepicker_append_text', '' ),

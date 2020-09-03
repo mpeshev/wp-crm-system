@@ -75,7 +75,7 @@ if ( !function_exists( 'wpcrm_system_display_status' ) ){
 if ( !function_exists( 'wpcrm_system_display_priority' ) ){
 	function wpcrm_system_display_priority( $priority ){
 		$wpcrm_priority = array(''=>__('Not Set', 'wp-crm-system'),'low'=>_x('Low','Not of great importance','wp-crm-system'),'medium'=>_x('Medium','Average priority','wp-crm-system'),'high'=>_x('High','Greatest importance','wp-crm-system'));
-		if ( array_key_exists( $status, $wpcrm_priority ) ){
+		if ( array_key_exists( $priority, $wpcrm_priority ) ){
 			return $wpcrm_priority[$priority];
 		} else {
 			return;
