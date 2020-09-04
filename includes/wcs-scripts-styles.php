@@ -107,5 +107,24 @@ function wpcrm_scripts_styles($hook) {
 			'wpcrm_nonce' => wp_create_nonce('wpcrm-nonce')
 		)
 	);
+
+	if( $post_type == 'wpcrm-contact' ) {
+		wp_enqueue_script( 'wp_crm_system_contact', WP_CRM_SYSTEM_PLUGIN_URL . '/js/wp-crm-system-contact.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
+	}
+	if( $post_type == 'wpcrm-task' ) {
+		wp_enqueue_script( 'wp_crm_system_task', WP_CRM_SYSTEM_PLUGIN_URL . '/js/wp-crm-system-task.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
+	}
+	if( $post_type == 'wpcrm-organization' ) {
+		wp_enqueue_script( 'wp_crm_system_organization', WP_CRM_SYSTEM_PLUGIN_URL . '/js/wp-crm-system-organization.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
+	}
+	if( $post_type == 'wpcrm-opportunity' ) {
+		wp_enqueue_script( 'wp_crm_system_opportunity', WP_CRM_SYSTEM_PLUGIN_URL . '/js/wp-crm-system-opportunity.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
+	}
+	if( $post_type == 'wpcrm-project' ) {
+		wp_enqueue_script( 'wp_crm_system_project', WP_CRM_SYSTEM_PLUGIN_URL . '/js/wp-crm-system-project.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
+	}
+	if( $post_type == 'wpcrm-campaign' ) {
+		wp_enqueue_script( 'wp_crm_system_campaign', WP_CRM_SYSTEM_PLUGIN_URL . '/js/wp-crm-system-campaign.js', array( 'jquery' ), WP_CRM_SYSTEM_VERSION, false );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'wpcrm_scripts_styles' );
