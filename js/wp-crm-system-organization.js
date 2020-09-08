@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
 
         if (title.val().length < 1){
             if( $('#required-title-message').length == 0){
-                $('#titlewrap').after('<label id="required-title-message">* Task title is required</label>'); 
+                $('#titlewrap').after('<label id="required-title-message">* Organization title is required</label>'); 
                 $('#required-title-message').css('color', 'red');
             }
             handleError = 1;
